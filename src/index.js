@@ -18,6 +18,10 @@ import * as ReactDOMClient from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import App from "App";
 
+import "primeicons/primeicons.css";
+import { PrimeReactProvider, PrimeReactContext } from "primereact/api";
+import "primereact/resources/themes/lara-light-cyan/theme.css";
+
 const container = document.getElementById("root");
 
 // Create a root.

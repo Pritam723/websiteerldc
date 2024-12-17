@@ -37,10 +37,10 @@ Coded by www.creative-tim.com
 */
 
 // @mui material components
-import Icon from "@mui/material/Icon";
+// import Icon from "@mui/material/Icon";
 
 // @mui icons
-import GitHubIcon from "@mui/icons-material/GitHub";
+// import GitHubIcon from "@mui/icons-material/GitHub";
 
 // Pages
 import AboutUs from "layouts/pages/landing-pages/about-us";
@@ -70,8 +70,8 @@ import Typography from "layouts/sections/elements/typography";
 
 const routes = [
   {
-    name: "my pages",
-    icon: <Icon>dashboard</Icon>,
+    name: "Home",
+    // icon: <Icon>dashboard</Icon>,
     columns: 1,
     rowsPerColumn: 2,
     collapse: [
@@ -108,46 +108,8 @@ const routes = [
     ],
   },
   {
-    name: "my pages",
-    icon: <Icon>dashboard</Icon>,
-    columns: 1,
-    rowsPerColumn: 2,
-    collapse: [
-      {
-        name: "landing pages",
-        collapse: [
-          {
-            name: "about us",
-            route: "/pages/landing-pages/about-us",
-            component: <AboutUs />,
-          },
-          {
-            name: "contact us",
-            route: "/pages/landing-pages/contact-us",
-            component: <ContactUs />,
-          },
-          {
-            name: "author",
-            route: "/pages/landing-pages/author",
-            component: <Author />,
-          },
-        ],
-      },
-      {
-        name: "account",
-        collapse: [
-          {
-            name: "sign in",
-            route: "/pages/authentication/sign-in",
-            component: <SignIn />,
-          },
-        ],
-      },
-    ],
-  },
-  {
-    name: "my sections",
-    icon: <Icon>view_day</Icon>,
+    name: "About Us",
+    // icon: <Icon>view_day</Icon>,
     collapse: [
       {
         name: "page sections",
@@ -295,8 +257,8 @@ const routes = [
     ],
   },
   {
-    name: "docs",
-    icon: <Icon>article</Icon>,
+    name: "System Operation",
+    // icon: <Icon>article</Icon>,
     collapse: [
       {
         name: "getting started",
@@ -321,10 +283,42 @@ const routes = [
     ],
   },
   {
-    name: "github",
-    icon: <GitHubIcon />,
-    href: "https://www.github.com/creativetimofficial/material-kit-react",
+    name: "Scheduling",
+    // icon: <Icon>article</Icon>,
   },
+  {
+    name: "Market Operation",
+    // icon: <Icon>article</Icon>,
+  },
+  {
+    name: "Open Access",
+    // icon: <Icon>article</Icon>,
+  },
+  {
+    name: "Reports",
+    // icon: <Icon>article</Icon>,
+  },
+  {
+    name: "SCADA",
+    // icon: <Icon>article</Icon>,
+  },
+  {
+    name: "Useful Links",
+    // icon: <Icon>article</Icon>,
+  },
+  {
+    name: "Documents",
+    // icon: <Icon>article</Icon>,
+  },
+  {
+    name: "More",
+    // icon: <Icon>article</Icon>,
+  },
+  // {
+  //   name: "github",
+  //   icon: <GitHubIcon />,
+  //   href: "https://www.github.com/creativetimofficial/material-kit-react",
+  // },
 ];
 
 export default routes;
