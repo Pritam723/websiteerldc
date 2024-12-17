@@ -471,8 +471,12 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
       >
         <MKBox display="flex" justifyContent="space-between" alignItems="center">
           <MKBox
-            component={Link}
-            to="/"
+            // component={Link}
+            // to="https://erldc.in/en/"
+
+            component="a"
+            href="https://posoco.in/" // Replace with your desired URL
+            target="_blank" // Open in a new tab
             lineHeight={1}
             py={transparent ? 1.5 : 0.75}
             pl={relative || transparent ? 0 : { xs: 0, lg: 1 }}
@@ -483,7 +487,7 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
                 src={brand}
                 alt="Organization Logo"
                 sx={{
-                  maxWidth: "150px", // Adjust size as needed
+                  maxWidth: "130px", // Adjust size as needed
                   maxHeight: "50px", // Adjust size as needed
                 }}
               />

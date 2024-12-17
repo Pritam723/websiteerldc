@@ -16,7 +16,7 @@ export default {
   brand: {
     name: "ERLDC",
     image: logoCT,
-    route: "/",
+    route: "https://erldc.in/en/",
   },
   socials: [
     {
