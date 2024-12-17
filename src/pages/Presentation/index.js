@@ -25,6 +25,8 @@ import MKSocialButton from "components/MKSocialButton";
 
 // Material Kit 2 React examples
 import DefaultNavbar from "examples/Navbars/DefaultNavbar";
+import Navbar from "examples/Navbars/DefaultNavbar/Navbar";
+
 import DefaultFooter from "examples/Footers/DefaultFooter";
 import FilledInfoCard from "examples/Cards/InfoCards/FilledInfoCard";
 
@@ -42,9 +44,11 @@ import BuiltByDevelopers from "pages/Presentation/components/BuiltByDevelopers";
 // Routes
 import routes from "routes";
 import footerRoutes from "footer.routes";
-
+import video_posoco from "assets/videos/video_posoco.mp4";
+import "./video.css";
 // Images
-import bgImage from "assets/images/bg-presentation.jpg";
+import bgImage from "assets/images/transmission.jpg";
+// import sample from './sample.mp4';
 
 function Presentation() {
   return (
@@ -54,24 +58,28 @@ function Presentation() {
         routes={routes}
         action={{
           type: "external",
-          route: "https://www.creative-tim.com/product/material-kit-react",
-          label: "GRID-INDIA",
+          route: "https://posoco.in/en/",
+          label: "GRID-INDIA SITE",
           color: "info",
         }}
         sticky
       />
+
       <MKBox
-        minHeight="75vh"
-        width="100%"
-        sx={{
-          backgroundImage: `url(${bgImage})`,
-          backgroundSize: "cover",
-          backgroundPosition: "top",
-          display: "grid",
-          placeItems: "center",
-        }}
+      // minHeight="75vh"
+      // width="100%"
+      // sx={{
+      //   backgroundImage: `url(${bgImage})`,
+      //   backgroundSize: "cover",
+      //   backgroundPosition: "top",
+      //   display: "grid",
+      //   placeItems: "center",
+      // }}
       >
-        <Container>
+        <video className="videoTag" autoPlay loop muted>
+          <source src={video_posoco} type="video/mp4" />
+        </video>
+        {/* <Container>
           <Grid container item xs={12} lg={7} justifyContent="center" mx="auto">
             <MKTypography
               variant="h1"
@@ -97,7 +105,7 @@ function Presentation() {
               developers around the world.
             </MKTypography>
           </Grid>
-        </Container>
+        </Container> */}
       </MKBox>
       <Card
         sx={{
