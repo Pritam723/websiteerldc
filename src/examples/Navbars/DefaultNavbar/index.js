@@ -42,6 +42,7 @@ import DefaultNavbarMobile from "examples/Navbars/DefaultNavbar/DefaultNavbarMob
 
 // Material Kit 2 React base styles
 import breakpoints from "assets/theme/base/breakpoints";
+import GridLogo from "assets/images/GridIndiaLogo1.png";
 
 function DefaultNavbar({ brand, routes, transparent, light, action, sticky, relative, center }) {
   const [dropdown, setDropdown] = useState("");
@@ -476,10 +477,27 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
             py={transparent ? 1.5 : 0.75}
             pl={relative || transparent ? 0 : { xs: 0, lg: 1 }}
           >
+            {brand.endsWith(".png") || brand.endsWith(".jpg") || brand.endsWith(".svg") ? (
+              <MKBox
+                component="img"
+                src={brand}
+                alt="Organization Logo"
+                sx={{
+                  maxWidth: "150px", // Adjust size as needed
+                  maxHeight: "50px", // Adjust size as needed
+                }}
+              />
+            ) : (
+              <MKTypography variant="button" fontWeight="bold" color={light ? "white" : "dark"}>
+                {brand}
+              </MKTypography>
+            )}
+            {/* 
             <MKTypography variant="button" fontWeight="bold" color={light ? "white" : "dark"}>
               {brand}
-            </MKTypography>
+            </MKTypography> */}
           </MKBox>
+
           <MKBox
             color="inherit"
             display={{ xs: "none", lg: "flex" }}
@@ -551,7 +569,8 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
 
 // Setting default values for the props of DefaultNavbar
 DefaultNavbar.defaultProps = {
-  brand: "Material Kit 2",
+  // brand: "assets/images/GridIndiaLogo.png",
+  brand: GridLogo,
   transparent: false,
   light: false,
   action: false,

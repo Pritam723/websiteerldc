@@ -49,12 +49,13 @@ import bgImage from "assets/images/bg-presentation.jpg";
 function Presentation() {
   return (
     <>
+      {/* <div>Grid-India</div> */}
       <DefaultNavbar
         routes={routes}
         action={{
           type: "external",
           route: "https://www.creative-tim.com/product/material-kit-react",
-          label: "free download",
+          label: "GRID-INDIA",
           color: "info",
         }}
         sticky

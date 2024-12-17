@@ -108,6 +108,44 @@ const routes = [
     ],
   },
   {
+    name: "my pages",
+    icon: <Icon>dashboard</Icon>,
+    columns: 1,
+    rowsPerColumn: 2,
+    collapse: [
+      {
+        name: "landing pages",
+        collapse: [
+          {
+            name: "about us",
+            route: "/pages/landing-pages/about-us",
+            component: <AboutUs />,
+          },
+          {
+            name: "contact us",
+            route: "/pages/landing-pages/contact-us",
+            component: <ContactUs />,
+          },
+          {
+            name: "author",
+            route: "/pages/landing-pages/author",
+            component: <Author />,
+          },
+        ],
+      },
+      {
+        name: "account",
+        collapse: [
+          {
+            name: "sign in",
+            route: "/pages/authentication/sign-in",
+            component: <SignIn />,
+          },
+        ],
+      },
+    ],
+  },
+  {
     name: "my sections",
     icon: <Icon>view_day</Icon>,
     collapse: [
@@ -128,6 +166,24 @@ const routes = [
           },
         ],
       },
+      {
+        name: "ritik sections",
+        description: "See all sections",
+        dropdown: true,
+        collapse: [
+          {
+            name: "page headers",
+            route: "/sections/page-sections/page-headers",
+            component: <PageHeaders />,
+          },
+          {
+            name: "features",
+            route: "/sections/page-sections/features",
+            component: <Features />,
+          },
+        ],
+      },
+
       {
         name: "navigation",
         description: "See all navigations",
