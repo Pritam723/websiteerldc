@@ -56,12 +56,12 @@ function Presentation() {
       {/* <div>Grid-India</div> */}
       <DefaultNavbar
         routes={routes}
-        action={{
-          type: "external",
-          route: "https://posoco.in/en/",
-          label: "GRID-INDIA SITE",
-          color: "info",
-        }}
+        // action={{
+        //   type: "external",
+        //   route: "https://posoco.in/en/",
+        //   label: "GRID-INDIA SITE",
+        //   color: "info",
+        // }}
         sticky
       />
 
