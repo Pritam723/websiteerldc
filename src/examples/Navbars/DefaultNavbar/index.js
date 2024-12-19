@@ -44,7 +44,17 @@ import DefaultNavbarMobile from "examples/Navbars/DefaultNavbar/DefaultNavbarMob
 import breakpoints from "assets/theme/base/breakpoints";
 import GridLogo from "assets/images/GridIndiaLogo1.png";
 
-function DefaultNavbar({ brand, routes, transparent, light, action, sticky, relative, center }) {
+function DefaultNavbar({
+  brand,
+  routes,
+  transparent,
+  background,
+  light,
+  action,
+  sticky,
+  relative,
+  center,
+}) {
   const [dropdown, setDropdown] = useState("");
   const [dropdownEl, setDropdownEl] = useState("");
   const [dropdownName, setDropdownName] = useState("");
@@ -451,13 +461,17 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
   );
 
   return (
-    <Container sx={sticky ? { position: "sticky", top: 0, zIndex: 10 } : null}>
+    <Container
+      // style={{ backgroundColor: "#eb2890" }}
+      sx={sticky ? { position: "sticky", top: 10, zIndex: 10 } : null}
+    >
       <MKBox
         py={1}
         px={{ xs: 4, sm: transparent ? 2 : 3, lg: transparent ? 0 : 2 }}
         my={relative ? 0 : 2}
         mx={relative ? 0 : 3}
-        width={relative ? "100%" : "calc(100% - 48px)"}
+        // width="100%"
+        width={relative ? "100%" : "calc(100% - 20px)"}
         borderRadius="xl"
         shadow={transparent ? "none" : "md"}
         color={light ? "white" : "dark"}
@@ -481,6 +495,7 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
             py={transparent ? 1.5 : 0.75}
             pl={relative || transparent ? 0 : { xs: 0, lg: 1 }}
           >
+            {/* updated by 00339  */}
             {brand.endsWith(".png") || brand.endsWith(".jpg") || brand.endsWith(".svg") ? (
               <MKBox
                 component="img"
@@ -492,14 +507,16 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
                 }}
               />
             ) : (
-              <MKTypography variant="button" fontWeight="bold" color={light ? "white" : "dark"}>
+              <MKTypography
+                variant="button"
+                fontWeight="bold"
+                backgroundColor="black"
+                color={light ? "white" : "dark"}
+              >
                 {brand}
               </MKTypography>
             )}
-            {/* 
-            <MKTypography variant="button" fontWeight="bold" color={light ? "white" : "dark"}>
-              {brand}
-            </MKTypography> */}
+            {/* updated by 00339  */}
           </MKBox>
 
           <MKBox
@@ -507,6 +524,8 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
             display={{ xs: "none", lg: "flex" }}
             ml="auto"
             mr={center ? "auto" : 0}
+            size="Bold"
+            backgroundColor="black"
           >
             {renderNavbarItems}
           </MKBox>
@@ -556,6 +575,7 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
             <Icon fontSize="default">{mobileNavbar ? "close" : "menu"}</Icon>
           </MKBox>
         </MKBox>
+
         <MKBox
           bgColor={transparent ? "white" : "transparent"}
           shadow={transparent ? "lg" : "none"}
@@ -574,6 +594,7 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
 // Setting default values for the props of DefaultNavbar
 DefaultNavbar.defaultProps = {
   // brand: "assets/images/GridIndiaLogo.png",
+  // fontWeight: 800,
   brand: GridLogo,
   transparent: false,
   light: false,
@@ -585,6 +606,7 @@ DefaultNavbar.defaultProps = {
 
 // Typechecking props for the DefaultNavbar
 DefaultNavbar.propTypes = {
+  background: PropTypes.string,
   brand: PropTypes.string,
   routes: PropTypes.arrayOf(PropTypes.shape).isRequired,
   transparent: PropTypes.bool,
