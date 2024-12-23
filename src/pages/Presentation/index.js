@@ -129,7 +129,7 @@ function Presentation() {
           <Grid container spacing={3}>
             <Grid item xs={12} lg={4}>
               <FilledInfoCard
-                variant="gradient"
+                // variant="gradient"
                 color="info"
                 icon="flag"
                 title="Getting Started"

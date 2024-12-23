@@ -58,9 +58,9 @@ function FilledInfoCard({ variant, color, icon, title, description, action }) {
       variant={variant}
       bgColor={variant === "contained" ? "grey-100" : color}
       borderRadius="xl"
-      pt={3.5}
-      pb={3}
-      px={3}
+      pt={2}
+      pb={1.5}
+      px={1.5}
     >
       <MKTypography
         display="block"

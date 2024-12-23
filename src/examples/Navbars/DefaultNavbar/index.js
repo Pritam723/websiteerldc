@@ -68,21 +68,19 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
         setMobileNavbar(false);
       }
     }
-
-    /** 
-     The event listener that's calling the displayMobileNavbar function when 
+    /**
+     The event listener that's calling the displayMobileNavbar function when
      resizing the window.
     */
     window.addEventListener("resize", displayMobileNavbar);
-
     // Call the displayMobileNavbar function to set the state with the initial value.
     displayMobileNavbar();
-
     // Remove event listener on cleanup
     return () => window.removeEventListener("resize", displayMobileNavbar);
   }, []);
 
   const renderNavbarItems = routes.map(({ name, icon, href, route, collapse }) => (
+    // <div key={name}>hihihihi</div>
     <DefaultNavbarDropdown
       key={name}
       name={name}
@@ -451,9 +449,10 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
   );
 
   return (
+    // <div>hii</div>
     <Container sx={sticky ? { position: "sticky", top: 0, zIndex: 10 } : null}>
       <MKBox
-        py={1}
+        py={0}
         px={{ xs: 4, sm: transparent ? 2 : 3, lg: transparent ? 0 : 2 }}
         my={relative ? 0 : 2}
         mx={relative ? 0 : 3}
@@ -470,6 +469,7 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
         })}
       >
         <MKBox display="flex" justifyContent="space-between" alignItems="center">
+          {/* Component for GRID-INDIA Logo Start*/}
           <MKBox
             component={Link}
             to="/"
@@ -483,8 +483,8 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
                 src={brand}
                 alt="Organization Logo"
                 sx={{
-                  maxWidth: "150px", // Adjust size as needed
-                  maxHeight: "50px", // Adjust size as needed
+                  maxWidth: "130px", // Adjust size as needed
+                  maxHeight: "40px", // Adjust size as needed
                 }}
               />
             ) : (
@@ -497,12 +497,15 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
               {brand}
             </MKTypography> */}
           </MKBox>
+          {/* Component for GRID-INDIA Logo End*/}
 
           <MKBox
             color="inherit"
             display={{ xs: "none", lg: "flex" }}
-            ml="auto"
-            mr={center ? "auto" : 0}
+            // ml="auto"
+            // mr={center ? "auto" : 0}
+            ml={0}
+            mr={0}
           >
             {renderNavbarItems}
           </MKBox>

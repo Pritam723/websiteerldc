@@ -1,5 +1,8 @@
 // @mui icons
 import FacebookIcon from "@mui/icons-material/Facebook";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import XIcon from "@mui/icons-material/X";
+
 import TwitterIcon from "@mui/icons-material/Twitter";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import YouTubeIcon from "@mui/icons-material/YouTube";
@@ -9,72 +12,88 @@ import MKTypography from "components/MKTypography";
 
 // Images
 import logoCT from "assets/images/logo-ct-dark.png";
+import GridLogo from "assets/images/GridIndiaLogo1.png";
 
 const date = new Date().getFullYear();
 
 export default {
   brand: {
-    name: "ERLDC",
-    image: logoCT,
+    name: "ERLDC, GRID-INDIA",
+    image: GridLogo,
     route: "/",
   },
   socials: [
     {
       icon: <FacebookIcon />,
-      link: "https://www.facebook.com/CreativeTim/",
+      link: "https://www.facebook.com/GridIndia1",
+      color: "info",
     },
     {
-      icon: <TwitterIcon />,
-      link: "https://twitter.com/creativetim",
+      icon: <LinkedInIcon />,
+      link: "https://www.linkedin.com/company/power-system-operation-corporation-ltd",
+      color: "info",
     },
     {
-      icon: <GitHubIcon />,
-      link: "https://github.com/creativetimofficial",
+      icon: <XIcon />,
+      link: "https://twitter.com/GridIndia1",
+      color: "dark",
     },
-    {
-      icon: <YouTubeIcon />,
-      link: "https://www.youtube.com/channel/UCVyTG4sCw-rOvB9oHkzZD1w",
-    },
+
+    // {
+    //   icon: <GitHubIcon />,
+    //   link: "https://github.com/creativetimofficial",
+    // },
+    // {
+    //   icon: <YouTubeIcon />,
+    //   link: "https://www.youtube.com/channel/UCVyTG4sCw-rOvB9oHkzZD1w",
+    // },
   ],
   menus: [
     {
-      name: "company",
+      name: "Quick Links",
       items: [
-        { name: "about us", href: "https://www.creative-tim.com/presentation" },
-        { name: "freebies", href: "https://www.creative-tim.com/templates/free" },
-        { name: "premium tools", href: "https://www.creative-tim.com/templates/premium" },
-        { name: "blog", href: "https://www.creative-tim.com/blog" },
+        { name: "Feedback & Grievance", href: "/presentation" },
+        { name: "Organizational Chart", href: "https://www.creative-tim.com/templates/free" },
+        { name: "Upload Documents", href: "https://www.creative-tim.com/templates/premium" },
+        { name: "RTI", href: "https://www.creative-tim.com/blog" },
+        { name: "GRID-INDIA Website", href: "https://www.creative-tim.com/blog" },
       ],
     },
     {
-      name: "resources",
+      name: "Address",
       items: [
-        { name: "illustrations", href: "https://iradesign.io/" },
-        { name: "bits & snippets", href: "https://www.creative-tim.com/bits" },
-        { name: "affiliate program", href: "https://www.creative-tim.com/affiliates/new" },
+        {
+          name: "Eastern Regional Load Despatch Centre, 14, Golf Club Road, Tollygunge, Kolkata -700 033",
+          href: "https://www.google.com/maps/dir//erldc/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x3a0270c3a52e094b:0xe0462ed564bcee08?sa=X&ved=1t:3061&ictx=111",
+        },
+        // { name: "bits & snippets", href: "https://www.creative-tim.com/bits" },
+        // { name: "affiliate program", href: "https://www.creative-tim.com/affiliates/new" },
       ],
     },
     {
-      name: "help & support",
+      name: "Contact Us",
       items: [
-        { name: "contact us", href: "https://www.creative-tim.com/contact-us" },
-        { name: "knowledge center", href: "https://www.creative-tim.com/knowledge-center" },
-        { name: "custom development", href: "https://services.creative-tim.com/" },
-        { name: "sponsorships", href: "https://www.creative-tim.com/sponsorships" },
+        { name: "(+91) 33 30116900-09 (EPABX)" },
+        { name: "2423-5875 / 24235265 / 30116990-96 (CONTROL ROOM)" },
+        { name: "erldcinfo@posoco.in", href: "mailto:erldcinfo@posoco.in" },
       ],
     },
     {
-      name: "legal",
+      name: "Helpline",
       items: [
-        { name: "terms & conditions", href: "https://www.creative-tim.com/terms" },
-        { name: "privacy policy", href: "https://www.creative-tim.com/privacy" },
-        { name: "licenses (EULA)", href: "https://www.creative-tim.com/license" },
+        {
+          name: "NCW Women's HelpLine",
+          // href: "https://www.creative-tim.com/contact-us",
+        },
+        { name: "Helpline No. 7827170170" },
+        // { name: "custom development", href: "https://services.creative-tim.com/" },
+        // { name: "sponsorships", href: "https://www.creative-tim.com/sponsorships" },
       ],
     },
   ],
   copyright: (
     <MKTypography variant="button" fontWeight="regular">
-      All rights reserved. Copyright &copy; {date} ERLDC{" "}
+      All rights reserved. &copy; {date}{" "}
       <MKTypography
         component="a"
         href="https://www.creative-tim.com"
@@ -83,7 +102,7 @@ export default {
         variant="button"
         fontWeight="regular"
       >
-        Creative Tim
+        Eastern Regional Load Despatch Centre
       </MKTypography>
       .
     </MKTypography>

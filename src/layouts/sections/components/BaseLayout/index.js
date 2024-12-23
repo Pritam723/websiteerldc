@@ -27,6 +27,9 @@ import MKTypography from "components/MKTypography";
 // Material Kit 2 React examples
 import DefaultNavbar from "examples/Navbars/DefaultNavbar";
 import CenteredFooter from "examples/Footers/CenteredFooter";
+import DefaultFooter from "examples/Footers/DefaultFooter";
+import footerRoutes from "footer.routes";
+
 import Breadcrumbs from "examples/Breadcrumbs";
 
 // Routes
@@ -38,12 +41,12 @@ function BaseLayout({ breadcrumb, title, children }) {
       <MKBox bgColor="white" shadow="sm" py={0.25}>
         <DefaultNavbar
           routes={routes}
-          action={{
-            type: "external",
-            route: "https://www.creative-tim.com/product/material-kit-react",
-            label: "free download",
-            color: "info",
-          }}
+          // action={{
+          //   type: "external",
+          //   route: "https://www.creative-tim.com/product/material-kit-react",
+          //   label: "free download",
+          //   color: "info",
+          // }}
           transparent
           relative
         />
@@ -60,7 +63,7 @@ function BaseLayout({ breadcrumb, title, children }) {
         </Grid>
       </Container>
       <MKBox mt="auto">
-        <CenteredFooter />
+        <DefaultFooter content={footerRoutes} />
       </MKBox>
     </MKBox>
   );

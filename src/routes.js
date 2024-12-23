@@ -37,10 +37,10 @@ Coded by www.creative-tim.com
 */
 
 // @mui material components
-// import Icon from "@mui/material/Icon";
+import Icon from "@mui/material/Icon";
 
 // @mui icons
-// import GitHubIcon from "@mui/icons-material/GitHub";
+import GitHubIcon from "@mui/icons-material/GitHub";
 
 // Pages
 import AboutUs from "layouts/pages/landing-pages/about-us";
@@ -69,44 +69,44 @@ import Toggles from "layouts/sections/elements/toggles";
 import Typography from "layouts/sections/elements/typography";
 
 const routes = [
-  {
-    name: "Home",
-    // icon: <Icon>dashboard</Icon>,
-    columns: 1,
-    rowsPerColumn: 2,
-    collapse: [
-      {
-        name: "landing pages",
-        collapse: [
-          {
-            name: "about us",
-            route: "/pages/landing-pages/about-us",
-            component: <AboutUs />,
-          },
-          {
-            name: "contact us",
-            route: "/pages/landing-pages/contact-us",
-            component: <ContactUs />,
-          },
-          {
-            name: "author",
-            route: "/pages/landing-pages/author",
-            component: <Author />,
-          },
-        ],
-      },
-      {
-        name: "account",
-        collapse: [
-          {
-            name: "sign in",
-            route: "/pages/authentication/sign-in",
-            component: <SignIn />,
-          },
-        ],
-      },
-    ],
-  },
+  // {
+  //   name: "Home",
+  //   // icon: <Icon>dashboard</Icon>,
+  //   columns: 1,
+  //   rowsPerColumn: 2,
+  //   collapse: [
+  //     {
+  //       name: "landing pages",
+  //       collapse: [
+  //         {
+  //           name: "about us",
+  //           route: "/pages/landing-pages/about-us",
+  //           component: <AboutUs />,
+  //         },
+  //         {
+  //           name: "contact us",
+  //           route: "/pages/landing-pages/contact-us",
+  //           component: <ContactUs />,
+  //         },
+  //         {
+  //           name: "author",
+  //           route: "/pages/landing-pages/author",
+  //           component: <Author />,
+  //         },
+  //       ],
+  //     },
+  //     {
+  //       name: "account",
+  //       collapse: [
+  //         {
+  //           name: "sign in",
+  //           route: "/pages/authentication/sign-in",
+  //           component: <SignIn />,
+  //         },
+  //       ],
+  //     },
+  //   ],
+  // },
   {
     name: "About Us",
     // icon: <Icon>view_day</Icon>,
@@ -263,22 +263,27 @@ const routes = [
       {
         name: "getting started",
         description: "All about overview, quick start, license and contents",
-        href: "https://www.creative-tim.com/learning-lab/react/quick-start/material-kit/",
+        dropdown: true,
+        // href: "https://www.creative-tim.com/learning-lab/react/quick-start/material-kit/",
+        collapse: [
+          {
+            name: "test1",
+            description: "test1",
+            dropdown: true,
+            collapse: [
+              {
+                name: "test22",
+                description: "test22",
+                // dropdown:true,
+              },
+            ],
+          },
+        ],
       },
       {
         name: "foundation",
         description: "See our colors, icons and typography",
         href: "https://www.creative-tim.com/learning-lab/react/colors/material-kit/",
-      },
-      {
-        name: "components",
-        description: "Explore our collection of fully designed components",
-        href: "https://www.creative-tim.com/learning-lab/react/alerts/material-kit/",
-      },
-      {
-        name: "plugins",
-        description: "Check how you can integrate our plugins",
-        href: "https://www.creative-tim.com/learning-lab/react/datepicker/material-kit/",
       },
     ],
   },
@@ -302,10 +307,10 @@ const routes = [
     name: "SCADA",
     // icon: <Icon>article</Icon>,
   },
-  {
-    name: "Useful Links",
-    // icon: <Icon>article</Icon>,
-  },
+  // {
+  //   name: "Useful Links",
+  //   // icon: <Icon>article</Icon>,
+  // },
   {
     name: "Documents",
     // icon: <Icon>article</Icon>,
@@ -314,6 +319,10 @@ const routes = [
     name: "More",
     // icon: <Icon>article</Icon>,
   },
+  // {
+  //   name: "IMS & ISMS",
+  //   // icon: <Icon>article</Icon>,
+  // },
   // {
   //   name: "github",
   //   icon: <GitHubIcon />,
