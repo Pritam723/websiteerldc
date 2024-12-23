@@ -55,6 +55,10 @@ function Presentation() {
     <>
       {/* <div>Grid-India</div> */}
       <DefaultNavbar
+        // className="custom-navbar"
+        // style={{ backgroundColor: "#ff5733" }}
+        // background="#2c3e50"
+        // font-family="Roboto"
         routes={routes}
         // action={{
         //   type: "external",

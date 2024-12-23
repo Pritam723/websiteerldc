@@ -56,6 +56,8 @@ function DefaultNavbarDropdown({
         {...rest}
         mx={0}
         p={1}
+        // mx={0}
+        // p={0}
         display="flex"
         alignItems="baseline"
         color={light ? "white" : "dark"}
@@ -72,6 +74,7 @@ function DefaultNavbarDropdown({
         >
           {icon}
         </MKTypography>
+
         <MKTypography
           variant="button"
           fontWeight="bold"
