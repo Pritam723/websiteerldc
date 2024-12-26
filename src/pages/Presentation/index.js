@@ -29,6 +29,7 @@ import Navbar from "examples/Navbars/DefaultNavbar/Navbar";
 
 import DefaultFooter from "examples/Footers/DefaultFooter";
 import FilledInfoCard from "examples/Cards/InfoCards/FilledInfoCard";
+import Carousel from "examples/Carousel/carousel";
 
 // Presentation page sections
 import Counters from "pages/Presentation/sections/Counters";
@@ -55,10 +56,6 @@ function Presentation() {
     <>
       {/* <div>Grid-India</div> */}
       <DefaultNavbar
-        // className="custom-navbar"
-        // style={{ backgroundColor: "#ff5733" }}
-        // background="#2c3e50"
-        // font-family="Roboto"
         routes={routes}
         // action={{
         //   type: "external",
@@ -124,58 +121,98 @@ function Presentation() {
       >
         <Counters />
         <Information />
-        <DesignBlocks />
+        {/* <DesignBlocks /> */}
         <Pages />
         <Container sx={{ mt: 6 }}>
           <BuiltByDevelopers />
         </Container>
         <Container>
           <Grid container spacing={3}>
-            <Grid item xs={12} lg={4}>
+            <Grid item xs={12} lg={2}>
               <FilledInfoCard
                 // variant="gradient"
                 color="info"
-                icon="flag"
-                title="Getting Started"
-                description="Check the possible ways of working with our product and the necessary files for building your own project."
+                icon="bolt"
+                title="New WBES"
+                // description="Check the possible ways of working with our product and the necessary files for building your own project."
                 action={{
                   type: "external",
-                  route: "https://www.creative-tim.com/learning-lab/react/overview/material-kit/",
-                  label: "Let's start",
+                  route: "https://newwbes.grid-india.in/",
+                  label: "Visit Site",
                 }}
               />
             </Grid>
-            <Grid item xs={12} lg={4}>
+            <Grid item xs={12} lg={2}>
               <FilledInfoCard
                 color="info"
-                icon="precision_manufacturing"
-                title="Plugins"
-                description="Get inspiration and have an overview about the plugins that we used to create the Material Kit."
+                icon="earbuds_battery"
+                title="FTC Application"
+                // description="Get inspiration and have an overview about the plugins that we used to create the Material Kit."
                 action={{
                   type: "external",
-                  route: "https://www.creative-tim.com/learning-lab/react/overview/datepicker/",
-                  label: "Read more",
+                  route: "https://ftc.erldc.in/FTC_ERLDC/",
+                  label: "Visit FTC Application",
                 }}
               />
             </Grid>
-            <Grid item xs={12} lg={4}>
+            <Grid item xs={12} lg={2}>
               <FilledInfoCard
                 color="info"
-                icon="apps"
-                title="Components"
-                description="Material Kit is giving you a lot of pre-made components, that will help you to build UI's faster."
+                icon="menu_book"
+                title="M.Presentation"
+                // description="Material Kit is giving you a lot of pre-made components, that will help you to build UI's faster."
                 action={{
                   type: "external",
-                  route: "https://www.creative-tim.com/learning-lab/react/alerts/material-kit/",
-                  label: "Read more",
+                  route: "https://mp.erldc.in/",
+                  label: "Moring Presentation",
+                }}
+              />
+            </Grid>
+            <Grid item xs={12} lg={2}>
+              <FilledInfoCard
+                // variant="gradient"
+                color="info"
+                icon="app_registration"
+                title="NOAR"
+                // description="Check the possible ways of working with our product and the necessary files for building your own project."
+                action={{
+                  type: "external",
+                  route: "https://noar.in/",
+                  label: "Visit NOAR Site",
+                }}
+              />
+            </Grid>
+            <Grid item xs={12} lg={2}>
+              <FilledInfoCard
+                color="info"
+                icon="assessment"
+                title="Reporting"
+                // description="Get inspiration and have an overview about the plugins that we used to create the Material Kit."
+                action={{
+                  type: "external",
+                  route: "https://report.erldc.in/POSOCO/",
+                  label: "Go to site",
+                }}
+              />
+            </Grid>
+            <Grid item xs={12} lg={2}>
+              <FilledInfoCard
+                color="info"
+                icon="currency_rupee"
+                title="Fees & Charges"
+                // description="Material Kit is giving you a lot of pre-made components, that will help you to build UI's faster."
+                action={{
+                  type: "external",
+                  route: "https://fc.posoco.in/FnCWeb/#/landing",
+                  label: "Visit F&C Application",
                 }}
               />
             </Grid>
           </Grid>
         </Container>
-        <Testimonials />
-        <Download />
-        <MKBox pt={18} pb={6}>
+        {/* <Testimonials /> */}
+        {/* <Download /> */}
+        {/* <MKBox pt={18} pb={6}>
           <Container>
             <Grid container spacing={3}>
               <Grid item xs={12} lg={5} ml="auto" sx={{ textAlign: { xs: "center", lg: "left" } }}>
@@ -226,7 +263,13 @@ function Presentation() {
               </Grid>
             </Grid>
           </Container>
-        </MKBox>
+        </MKBox> */}
+        {/* <Container>
+          <Grid container>
+            {" "} */}
+        <Carousel />
+        {/* </Grid>
+        </Container> */}
       </Card>
       <MKBox pt={6} px={1} mt={6}>
         <DefaultFooter content={footerRoutes} />
