@@ -1,0 +1,131 @@
+.custom-carousels{
+    /* transition: transform 2s ease-in-out; Smooth scrolling effect */
+    /* border-color: #4b5563; */
+    /* display: flex; */
+    animation: slide 20s linear infinite;
+  }
+  .custom-carousels {
+    display: flex;
+    animation: slide 20s linear infinite; /* Continuous sliding animation */
+    will-change: transform; /* Optimization for smoother animations */
+  }
+  
+ 
+  
+  .custom-carousels .p-carousel-item.p-carousel-item-active {
+    transform: scale(1); /* Highlight active items */
+  }
+  
+  .custom-carousels .p-carousel-content {
+    gap: 15px; /* Add spacing between items */
+  }
+  .card{
+    /* background-color: rgb(136, 164, 155); */
+
+    width: 100%;
+    height: 90px;
+  }
+  /* .carousel-container {
+    overflow: hidden;
+    position: relative;
+    height: 100%;
+    border-color: #4b5563;
+    width: 100%;
+  }
+  .carousel-track {
+    display: flex;
+    position: absolute;
+    left: 0;
+    justify-content: center;
+    align-items: center;
+    height: 80px;
+    gap: 16px;
+    width: 200%;
+    height: 100%;
+    animation: slide 20s linear infinite;
+    &:hover {
+        animation-play-state: paused;
+    }
+  }
+  .carousel-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    &:hover {
+      transform: scale(0.9);
+      box-shadow: 5px 5px 8px rgba(222, 222, 222, 0.362),
+        10px 10px 8px rgba(152, 133, 133, 0.392),
+        15px 15px 8px rgba(139, 154, 139, 0.303);
+    }
+    border-radius: 20%;
+    background: rgb(41, 40, 40);
+  }
+  
+  .carousel-card > img {
+    height: 80%;
+    width: 80%;
+    border-radius: 10%;
+  } */
+
+/* body{
+min-height: 100vh;
+display: grid;
+} */
+
+.slider {
+height: 150px;
+margin: auto;
+position: relative;
+width: 80%;
+display: grid;
+/* place-items: center; */
+overflow: hidden;
+}
+
+.slide-track {
+
+display: flex;
+width: calc(250px * 12);
+/* width: 60%; */
+animation: scroll 20s linear infinite;
+
+}
+.slide-track:hover {  
+    animation-play-state: paused;
+  }
+@keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(calc(-250px * 6));
+    }
+
+}
+img:hover {
+    transform: translateZ(20px);
+  }
+
+
+.slide{
+
+height: 200px;
+
+width: 250px;
+
+display: flex;
+
+align-items: center;
+
+padding:15px;
+perspective: 100px;
+}
+
+img {
+
+width: 100%;
+
+}
+
