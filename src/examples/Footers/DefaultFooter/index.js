@@ -26,6 +26,7 @@ import Grid from "@mui/material/Grid";
 // Material Kit 2 React components
 import MKBox from "components/MKBox";
 import MKTypography from "components/MKTypography";
+import GridLogo from "assets/images/GridIndiaLogo1.png";
 
 function DefaultFooter({ content }) {
   const { brand, socials, menus, copyright } = content;
@@ -34,24 +35,24 @@ function DefaultFooter({ content }) {
     <MKBox component="footer">
       <Container>
         <Grid container spacing={3}>
-          <Grid item xs={12} md={3} sx={{ ml: "auto", mb: 3 }}>
+          <Grid style={{ paddingTop: 0 }} item xs={12} md={3} sx={{ ml: "auto", mb: 3 }}>
             <MKBox>
               <Link to={brand.route}>
-                <MKBox component="img" src={brand.image} alt={brand.name} maxWidth="2rem" mb={2} />
+                <MKBox component="img" src={brand.image} alt={brand.name} maxWidth="10rem" mb={0} />
               </Link>
-              <MKTypography variant="h6">{brand.name}</MKTypography>
+              <MKTypography variant="h3">{brand.name}</MKTypography>
             </MKBox>
-            <MKBox display="flex" alignItems="center" mt={3}>
-              {socials.map(({ icon, link }, key) => (
+            <MKBox display="flex" alignItems="center" mt={1}>
+              {socials.map(({ icon, link, color }, key) => (
                 <MKTypography
                   key={link}
                   component="a"
                   href={link}
                   target="_blank"
                   rel="noreferrer"
-                  variant="h5"
-                  color="dark"
-                  opacity={0.8}
+                  variant="h2"
+                  color={color}
+                  opacity={1}
                   mr={key === socials.length - 1 ? 0 : 2.5}
                 >
                   {icon}
@@ -60,7 +61,7 @@ function DefaultFooter({ content }) {
             </MKBox>
           </Grid>
           {menus.map(({ name: title, items }) => (
-            <Grid key={title} item xs={6} md={2} sx={{ mb: 3 }}>
+            <Grid style={{ paddingTop: 0 }} key={title} item xs={6} md={2} sx={{ mb: 3 }}>
               <MKTypography
                 display="block"
                 variant="button"
@@ -81,7 +82,7 @@ function DefaultFooter({ content }) {
                         rel="noreferrer"
                         variant="button"
                         fontWeight="regular"
-                        textTransform="capitalize"
+                        // textTransform="capitalize"
                       >
                         {name}
                       </MKTypography>
@@ -101,7 +102,7 @@ function DefaultFooter({ content }) {
               </MKBox>
             </Grid>
           ))}
-          <Grid item xs={12} sx={{ textAlign: "center", my: 3 }}>
+          <Grid style={{ paddingTop: 0 }} item xs={12} sx={{ textAlign: "center", my: 0 }}>
             {copyright}
           </Grid>
         </Grid>

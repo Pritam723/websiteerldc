@@ -27,15 +27,15 @@ export default [
     name: "Contact Us Page",
     route: "/pages/landing-pages/contact-us",
   },
-  {
-    image:
-      "https://raw.githubusercontent.com/creativetimofficial/public-assets/master/material-design-system/presentation/account/signin-basic.jpg",
-    name: "Sign In Page",
-    route: "/pages/authentication/sign-in",
-  },
-  {
-    image: `${imagesPrefix}/author.jpg`,
-    name: "Author Page",
-    route: "/pages/landing-pages/author",
-  },
+  // {
+  //   image:
+  //     "https://raw.githubusercontent.com/creativetimofficial/public-assets/master/material-design-system/presentation/account/signin-basic.jpg",
+  //   name: "Sign In Page",
+  //   route: "/pages/authentication/sign-in",
+  // },
+  // {
+  //   image: `${imagesPrefix}/author.jpg`,
+  //   name: "Author Page",
+  //   route: "/pages/landing-pages/author",
+  // },
 ];

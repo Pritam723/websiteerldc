@@ -78,21 +78,19 @@ function DefaultNavbar({
         setMobileNavbar(false);
       }
     }
-
-    /** 
-     The event listener that's calling the displayMobileNavbar function when 
+    /**
+     The event listener that's calling the displayMobileNavbar function when
      resizing the window.
     */
     window.addEventListener("resize", displayMobileNavbar);
-
     // Call the displayMobileNavbar function to set the state with the initial value.
     displayMobileNavbar();
-
     // Remove event listener on cleanup
     return () => window.removeEventListener("resize", displayMobileNavbar);
   }, []);
 
   const renderNavbarItems = routes.map(({ name, icon, href, route, collapse }) => (
+    // <div key={name}>hihihihi</div>
     <DefaultNavbarDropdown
       key={name}
       name={name}
@@ -461,12 +459,10 @@ function DefaultNavbar({
   );
 
   return (
-    <Container
-      // style={{ backgroundColor: "#eb2890" }}
-      sx={sticky ? { position: "sticky", top: 10, zIndex: 10 } : null}
-    >
+    // <div>hii</div>
+    <Container sx={sticky ? { position: "sticky", top: 0, zIndex: 10 } : null}>
       <MKBox
-        py={1}
+        py={0}
         px={{ xs: 4, sm: transparent ? 2 : 3, lg: transparent ? 0 : 2 }}
         my={relative ? 0 : 2}
         mx={relative ? 0 : 3}
@@ -484,6 +480,7 @@ function DefaultNavbar({
         })}
       >
         <MKBox display="flex" justifyContent="space-between" alignItems="center">
+          {/* Component for GRID-INDIA Logo Start*/}
           <MKBox
             // component={Link}
             // to="https://erldc.in/en/"
@@ -503,7 +500,7 @@ function DefaultNavbar({
                 alt="Organization Logo"
                 sx={{
                   maxWidth: "130px", // Adjust size as needed
-                  maxHeight: "50px", // Adjust size as needed
+                  maxHeight: "40px", // Adjust size as needed
                 }}
               />
             ) : (
@@ -518,14 +515,15 @@ function DefaultNavbar({
             )}
             {/* updated by 00339  */}
           </MKBox>
+          {/* Component for GRID-INDIA Logo End*/}
 
           <MKBox
             color="inherit"
             display={{ xs: "none", lg: "flex" }}
-            ml="auto"
-            mr={center ? "auto" : 0}
-            size="Bold"
-            backgroundColor="black"
+            // ml="auto"
+            // mr={center ? "auto" : 0}
+            ml={0}
+            mr={0}
           >
             {renderNavbarItems}
           </MKBox>

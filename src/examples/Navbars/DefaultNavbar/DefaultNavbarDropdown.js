@@ -78,11 +78,10 @@ function DefaultNavbarDropdown({
         <MKTypography
           variant="button"
           fontWeight="bold"
-          whiteSpace="nowrap"
           textTransform="capitalize"
           color={light ? "white" : "dark"}
-          sx={{ fontWeight: "100%", ml: 0, mr: 0 }}
-          // sx={{ fontWeight: "100%", ml: , mr: 0.25 }}
+          sx={{ fontWeight: "100%", ml: 1, mr: 0.25 }}
+          whiteSpace="nowrap"
         >
           {name}
         </MKTypography>
