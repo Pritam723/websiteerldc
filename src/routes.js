@@ -41,6 +41,7 @@ import Icon from "@mui/material/Icon";
 
 // @mui icons
 import GitHubIcon from "@mui/icons-material/GitHub";
+import LightbulbIcon from '@mui/icons-material/Lightbulb';
 
 // Pages
 import AboutUs from "layouts/pages/landing-pages/about-us";
@@ -69,191 +70,36 @@ import Toggles from "layouts/sections/elements/toggles";
 import Typography from "layouts/sections/elements/typography";
 
 const routes = [
-  // {
-  //   name: "Home",
-  //   // icon: <Icon>dashboard</Icon>,
-  //   columns: 1,
-  //   rowsPerColumn: 2,
-  //   collapse: [
-  //     {
-  //       name: "landing pages",
-  //       collapse: [
-  //         {
-  //           name: "about us",
-  //           route: "/pages/landing-pages/about-us",
-  //           component: <AboutUs />,
-  //         },
-  //         {
-  //           name: "contact us",
-  //           route: "/pages/landing-pages/contact-us",
-  //           component: <ContactUs />,
-  //         },
-  //         {
-  //           name: "author",
-  //           route: "/pages/landing-pages/author",
-  //           component: <Author />,
-  //         },
-  //       ],
-  //     },
-  //     {
-  //       name: "account",
-  //       collapse: [
-  //         {
-  //           name: "sign in",
-  //           route: "/pages/authentication/sign-in",
-  //           component: <SignIn />,
-  //         },
-  //       ],
-  //     },
-  //   ],
-  // },
+
+  {
+            name: <b>Home</b>,
+            route: "layouts/pages/presentation",
+  },
+
   {
     name: "About Us",
-    // icon: <Icon>view_day</Icon>,
+    // icon: <Icon>InfoIcon</Icon>,
     collapse: [
       {
-        name: "page sections",
-        description: "See all sections",
-        dropdown: true,
-        collapse: [
-          {
-            name: "page headers",
-            route: "/sections/page-sections/page-headers",
-            component: <PageHeaders />,
-          },
-          {
-            name: "features",
-            route: "/sections/page-sections/features",
-            component: <Features />,
-          },
-        ],
+        name:<b style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+        <LightbulbIcon style={{ color: "gold", fontSize: "24px" }} /> Vision/Mission
+      </b>,
+        route: "/sections/page-sections/page-headers",
+        component: <PageHeaders />,
       },
       {
-        name: "ritik sections",
-        description: "See all sections",
-        dropdown: true,
-        collapse: [
-          {
-            name: "page headers",
+
+            name: <b>Salient features</b>,
             route: "/sections/page-sections/page-headers",
             component: <PageHeaders />,
-          },
-          {
-            name: "features",
-            route: "/sections/page-sections/features",
-            component: <Features />,
-          },
-        ],
       },
 
       {
-        name: "navigation",
-        description: "See all navigations",
-        dropdown: true,
-        collapse: [
-          {
-            name: "navbars",
-            route: "/sections/navigation/navbars",
-            component: <Navbars />,
-          },
-          {
-            name: "nav tabs",
-            route: "/sections/navigation/nav-tabs",
-            component: <NavTabs />,
-          },
-          {
-            name: "pagination",
-            route: "/sections/navigation/pagination",
-            component: <Pagination />,
-          },
-        ],
-      },
-      {
-        name: "input areas",
-        description: "See all input areas",
-        dropdown: true,
-        collapse: [
-          {
-            name: "inputs",
-            route: "/sections/input-areas/inputs",
-            component: <Inputs />,
-          },
-          {
-            name: "forms",
-            route: "/sections/input-areas/forms",
-            component: <Forms />,
-          },
-        ],
-      },
-      {
-        name: "attention catchers",
-        description: "See all examples",
-        dropdown: true,
-        collapse: [
-          {
-            name: "alerts",
-            route: "/sections/attention-catchers/alerts",
-            component: <Alerts />,
-          },
-          {
-            name: "modals",
-            route: "/sections/attention-catchers/modals",
-            component: <Modals />,
-          },
-          {
-            name: "tooltips & popovers",
-            route: "/sections/attention-catchers/tooltips-popovers",
-            component: <TooltipsPopovers />,
-          },
-        ],
-      },
-      {
-        name: "elements",
-        description: "See all 32 examples",
-        dropdown: true,
-        collapse: [
-          {
-            name: "avatars",
-            route: "/sections/elements/avatars",
-            component: <Avatars />,
-          },
-          {
-            name: "badges",
-            route: "/sections/elements/badges",
-            component: <Badges />,
-          },
-          {
-            name: "breadcrumbs",
-            route: "/sections/elements/breadcrumbs",
-            component: <BreadcrumbsEl />,
-          },
-          {
-            name: "buttons",
-            route: "/sections/elements/buttons",
-            component: <Buttons />,
-          },
-          {
-            name: "dropdowns",
-            route: "/sections/elements/dropdowns",
-            component: <Dropdowns />,
-          },
-          {
-            name: "progress bars",
-            route: "/sections/elements/progress-bars",
-            component: <ProgressBars />,
-          },
-          {
-            name: "toggles",
-            route: "/sections/elements/toggles",
-            component: <Toggles />,
-          },
-          {
-            name: "typography",
-            route: "/sections/elements/typography",
-            component: <Typography />,
-          },
-        ],
-      },
+
+        name: <b>GRID-INDIA Annual Reports</b>,
+        href:"http://posoco.in/about-us/annual-reports/"
+
+  },
     ],
   },
   {
@@ -261,63 +107,757 @@ const routes = [
     // icon: <Icon>article</Icon>,
     collapse: [
       {
-        name: "getting started",
-        description: "All about overview, quick start, license and contents",
+        name: <b>TTC/ATC</b>,
+        href:"https://posoco.in/market/monthly-atc-intra-regional"
+  },
+
+      {
+        name: <b>Outage</b>,
         dropdown: true,
-        // href: "https://www.creative-tim.com/learning-lab/react/quick-start/material-kit/",
         collapse: [
           {
-            name: "test1",
-            description: "test1",
-            dropdown: true,
-            collapse: [
-              {
-                name: "test22",
-                description: "test22",
-                // dropdown:true,
-              },
-            ],
+            name: <b>Outage Software LC Module</b>,
+            href:"https://mdp.erldc.in/en/outage/"
+          },         
+           {
+            name: <b>E-Logbook Software</b>,
+            href:"https://logbook.erldc.in/en/"
+          },
+          {
+            name: <b>Shutdown Availed List</b>,
+            route: "/sections/page-sections/page-headers",
+            component: <PageHeaders />,
+          },
+          {
+            name: <b>OCC Approved List</b>,
+            href:"http://erpc.gov.in/approved-shutdown/"
+          },
+          {
+            name: <b>ERLDC Outage Procedure</b>,
+            route: "/sections/page-sections/page-headers",
+            component: <PageHeaders />,
+          },
+          {
+            name: <b>LGBR</b>,
+            href:"http://erpc.gov.in/meeting-2/lgbr/"
           },
         ],
       },
+      
       {
-        name: "foundation",
-        description: "See our colors, icons and typography",
-        href: "https://www.creative-tim.com/learning-lab/react/colors/material-kit/",
+        name: <b>Forecasting</b>,
+        dropdown: true,
+        collapse: [
+          {
+            name: <b>Day Ahead Forecasting error</b>,
+            route:"/sections/page-sections/page-headers"
+          },         
+           {
+            name: <b>Intra Day Forecasting error</b>,
+            route:"/sections/page-sections/page-headers"
+          },
+          {
+            name: <b>Week Ahead Forecasting error</b>,
+            route: "/sections/page-sections/page-headers",
+            component: <PageHeaders />,
+          },
+          {
+            name: <b>Week ahead rolling Forecast</b>,
+            route:"/sections/page-sections/page-headers"
+          },
+          {
+            name: <b>Month Ahead Forecasting error</b>,
+            route: "/sections/page-sections/page-headers",
+            component: <PageHeaders />,
+          },
+          {
+            name: <b>Year Ahead Forecasting error</b>,
+            route:"/sections/page-sections/page-headers"
+          },
+        ],
+
+
+      },
+      {
+        name: <b>FRC</b>,
+        route:"/sections/page-sections/page-headers"
+      },
+      {
+        name: <b>Transmission Element Availability</b>,
+        route:"/sections/page-sections/page-headers"
+      },
+      {
+        name: <b>System Reliability Indices</b>,
+        dropdown: true,
+        collapse: [
+          {
+            name: <b>Inter-Regional</b>,
+            route:"/sections/page-sections/page-headers"
+          },         
+           {
+            name: <b>Intra Regional ATC Violation Daily</b>,
+            route:"/sections/page-sections/page-headers"
+          },         
+           {
+            name: <b>Intra Regional ATC Violation Weekly</b>,
+            route:"/sections/page-sections/page-headers"
+          },{
+            name: <b>Intra Regional ATC Violation Monthly</b>,
+            route:"/sections/page-sections/page-headers"
+          },
+        ],
       },
     ],
   },
   {
     name: "Scheduling",
     // icon: <Icon>article</Icon>,
+    collapse: [
+      {
+        name: <b>ISGS Real Time Data</b>,
+        route:"/sections/page-sections/page-headers"  
   },
+
+      {
+        name: <b>Share Table</b>,
+        route:"/sections/page-sections/page-headers"
+      },
+      
+      {
+        name: <b>Final Schedule</b>,
+        route:"/sections/page-sections/page-headers"        
+      },
+      {
+        name: <b>WEB Based Application</b>,
+        dropdown: true,
+        collapse: [
+          {
+            name: <b>New WBES</b>,
+            href:"https://newwbes.grid-india.in/"
+          },         
+           {
+            name: <b>OLD Web Based Application</b>,
+            href:"https://wbes.erldc.in/Account/Login?ReturnUrl=%2f"
+          },         
+        ],
+      },
+      {
+        name: <b>Payment Security Mechanism</b>,
+        href:"http://posoco.in/reports/psm-daily-reports/"
+      },
+      {
+        name: <b>Peak Hours and Season Declaration</b>,
+        route:"/sections/page-sections/page-headers"
+      },
+    ],
+  },
+
   {
     name: "Market Operation",
     // icon: <Icon>article</Icon>,
+    collapse: [
+      {
+        name: <b>TGNA</b>,
+        dropdown: true,
+        collapse: [
+          {
+            name: <b>Reconciliation CTU</b>,
+            route:"/sections/page-sections/page-headers"
+          },         
+           {
+            name: <b>Reconciliation Applicant</b>,
+            route:"/sections/page-sections/page-headers"
+          },
+
+          {
+            name: <b>Disbursement</b>,
+            route:"/sections/page-sections/page-headers"
+          },
+          {
+            name: <b>NOAR</b>,
+            href:"https://noar.in/landing",
+          },
+        ],
+      },
+      {
+        name: <b>FTC</b>,
+        dropdown: true,
+        collapse: [
+          {
+            name: <b>First Time Charging Documents</b>,
+            route:"/sections/page-sections/page-headers"
+          },         
+        ],
+      },
+      
+      {
+        name: <b>DSM</b>,
+        dropdown: true,
+        collapse: [
+          {
+            name: <b>DSM rate</b>,
+            href:"https://dsm.posoco.in/newdsm"
+          },         
+           {
+            name: <b>DSM Disbursement Letter</b>,
+            route:"/sections/page-sections/page-headers"
+          },
+          {
+            name: <b>DSM Reconciliation</b>,
+            route: "/sections/page-sections/page-headers",
+          },
+        ],
+      },
+
+      {
+        name: <b>Reactive</b>,
+        dropdown: true,
+        collapse: [
+          {
+            name: <b>Reactive Reconciliation</b>,
+            route:"/sections/page-sections/page-headers"
+          },         
+           {
+            name: <b>Reactive Disbursement Letter</b>,
+            route:"/sections/page-sections/page-headers"
+          },         
+        ],
+      },
+      {
+        name: <b>Ancilliary Services</b>,
+        dropdown: true,
+        collapse: [
+          {
+            name: <b>RRAS Reconciliation</b>,
+            route:"/sections/page-sections/page-headers"
+          },         
+           {
+            name: <b>AGC Reconciliation</b>,
+            route:"/sections/page-sections/page-headers"
+          },         
+        ],
+      },
+      {
+        name: <b>Metering</b>,
+        dropdown: true,
+        collapse: [
+          {
+            name: <b>SEM data</b>,
+            route:"/sections/page-sections/page-headers"
+          },
+          {
+            name: <b>Metering Software</b>,
+            route:"/sections/page-sections/page-headers"
+          },   
+          {
+            name: <b>Time Correction manual</b>,
+            route:"/sections/page-sections/page-headers"
+          },
+          {
+            name: <b>Metering Manual</b>,
+            route:"/sections/page-sections/page-headers"
+          },
+          {
+            name: <b>Metering Error</b>,
+            route:"/sections/page-sections/page-headers"
+          },         
+        ],
+      },
+      {
+        name: <b>Fees & Charges</b>,
+        dropdown: true,
+        collapse: [
+          {
+            name: <b>F&C User List</b>,
+            href:"http://fc.posoco.in/FnCWeb/#/landing/reg-users"
+          },
+          {
+            name: <b>Monthly Bill Statement</b>,
+            route:"/sections/page-sections/page-headers"
+          },   
+          {
+            name: <b>Supplementary & PLI Bill</b>,
+            route:"/sections/page-sections/page-headers"
+          },
+          {
+            name: <b>Quarterly Reconciliation Statement</b>,
+            route:"/sections/page-sections/page-headers"
+          },  
+        ],
+      },
+      {
+        name: <b>Reports</b>,
+        dropdown: true,
+        collapse: [
+          {
+            name: <b>Congestion Report</b>,
+            route:"/sections/page-sections/page-headers"
+          }
+        ]
+      },
+          {
+            name: <b>PSDF</b>,
+            route:"/sections/page-sections/page-headers"
+          },   
+          {
+            name: <b>Bank Details</b>,
+            route:"/sections/page-sections/page-headers"
+          },      
+    ],
   },
   {
     name: "Open Access",
     // icon: <Icon>article</Icon>,
+    collapse: [
+      {
+        name: <b>Interest</b>,
+        route:"/sections/page-sections/page-headers"
+      },
+      {
+        name: <b>Regional Entities</b>,    
+      },
+      
+      {
+        name: <b>Regulation</b>,
+        href:"http://cercind.gov.in/Current_reg.html"
+      },
+
+      {
+        name: <b>Transaction</b>,
+      },
+      {
+        name: <b>STOA Summary</b>,
+        dropdown: true,
+        collapse: [
+          {
+            name: <b>Categorized No. of Approval</b>,
+            href:"http://noar.in/landing"
+          },         
+           {
+            name: <b>Categorized MU</b>,
+            href:"http://noar.in/landing"
+          },       
+          {
+            name: <b>Summary</b>,
+            href:"http://noar.in/landing"
+          }, 
+          {
+            name: <b>Approved Transaction</b>,
+            href:"http://noar.in/landing"
+          },   
+        ],
+      },
+      {
+        name: <b>Transmission Loss</b>,
+        href:"http://posoco.in/side-menu-pages/applicable-transmission-losses/"
+      },
+      {
+        name: <b>Transmission Charges</b>,
+        href:"http://noar.in/landing"
+      },
+      {
+        name: <b>Reconciliation</b>,
+        dropdown: true,
+        collapse: [
+          {
+            name: <b>Applicant Amount</b>,
+            route:"/sections/page-sections/page-headers"
+          },
+          {
+            name: <b>Beneficiary Amount</b>,
+            route:"/sections/page-sections/page-headers"
+          },
+          {
+            name: <b>TDS Certificate</b>,
+            route:"/sections/page-sections/page-headers"
+          },
+          {
+            name: <b>Interest</b>,
+            route:"/sections/page-sections/page-headers"
+          }
+        ]
+      },
+          {
+            name: <b>Procedures</b>,
+            href:"http://noar.in/procedures"
+          },   
+          {
+            name: <b>Web based Application</b>,
+            href:"http://noar.in/landing"
+          },        
+    ],
   },
+
   {
     name: "Reports",
     // icon: <Icon>article</Icon>,
+      collapse: [
+        {
+          name: <b>ER Utility Performance</b>,
+          dropdown: true,
+          collapse: [
+            {
+              name: <b>Hydro Reservoir</b>,
+              route:"/sections/page-sections/page-headers"
+            },         
+          ],
+        },
+        {
+          name: <b>Daily Report</b>,
+          dropdown: true,
+          collapse: [
+            {
+              name: <b>Daily PSP report</b>,
+              route:"/sections/page-sections/page-headers"
+            },   
+            {
+              name: <b>Generation Outage</b>,
+              route:"/sections/page-sections/page-headers"
+            },       
+          ],
+        },
+        
+        {
+          name: <b>Weekly Reports</b>,
+          route:"/sections/page-sections/page-headers"
+        },
+        {
+          name: <b>Monthly Reports</b>,
+          route:"/sections/page-sections/page-headers"
+        },
+        {
+          name: <b>Quarterly Reports</b>,
+          route:"/sections/page-sections/page-headers"
+        },
+        {
+          name: <b>Annual Reports</b>,
+          route:"/sections/page-sections/page-headers"
+        },
+        {
+          name: <b>Disturbance Reports</b>,
+          href:"http://posoco.in/grid-disturbancesincidence/"
+        },
+  
+        {
+          name: <b>Voltage Deviation Index</b>,
+          dropdown: true,
+          collapse: [
+            {
+              name: <b>Daily</b>,
+              route:"/sections/page-sections/page-headers"
+            },         
+             {
+              name: <b>Weekly</b>,
+              route:"/sections/page-sections/page-headers"
+            },    
+            {
+              name: <b>Monthly</b>,
+              route:"/sections/page-sections/page-headers"
+            },      
+          ],
+        },
+        {
+          name: <b>Monthly Deviation Report</b>,
+          route:"/sections/page-sections/page-headers"
+        },
+        {
+          name: <b>Annual Compendium</b>,
+          route:"/sections/page-sections/page-headers"
+        },
+        {
+          name: <b>Grid Events (Flash report)</b>,
+          route:"/sections/page-sections/page-headers"
+        },
+        {
+          name: <b>Weather related events</b>,
+          route:"/sections/page-sections/page-headers"
+        },
+        {
+          name: <b>Technical Reports</b>,
+          route:"/sections/page-sections/page-headers"
+        },   
+      ],
   },
   {
     name: "SCADA",
     // icon: <Icon>article</Icon>,
+    collapse: [
+      {
+        name: <b>Telemetry</b>,
+        route:"/sections/page-sections/page-headers"
+      },
+      {
+        name: <b>Scada vs SEM Report</b>,
+        route:"/sections/page-sections/page-headers"
+
+      },
+      
+      {
+        name: <b>Real-Time Data</b>,
+        dropdown: true,
+        collapse: [
+          {
+            name: <b>Constituent Wise Schedule & Actual</b>,
+            route:"/sections/page-sections/page-headers"
+          },         
+           {
+            name: <b>Inter-Regional Wise Deviation</b>,
+            route:"/sections/page-sections/page-headers"
+          },    
+          {
+            name: <b>Constituent Wise Generation</b>,
+            route:"/sections/page-sections/page-headers"
+          },    
+          {
+            name: <b>Station Wise Voltage</b>,
+            route:"/sections/page-sections/page-headers"
+          }, 
+          {
+            name: <b>Station Wise Generation</b>,
+            route:"/sections/page-sections/page-headers"
+          }, 
+          {
+            name: <b>ER Generation</b>,
+            route:"/sections/page-sections/page-headers"
+          },   
+        ],
+      },
+      {
+        name: <b>SCADA TeST Meeting</b>,
+        href:"http://erpc.gov.in/test-meetings/"
+      },
+    ],
   },
-  // {
-  //   name: "Useful Links",
-  //   // icon: <Icon>article</Icon>,
-  // },
+
+  {
+    name: "Useful Links",
+    // icon: <Icon>article</Icon>,
+    collapse: [
+      {
+        name: <b>Grid-India Website</b>,
+        href:"https://grid-india.in/"
+      },
+      
+      {
+        name: <b>OTHER LINKS</b>,
+        dropdown: true,
+        collapse: [
+          {
+            name: <b>FOLD</b>,
+            href:"http://forumofld.in/"
+          },         
+           {
+            name: <b>PSDF</b>,
+            href:"http://psdfindia.in/"
+          },    
+          {
+            name: <b>Vidyut PRAVAH</b>,
+            href:"http://vidyutpravah.in/"
+          },    
+          {
+            name: <b>MoP</b>,
+            href:"http://powermin.gov.in/"
+          }, 
+          {
+            name: <b>CERC</b>,
+            href:"http://cercind.gov.in/"
+          }, 
+          {
+            name: <b>MNRE</b>,
+            href:"http://mnre.gov.in/"
+          },   
+        ],
+      },
+      {
+        name: <b>Govt./PSU</b>,
+        href:"http://indianpsu.com/"
+      },
+      {
+        name: <b>Application</b>,
+        dropdown: true,
+        collapse: [
+          {
+            name: <b>WBES</b>,
+            href:"https://wbes.erldc.in/"
+          },         
+           {
+            name: <b>WBES Old</b>,
+            href:"https://wbes.erldc.in/wbes_test"
+          },    
+          {
+            name: <b>Fees & Charges</b>,
+            href:"http://fc.posoco.in/FnCWeb/"
+          },    
+          {
+            name: <b>Meter Data</b>,
+            href:"https://mdp.erldc.in/ERLDC_MDP"
+          }, 
+          {
+            name: <b>E-Log Book</b>,
+            href:"https://logbook.erldc.in/en"
+          }, 
+          {
+            name: <b>Open Access</b>,
+            href:"http://mnre.gov.in/"
+          },   
+          {
+            name: <b>Web-base report</b>,
+            href:"https://report.erldc.in/POSOCO/"
+          },  
+        ],
+      },
+      {
+        name: <b>RLDCs/NLDC</b>,
+        dropdown: true,
+        collapse: [
+          {
+            name: <b>WRLDC</b>,
+            href:"http://www.wrldc.in/"
+          },         
+           {
+            name: <b>SRLDC</b>,
+            href:"http://www.srldc.in/"
+          },    
+          {
+            name: <b>NRLDC</b>,
+            href:"http://nrldc.in/"
+          },    
+          {
+            name: <b>NERLDC</b>,
+            href:"https://www.nerldc.in/"
+          }, 
+          {
+            name: <b>NLDC</b>,
+            href:"http://posoco.in/"
+          },   
+        ],
+        
+      },
+      {
+        name: <b>Renewable</b>,
+        route:"/sections/page-sections/page-headers"
+      },  
+      {
+        name: <b>REC Mechanism</b>,
+        href:"http://www.recregistryindia.nic.in/index.php/publics/Reference_Documents"
+      },      
+         {
+        name: <b>Weather</b>,
+        dropdown: true,
+        collapse: [
+          {
+            name: <b>ER Weather Information</b>,
+            href:"http://14.139.247.5/power/ERLDC/MAIN.html"
+          },         
+           {
+            name: <b>IMD</b>,
+            href:"http://mausam.imd.gov.in/"
+          },    
+           
+        ],
+        
+      },
+    ],
+  },
   {
     name: "Documents",
     // icon: <Icon>article</Icon>,
+    dropdown: true,
+        collapse: [
+          {
+            name: <b>Documents</b>,
+            route:"/sections/page-sections/page-headers"
+          },            
+           
+        ],
   },
   {
     name: "More",
     // icon: <Icon>article</Icon>,
+    collapse: [
+      {
+        name: <b>Telemetry</b>,
+        route:"/sections/page-sections/page-headers"
+      },
+      {
+        name: <b>Scada vs SEM Report</b>,
+        route:"/sections/page-sections/page-headers"
+
+      },
+      
+      {
+        name: <b>HR</b>,
+        dropdown: true,
+        collapse: [
+          {
+            name: <b>HR Initiatives</b>,
+            route:"/sections/page-sections/page-headers"
+          },         
+           {
+            name: <b>Organizational Chart</b>,
+            route:"/sections/page-sections/page-headers"
+          },    
+          {
+            name: <b>Our Employees</b>,
+            route:"/sections/page-sections/page-headers"
+          },    
+          {
+            name: <b>Empaneled Hospitals</b>,
+            route:"/sections/page-sections/page-headers"
+          }, 
+          {
+            name: <b>Summer Internship</b>,
+            route:"/sections/page-sections/page-headers"
+          }, 
+          {
+            name: <b>Careers</b>,
+            route:"/sections/page-sections/page-headers"
+          },   
+        ],
+      },
+      {
+        name: <b>Live Map</b>,
+        route:"/sections/page-sections/page-headers"
+      },
+      {
+        name: <b>Download Map</b>,
+        route:"/sections/page-sections/page-headers"
+      },
+      {
+        name: <b>Tender</b>,
+        route:"/sections/page-sections/page-headers"
+      },
+      {
+        name: <b>Contracts Awarded</b>,
+        dropdown: true,
+        collapse: [
+          {
+            name: <b>Open Tender</b>,
+            route:"/sections/page-sections/page-headers"
+          },         
+           {
+            name: <b>Limited Tender</b>,
+            route:"/sections/page-sections/page-headers"
+          },    
+          {
+            name: <b>Single Tender</b>,
+            route:"/sections/page-sections/page-headers"
+          },    
+             
+        ],
+      },
+      {
+        name: <b>राजभाषा</b>,
+        dropdown: true,
+        collapse: [
+          {
+            name: <b>राजभाषा पत्रिका</b>,
+            route:"/sections/page-sections/page-headers"
+          },         
+             
+        ],
+      },
+    ],
   },
   // {
   //   name: "IMS & ISMS",
