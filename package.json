@@ -51,11 +51,7 @@
     "rules": {
       "no-unused-vars": 0,
       "@typescript-eslint/no-unused-vars": 0
-    },
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+    }
   },
   "browserslist": {
     "production": [

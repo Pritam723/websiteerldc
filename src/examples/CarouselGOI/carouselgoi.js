@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Button } from "primereact/button";
 import { Carousel } from "primereact/carousel";
 import { Tag } from "primereact/tag";
-import "./carousel.css";
+import "./carouselgoi.css";
 // import { ProductService } from "./service/ProductService";
 // import appleLogo from "assets/images/courasol/1.png";
 import pic1 from "assets/images/Courasal/1.png";
@@ -76,68 +76,116 @@ export default function CircularDemo() {
     //     itemTemplate={productTemplate}
     //   />
     // </div>
-    <div className="slider">
-      <div className="slide-track">
+    <div className="slider-goi">
+      <div className="slide-track-goi">
         {/* 9 slides */}
-        <div className="slide">
-          <a href="http://urjaindia.co.in/" target="_blank" rel="noopener noreferrer">
+        <div className="slide-goi">
+          <a
+            href="http://urjaindia.co.in/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <img src={pic1} alt="name" />
           </a>
         </div>
-        <div className="slide">
-          <a href="https://vidyutpravah.in/" target="_blank" rel="noopener noreferrer">
+        <div className="slide-goi">
+          <a
+            href="https://vidyutpravah.in/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <img src={pic2} alt="name" />
           </a>
         </div>
-        <div className="slide">
-          <a href="https://powermin.gov.in/" target="_blank" rel="noopener noreferrer">
+        <div className="slide-goi">
+          <a
+            href="https://powermin.gov.in/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <img src={pic3} alt="name" />
           </a>
         </div>
-        <div className="slide">
-          <a href="https://npp.gov.in/" target="_blank" rel="noopener noreferrer">
+        <div className="slide-goi">
+          <a
+            href="https://npp.gov.in/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <img src={pic4} alt="name" />
           </a>
         </div>
-        <div className="slide">
-          <a href="http://ujala.gov.in/" target="_blank" rel="noopener noreferrer">
+        <div className="slide-goi">
+          <a
+            href="http://ujala.gov.in/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <img src={pic5} alt="name" />
           </a>
         </div>
-        <div className="slide">
-          <a href="http://www.tarang.website/" target="_blank" rel="noopener noreferrer">
+        <div className="slide-goi">
+          <a
+            href="http://www.tarang.website/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <img src={pic6} alt="name" />
           </a>
         </div>
 
         {/* same  slides */}
-        <div className="slide">
-          <a href="http://urjaindia.co.in/" target="_blank" rel="noopener noreferrer">
+        <div className="slide-goi">
+          <a
+            href="http://urjaindia.co.in/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <img src={pic1} alt="name" />
           </a>
         </div>
-        <div className="slide">
-          <a href="https://vidyutpravah.in/" target="_blank" rel="noopener noreferrer">
+        <div className="slide-goi">
+          <a
+            href="https://vidyutpravah.in/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <img src={pic2} alt="name" />
           </a>
         </div>
-        <div className="slide">
-          <a href="https://powermin.gov.in/" target="_blank" rel="noopener noreferrer">
+        <div className="slide-goi">
+          <a
+            href="https://powermin.gov.in/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <img src={pic3} alt="name" />
           </a>
         </div>
-        <div className="slide">
-          <a href="https://npp.gov.in/" target="_blank" rel="noopener noreferrer">
+        <div className="slide-goi">
+          <a
+            href="https://npp.gov.in/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <img src={pic4} alt="name" />
           </a>
         </div>
-        <div className="slide">
-          <a href="http://ujala.gov.in/" target="_blank" rel="noopener noreferrer">
+        <div className="slide-goi">
+          <a
+            href="http://ujala.gov.in/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <img src={pic5} alt="name" />
           </a>
         </div>
-        <div className="slide">
-          <a href="http://www.tarang.website/" target="_blank" rel="noopener noreferrer">
+        <div className="slide-goi">
+          <a
+            href="http://www.tarang.website/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <img src={pic6} alt="name" />
           </a>
         </div>
