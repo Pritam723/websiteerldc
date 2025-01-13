@@ -14,7 +14,7 @@ Coded by www.creative-tim.com
 */
 
 // react-router-dom components
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 import { Link } from "react-router-dom";
 import pic1 from "assets/images/Courasal/1.png";
@@ -52,7 +52,6 @@ function Pages() {
         const square = entry.target;
         if (entry.isIntersecting > 0) {
           square.classList.add("horizonal-courasol-show");
-          // obs.unobserve(square);
         }
       });
     });
@@ -61,13 +60,38 @@ function Pages() {
     hiddenElements.forEach((element) => observer.observe(element));
   }, []);
 
-  const renderData = data.map(({ image, name, route }) => (
-    <Grid item xs={12} md={6} sx={{ mb: { xs: 3, lg: 0 } }} key={name}>
-      <Link to={route}>
-        <ExampleCard image={image} name={name} display="grid" minHeight="auto" />
-      </Link>
-    </Grid>
-  ));
+  const scrollContainerRef = useRef(null);
+  const scrollItemsRef = useRef(null);
+
+  useEffect(() => {
+    const scrollContainer = scrollContainerRef.current;
+    const scrollItems = scrollItemsRef.current;
+
+    if (scrollContainer && scrollItems) {
+      const containerHeight = scrollContainer.offsetHeight;
+      const itemsHeight = Array.from(scrollItems.children).reduce(
+        (total, item) => total + item.offsetHeight,
+        0
+      );
+      console.log(itemsHeight);
+      if (itemsHeight > containerHeight) {
+        scrollItems.style.animationPlayState = "running";
+      } else {
+        scrollItems.style.animationPlayState = "paused"; // Disable scrolling
+      }
+    }
+  }, []);
+
+  const items = [
+    "Flash report for Grid Event at 220/132 kV Darbhanga (Bihar) Substation",
+    "Preliminary Load Crash Report",
+    "Transition from existing Web Based Energy Scheduling (WBES) software to the New WBES software scheduled with effect from 05th August’2024.",
+    "Flash report for Grid Event at 220/132 kV Bokaro Substation",
+    "Hydro power stations would be scheduled maximum during non-solar peak hours",
+    "Flash report for Grid Event at 220/132 kV Bokaro Substation",
+    // "Preliminary Load Crash Report",
+    // "Hydro power stations would be scheduled maximum during non-solar peak hours",
+  ];
 
   return (
     <MKBox component="section" py={6}>
@@ -99,67 +123,47 @@ function Pages() {
             sx={{ mt: 0, px: { xs: 0, lg: 8 } }}
             className="grid-item horizonal-courasol-hide"
           >
-            <Card sx={{ border: "5px solid", width: "400px", height: "545px", marginTop: 2 }}>
-              <div className="scroll-container">
-                <div className="scroll-items">
-                  {/* Original Items for  scroll */}
-
-                  <div className="scroll-item">
-                    <div className="scroll-item-child">New</div>
-                    <a>Flash report for Grid Event at 220/132 kV Darbhanga (Bihar) Substation</a>
+            <Card
+              sx={{
+                border: "1px solid rgb(133, 185, 187)",
+                width: "400px",
+                height: "545px",
+                marginTop: 2,
+              }}
+            >
+              <div className="courasol-head">Latest News</div>
+              <div className="scroll-container" ref={scrollContainerRef}>
+                <div className="scroll-items" ref={scrollItemsRef}>
+                  <div ref={scrollItemsRef}>
+                    <div className="scroll-item">
+                      <div className="scroll-item-child">New</div>
+                      <a href="https://google.com">{items[0]}</a>
+                    </div>
+                    <div className="scroll-item">
+                      <div className="scroll-item-child">New</div>
+                      <a href="https://google.com">{items[1]}</a>
+                    </div>
+                    <div className="scroll-item">
+                      <div className="scroll-item-child">New</div>
+                      <a href="https://google.com">{items[2]}</a>
+                    </div>
+                    <div className="scroll-item">
+                      <div className="scroll-item-child">New</div>
+                      <a href="https://google.com">{items[3]}</a>
+                    </div>
+                    <div className="scroll-item">
+                      <div className="scroll-item-child">New</div>
+                      <a href="https://google.com">{items[4]}</a>
+                    </div>
+                    <div className="scroll-item">
+                      <div className="scroll-item-child">New</div>
+                      <a href="https://google.com">{items[5]}</a>
+                    </div>
+                    <div className="scroll-item">
+                      <div className="scroll-item-child">New</div>
+                      <a href="https://google.com">{items[5]}</a>
+                    </div>
                   </div>
-
-                  <div className="scroll-item">
-                    <div className="scroll-item-child">New</div>
-                    <a>Preliminary Load Crash Report</a>
-                  </div>
-                  <div className="scroll-item">
-                    <div className="scroll-item-child">New</div>
-
-                    <a>
-                      Transition from existing Web Based Energy Scheduling (WBES) software to the
-                      New WBES software scheduled with effect from 05th August’2024.
-                    </a>
-                  </div>
-                  <div className="scroll-item">
-                    <div className="scroll-item-child">New</div>
-                    <a>Flash report for Grid Event at 220/132 kV Bokaro Substation</a>
-                  </div>
-                  <div className="scroll-item">
-                    <div className="scroll-item-child">New</div>
-                    <a>
-                      Hydro power stations would be scheduled maximum during non-solar peak hours
-                    </a>
-                  </div>
-                  {/* Repeadted Items for 360 degree scroll */}
-                  <div className="scroll-item">
-                    <div className="scroll-item-child">New</div>
-                    <a>Flash report for Grid Event at 220/132 kV Darbhanga (Bihar) Substation</a>
-                  </div>
-
-                  <div className="scroll-item">
-                    <div className="scroll-item-child">New</div>
-                    <a>Preliminary Load Crash Report</a>
-                  </div>
-                  <div className="scroll-item">
-                    <div className="scroll-item-child">New</div>
-
-                    <a>
-                      Transition from existing Web Based Energy Scheduling (WBES) software to the
-                      New WBES software scheduled with effect from 05th August’2024.
-                    </a>
-                  </div>
-                  <div className="scroll-item">
-                    <div className="scroll-item-child">New</div>
-                    <a>Flash report for Grid Event at 220/132 kV Bokaro Substation</a>
-                  </div>
-                  <div className="scroll-item">
-                    <div className="scroll-item-child">New</div>
-                    <a>
-                      Hydro power stations would be scheduled maximum during non-solar peak hours
-                    </a>
-                  </div>
-                  {/* Repeadted Items for 360 degree scroll */}
                 </div>
               </div>
             </Card>
@@ -172,25 +176,49 @@ function Pages() {
             sx={{ mt: 0, px: { xs: 0, lg: 8 } }}
             className="grid-item horizonal-courasol-hide"
           >
-            <Card sx={{ border: "1px solid", width: "400px", height: "545px", marginTop: 2 }}>
-              <dl>
-                <dt>Coffee</dt>
-                <dd>- black hot drink</dd>
-                <dt>Milk</dt>
-                <dd>- white cold drink</dd>
-                <dt>Coffee</dt>
-                <dd>- black hot drink</dd>
-                <dt>Milk</dt>
-                <dd>- white cold drink</dd>
-                <dt>Coffee</dt>
-                <dd>- black hot drink</dd>
-                <dt>Milk</dt>
-                <dd>- white cold drink</dd>
-                <dt>Coffee</dt>
-                <dd>- black hot drink</dd>
-                <dt>Milk</dt>
-                <dd>- white cold drink</dd>
-              </dl>
+            <Card
+              sx={{
+                border: "1px solid rgb(133, 185, 187)",
+                width: "400px",
+                height: "545px",
+                marginTop: 2,
+              }}
+            >
+              <div className="scroll-container" ref={scrollContainerRef}>
+                <div className="scroll-items" ref={scrollItemsRef}>
+                  <div ref={scrollItemsRef}>
+                    <div className="scroll-item">
+                      <div className="scroll-item-child">New</div>
+                      <a href="https://google.com">{items[0]}</a>
+                    </div>
+                    <div className="scroll-item">
+                      <div className="scroll-item-child">New</div>
+                      <a href="https://google.com">{items[1]}</a>
+                    </div>
+                    <div className="scroll-item">
+                      <div className="scroll-item-child">New</div>
+                      <a href="https://google.com">{items[2]}</a>
+                    </div>
+                    <div className="scroll-item">
+                      <div className="scroll-item-child">New</div>
+                      <a href="https://google.com">{items[3]}</a>
+                    </div>
+                    <div className="scroll-item">
+                      <div className="scroll-item-child">New</div>
+                      <a href="https://google.com">{items[4]}</a>
+                    </div>
+                    <div className="scroll-item">
+                      <div className="scroll-item-child">New</div>
+                      <a href="https://google.com">{items[5]}</a>
+                    </div>
+                    <div className="scroll-item">
+                      <div className="scroll-item-child">New</div>
+                      <a href="https://google.com">{items[5]}</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
               <CardActions>
                 <a href="https://www.facebook.com/GridIndia1" target="_blank" rel="noreferrer">
                   <Button size="small">Visit GRID-INDIA on Facebook</Button>
@@ -209,14 +237,14 @@ function Pages() {
           >
             <Card
               sx={{
-                border: "0.5px solid rgb(133, 185, 187)",
-                width: "545",
+                border: "1px solid rgb(133, 185, 187)",
+                width: "380px",
                 height: "545px",
                 marginTop: 2,
               }}
             >
               <iframe
-                src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FGridIndia1&tabs=timeline&width=340&height=500&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=true&appId"
+                src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FGridIndia1&tabs=timeline&width=380&height=500&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=true&appId"
                 width="fit-content"
                 height="500"
                 style={{ border: "none", overflow: "hidden", borderRadius: "25px" }}

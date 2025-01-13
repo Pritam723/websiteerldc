@@ -1,40 +1,102 @@
 
-/* Done by 00339 */
 
 .scroll-container {
   overflow: hidden;
-  height: 100%;
-  /* background-color: #f0eeee; */
-  width: 100%; /* Adjust the width if needed */
+  height: 545px; 
+  width: 100%;
+  margin: 2px;
   position: relative;
+
 }
+
+ .scroll-items {
+  display: flex;
+  height: 100;
+
+  flex-direction: column; 
+  animation: scroll-up 10s linear infinite; 
+}
+.scroll-items:hover{
+  animation-play-state: paused !important; 
+}
+
 @keyframes scroll-up {
   0% {
     transform: translateY(0);
   }
   100% {
-    transform: translateY(calc(-60px * 5));
+    transform: translateY(-100%);
+    
   }
 }
 
-.scroll-items {
-  display: flex;
-  flex-direction: column; /* Stack items vertically */
-  animation: scroll-up 10s linear infinite; /* Adjust duration */
+.scroll-item {
+  padding: 10px 10px;
+  font-size: 15px;
+  margin-bottom: 5px;
+  margin-left: 2px;
+  margin-right: 5px;
+
+  border-radius: 10px;
+  text-align: justify;
+  background-color: #f2f2f2;
+} 
+.scroll-item a{
+color: rgb(0, 0, 0);
 }
+.scroll-item a:hover{
+color: brown;
+}
+.courasol-head{
+  border-radius: 8px; 
+  padding: 5px;
+  /* margin-top: 0.1px; */
+  /* margin-left: 1px; */
+  /* margin-right: 1px; */
+  height: 60px;
+  font-family:'Times New Roman', Times, serif;
+  font-size: 20px;
+  justify-content: center;
+  text-align: center;
+  font-weight: bold;
+
+  color: rgb(255, 255, 255);
+  /* bo */
+  background-color: rgb(0, 4, 87);
+}
+
+
+
+
+
+
+/* ///////////////////////////////////// */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .scroll-items:hover {
   animation-play-state: paused;
-}
-.scroll-item {
-  padding-left: 15px;
-  padding-right: 15px;
-  font-size: 15px;
-  margin-bottom: 5px;
-  text-align: justify;
-  background-color: #f2f2f2;
-  /* height: 100px; */
-  
 }
 .scroll-item > a:hover {
   text-decoration: underline !important;
