@@ -486,7 +486,8 @@ function DefaultNavbar({
             // to="https://erldc.in/en/"
 
             component="a"
-            href="https://posoco.in/" // Replace with your desired URL
+            // href="https://posoco.in/" // Replace with your desired URL
+            href="/"
             target="_blank" // Open in a new tab
             lineHeight={1}
             py={transparent ? 1.5 : 0.75}
