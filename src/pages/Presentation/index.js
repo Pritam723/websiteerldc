@@ -40,7 +40,9 @@ import Testimonials from "pages/Presentation/sections/Testimonials";
 import Download from "pages/Presentation/sections/Download";
 
 // Presentation page components
-import BuiltByDevelopers from "pages/Presentation/components/BuiltByDevelopers";
+import Highlights from "pages/Presentation/components/Highlights/Highlights";
+import LatestNews from "pages/Presentation/components/LatestNews/LatestNews";
+
 import { useState, useEffect } from "react";
 // Routes
 import routes from "routes";
@@ -55,6 +57,7 @@ import FlasherSlider from "examples/FlasherSlider/flasherSlider.js";
 import Chip from "@mui/material/Chip";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import MKBadge from "components/MKBadge";
+import AppBar from "examples/AppBar/AppBar";
 
 function Presentation() {
   useEffect(() => {
@@ -75,7 +78,7 @@ function Presentation() {
 
   return (
     <>
-      {/* <div>Grid-India</div> */}
+      <AppBar />
       <DefaultNavbar routes={routes} sticky />
 
       <MKBox>
@@ -101,12 +104,19 @@ function Presentation() {
         <Information />
         {/* <DesignBlocks /> */}
         <Pages />
-        <Container sx={{ mt: 6 }} className="grid-item vertical-courasol-hide">
-          <BuiltByDevelopers />
+        <Container sx={{ mt: 3 }} className="grid-item vertical-courasol-hide">
+          <Grid container spacing={3}>
+            <Grid item xs={12} lg={8}>
+              <Highlights />
+            </Grid>
+            <Grid item xs={12} lg={4}>
+              <LatestNews />
+            </Grid>
+          </Grid>
         </Container>
 
         <Container className="grid-item vertical-courasol-hide">
-          <Grid container spacing={3}>
+          <Grid container spacing={1}>
             <Grid item xs={12} lg={2}>
               <FilledInfoCard
                 // variant="gradient"
