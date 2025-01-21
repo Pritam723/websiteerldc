@@ -22,6 +22,7 @@ import Icon from "@mui/material/Icon";
 import MKBox from "components/MKBox";
 import MKTypography from "components/MKTypography";
 import sampleMouImage from "assets/images/mou_iit2.jpg";
+import { Height } from "@mui/icons-material";
 
 function BuiltByDevelopers() {
   const bgImage = sampleMouImage;
@@ -35,26 +36,31 @@ function BuiltByDevelopers() {
       my={2}
       py={6}
       sx={{
-        backgroundImage: ({ functions: { linearGradient, rgba }, palette: { gradients } }) =>
+        backgroundImage: ({
+          functions: { linearGradient, rgba },
+          palette: { gradients },
+        }) =>
           `${linearGradient(
-            rgba(gradients.dark.main, 0.8),
-            rgba(gradients.dark.state, 0.8)
+            rgba(gradients.dark.main, 0.7),
+            rgba(gradients.dark.state, 0.7)
           )}, url(${bgImage})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
+        height: "200px",
       }}
     >
       <Container>
         <Grid container item xs={12} lg={6} sx={{ ml: { xs: 0, lg: 6 } }}>
-          <MKTypography variant="h4" color="white" fontWeight="bold">
-            Stay tuned with the latest news, events, and highlights of ERLDC{" "}
+          <MKTypography variant="h5" color="white" fontWeight="bold">
+            Stay tuned with the events and highlights of ERLDC{" "}
           </MKTypography>
-          <MKTypography variant="h1" color="white" mb={1}>
+          {/* <MKTypography variant="h1" color="white" mb={1}>
             MoU with IIT Bhubaneswar
-          </MKTypography>
+          </MKTypography> */}
           <MKTypography variant="body1" color="white" opacity={0.8} mb={2}>
-            An MoU has been signed with Indian Institute Of Technology (IIT) Bhubaneswar for
-            Research & Development work in the field of Cyber Security
+            An MoU has been signed with Indian Institute Of Technology (IIT)
+            Bhubaneswar for Research & Development work in the field of Cyber
+            Security
           </MKTypography>
           <MKTypography
             component="a"
@@ -79,7 +85,8 @@ function BuiltByDevelopers() {
               },
             }}
           >
-            See more Highlights <Icon sx={{ fontWeight: "bold" }}>arrow_forward</Icon>
+            See more Highlights{" "}
+            <Icon sx={{ fontWeight: "bold" }}>arrow_forward</Icon>
           </MKTypography>
         </Grid>
       </Container>

@@ -96,7 +96,7 @@ export default {
       All rights reserved. &copy; {date}{" "}
       <MKTypography
         component="a"
-        href="https://www.creative-tim.com"
+        href="https://erldc.in"
         target="_blank"
         rel="noreferrer"
         variant="button"

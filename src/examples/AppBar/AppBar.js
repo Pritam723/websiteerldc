@@ -43,9 +43,9 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create("width"),
     [theme.breakpoints.up("sm")]: {
-      width: "6ch",
+      width: "12ch",
       "&:focus": {
-        width: "10ch",
+        width: "20ch",
       },
     },
   },
@@ -85,8 +85,10 @@ export default function MyAppBar() {
   }, []);
 
   // Font size scaling logic
-  const fontSizeTitle = windowWidth > 800 ? "1rem" : windowWidth > 600 ? "0.9rem" : "0.8rem";
-  const fontSizeContent = windowWidth > 800 ? "0.7rem" : windowWidth > 600 ? "0.6rem" : "0.5rem";
+  const fontSizeTitle =
+    windowWidth > 800 ? "1rem" : windowWidth > 600 ? "0.9rem" : "0.8rem";
+  const fontSizeContent =
+    windowWidth > 800 ? "0.7rem" : windowWidth > 600 ? "0.6rem" : "0.5rem";
 
   return (
     <Container>
@@ -119,7 +121,7 @@ export default function MyAppBar() {
                 noWrap
                 style={{ fontSize: fontSizeTitle }} // Dynamic font size for title
               >
-                Eastern Regional Load Despatch Center
+                EASTERN REGIONAL LOAD DESPATCH CENTER
               </Typography>
             </div>
 
@@ -186,31 +188,81 @@ export default function MyAppBar() {
                       हिन्दी
                     </Typography>
                   </a>
-                  <a href="#" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
-                <Typography component="div" fontSize="12px" color="#1c94d2" fontWeight="bold">
-                  ISO 9001:2015
-                </Typography>
-              </a>
-              <a href="#" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
-                <Typography component="div" fontSize="12px" color="#1c94d2" fontWeight="bold">
-                  ISO 27001:2013
-                </Typography>
-              </a>
-              <a href="#" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
-                <Typography component="div" fontSize="12px" color="#1c94d2" fontWeight="bold">
-                  ISO 14001:2015
-                </Typography>
-              </a>
-              <a href="#" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
-                <Typography component="div" fontSize="12px" color="#1c94d2" fontWeight="bold">
-                  ISO 45001:2018
-                </Typography>
-              </a>
-              <a href="#" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
-                <Typography component="div" fontSize="12px" color="#1c94d2" fontWeight="bold">
-                  IMS POLICY
-                </Typography>
-              </a>
+                  <a
+                    href="#"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ textDecoration: "none" }}
+                  >
+                    <Typography
+                      component="div"
+                      fontSize="12px"
+                      color="#1c94d2"
+                      fontWeight="bold"
+                    >
+                      ISO 9001:2015
+                    </Typography>
+                  </a>
+                  <a
+                    href="#"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ textDecoration: "none" }}
+                  >
+                    <Typography
+                      component="div"
+                      fontSize="12px"
+                      color="#1c94d2"
+                      fontWeight="bold"
+                    >
+                      ISO 27001:2013
+                    </Typography>
+                  </a>
+                  <a
+                    href="#"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ textDecoration: "none" }}
+                  >
+                    <Typography
+                      component="div"
+                      fontSize="12px"
+                      color="#1c94d2"
+                      fontWeight="bold"
+                    >
+                      ISO 14001:2015
+                    </Typography>
+                  </a>
+                  <a
+                    href="#"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ textDecoration: "none" }}
+                  >
+                    <Typography
+                      component="div"
+                      fontSize="12px"
+                      color="#1c94d2"
+                      fontWeight="bold"
+                    >
+                      ISO 45001:2018
+                    </Typography>
+                  </a>
+                  <a
+                    href="#"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ textDecoration: "none" }}
+                  >
+                    <Typography
+                      component="div"
+                      fontSize="12px"
+                      color="#1c94d2"
+                      fontWeight="bold"
+                    >
+                      IMS POLICY
+                    </Typography>
+                  </a>
                   {/* Add other links as needed */}
                 </>
               )}

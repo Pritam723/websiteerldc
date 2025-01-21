@@ -103,7 +103,19 @@ function DefaultFooter({ content }) {
             </Grid>
           ))}
           <Grid style={{ paddingTop: 0 }} item xs={12} sx={{ textAlign: "center", my: 0 }}>
+            <MKTypography
+              // component="a"
+              // href="https://erldc.in"
+              // target="_blank"
+              // rel="noreferrer"
+              variant="button"
+              fontWeight="regular"
+            >
+              Total Website Views: {"03."}
+            </MKTypography>{" "}
             {copyright}
+            {/* <MKBox> */}
+            {/* </MKBox> */}
           </Grid>
         </Grid>
       </Container>

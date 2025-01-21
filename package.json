@@ -19,11 +19,15 @@
     "@mui/icons-material": "^5.16.12",
     "@mui/material": "^5.16.12",
     "@mui/styled-engine": "5.12.0",
+    "@mui/x-charts": "^7.23.6",
     "@testing-library/jest-dom": "5.16.5",
     "@testing-library/react": "14.0.0",
     "@testing-library/user-event": "14.4.3",
+    "chart.js": "^4.4.7",
     "chroma-js": "2.4.2",
     "flatpickr": "4.6.13",
+    "highcharts": "^12.1.2",
+    "highcharts-react-official": "^3.2.1",
     "primeflex": "^3.3.1",
     "primeicons": "^7.0.0",
     "primereact": "^10.8.5",
@@ -34,11 +38,14 @@
     "react-copy-to-clipboard": "5.1.0",
     "react-countup": "6.4.2",
     "react-dom": "18.2.0",
+    "react-fast-marquee": "^1.6.5",
     "react-flatpickr": "3.10.13",
-    "react-router-dom": "^7.1.1",
+    "react-helmet": "^6.1.0",
+    "react-router-dom": "6.10.0",
     "react-scripts": "5.0.1",
     "react-syntax-highlighter": "15.5.0",
-    "web-vitals": "3.3.1"
+    "web-vitals": "3.3.1",
+    "react-simple-maps": "^3.0.0"
   },
   "scripts": {
     "start": "set PORT=3001 && react-scripts start",
@@ -49,8 +56,10 @@
     "prettify": "prettier --write ."
   },
   "eslintConfig": {
-    "rules": {},
-    "extends": []
+    "rules": {
+      "no-unused-vars": 0,
+      "@typescript-eslint/no-unused-vars": 0
+    }
   },
   "browserslist": {
     "production": [
