@@ -34,6 +34,7 @@ import MKTypography from "components/MKTypography";
 
 // Presentation page components
 import ExampleCard from "pages/Presentation/components/ExampleCard";
+import EasternMap from "pages/Presentation/components/Easternmap/easternmap";
 
 // Data
 import data from "pages/Presentation/sections/data/pagesData";
@@ -46,8 +47,11 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import cmd_image from "assets/images/test.jpg";
 import "./pages.css";
+import { Tooltip as ReactTooltip } from "react-tooltip";
 
 function Pages() {
+  const [content, setContent] = useState("ghgh");
+
   useEffect(() => {
     //Runs only on the first render
     const observer = new IntersectionObserver((entries) => {
@@ -100,89 +104,19 @@ function Pages() {
 
   return (
     <MKBox component="section" py={0}>
-      {/* <Container>
-        <Grid
-          container
-          item
-          xs={12}
-          lg={6}
-          flexDirection="column"
-          alignItems="center"
-          sx={{ textAlign: "center", my: 0, mx: "auto", px: 0.75 }}
-        >
-          <MKBadge
-            variant="contained"
-            color="info"
-            badgeContent="Our Constituents: WEST BENGAL, ODISHA, BIHAR, JHARKHAND, SIKKIM, DVC"
-            container
-            sx={{ mb: 0 }}
-          />
-        </Grid>
-      </Container> */}
       <Container sx={{ mt: { xs: 8, lg: 6 } }}>
         <Grid container spacing={2} className="grid-container">
           <Grid
             item
             xs={12}
-            lg={4}
-            sx={{ mt: 0, px: { xs: 0, lg: 8 } }}
-            className="grid-item horizonal-courasol-hide"
-          >
-            {/* <Grid container spacing={4}>
-              {renderData}
-            </Grid> */}
-
-            <Card
-              sx={{
-                border: "0.5px solid rgb(189, 233, 176)",
-                width: "350px",
-                height: "450px",
-                marginTop: 2,
-                boxShadow: "4px 6px 8px rgb(185, 235, 175)",
-              }}
-            >
-              <Card
-                sx={{
-                  height: "300px",
-                }}
-              >
-                <CardMedia
-                  component="img"
-                  alt="green iguana"
-                  height="545"
-                  image={cmd_image}
-                />
-                {/* <CardContent> */}
-                {/* <Typography gutterBottom variant="h5" component="div"> */}
-                {/* Mr. S. R. Narasimhan */}
-                {/* <br /> */}
-                {/* </Typography> */}
-                {/* <Typography variant="body2" sx={{ color: "text.secondary" }}>
-                    Chairman & Managing Director
-                  </Typography> */}
-
-                <CardActions>
-                  {/* <Button size="small">Share</Button> */}
-                  <Button size="small">
-                    Message from Mr. S. R. Narasimhan, CMD Grid-India
-                  </Button>
-                </CardActions>
-                {/* </CardContent> */}
-              </Card>
-            </Card>
-          </Grid>
-
-          <Grid
-            item
-            xs={12}
-            lg={4}
+            lg={5}
             sx={{ mt: 0, px: { xs: 0, lg: 8 } }}
             className="grid-item horizonal-courasol-hide"
           >
             <Card
               sx={{
                 border: "0.5px solid rgb(221, 170, 136)",
-                width: "350px",
+                width: "510px",
                 height: "450px",
                 marginTop: 2,
                 boxShadow: "4px 6px 8px rgb(236, 161, 131)",
@@ -225,11 +159,31 @@ function Pages() {
               </div>
             </Card>
           </Grid>
+          <Grid
+            item
+            xs={12}
+            lg={3.5}
+            sx={{ mt: 0, px: { xs: 0, lg: 8 } }}
+            className="grid-item horizonal-courasol-hide"
+          >
+            <Card
+              sx={{
+                border: "0.5px solid rgb(136, 221, 174)",
+                width: "350px",
+                height: "450px",
+                marginTop: 2,
+                boxShadow: "4px 6px 8px rgb(136, 221, 174)",
+              }}
+            >
+              <EasternMap />
+              <Button size="small">See ER Power Map</Button>
+            </Card>
+          </Grid>
 
           <Grid
             item
             xs={12}
-            lg={4}
+            lg={3.5}
             sx={{ mt: 0, px: { xs: 0, lg: 8 } }}
             className="grid-item horizonal-courasol-hide"
           >
