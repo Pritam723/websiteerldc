@@ -25,12 +25,16 @@ import CssBaseline from "@mui/material/CssBaseline";
 // Material Kit 2 React themes
 import theme from "assets/theme";
 import Presentation from "layouts/pages/presentation";
-import Test from "Test";
+// import Test from "Test";
 // Material Kit 2 React routes
 import routes from "routes";
 
+
+
 export default function App() {
   const { pathname } = useLocation();
+  
+
 
   // Setting page scroll to 0 when changing the route
   useEffect(() => {
@@ -54,6 +58,8 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
+  
+
       <Routes>
         {getRoutes(routes)}
         {/* <Route path="/presentation" element={<Test />} /> */}

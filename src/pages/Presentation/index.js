@@ -38,6 +38,8 @@ import DesignBlocks from "pages/Presentation/sections/DesignBlocks";
 import Pages from "pages/Presentation/sections/Pages";
 import Testimonials from "pages/Presentation/sections/Testimonials";
 import Download from "pages/Presentation/sections/Download";
+import MyAppBar from 'AppBar/MyAppBar.js';
+import Disclaimer from 'Disclaimer/Disclaimer.js';
 
 // Presentation page components
 import BuiltByDevelopers from "pages/Presentation/components/BuiltByDevelopers";
@@ -49,6 +51,7 @@ import video_posoco from "assets/videos/video_posoco.mp4";
 import "./video.css";
 // Images
 import bgImage from "assets/images/transmission.jpg";
+
 // import sample from './sample.mp4';
 
 // const observer = new IntersectionObserver((entries) => {
@@ -95,7 +98,8 @@ function Presentation() {
 
   return (
     <>
-      {/* <div>Grid-India</div> */}
+      <MyAppBar/>
+      <Disclaimer/>
       <DefaultNavbar routes={routes} sticky />
 
       <MKBox>
@@ -212,7 +216,7 @@ function Presentation() {
       <MKBox pt={6} px={1} mt={6}>
         <DefaultFooter content={footerRoutes} />
       </MKBox>
-    </>
+      </>
   );
 }
 

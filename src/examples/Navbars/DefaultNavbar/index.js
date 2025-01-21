@@ -13,6 +13,12 @@ Coded by www.creative-tim.com
 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
+//IMS logos
+import IMSLogo1 from "assets/images/IMS Policy Logos/iso-logo-14001.png";
+import IMSLogo2 from "assets/images/IMS Policy Logos/iso-logo-27001.png";
+import IMSLogo3 from "assets/images/IMS Policy Logos/iso-logo-45001.png";
+import IMSLogo4 from "assets/images/IMS Policy Logos/iso-logo-90001.png";
+import IMSLogo5 from "assets/images/IMS Policy Logos/yogaLogo.png";
 
 import { Fragment, useState, useEffect } from "react";
 
@@ -43,6 +49,8 @@ import DefaultNavbarMobile from "examples/Navbars/DefaultNavbar/DefaultNavbarMob
 // Material Kit 2 React base styles
 import breakpoints from "assets/theme/base/breakpoints";
 import GridLogo from "assets/images/GridIndiaLogo1.png";
+import { blueGrey } from "@mui/material/colors";
+import Button from "assets/theme/components/button";
 
 function DefaultNavbar({
   brand,
@@ -461,10 +469,12 @@ function DefaultNavbar({
   return (
     // <div>hii</div>
     <Container sx={sticky ? { position: "sticky", top: 0, zIndex: 10 } : null}>
+      
+
       <MKBox
         py={0}
         px={{ xs: 4, sm: transparent ? 2 : 3, lg: transparent ? 0 : 2 }}
-        my={relative ? 0 : 2}
+        my={relative ? 0 : 0.5}
         mx={relative ? 0 : 3}
         // width="100%"
         width={relative ? "100%" : "calc(100% - 20px)"}
@@ -479,7 +489,7 @@ function DefaultNavbar({
           backdropFilter: transparent ? "none" : `saturate(200%) blur(30px)`,
         })}
       >
-        <MKBox display="flex" justifyContent="space-between" alignItems="center">
+        <MKBox display="flex" justifyContent="space-between" alignItems="center" >
           {/* Component for GRID-INDIA Logo Start*/}
           <MKBox
             // component={Link}
