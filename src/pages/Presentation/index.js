@@ -48,9 +48,11 @@ import { useState, useEffect } from "react";
 import routes from "routes";
 import footerRoutes from "footer.routes";
 import video_posoco from "assets/videos/video_posoco.mp4";
+import ERLDC_IMG from "assets/images/ERLDC.png";
+
 import "./video.css";
 // Images
-import bgImage from "assets/images/transmission.jpg";
+// import bgImage from "assets/images/transmission.jpg";
 // import sample from './sample.mp4';
 import FlasherSlider from "examples/FlasherSlider/flasherSlider.js";
 
@@ -82,7 +84,17 @@ function Presentation() {
       <DefaultNavbar routes={routes} sticky />
 
       <MKBox>
-        <video className="videoTag" autoPlay loop muted>
+        <video
+          className="videoTag"
+          autoPlay
+          loop
+          muted
+          poster={ERLDC_IMG}
+          // controls="controls"
+          preload="none"
+          // onclick="this.play()"
+          // onclick={this.play()}
+        >
           <source src={video_posoco} type="video/mp4" />
         </video>
       </MKBox>
