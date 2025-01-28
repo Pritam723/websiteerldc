@@ -78,8 +78,8 @@ html {
 /* The Close Button */
 .close {
   position: absolute;
-  top: 75px;
-  right: 170px;
+  top: 9%;
+  right: 9%;
   color: #ee0909;
   font-size: 20px;
   font-weight: bold;
@@ -97,6 +97,10 @@ html {
 @media only screen and (max-width: 700px) {
   .modal-content {
     width: 100%;
+  }
+  .close{
+    top: 9.7%;
+    right: -0.5%;
   }
 }
 
