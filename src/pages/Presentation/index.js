@@ -61,6 +61,7 @@ import Chip from "@mui/material/Chip";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import MKBadge from "components/MKBadge";
 import AppBar from "examples/AppBar/AppBar";
+import Banner from "examples/Banner/Banner";
 
 function Presentation() {
   useEffect(() => {
@@ -81,6 +82,7 @@ function Presentation() {
 
   return (
     <>
+    <Banner />
       <Disclaimer/>
       <AppBar />
       <DefaultNavbar routes={routes} sticky />
