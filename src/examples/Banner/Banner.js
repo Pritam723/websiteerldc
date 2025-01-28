@@ -6,8 +6,13 @@ export const Modal = ({ src, alt, onClose }) => {
   const [isClosing, setIsClosing] = useState(false);
 
   const handleOutsideClick = (e) => {
+    // Check if the click is on the modal content or its children
+    if (e.target.className.includes("modal-content")) {
+      return; // Do nothing if clicked on the modal content
+    }
+
     if (e.target.className.includes("modal")) {
-      triggerClose();
+      triggerClose(); // Close the modal if clicked outside the content
     }
   };
 
