@@ -31,7 +31,8 @@ import Modal from "examples/Modals/Modal.js";
 import bgFront from "assets/images/Flower-offering.jpg";
 import bgBack from "assets/images/nscb.jpg";
 // import "./information.css";
-import Test2 from "Test2";
+
+import GridDataInfographics from "examples/GridDataInfographics/GridDataInfographics.js";
 
 function Information() {
   return (
@@ -72,7 +73,7 @@ function Information() {
             </RotatingCard>
           </Grid> */}
         <Grid item xs={12} lg={5} sx={{ mx: "auto" }}>
-          <Test2 />
+          <GridDataInfographics />
         </Grid>
 
         <Grid item xs={12} lg={7} sx={{ ml: "auto" }}>

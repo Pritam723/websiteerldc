@@ -38,7 +38,7 @@ import DesignBlocks from "pages/Presentation/sections/DesignBlocks";
 import Pages from "pages/Presentation/sections/Pages";
 import Testimonials from "pages/Presentation/sections/Testimonials";
 import Download from "pages/Presentation/sections/Download";
-import Disclaimer from 'Disclaimer/Disclaimer.js';
+import Disclaimer from "examples/Disclaimer/Disclaimer.js";
 
 // Presentation page components
 import Highlights from "pages/Presentation/components/Highlights/Highlights";
@@ -81,7 +81,7 @@ function Presentation() {
 
   return (
     <>
-      <Disclaimer/>
+      <Disclaimer />
       <AppBar />
       <DefaultNavbar routes={routes} sticky />
 
@@ -219,7 +219,7 @@ function Presentation() {
       <MKBox pt={6} px={1} mt={6}>
         <DefaultFooter content={footerRoutes} />
       </MKBox>
-      </>
+    </>
   );
 }
 

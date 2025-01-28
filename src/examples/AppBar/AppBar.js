@@ -38,8 +38,8 @@ const SearchIconWrapper = styled("div")(({ theme }) => ({
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: "inherit",
   width: "100%",
-  '& .MuiInputBase-input::placeholder': {
-    fontSize: '12px', // Adjust the size here
+  "& .MuiInputBase-input::placeholder": {
+    fontSize: "12px", // Adjust the size here
     color: theme.palette.text.secondary, // Adjust the color
   },
   "& .MuiInputBase-input": {
@@ -141,24 +141,25 @@ export default function MyAppBar() {
                 fontSize: fontSizeContent, // Dynamic font size for second div
               }}
             >
+              {windowWidth > 1200 && (
+                <>
+                  {isSearchVisible && (
+                    <Search ref={searchRef}>
+                      <SearchIconWrapper>
+                        <SearchIcon />
+                      </SearchIconWrapper>
+                      <StyledInputBase
+                        placeholder="Search…"
+                        inputProps={{ "aria-label": "search" }}
+                      />
+                    </Search>
+                  )}
+                  {!isSearchVisible && (
+                    <IconButton onClick={toggleSearch} color="inherit">
+                      <SearchIcon />
+                    </IconButton>
+                  )}
 
-{windowWidth > 1200 && (<>{isSearchVisible && (
-                <Search ref={searchRef}>
-                  <SearchIconWrapper>
-                    <SearchIcon />
-                  </SearchIconWrapper>
-                  <StyledInputBase
-                    placeholder="Search…"
-                    inputProps={{ "aria-label": "search" }}
-                  />
-                </Search>
-              )}
-              {!isSearchVisible && (
-                <IconButton onClick={toggleSearch} color="inherit">
-                  <SearchIcon />
-                </IconButton>
-              )}
-              
                   <a
                     href="#"
                     target="_blank"
@@ -192,7 +193,6 @@ export default function MyAppBar() {
                     </Typography>
                   </a>
 
-                  
                   <a
                     href="#"
                     target="_blank"
@@ -271,9 +271,9 @@ export default function MyAppBar() {
                   {/* Add other links as needed */}
                 </>
               )}
-              <IconButton sx={{ flexShrink: 0 }}>
-                <AccountCircle />
-              </IconButton>
+              {/* <IconButton sx={{ flexShrink: 0 }}>
+                <AccountCircle /> Logout
+              </IconButton> */}
             </div>
           </Toolbar>
         </AppBar>

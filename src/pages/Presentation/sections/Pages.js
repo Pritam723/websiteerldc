@@ -48,8 +48,6 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import cmd_image from "assets/images/test.jpg";
 import "./pages.css";
-import Test2 from "Test2";
-import Test from "Test";
 
 import RotatingCard from "examples/Cards/RotatingCard";
 import RotatingCardFront from "examples/Cards/RotatingCard/RotatingCardFront";
@@ -59,9 +57,6 @@ import bgFront from "assets/images/Flower-offering.jpg";
 import bgBack from "assets/images/nscb.jpg";
 
 import EasternMap from "examples/Easternmap/EasternMap";
-
-// import bgFront from "assets/images/test2.jpg";
-// import bgBack from "assets/images/test2.jpg";
 
 function Pages() {
   useEffect(() => {

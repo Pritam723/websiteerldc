@@ -1,274 +1,273 @@
-import React, { useState, useEffect } from "react";
-import {
-  ComposableMap,
-  Geographies,
-  Geography,
-  Annotation,
-  ZoomableGroup,
-} from "react-simple-maps";
+import "primeicons/primeicons.css";
+import "primereact/resources/themes/lara-light-indigo/theme.css";
+import "primereact/resources/primereact.css";
+import "primeflex/primeflex.css";
+import ReactDOM from "react-dom";
 
-import { scaleQuantile } from "d3-scale";
-import { geoCentroid } from "d3-geo";
-import axios from "axios";
-// import Container1 from "./Container1.js";
-// import Container3 from "./Container3.js";
-// import { geoPolyhedralWaterman } from "d3-geo-projection";
+import React, { useEffect, useState } from "react";
+import { Form, Field } from "react-final-form";
+import { InputText } from "primereact/inputtext";
+import { Button } from "primereact/button";
+import { Dropdown } from "primereact/dropdown";
+import { Calendar } from "primereact/calendar";
+import { Password } from "primereact/password";
+import { Checkbox } from "primereact/checkbox";
 import { Dialog } from "primereact/dialog";
-import "./App.css";
-const COLOR_RANGE = [
-  "#ffedea",
-  "#ffcec5",
-  "#ffad9f",
-  "#ff8a75",
-  "#ff5533",
-  "#e2492d",
-  "#be3d26",
-  "#9a311f",
-  "#782618",
-];
+import { Divider } from "primereact/divider";
+import { classNames } from "primereact/utils";
+import "./SignIn.css";
+import BaseLayout from "layouts/sections/components/BaseLayout";
+import View from "layouts/sections/components/View";
+import MKBox from "components/MKBox";
 
-const INDIA_TOPO_JSON = require("./eastcopy.json");
-const DEFAULT_COLOR = "#ffedea";
-// const DEFAULT_COLOR = "#00FF00";
+export default function ReactFinalFormDemo() {
+  const [showMessage, setShowMessage] = useState(false);
+  const [formData, setFormData] = useState({});
 
-const geographyStyle = {
-  default: {
-    outline: "none",
-  },
-  hover: {
-    fill: "#ccc",
-    transition: "all 250ms",
-    outline: "none",
-  },
-  pressed: {
-    outline: "none",
-  },
-};
+  const validate = (data) => {
+    let errors = {};
 
-function Eastern2(props) {
-  // const [tooltipContent, setTooltipContent] = useState("");
-  const [data, setData] = useState([
-    {
-      id: "BR",
-      name: "Bihar",
-      color: "#f8c460",
-      content: "Bihar demand: 6500 MW",
-      clatlong: [84.9629, 25.5937],
-      tooltiplatlong: [109, 67],
+    // if (!data.name) {
+    //   errors.name = "Name is required.";
+    // }
 
-      // color: "#6cecf8",
-    },
-    {
-      id: "JH",
-      name: "Jharkhand",
-      color: "#cccdfb",
-      content: "Jharkhand demand: 3000 MW",
-      clatlong: [84.3629, 23.4937],
-      tooltiplatlong: [109, 190],
+    if (!data.email) {
+      errors.email = "Email/UserID is required.";
+    }
+    // else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(data.email)) {
+    //   errors.email = "Invalid email address. E.g. example@email.com";
+    // }
 
-      // color: "#f8c460",
-    },
-    {
-      id: "OR",
-      name: "Odisha",
-      color: "#6cecf8",
-      content: "Odisha demand: 5500 MW",
-      tooltiplatlong: [109, 337],
-      clatlong: [84.9629, 20.5937],
-    },
-    {
-      id: "WB",
-      name: "West Bengal",
-      color: "#8bf579",
-      content: "WB demand: 7000 MW",
-      clatlong: [88.9629, 23.5937],
-      tooltiplatlong: [109, 137],
+    if (!data.password) {
+      errors.password = "Password is required.";
+    }
 
-      // color: "#6cecf8",
-    },
-    {
-      id: "SK",
-      name: "Sikkim",
-      color: "#ded946",
-      content: "Sikkim demand: 90 MW",
-      clatlong: [87.9629, 27.5937],
-      tooltiplatlong: [109, 87],
-    },
-    {
-      id: "DVC",
-      name: "DVC",
-      color: "#ffad9f",
-      content: "DVC demand: 4500 MW",
-      clatlong: [85.8629, 23.6937],
-      tooltiplatlong: [109, 157],
-    },
-  ]);
+    // if (!data.accept) {
+    //   errors.accept = "You need to agree to the terms and conditions.";
+    // }
 
-  const [keyList, setKeyList] = useState([]);
-
-  const [showdailog, setshowdailog] = useState(false);
-  const [clickdata, setclickdata] = useState([]);
-
-  var temp_list = [...keyList];
-  temp_list.splice(0, 3);
-
-  const onMouseclick = (e) => {
-    var x = e[0];
-    console.log(e[0], e[1], e[2]);
-
-    setclickdata([x]);
-    setshowdailog(true);
+    return errors;
   };
 
-  const onMouseLeave = () => {
-    setshowdailog(false);
+  const onSubmit = (data, form) => {
+    setFormData(data);
+    setShowMessage(true);
+
+    form.restart();
   };
 
-  const [tooltip, setTooltip] = useState({
-    visible: false,
-    x: 0,
-    y: 0,
-    content: "by default",
-  });
-  const [showDialog, setShowDialog] = useState(false);
-  const [clickData, setClickData] = useState(null);
-
-  const handleMouseEnter = (e, region) => {
-    console.log(e);
-    console.log(region[0].clatlong[0]);
-    const rect = e.target.getBoundingClientRect();
-    console.log(rect);
-
-    setTooltip({
-      visible: true,
-      // x: region[0].clatlong[0],
-      // y: region[0].clatlong[0] + window.scrollY,
-      x: region[0].tooltiplatlong[0],
-      y: region[0].tooltiplatlong[1],
-      // x: 109,
-      // y: 63,
-      content: region[0].content,
-    });
+  const isFormFieldValid = (meta) => !!(meta.touched && meta.error);
+  const getFormErrorMessage = (meta) => {
+    return (
+      isFormFieldValid(meta) && <small className="p-error">{meta.error}</small>
+    );
   };
 
-  const handleMouseLeave = () => {
-    setTooltip({ ...tooltip, visible: false });
-  };
+  const dialogFooter = (
+    <div className="flex justify-content-center">
+      <Button
+        label="OK"
+        className="p-button-text"
+        autoFocus
+        onClick={() => setShowMessage(false)}
+      />
+    </div>
+  );
+  const passwordHeader = <h6>Pick a password</h6>;
+  const passwordFooter = (
+    <React.Fragment>
+      <Divider />
+      <p className="mt-2">Suggestions</p>
+      <ul className="pl-2 ml-2 mt-0" style={{ lineHeight: "1.5" }}>
+        <li>At least one lowercase</li>
+        <li>At least one uppercase</li>
+        <li>At least one numeric</li>
+        <li>Minimum 8 characters</li>
+      </ul>
+    </React.Fragment>
+  );
 
-  // const handleClick = (region) => {
-  //   setClickData(region);
-  //   setShowDialog(true);
-  // };
   return (
-    <>
-      <div className="full-width-height ">
-        <h2 className="no-margin center">Eastern Regional Map</h2>
-        {/* <h1 className="no-margin center">Eastern Regional {Energy} map</h1> */}
-        <div className="devider">
-          <div className="container_1">
-            <ComposableMap
-              width={1742}
-              height={2307}
-              projection="geoMercator"
-              // projection="geoAzimuthalEqualArea"
-              projectionConfig={{
-                rotate: [-87.0, -22.0, 10],
-                center: [0, 0],
-                scale: 10000,
+    <BaseLayout
+      title="Sign In"
+      breadcrumb={[
+        {
+          label: "User",
+        },
+        { label: "Sign In", route: "/user/signin" },
+      ]}
+    >
+      <div className="form-demo">
+        <Dialog
+          visible={showMessage}
+          onHide={() => setShowMessage(false)}
+          position="top"
+          footer={dialogFooter}
+          showHeader={false}
+          breakpoints={{ "960px": "80vw" }}
+          style={{ width: "30vw" }}
+        >
+          <div className="flex align-items-center flex-column pt-6 px-3">
+            <i
+              className="pi pi-check-circle"
+              style={{ fontSize: "5rem", color: "var(--green-500)" }}
+            ></i>
+            <h5>Registration Successful!</h5>
+            <p style={{ lineHeight: 1.5, textIndent: "1rem" }}>
+              Your account is registered under name <b>{formData.name}</b> ;
+              it'll be valid next 30 days without activation. Please check{" "}
+              <b>{formData.email}</b> for activation instructions.
+            </p>
+          </div>
+        </Dialog>
+
+        <div className="flex justify-content-center">
+          <div className="card">
+            <h3 className="text-center">Sign In to ERLDC</h3>
+            <Form
+              onSubmit={onSubmit}
+              initialValues={{
+                name: "",
+                email: "",
+                password: "",
+                date: null,
+                country: null,
+                accept: false,
               }}
-            >
-              <Geographies geography={INDIA_TOPO_JSON}>
-                {({ geographies }) =>
-                  geographies.map((geo) => {
-                    const current = [
-                      data.find((s) => {
-                        return s["id"] === geo.properties.id;
-                      }),
-                    ];
-
-                    return (
-                      <g key={geo.rsmKey}>
-                        <Geography
-                          geography={geo}
-                          fill={current[0].color}
-                          style={geographyStyle}
-                          onMouseEnter={(e) => handleMouseEnter(e, current)}
-                          onMouseLeave={handleMouseLeave}
-                        />
-
-                        <Annotation
-                          subject={current[0].clatlong}
-                          dx={0}
-                          dy={0}
-                          connectorProps={{
-                            stroke: "#FF5533",
-                            strokeWidth: 1,
-                            strokeLinecap: "round",
-                          }}
-                        >
-                          <text
-                            x="130"
-                            textAnchor="end"
-                            alignmentBaseline="middle"
-                            fill="black"
-                            style={{
-                              fontSize: "64px", // Adjust the font size to make the text larger
-                            }}
+              validate={validate}
+              render={({ handleSubmit }) => (
+                <form onSubmit={handleSubmit} className="p-fluid">
+                  {/* <Field
+                    name="name"
+                    render={({ input, meta }) => (
+                      <div className="field">
+                        <span className="p-float-label">
+                          <InputText
+                            id="name"
+                            {...input}
+                            autoFocus
+                            className={classNames({
+                              "p-invalid": isFormFieldValid(meta),
+                            })}
+                          />
+                          <label
+                            htmlFor="name"
+                            className={classNames({
+                              "p-error": isFormFieldValid(meta),
+                            })}
                           >
-                            {current[0].name}
-                          </text>
-                        </Annotation>
-                      </g>
-                    );
-                  })
-                }
-              </Geographies>
-            </ComposableMap>
+                            Name*
+                          </label>
+                        </span>
+                        {getFormErrorMessage(meta)}
+                      </div>
+                    )}
+                  /> */}
+
+                  <Field
+                    name="email"
+                    render={({ input, meta }) => (
+                      <div className="field">
+                        <span className="p-float-label p-input-icon-right">
+                          {/* <i className="pi pi-envelope" /> */}
+                          <InputText
+                            id="email"
+                            {...input}
+                            className={classNames({
+                              "p-invalid": isFormFieldValid(meta),
+                            })}
+                          />
+                          <label
+                            htmlFor="email"
+                            className={classNames({
+                              "p-error": isFormFieldValid(meta),
+                            })}
+                          >
+                            Email/UserID*
+                          </label>
+                        </span>
+                        {getFormErrorMessage(meta)}
+                      </div>
+                    )}
+                  />
+                  <Field
+                    name="password"
+                    render={({ input, meta }) => (
+                      <div className="field">
+                        <span className="p-float-label">
+                          <Password
+                            id="password"
+                            {...input}
+                            toggleMask
+                            className={classNames({
+                              "p-invalid": isFormFieldValid(meta),
+                            })}
+                            feedback={false}
+                            // header={passwordHeader}
+                            // footer={passwordFooter}
+                          />
+                          <label
+                            htmlFor="password"
+                            className={classNames({
+                              "p-error": isFormFieldValid(meta),
+                            })}
+                          >
+                            Password*
+                          </label>
+                        </span>
+                        {getFormErrorMessage(meta)}
+                      </div>
+                    )}
+                  />
+                  {/* <Field
+                  name="date"
+                  render={({ input }) => (
+                    <div className="field">
+                      <span className="p-float-label">
+                        <Calendar
+                          id="date"
+                          {...input}
+                          dateFormat="dd/mm/yy"
+                          mask="99/99/9999"
+                          showIcon
+                        />
+                        <label htmlFor="date">Birthday</label>
+                      </span>
+                    </div>
+                  )}
+                /> */}
+
+                  {/* <Field
+                    name="accept"
+                    type="checkbox"
+                    render={({ input, meta }) => (
+                      <div className="field-checkbox">
+                        <Checkbox
+                          inputId="accept"
+                          {...input}
+                          className={classNames({
+                            "p-invalid": isFormFieldValid(meta),
+                          })}
+                        />
+                        <label
+                          htmlFor="accept"
+                          className={classNames({
+                            "p-error": isFormFieldValid(meta),
+                          })}
+                        >
+                          I agree to the terms and conditions*
+                        </label>
+                      </div>
+                    )}
+                  /> */}
+
+                  <Button type="submit" label="Sign In" className="mt-2" />
+                </form>
+              )}
+            />
           </div>
         </div>
       </div>
-      {tooltip.visible && (
-        <div
-          style={{
-            position: "absolute",
-            top: tooltip.y,
-            left: tooltip.x,
-            backgroundColor: "rgba(8, 110, 141, 0.75)",
-            color: "white",
-            padding: "2px",
-            borderRadius: "4px",
-            pointerEvents: "none",
-            fontSize: "14px",
-            // transform: "translate(-50%, 200%)",
-          }}
-        >
-          {tooltip.content}
-        </div>
-      )}
-      {/* <Button size="small">See ER Power Map</Button> */}
-      <Dialog
-        header="Values"
-        visible={showdailog}
-        style={{ width: "13vw", height: "18vw" }}
-        onHide={() => setshowdailog(false)}
-      >
-        {clickdata[0] ? (
-          <div>
-            <p>State : {clickdata[0].name}</p>
-            {/* <p>District : {clickdata[0].District}</p> */}
-            {/* <p>Ac_name : {clickdata[0].Ac_name}</p> */}
-            {temp_list.map((item) => (
-              <p>
-                {item} : {clickdata[0][item] ? clickdata[0][item] : "NA"}
-              </p>
-            ))}
-          </div>
-        ) : (
-          ""
-        )}
-      </Dialog>
-    </>
+    </BaseLayout>
   );
 }
-
-export default Eastern2;

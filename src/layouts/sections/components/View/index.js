@@ -63,7 +63,7 @@ function View({ children, code, title, height, ...rest }) {
       sx={{ overflow: "hidden" }}
       {...rest}
     >
-      <MKBox
+      {/* <MKBox
         px={3}
         sx={{
           borderBottom: ({ borders: { borderWidth, borderColor } }) =>
@@ -107,7 +107,7 @@ function View({ children, code, title, height, ...rest }) {
             </AppBar>
           </Grid>
         </Grid>
-      </MKBox>
+      </MKBox> */}
       <MKBox display={activeTab === 0 ? "block" : "none"}>
         <MKBox width="100%" p={3}>
           <MKBox
@@ -147,9 +147,17 @@ function View({ children, code, title, height, ...rest }) {
                 width="25%"
                 mx="auto"
                 color="success"
-                sx={{ minHeight: "2.5rem !important", py: 1, justifyContent: "center" }}
+                sx={{
+                  minHeight: "2.5rem !important",
+                  py: 1,
+                  justifyContent: "center",
+                }}
               >
-                <MKTypography variant="body2" color="white" fontWeight="regular">
+                <MKTypography
+                  variant="body2"
+                  color="white"
+                  fontWeight="regular"
+                >
                   Code successfully copied!
                 </MKTypography>
               </MKAlert>

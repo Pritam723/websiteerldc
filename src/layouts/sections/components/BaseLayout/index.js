@@ -71,7 +71,16 @@ function BaseLayout({ breadcrumb, title, children }) {
           <MKTypography variant="h3" mb={1}>
             {title}
           </MKTypography>
-          {children}
+          <MKBox
+            width="100%"
+            position="relative"
+            borderRadius="xl"
+            shadow="lg"
+            mb={12}
+            sx={{ overflow: "hidden" }}
+          >
+            {children}
+          </MKBox>
         </Grid>
       </Container>
       <MKBox mt="auto">
