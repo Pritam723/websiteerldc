@@ -36,7 +36,7 @@ import MKTypography from "components/MKTypography";
 
 // Presentation page components
 import ExampleCard from "pages/Presentation/components/ExampleCard";
-import EasternMap from "pages/Presentation/components/Easternmap/easternmap";
+import EasternMap from "examples/Easternmap/EasternMap";
 
 // Data
 import data from "pages/Presentation/sections/data/pagesData";
