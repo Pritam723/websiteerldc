@@ -13,7 +13,7 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-import { useState } from "react";
+import { useState, useContext } from "react";
 
 // react-router components
 import { Link } from "react-router-dom";
@@ -31,8 +31,11 @@ import MKTypography from "components/MKTypography";
 
 // Material Kit 2 React example components
 import DefaultNavbarDropdown from "examples/Navbars/DefaultNavbar/DefaultNavbarDropdown";
+import { AuthContext, AuthProvider } from "context/AuthContext";
 
 function DefaultNavbarMobile({ routes, open }) {
+  const { user, namecontext } = useContext(AuthContext);
+
   const [collapse, setCollapse] = useState("");
 
   const handleSetCollapse = (name) =>
@@ -40,6 +43,7 @@ function DefaultNavbarMobile({ routes, open }) {
 
   const renderNavbarItems = routes.map(
     ({
+      isDynamic,
       name,
       icon,
       collapse: routeCollapses,
@@ -49,7 +53,11 @@ function DefaultNavbarMobile({ routes, open }) {
     }) => (
       <DefaultNavbarDropdown
         key={name}
-        name={name}
+        name={
+          isDynamic && namecontext
+            ? "Welcome " + namecontext.split(" ")[0]
+            : name
+        }
         icon={icon}
         collapseStatus={name === collapse}
         onClick={() => handleSetCollapse(name)}

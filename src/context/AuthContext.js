@@ -6,9 +6,15 @@ import { useNavigate, useLocation } from "react-router-dom";
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const navigate = useNavigate();
+  //   const navigate = useNavigate();
 
-  const [name, setName] = useState("Pritam");
+  const [namecontext, setNameContext] = useState(() =>
+    localStorage.getItem("authTokens")
+      ? jwtDecode(JSON.parse(localStorage.getItem("authTokens")).access_token)
+          .sub.name
+      : null
+  );
+
   const [authTokens, setAuthTokens] = useState(() =>
     localStorage.getItem("authTokens")
       ? JSON.parse(localStorage.getItem("authTokens"))
@@ -37,9 +43,13 @@ export const AuthProvider = ({ children }) => {
       });
       console.log(response);
       let tokenData = await response.data;
-      setAuthTokens(tokenData);
-      setUser(jwtDecode(tokenData.access_token));
-      localStorage.setItem("authTokens", JSON.stringify(tokenData));
+      await setAuthTokens(tokenData);
+      await setUser(jwtDecode(tokenData.access_token).sub);
+      await setNameContext(jwtDecode(tokenData.access_token).sub.name);
+
+      console.log(jwtDecode(tokenData.access_token).sub.name);
+
+      await localStorage.setItem("authTokens", JSON.stringify(tokenData));
       return true;
       //   navigate("/");
       //   console.log("works");
@@ -53,6 +63,7 @@ export const AuthProvider = ({ children }) => {
   let logoutUser = () => {
     setAuthTokens(null);
     setUser(null);
+    setNameContext(null);
     localStorage.removeItem("authTokens");
   };
 
@@ -61,7 +72,7 @@ export const AuthProvider = ({ children }) => {
     authTokens,
     loginUser,
     logoutUser,
-    name,
+    namecontext,
   };
 
   return (

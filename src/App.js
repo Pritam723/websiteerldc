@@ -49,10 +49,7 @@ export default function App() {
           <Route
             exact
             path={route.route}
-            // element={
-            //   <>{(route.cssOverlap && <CssBaseline />) || route.component}</>
-            // }
-
+            // element={route.component}
             element={
               route.cssOverlap ? (
                 <div>{route.component}</div>
@@ -74,6 +71,7 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
+      {/* <CssBaseline /> */}
       <AuthProvider>
         {" "}
         <Routes>
@@ -86,6 +84,7 @@ export default function App() {
                 <Presentation />
               </div>
             }
+            // element={<Presentation />}
           />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>

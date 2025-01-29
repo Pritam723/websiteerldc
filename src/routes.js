@@ -68,11 +68,8 @@ import PageHeaders from "layouts/sections/page-sections/page-headers";
 // import ProgressBars from "layouts/sections/elements/progress-bars";
 // import Toggles from "layouts/sections/elements/toggles";
 // import Typography from "layouts/sections/elements/typography";
-
+import UserProfile from "pages/FunctionalPages/UserProfile";
 import SignIn from "pages/FunctionalPages/SignIn";
-
-// import { AuthContext, AuthProvider } from "context/AuthContext";
-// const { name } = useContext(AuthContext);
 
 const routes = [
   // {
@@ -864,8 +861,9 @@ const routes = [
   //   // icon: <Icon>article</Icon>,
   // },
   {
+    isDynamic: true,
     name: "Login",
-    icon: <FaceIcon />,
+    // icon: <FaceIcon />,
     // route: "/sections/page-sections/page-headers",
     route: "/user/signin",
     component: <SignIn />,

@@ -20,7 +20,7 @@ import IMSLogo3 from "assets/images/IMS Policy Logos/iso-logo-45001.png";
 import IMSLogo4 from "assets/images/IMS Policy Logos/iso-logo-90001.png";
 import IMSLogo5 from "assets/images/IMS Policy Logos/yogaLogo.png";
 
-import { Fragment, useState, useEffect } from "react";
+import { Fragment, useState, useEffect, useContext } from "react";
 
 // react-router components
 import { Link } from "react-router-dom";
@@ -51,6 +51,8 @@ import breakpoints from "assets/theme/base/breakpoints";
 import GridLogo from "assets/images/GridIndiaLogo1.png";
 import { blueGrey } from "@mui/material/colors";
 import Button from "assets/theme/components/button";
+import { AuthContext, AuthProvider } from "context/AuthContext";
+import CssBaseline from "@mui/material/CssBaseline";
 
 function DefaultNavbar({
   brand,
@@ -63,6 +65,7 @@ function DefaultNavbar({
   relative,
   center,
 }) {
+  const { user, namecontext } = useContext(AuthContext);
   const [dropdown, setDropdown] = useState("");
   const [dropdownEl, setDropdownEl] = useState("");
   const [dropdownName, setDropdownName] = useState("");
@@ -98,11 +101,15 @@ function DefaultNavbar({
   }, []);
 
   const renderNavbarItems = routes.map(
-    ({ name, icon, href, route, collapse }) => (
+    ({ isDynamic, name, icon, href, route, collapse }) => (
       // <div key={name}>hihihihi</div>
       <DefaultNavbarDropdown
         key={name}
-        name={name}
+        name={
+          isDynamic && namecontext
+            ? "Welcome " + namecontext.split(" ")[0]
+            : name
+        }
         icon={icon}
         href={href}
         route={route}
@@ -494,6 +501,7 @@ function DefaultNavbar({
   return (
     // <div>hii</div>
     <Container sx={sticky ? { position: "sticky", top: 0, zIndex: 10 } : null}>
+      {/* <CssBaseline /> */}
       <MKBox
         py={0}
         px={{ xs: 4, sm: transparent ? 2 : 3, lg: transparent ? 0 : 2 }}

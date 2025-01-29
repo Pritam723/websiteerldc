@@ -18,20 +18,21 @@ import { Dialog } from "primereact/dialog";
 import { classNames } from "primereact/utils";
 import "./SignIn.css";
 import BaseLayout from "layouts/sections/components/BaseLayout";
-
 import axios from "axios";
 import { AuthContext, AuthProvider } from "context/AuthContext";
+
+import UserProfile from "./UserProfile";
 
 export default function SignIn({ redirectionURL = "/" }) {
   const navigate = useNavigate();
   // const location = useLocation();
   // console.log(redirectionURL);
-  const { user, loginUser } = useContext(AuthContext);
+  const { user, loginUser, namecontext } = useContext(AuthContext);
 
   const [showMessage, setShowMessage] = useState(false);
   // const [formData, setFormData] = useState({});
-  const [isLoginSuccessful, setIsLoginSuccessful] = useState(true);
-  const [username, setUsername] = useState("");
+  const [isLoginSuccessful, setIsLoginSuccessful] = useState(false);
+  // const [username, setUsername] = useState("");
 
   const validate = (data) => {
     let errors = {};
@@ -60,12 +61,17 @@ export default function SignIn({ redirectionURL = "/" }) {
 
     const loginFlag = await loginUser(data);
     // console.log(loginFlag);
-    setIsLoginSuccessful(loginFlag);
-    setShowMessage(true);
+    // await setUsername(namecontext);
+
+    console.log(namecontext);
+
+    await setIsLoginSuccessful(loginFlag);
+    await setShowMessage(true);
+
     if (!loginFlag) return;
-    console.log(user);
-    setUsername(user.name);
-    console.log("user is ");
+    // console.log(loginFlag);
+    // console.log("user is ");
+    // console.log(user);
 
     // axios
     //   .post("http://10.3.101.179:4001/login", data)
@@ -96,7 +102,7 @@ export default function SignIn({ redirectionURL = "/" }) {
         autoFocus
         onClick={() => {
           setShowMessage(false);
-          navigate(redirectionURL);
+          // navigate(redirectionURL);
         }}
       />
     </div>
@@ -116,7 +122,7 @@ export default function SignIn({ redirectionURL = "/" }) {
     </div>
   );
 
-  const SuccessDialouge = (name) => (
+  const SuccessDialouge = () => (
     <Dialog
       visible={showMessage}
       onHide={() => setShowMessage(false)}
@@ -131,7 +137,7 @@ export default function SignIn({ redirectionURL = "/" }) {
           className="pi pi-check-circle"
           style={{ fontSize: "5rem", color: "var(--green-500)" }}
         ></i>
-        <h5>Hi {name}. You are Signed In!</h5>
+        <h5>You are Signed In!</h5>
         <p style={{ lineHeight: 1.5, textIndent: "1rem" }}>
           You can now access password protected pages. Please Proceed. In case
           of any difficulty accessing the pages, please reach us at{" "}
@@ -165,7 +171,18 @@ export default function SignIn({ redirectionURL = "/" }) {
     </Dialog>
   );
 
-  return (
+  // useEffect(() => {
+  //   if (user) {
+  //     navigate("/user/userprofile");
+  //   }
+  // }, []);
+
+  return user ? (
+    <div>
+      {SuccessDialouge()}
+      <UserProfile />
+    </div>
+  ) : (
     <BaseLayout
       title={"Sign In"}
       breadcrumb={[
@@ -176,7 +193,8 @@ export default function SignIn({ redirectionURL = "/" }) {
       ]}
     >
       <div className="form-demo">
-        {isLoginSuccessful ? SuccessDialouge(username) : FailureDialouge()}
+        {/* {isLoginSuccessful ? SuccessDialouge() : FailureDialouge()} */}
+        {FailureDialouge()}
         <div className="flex justify-content-center">
           <div className="card">
             <h3 className="text-center">Sign In to ERLDC</h3>
