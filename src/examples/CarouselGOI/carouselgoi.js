@@ -1,7 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Button } from "primereact/button";
-import { Carousel } from "primereact/carousel";
-import { Tag } from "primereact/tag";
 import "./carouselgoi.css";
 // import { ProductService } from "./service/ProductService";
 // import appleLogo from "assets/images/courasol/1.png";

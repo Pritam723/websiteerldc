@@ -12,7 +12,7 @@ import React, { useState, useEffect, useRef, useContext } from "react";
 import { classNames } from "primereact/utils";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
-// import { ProductService } from "./ProductService";
+import { ProductService } from "./ProductService";
 import { Toast } from "primereact/toast";
 import { Button } from "primereact/button";
 import { FileUpload } from "primereact/fileupload";
@@ -29,6 +29,7 @@ import { Tag } from "primereact/tag";
 import breadcrumbs from "assets/theme/components/breadcrumbs";
 import { Calendar } from "primereact/calendar";
 import { Dropdown } from "primereact/dropdown";
+import moment from "moment";
 
 export default function PeakHours({
   dataToDisplay = {},
@@ -38,6 +39,7 @@ export default function PeakHours({
   apiEndPoints = {},
 }) {
   const { user } = useContext(AuthContext);
+
   let emptyProduct = {
     id: null,
     filename: "",
@@ -47,52 +49,13 @@ export default function PeakHours({
     quarter: null,
     year: null,
     fy: null,
-
     fileDateFromTo: null,
-
     uploadedOn: null,
     actualUploadDate: null,
     size: 0,
   };
 
-  const tempData = [
-    {
-      id: 100,
-      filename:
-        "04-Declaration of Peak hours of ER for the month of April 2025.pdf",
-      fileDate: "04-04-2024",
-      weekStartsEnds: ["04-04-2024 to 07-04-2024", null],
-      month: "April",
-      quarter: "Q1",
-      year: "2024",
-      fy: "2024-25",
-
-      fileDateFromTo: "04-04-2024 to 07-04-2024",
-
-      uploadedOn: "31-03-2024",
-      actualUploadDate: "07-04-2024",
-      size: 20,
-    },
-    {
-      id: 101,
-      filename:
-        "07-Declaration of Peak hours of ER for the month of July 2025.pdf",
-      fileDate: "12-07-2024",
-      weekStartsEnds: "12-07-2024 to 19-07-2024",
-      month: "July",
-      quarter: "Q2",
-      year: "2024",
-      fy: "2024-25",
-
-      fileDateFromTo: "04-04-2024 to 07-04-2024",
-
-      uploadedOn: "30-06-2024",
-      actualUploadDate: "07-04-2024",
-      size: 20,
-    },
-  ];
-
-  const [products, setProducts] = useState(tempData);
+  const [products, setProducts] = useState([]);
   const [productDialog, setProductDialog] = useState(false);
   const [deleteProductDialog, setDeleteProductDialog] = useState(false);
   const [deleteProductsDialog, setDeleteProductsDialog] = useState(false);
@@ -103,16 +66,31 @@ export default function PeakHours({
   const toast = useRef(null);
   const dt = useRef(null);
 
-  // useEffect(() => {
-  //   ProductService.getProducts().then((data) => setProducts(data));
-  // }, []);
+  useEffect(() => {
+    ProductService.getProducts().then((data) => setProducts(data));
+  }, []);
 
-  //   const formatCurrency = (value) => {
-  //     return value.toLocaleString("en-US", {
-  //       style: "currency",
-  //       currency: "USD",
-  //     });
-  //   };
+  const dateBodyTemplate = (rowData) => {
+    // return rowData.fileDate.toString();
+    if (!rowData.fileDate) {
+      return "Data not available.";
+    }
+    return moment(rowData.fileDate).format("DD/MM/YYYY");
+  };
+
+  const weekBodyTemplate = (rowData) => {
+    // return rowData.fileDate.toString();
+    if (
+      !rowData.weekStartsEnds ||
+      !rowData.weekStartsEnds[0] ||
+      !rowData.weekStartsEnds[1]
+    ) {
+      return "Data not available.";
+    }
+    return `${moment(rowData.weekStartsEnds[0]).format(
+      "DD/MM/YYYY"
+    )} to ${moment(rowData.weekStartsEnds[1]).format("DD/MM/YYYY")}`;
+  };
 
   const openNew = () => {
     setProduct(emptyProduct);
@@ -247,6 +225,14 @@ export default function PeakHours({
   };
 
   const onInputChange = (e, name) => {
+    // console.log(e.target);
+    console.log(e.target.value);
+
+    // console.log(typeof e.target);
+    console.log(typeof e.target.value);
+
+    // console.log(e.target.value[0] instanceof Date);
+
     const val = (e.target && e.target.value) || "";
     let _product = { ...product };
 
@@ -418,211 +404,217 @@ export default function PeakHours({
   );
 
   return (
-    <div>
-      <Toast ref={toast} />
-      <div className="card">
-        <Toolbar
-          className="mb-4"
-          left={leftToolbarTemplate}
-          // right={rightToolbarTemplate}
-        ></Toolbar>
+    <BaseLayout title={pageTitle} breadcrumb={breadcrumb}>
+      {/* <div className="flex justify-content-center">
+        <div className="card"> */}
 
-        <DataTable
-          ref={dt}
-          value={products}
-          selection={selectedProducts}
-          onSelectionChange={(e) => setSelectedProducts(e.value)}
-          dataKey="id"
-          paginator
-          rows={10}
-          // rowsPerPageOptions={[5, 10, 25]}
-          paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
-          currentPageReportTemplate="Showing {first} to {last} of {totalRecords} products"
-          globalFilter={globalFilter}
-          header={header}
+      <div>
+        <Toast ref={toast} />
+        <div className="card">
+          <Toolbar
+            className="mb-4"
+            left={leftToolbarTemplate}
+            // right={rightToolbarTemplate}
+          ></Toolbar>
+
+          <DataTable
+            ref={dt}
+            value={products}
+            selection={selectedProducts}
+            onSelectionChange={(e) => setSelectedProducts(e.value)}
+            dataKey="id"
+            paginator
+            rows={10}
+            // rowsPerPageOptions={[5, 10, 25]}
+            paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
+            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} products"
+            globalFilter={globalFilter}
+            header={header}
+          >
+            <Column selectionMode="multiple" exportable={false}></Column>
+            <Column
+              field="id"
+              header="ID"
+              sortable
+              style={{ minWidth: "12rem" }}
+              hidden={!dataToDisplay["id"]}
+            ></Column>
+            <Column
+              field="filename"
+              header="File Name"
+              sortable={false}
+              style={{ minWidth: "16rem" }}
+              hidden={!dataToDisplay["filename"]}
+            ></Column>
+            <Column
+              field="fileDate"
+              header="Date (dd/mm/yyyy)"
+              body={dateBodyTemplate}
+              sortable={false}
+              style={{ minWidth: "10rem" }}
+              hidden={!dataToDisplay["fileDate"]}
+            ></Column>
+            <Column
+              field="weekStartsEnds"
+              header="Week (Starts-Ends)"
+              body={weekBodyTemplate}
+              sortable={false}
+              style={{ minWidth: "12rem" }}
+              hidden={!dataToDisplay["weekStartsEnds"]}
+            ></Column>
+            {/*<Column
+              field="month"
+              header="Month"
+              //   body={statusBodyTemplate}
+              sortable={false}
+              style={{ minWidth: "12rem" }}
+              hidden={!dataToDisplay["month"]}
+            ></Column>
+            <Column
+              field="quarter"
+              header="Quarter"
+              //   body={statusBodyTemplate}
+              sortable={false}
+              style={{ minWidth: "12rem" }}
+              hidden={!dataToDisplay["quarter"]}
+            ></Column>
+            <Column
+              field="year"
+              header="Year"
+              //   body={statusBodyTemplate}
+              sortable={false}
+              style={{ minWidth: "12rem" }}
+              hidden={!dataToDisplay["year"]}
+            ></Column>
+            <Column
+              field="fy"
+              header="Financial Year"
+              //   body={statusBodyTemplate}
+              sortable={false}
+              style={{ minWidth: "12rem" }}
+              hidden={!dataToDisplay["fy"]}
+            ></Column>
+            <Column
+              field="fileDateFromTo"
+              header="File Date (From-To)"
+              //   body={statusBodyTemplate}
+              sortable={false}
+              style={{ minWidth: "12rem" }}
+              hidden={!dataToDisplay["fileDateFromTo"]}
+            ></Column>
+            <Column
+              field="uploadedOn"
+              header="Upload Date"
+              //   body={statusBodyTemplate}
+              sortable={false}
+              style={{ minWidth: "12rem" }}
+              hidden={!dataToDisplay["uploadedOn"]}
+            ></Column>
+            <Column
+              field="actualUploadDate"
+              header="Actual Upload Date"
+              //   body={statusBodyTemplate}
+              sortable={false}
+              style={{ minWidth: "12rem" }}
+              hidden={!dataToDisplay["actualUploadDate"]}
+            ></Column>
+            <Column
+              field="size"
+              header="File Size (In Kb)"
+              //   body={statusBodyTemplate}
+              sortable={false}
+              style={{ minWidth: "12rem" }}
+              hidden={!dataToDisplay["size"]}
+            ></Column> */}
+            <Column
+              header="Download"
+              body={downloadBodyTemplate}
+              exportable={false}
+              style={{ minWidth: "12rem" }}
+            ></Column>
+            <Column
+              header="Action"
+              body={actionBodyTemplate}
+              exportable={false}
+              style={{ minWidth: "12rem" }}
+            ></Column>
+          </DataTable>
+        </div>
+
+        <Dialog
+          visible={productDialog}
+          style={{ width: "32rem" }}
+          breakpoints={{ "960px": "75vw", "641px": "90vw" }}
+          header={pageTitle}
+          modal
+          className="p-fluid"
+          footer={productDialogFooter}
+          onHide={hideDialog}
         >
-          <Column selectionMode="multiple" exportable={false}></Column>
-          <Column
-            field="id"
-            header="ID"
-            sortable
-            style={{ minWidth: "12rem" }}
-            hidden={!dataToDisplay["id"]}
-          ></Column>
-          <Column
-            field="filename"
-            header="File Name"
-            sortable={false}
-            style={{ minWidth: "16rem" }}
-            hidden={!dataToDisplay["filename"]}
-          ></Column>
-          <Column
-            field="fileDate"
-            header="Date"
-            sortable={false}
-            style={{ minWidth: "10rem" }}
-            hidden={!dataToDisplay["fileDate"]}
-          ></Column>
-          <Column
-            field="weekStartsEnds"
-            header="Week (Starts-Ends)"
-            //   body={statusBodyTemplate}
-            sortable={false}
-            style={{ minWidth: "12rem" }}
-            hidden={!dataToDisplay["weekStartsEnds"]}
-          ></Column>
-          <Column
-            field="month"
-            header="Month"
-            //   body={statusBodyTemplate}
-            sortable={false}
-            style={{ minWidth: "12rem" }}
-            hidden={!dataToDisplay["month"]}
-          ></Column>{" "}
-          <Column
-            field="quarter"
-            header="Quarter"
-            //   body={statusBodyTemplate}
-            sortable={false}
-            style={{ minWidth: "12rem" }}
-            hidden={!dataToDisplay["quarter"]}
-          ></Column>{" "}
-          <Column
-            field="year"
-            header="Year"
-            //   body={statusBodyTemplate}
-            sortable={false}
-            style={{ minWidth: "12rem" }}
-            hidden={!dataToDisplay["year"]}
-          ></Column>{" "}
-          <Column
-            field="fy"
-            header="Financial Year"
-            //   body={statusBodyTemplate}
-            sortable={false}
-            style={{ minWidth: "12rem" }}
-            hidden={!dataToDisplay["fy"]}
-          ></Column>{" "}
-          <Column
-            field="fileDateFromTo"
-            header="File Date (From-To)"
-            //   body={statusBodyTemplate}
-            sortable={false}
-            style={{ minWidth: "12rem" }}
-            hidden={!dataToDisplay["fileDateFromTo"]}
-          ></Column>{" "}
-          <Column
-            field="uploadedOn"
-            header="Upload Date"
-            //   body={statusBodyTemplate}
-            sortable={false}
-            style={{ minWidth: "12rem" }}
-            hidden={!dataToDisplay["uploadedOn"]}
-          ></Column>{" "}
-          <Column
-            field="actualUploadDate"
-            header="Actual Upload Date"
-            //   body={statusBodyTemplate}
-            sortable={false}
-            style={{ minWidth: "12rem" }}
-            hidden={!dataToDisplay["actualUploadDate"]}
-          ></Column>{" "}
-          <Column
-            field="size"
-            header="File Size (In Kb)"
-            //   body={statusBodyTemplate}
-            sortable={false}
-            style={{ minWidth: "12rem" }}
-            hidden={!dataToDisplay["size"]}
-          ></Column>{" "}
-          <Column
-            header="Download"
-            body={downloadBodyTemplate}
-            exportable={false}
-            style={{ minWidth: "12rem" }}
-          ></Column>
-          <Column
-            header="Action"
-            body={actionBodyTemplate}
-            exportable={false}
-            style={{ minWidth: "12rem" }}
-          ></Column>
-        </DataTable>
-      </div>
+          <div className="field" hidden={!uploadPoints["filename"]}>
+            <label htmlFor="filename" className="font-bold">
+              File Name
+            </label>
+            <InputText
+              id="filename"
+              value={product.filename}
+              onChange={(e) => onInputChange(e, "filename")}
+              required
+              // autoFocus
+              className={classNames({
+                "p-invalid": submitted && !product.filename,
+              })}
+            />
+            {submitted && !product.filename && (
+              <small className="p-error">File Name is required.</small>
+            )}
+          </div>
+          <div className="field" hidden={!uploadPoints["fileDate"]}>
+            <label htmlFor="fileDate" className="font-bold">
+              File Date
+            </label>
+            <Calendar
+              id="fileDate"
+              value={product.fileDate}
+              onChange={(e) => {
+                e.preventDefault();
+                onInputChange(e, "fileDate");
+              }}
+              dateFormat="dd/mm/yy"
+              required
+              // autoFocus
+              className={classNames({
+                "p-invalid": submitted && !product.fileDate,
+              })}
+            />
+            {submitted && !product.fileDate && (
+              <small className="p-error">Date is required.</small>
+            )}
+          </div>
+          <div className="field" hidden={!uploadPoints["weekStartsEnds"]}>
+            <label htmlFor="weekStartsEnds" className="font-bold">
+              Week (Starts-Ends)
+            </label>
+            <Calendar
+              id="weekStartsEnds"
+              value={product.weekStartsEnds}
+              onChange={(e) => onInputChange(e, "weekStartsEnds")}
+              dateFormat="dd/mm/yy"
+              required
+              // autoFocus
+              className={classNames({
+                "p-invalid": submitted && !product.weekStartsEnds,
+              })}
+              selectionMode="range"
+              readOnlyInput
+              hideOnRangeSelection
+            />
+            {submitted && !product.weekStartsEnds && (
+              <small className="p-error">Week (Starts-Ends) is required.</small>
+            )}
+          </div>
 
-      <Dialog
-        visible={productDialog}
-        style={{ width: "32rem" }}
-        breakpoints={{ "960px": "75vw", "641px": "90vw" }}
-        header={pageTitle}
-        modal
-        className="p-fluid"
-        footer={productDialogFooter}
-        onHide={hideDialog}
-      >
-        <div className="field" hidden={!uploadPoints["filename"]}>
-          <label htmlFor="filename" className="font-bold">
-            File Name
-          </label>
-          <InputText
-            id="filename"
-            value={product.filename}
-            onChange={(e) => onInputChange(e, "filename")}
-            required
-            // autoFocus
-            className={classNames({
-              "p-invalid": submitted && !product.filename,
-            })}
-          />
-          {submitted && !product.filename && (
-            <small className="p-error">File Name is required.</small>
-          )}
-        </div>
-        <div className="field" hidden={!uploadPoints["fileDate"]}>
-          <label htmlFor="fileDate" className="font-bold">
-            File Date
-          </label>
-          <Calendar
-            id="fileDate"
-            value={product.fileDate}
-            onChange={(e) => {
-              e.preventDefault();
-              onInputChange(e, "fileDate");
-            }}
-            dateFormat="dd/mm/yy"
-            required
-            // autoFocus
-            className={classNames({
-              "p-invalid": submitted && !product.fileDate,
-            })}
-          />
-          {submitted && !product.fileDate && (
-            <small className="p-error">Date is required.</small>
-          )}
-        </div>
-        <div className="field" hidden={!uploadPoints["weekStartsEnds"]}>
-          <label htmlFor="weekStartsEnds" className="font-bold">
-            Week (Starts-Ends)
-          </label>
-          <Calendar
-            id="weekStartsEnds"
-            value={product.weekStartsEnds}
-            onChange={(e) => onInputChange(e, "weekStartsEnds")}
-            required
-            // autoFocus
-            className={classNames({
-              "p-invalid": submitted && !product.weekStartsEnds,
-            })}
-            selectionMode="range"
-            readOnlyInput
-            hideOnRangeSelection
-          />
-          {submitted && !product.weekStartsEnds && (
-            <small className="p-error">Week (Starts-Ends) is required.</small>
-          )}
-        </div>
-
-        {/* <div className="field" hidden={!uploadPoints["month"]}>
+          {/* <div className="field" hidden={!uploadPoints["month"]}>
             <label htmlFor="month" className="font-bold">
               Month
             </label>
@@ -770,49 +762,54 @@ export default function PeakHours({
               <small className="p-error">Upload Date is required.</small>
             )}
           </div> */}
-      </Dialog>
+        </Dialog>
 
-      <Dialog
-        visible={deleteProductDialog}
-        style={{ width: "32rem" }}
-        breakpoints={{ "960px": "75vw", "641px": "90vw" }}
-        header="Confirm"
-        modal
-        footer={deleteProductDialogFooter}
-        onHide={hideDeleteProductDialog}
-      >
-        <div className="confirmation-content">
-          <i
-            className="pi pi-exclamation-triangle mr-3"
-            style={{ fontSize: "2rem" }}
-          />
-          {product && (
-            <span>
-              Are you sure you want to delete <b>{product.filename}</b>?
-            </span>
-          )}
-        </div>
-      </Dialog>
+        <Dialog
+          visible={deleteProductDialog}
+          style={{ width: "32rem" }}
+          breakpoints={{ "960px": "75vw", "641px": "90vw" }}
+          header="Confirm"
+          modal
+          footer={deleteProductDialogFooter}
+          onHide={hideDeleteProductDialog}
+        >
+          <div className="confirmation-content">
+            <i
+              className="pi pi-exclamation-triangle mr-3"
+              style={{ fontSize: "2rem" }}
+            />
+            {product && (
+              <span>
+                Are you sure you want to delete <b>{product.filename}</b>?
+              </span>
+            )}
+          </div>
+        </Dialog>
 
-      <Dialog
-        visible={deleteProductsDialog}
-        style={{ width: "32rem" }}
-        breakpoints={{ "960px": "75vw", "641px": "90vw" }}
-        header="Confirm"
-        modal
-        footer={deleteProductsDialogFooter}
-        onHide={hideDeleteProductsDialog}
-      >
-        <div className="confirmation-content">
-          <i
-            className="pi pi-exclamation-triangle mr-3"
-            style={{ fontSize: "2rem" }}
-          />
-          {product && (
-            <span>Are you sure you want to delete the selected products?</span>
-          )}
-        </div>
-      </Dialog>
-    </div>
+        <Dialog
+          visible={deleteProductsDialog}
+          style={{ width: "32rem" }}
+          breakpoints={{ "960px": "75vw", "641px": "90vw" }}
+          header="Confirm"
+          modal
+          footer={deleteProductsDialogFooter}
+          onHide={hideDeleteProductsDialog}
+        >
+          <div className="confirmation-content">
+            <i
+              className="pi pi-exclamation-triangle mr-3"
+              style={{ fontSize: "2rem" }}
+            />
+            {product && (
+              <span>
+                Are you sure you want to delete the selected products?
+              </span>
+            )}
+          </div>
+        </Dialog>
+      </div>
+      {/* </div>
+      </div> */}
+    </BaseLayout>
   );
 }

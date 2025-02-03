@@ -29,6 +29,8 @@ import Presentation from "layouts/pages/presentation";
 // Material Kit 2 React routes
 import routes from "routes";
 import { AuthContext, AuthProvider } from "context/AuthContext";
+import UserProfile from "pages/FunctionalPages/UserProfile";
+import Test from "./Test";
 
 export default function App() {
   const { pathname } = useLocation();
@@ -40,7 +42,8 @@ export default function App() {
   }, [pathname]);
 
   const getRoutes = (allRoutes) =>
-    allRoutes.map((route) => {
+    allRoutes.map((route, index) => {
+      // console.log(route.name + index.toString());
       if (route.collapse) {
         return getRoutes(route.collapse);
       }
@@ -62,7 +65,7 @@ export default function App() {
                 </div>
               )
             }
-            key={route.key}
+            key={route.name}
           />
         );
       }
@@ -77,6 +80,7 @@ export default function App() {
         <Routes>
           {getRoutes(routes)}
           <Route
+            key="LandingPage"
             path="/"
             element={
               <div>
@@ -86,7 +90,8 @@ export default function App() {
             }
             // element={<Presentation />}
           />
-          <Route path="*" element={<Navigate to="/" />} />
+          <Route key="default" path="*" element={<Navigate to="/" />} />
+          {/* <Route path="/user/userprofile" element={<UserProfile />} /> */}
         </Routes>
       </AuthProvider>
     </ThemeProvider>

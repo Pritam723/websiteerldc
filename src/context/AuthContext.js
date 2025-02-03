@@ -8,6 +8,12 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   //   const navigate = useNavigate();
 
+  const [languagePreference, setLanguagePreference] = useState(() =>
+    localStorage.getItem("languagePreference")
+      ? localStorage.getItem("languagePreference")
+      : "English"
+  );
+
   const [namecontext, setNameContext] = useState(() =>
     localStorage.getItem("authTokens")
       ? jwtDecode(JSON.parse(localStorage.getItem("authTokens")).access_token)
@@ -73,6 +79,8 @@ export const AuthProvider = ({ children }) => {
     loginUser,
     logoutUser,
     namecontext,
+    languagePreference,
+    setLanguagePreference,
   };
 
   return (

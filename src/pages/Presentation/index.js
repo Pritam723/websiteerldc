@@ -25,7 +25,7 @@ import MKSocialButton from "components/MKSocialButton";
 
 // Material Kit 2 React examples
 import DefaultNavbar from "examples/Navbars/DefaultNavbar";
-import Navbar from "examples/Navbars/DefaultNavbar/Navbar";
+// import Navbar from "examples/Navbars/DefaultNavbar/Navbar";
 
 import DefaultFooter from "examples/Footers/DefaultFooter";
 import FilledInfoCard from "examples/Cards/InfoCards/FilledInfoCard";
@@ -82,7 +82,7 @@ function Presentation() {
 
   return (
     <>
-      <Banner />
+      {/* <Banner /> */}
       <Disclaimer />
       <AppBar />
       <DefaultNavbar routes={routes} sticky />
