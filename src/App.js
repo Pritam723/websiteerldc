@@ -52,19 +52,7 @@ export default function App() {
           <Route
             exact
             path={route.route}
-            // element={route.component}
-            element={
-              route.cssOverlap ? (
-                <div>{route.component}</div>
-              ) : (
-                <div>
-                  <div>
-                    <CssBaseline />
-                    {route.component}
-                  </div>
-                </div>
-              )
-            }
+            element={route.component}
             key={route.name}
           />
         );
@@ -76,17 +64,16 @@ export default function App() {
     <ThemeProvider theme={theme}>
       {/* <CssBaseline /> */}
       <AuthProvider>
-        {" "}
         <Routes>
           {getRoutes(routes)}
           <Route
             key="LandingPage"
             path="/"
             element={
-              <div>
+              <React.Fragment>
                 <CssBaseline />
                 <Presentation />
-              </div>
+              </React.Fragment>
             }
             // element={<Presentation />}
           />

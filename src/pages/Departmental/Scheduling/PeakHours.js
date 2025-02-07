@@ -8,10 +8,15 @@ import { AuthContext, AuthProvider } from "context/AuthContext";
 import React, { useState, useEffect, useRef, useContext } from "react";
 import CommonDataTable from "pages/CommonDataTable/CommonDataTable.js";
 
+import { DEFAULT_FILTERS } from "utilities/DataFilterUtility";
+
 export default function PeakHours() {
   const { user } = useContext(AuthContext);
 
   const pageTitle = "Peak Hours & Season Declaration";
+  const targetTableClass = "PeakHour";
+  const multipleUploads = true;
+
   const breadcrumb = [
     // { label: "Home" },
 
@@ -30,44 +35,73 @@ export default function PeakHours() {
 
   const uploadPoints = {
     // id: false,
-    filename: false,
+    // fileName: false,
     fileDate: true,
-    weekStartsEnds: true,
-    month: true,
+    // weekStartsEnds: true,
+    // month: true,
     // quarter: true,
     // year: true,
-    fy: true,
+    // fy: true,
     // fileDateFromTo: true,
-    // uploadedOn: true,
+    uploadedOn: true,
+    // uploadedBy: true,
     // actualUploadDate: false,
     // size: true,
   };
 
   const dataToDisplay = {
     // id: false,
-    filename: true,
+    fileName: true,
     fileDate: true,
-    weekStartsEnds: true,
-    month: true,
+    // weekStartsEnds: true,
+    // month: true,
     // quarter: true,
     // year: true,
-    fy: true,
+    // fy: true,
     // fileDateFromTo: true,
-    // uploadedOn: true,
+    uploadedOn: true,
+    // uploadedBy: true,
+    // actualUploadDate: false,
+    size: true,
+  };
+
+  const sortInUse = {
+    // id: false,
+    fileName: true,
+    fileDate: true,
+    // weekStartsEnds: true,
+    // month: true,
+    // quarter: true,
+    // year: true,
+    // fy: true,
+    // fileDateFromTo: true,
+    uploadedOn: true,
+    // uploadedBy: true,
+
     // actualUploadDate: false,
     // size: true,
   };
 
-  const filtersInUse = {};
+  const filtersInUse = {
+    "Date Range": true,
+    Year: true,
+    Month: true,
+    "Financial Year & Quarter": true,
+  };
+
+  const defaultFiltering = DEFAULT_FILTERS.CURRENT_YEAR;
 
   return (
-    // <>huu</>
     <CommonDataTable
       dataToDisplay={dataToDisplay}
       uploadPoints={uploadPoints}
+      filtersInUse={filtersInUse}
+      defaultFiltering={defaultFiltering}
+      sortInUse={sortInUse}
       pageTitle={pageTitle}
       breadcrumb={breadcrumb}
-      apiEndPoints={apiEndPoints}
+      targetTableClass={targetTableClass}
+      multipleUploads={multipleUploads}
     />
   );
 }

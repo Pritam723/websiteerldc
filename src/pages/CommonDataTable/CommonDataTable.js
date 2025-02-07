@@ -12,37 +12,55 @@ import React, { useState, useEffect, useRef, useContext } from "react";
 import { classNames } from "primereact/utils";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
-import { ProductService } from "./ProductService";
 import { Toast } from "primereact/toast";
 import { Button } from "primereact/button";
 import { FileUpload } from "primereact/fileupload";
-import { Rating } from "primereact/rating";
+
 import { Toolbar } from "primereact/toolbar";
-import { InputTextarea } from "primereact/inputtextarea";
+
 import { IconField } from "primereact/iconfield";
 import { InputIcon } from "primereact/inputicon";
-import { RadioButton } from "primereact/radiobutton";
-import { InputNumber } from "primereact/inputnumber";
 import { Dialog } from "primereact/dialog";
 import { InputText } from "primereact/inputtext";
-import { Tag } from "primereact/tag";
-import breadcrumbs from "assets/theme/components/breadcrumbs";
 import { Calendar } from "primereact/calendar";
 import { Dropdown } from "primereact/dropdown";
-import moment from "moment";
+import axios from "axios";
 
-export default function PeakHours({
+import { FloatLabel } from "primereact/floatlabel";
+
+import { showToastMessage } from "utilities/ToastMessage";
+import {
+  getQuarterList,
+  getFinancialYearList,
+} from "utilities/DataFilterUtility";
+
+import {
+  fileNameBodyTemplate,
+  dateBodyTemplate,
+  weekBodyTemplate,
+  monthBodyTemplate,
+  yearBodyTemplate,
+  fileDateFromToBodyTemplate,
+  uploadDateBodyTemplate,
+  fileSizeBodyTemplate,
+} from "./CommonDataTableUtility";
+
+export default function CommonDataTable({
   dataToDisplay = {},
   uploadPoints = {},
+  sortInUse = {},
+  filtersInUse = {},
+  defaultFiltering = null,
   pageTitle = "",
   breadcrumb = [],
-  apiEndPoints = {},
+  targetTableClass = null,
+  multipleUploads = false,
 }) {
   const { user } = useContext(AuthContext);
 
   let emptyProduct = {
     id: null,
-    filename: "",
+    fileName: null,
     fileDate: null,
     weekStartsEnds: null,
     month: null,
@@ -51,11 +69,31 @@ export default function PeakHours({
     fy: null,
     fileDateFromTo: null,
     uploadedOn: null,
+    uploadedBy: null,
     actualUploadDate: null,
+    attachedFiles: null,
     size: 0,
   };
 
+  ///////////////////// These States are used for Filtering & Default Filtering /////////////////
+  const [filterOptions] = useState(
+    Object.keys(filtersInUse).filter((key) => filtersInUse[key])
+  );
+  const [filterBy, setFilterBy] = useState(
+    filterOptions.length > 0 ? filterOptions[0] : null
+  );
+  const [filterRange, setFilterRange] = useState(null); // Can be Range or can be a single value. Will cover for Year, Month, Date Range.
+  const [filterFY, setFilterFY] = useState(null);
+  const [filterQuarter, setFilterQuarter] = useState(null);
+
+  const [fyList, setFyList] = useState([]);
+  const [quarterList, setQuarterList] = useState(getQuarterList());
+  const [displayRange, setDisplayRange] = useState("");
+
+  //////////////////////////////////////////////////////////////////////////////////////////////
+
   const [products, setProducts] = useState([]);
+  // const [attachedFiles, setAttachedFiles] = useState([]);
   const [productDialog, setProductDialog] = useState(false);
   const [deleteProductDialog, setDeleteProductDialog] = useState(false);
   const [deleteProductsDialog, setDeleteProductsDialog] = useState(false);
@@ -65,32 +103,83 @@ export default function PeakHours({
   const [globalFilter, setGlobalFilter] = useState(null);
   const toast = useRef(null);
   const dt = useRef(null);
+  const uploadRef = useRef(null);
+
+  const fetchAllStandardData = async () => {
+    try {
+      console.log({
+        filterOptions: {
+          filterBy: filterBy,
+          filterRange: filterRange,
+          filterFY: filterFY,
+          filterQuarter: filterQuarter,
+          defaultFiltering: defaultFiltering,
+        },
+        targetTableClass: targetTableClass,
+      });
+
+      // return;
+
+      let response = await axios({
+        method: "post",
+        url: "http://10.3.101.179:4001/fetchAllStandardData",
+        headers: {},
+        data: {
+          filterOptions: {
+            filterBy: filterBy,
+            filterRange: filterRange,
+            filterFY: filterFY,
+            filterQuarter: filterQuarter,
+            defaultFiltering: defaultFiltering,
+          },
+          targetTableClass: targetTableClass,
+        },
+      });
+      console.log(response);
+      console.log(response.data["data"]["products"]);
+      const responseData = response.data;
+
+      // Convert timestamps to Date objects, keeping null values unchanged
+      const convertedProducts = responseData["data"]["products"].map(
+        (product) => ({
+          ...product,
+          fileDate: product.fileDate ? new Date(product.fileDate) : null,
+          fileDateFromTo: product.fileDateFromTo
+            ? product.fileDateFromTo.map((ts) => (ts ? new Date(ts) : null))
+            : null,
+          month: product.month ? new Date(product.month) : null,
+          year: product.year ? new Date(product.year) : null,
+          uploadedOn: product.uploadedOn ? new Date(product.uploadedOn) : null,
+          weekStartsEnds: product.weekStartsEnds
+            ? product.weekStartsEnds.map((ts) => (ts ? new Date(ts) : null))
+            : null,
+        })
+      );
+
+      // Update state with converted data
+
+      setDisplayRange(responseData["data"]["dataInfo"]);
+      setProducts(convertedProducts);
+      console.log("Done");
+    } catch (e) {
+      // console.log(e.response.data);
+      const responseData = e.response?.data;
+      console.log(responseData);
+
+      const toastDetails = {
+        severity: responseData?.type,
+        summary: responseData?.summary,
+        deatil: responseData?.message,
+      };
+      showToastMessage(toast, toastDetails);
+    }
+  };
 
   useEffect(() => {
-    ProductService.getProducts().then((data) => setProducts(data));
+    // ProductService.getProducts().then((data) => setProducts(data));
+    fetchAllStandardData();
+    getFinancialYearList(setFyList, toast);
   }, []);
-
-  const dateBodyTemplate = (rowData) => {
-    // return rowData.fileDate.toString();
-    if (!rowData.fileDate) {
-      return "Data not available.";
-    }
-    return moment(rowData.fileDate).format("DD/MM/YYYY");
-  };
-
-  const weekBodyTemplate = (rowData) => {
-    // return rowData.fileDate.toString();
-    if (
-      !rowData.weekStartsEnds ||
-      !rowData.weekStartsEnds[0] ||
-      !rowData.weekStartsEnds[1]
-    ) {
-      return "Data not available.";
-    }
-    return `${moment(rowData.weekStartsEnds[0]).format(
-      "DD/MM/YYYY"
-    )} to ${moment(rowData.weekStartsEnds[1]).format("DD/MM/YYYY")}`;
-  };
 
   const openNew = () => {
     setProduct(emptyProduct);
@@ -111,38 +200,157 @@ export default function PeakHours({
     setDeleteProductsDialog(false);
   };
 
-  const saveProduct = () => {
+  const saveProduct = async () => {
     setSubmitted(true);
 
-    if (product.name.trim()) {
-      let _products = [...products];
-      let _product = { ...product };
+    /////////////////////  Reading the Files ///////////////////////////////////
+    const files = uploadRef.current.getFiles();
 
-      if (product.id) {
-        const index = findIndexById(product.id);
+    if (files.length == 0) return;
 
-        _products[index] = _product;
-        toast.current.show({
-          severity: "success",
-          summary: "Successful",
-          detail: "Product Updated",
-          life: 3000,
+    for (let key in uploadPoints) {
+      if (uploadPoints[key] && !product[key]) return;
+    }
+
+    // if (!product.weekStartsEnds || !product.uploadedOn || files.length == 0)
+    //   return;
+
+    const _attachedFiles = [];
+
+    // Convert file processing into a promise-based operation
+    const processFiles = async () => {
+      const filePromises = files.map((file) => {
+        return new Promise(async (resolve) => {
+          const reader = new FileReader();
+          const blob = await fetch(file.objectURL).then((r) => r.blob());
+
+          reader.onloadend = () => {
+            const base64data = reader.result;
+
+            const fileObject = {
+              fileName: file.name,
+              lastModified: file.lastModified,
+              size: file.size,
+              filetype: file.type,
+              extension: file.name ? file.name.split(".").pop() : "",
+              base64Data: base64data,
+            };
+
+            _attachedFiles.push(fileObject);
+            resolve(); // Resolve after processing this file
+          };
+
+          reader.readAsDataURL(blob);
         });
-      } else {
-        _product.id = createId();
-        _product.image = "product-placeholder.svg";
-        _products.push(_product);
-        toast.current.show({
-          severity: "success",
-          summary: "Successful",
-          detail: "Product Created",
-          life: 3000,
-        });
+      });
+
+      await Promise.all(filePromises); // Wait for all files to be processed
+    };
+
+    // Wait for all files to be processed before continuing
+    await processFiles();
+
+    // console.log(_attachedFiles);
+    // console.log(_attachedFiles.length);
+    /////////////////////  Done with Reading Files /////////////////////////////
+
+    // if (product.fileName.trim()) {
+    // Put code under this check.
+    //}
+
+    let _products = [...products];
+    let _product = { ...product };
+
+    // console.log(_product);
+    // console.log(product);
+
+    if (product.id) {
+      // So, this is a update call. Because product.id is not null.
+      // Also we are sure that we are working with 1 File only.
+      const index = findIndexById(product.id);
+
+      const [newIDs, success, toastDetails] = await addProductDetails(
+        _product,
+        _attachedFiles
+      );
+
+      if (!success) {
+        showToastMessage(toast, toastDetails);
+        return;
       }
 
-      setProducts(_products);
-      setProductDialog(false);
-      setProduct(emptyProduct);
+      // So, update is successful.
+      _products[index] = _product;
+      showToastMessage(toast, toastDetails);
+    } else {
+      // So, this is a new entry call. Because product.id is null.
+      // We need to create ID which will come from backend actually.
+
+      // console.log(_product);
+
+      const [newIDs, success, toastDetails] = await addProductDetails(
+        _product,
+        _attachedFiles
+      );
+
+      if (!success) {
+        showToastMessage(toast, toastDetails);
+        return;
+      }
+
+      // console.log(newIDs);
+      newIDs.forEach((newID, index) => {
+        const _cloneProduct = { ..._product };
+        _cloneProduct.id = newID;
+        _cloneProduct.fileName = _attachedFiles[index]["fileName"];
+        _cloneProduct.size = _attachedFiles[index]["size"];
+        _products.push(_cloneProduct);
+      });
+
+      showToastMessage(toast, toastDetails);
+    }
+
+    setProducts(_products);
+    setProductDialog(false);
+    setProduct(emptyProduct);
+  };
+
+  const addProductDetails = async (_product, _attachedFiles) => {
+    try {
+      let response = await axios({
+        method: "post",
+        url: "http://10.3.101.179:4001/addStandardData",
+        headers: {},
+        data: {
+          product: _product,
+          files: _attachedFiles,
+          targetTableClass: targetTableClass,
+        },
+      });
+      console.log(response.data["data"]["productIDs"]);
+      const responseData = response.data;
+      return [
+        responseData["data"]["productIDs"],
+        true,
+        {
+          severity: responseData.type,
+          summary: responseData.summary,
+          deatil: responseData.message,
+        },
+      ];
+    } catch (e) {
+      // console.log(e.response.data);
+      const responseData = e.response?.data;
+
+      return [
+        [],
+        false,
+        {
+          severity: responseData?.type,
+          summary: responseData?.summary,
+          deatil: responseData?.message,
+        },
+      ];
     }
   };
 
@@ -182,23 +390,6 @@ export default function PeakHours({
 
     return index;
   };
-
-  const createId = () => {
-    let id = "";
-    let chars =
-      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-
-    for (let i = 0; i < 5; i++) {
-      id += chars.charAt(Math.floor(Math.random() * chars.length));
-    }
-
-    return id;
-  };
-
-  //   const exportCSV = () => {
-  //     dt.current.exportCSV();
-  //   };
-
   const confirmDeleteSelected = () => {
     setDeleteProductsDialog(true);
   };
@@ -215,13 +406,6 @@ export default function PeakHours({
       detail: "Products Deleted",
       life: 3000,
     });
-  };
-
-  const onCategoryChange = (e) => {
-    let _product = { ...product };
-
-    _product["category"] = e.value;
-    setProduct(_product);
   };
 
   const onInputChange = (e, name) => {
@@ -241,20 +425,106 @@ export default function PeakHours({
     setProduct(_product);
   };
 
-  const onInputNumberChange = (e, name) => {
-    const val = e.value || 0;
-    let _product = { ...product };
+  const startToolbarTemplate = () => {
+    return (
+      filterOptions.length > 0 && (
+        <div className="flex flex-wrap gap-2">
+          <FloatLabel>
+            <Dropdown
+              value={filterBy}
+              onChange={(e) => {
+                setFilterBy(e.value);
+                setFilterRange(null);
+                setFilterFY(null);
+                setFilterQuarter(null);
+              }}
+              options={filterOptions}
+              // optionLabel="name"
+              placeholder="Filter Parameter"
+              className="w-full md:w-14rem"
+              // checkmark={true}
+              highlightOnSelect={false}
+            />
+            <label>Select a Filter Parameter</label>
+          </FloatLabel>
+          {filterBy == "Date Range" && (
+            <Calendar
+              placeholder="Select Date Range"
+              value={filterRange}
+              onChange={(e) => {
+                console.log(e.target.value);
+                setFilterRange(e.target.value);
+              }}
+              selectionMode="range"
+              // readOnlyInput
+              hideOnRangeSelection
+            />
+          )}
 
-    _product[`${name}`] = val;
+          {filterBy == "Month" && (
+            <Calendar
+              placeholder="Select Month"
+              value={filterRange}
+              onChange={(e) => {
+                console.log(e.target.value);
+                setFilterRange(e.target.value);
+              }}
+              view="month"
+              dateFormat="mm/yy"
+            />
+          )}
 
-    setProduct(_product);
+          {filterBy == "Year" && (
+            <Calendar
+              placeholder="Select Year"
+              value={filterRange}
+              onChange={(e) => {
+                console.log(e.target.value);
+                setFilterRange(e.target.value);
+              }}
+              view="year"
+              dateFormat="yy"
+            />
+          )}
+
+          {filterBy == "Financial Year & Quarter" && (
+            <React.Fragment>
+              <Dropdown
+                value={filterFY}
+                onChange={(e) => setFilterFY(e.value)}
+                options={fyList}
+                // optionLabel="fy"
+                placeholder="Select Financial Year"
+              />
+
+              <Dropdown
+                value={filterQuarter}
+                onChange={(e) => setFilterQuarter(e.value)}
+                options={quarterList}
+                // optionLabel="fy"
+                placeholder="Select Quarter"
+              />
+            </React.Fragment>
+          )}
+
+          <Button
+            icon="pi pi-cloud-download"
+            label="Fetch Data"
+            rounded
+            onClick={() => {
+              fetchAllStandardData();
+            }}
+          />
+        </div>
+      )
+    );
   };
 
-  const leftToolbarTemplate = () => {
+  const endToolbarTemplate = () => {
     return (
       <div className="flex flex-wrap gap-2">
         <Button
-          label="New"
+          label={`Upload Data`}
           icon="pi pi-plus"
           severity="success"
           onClick={openNew}
@@ -269,34 +539,6 @@ export default function PeakHours({
       </div>
     );
   };
-
-  //   const rightToolbarTemplate = () => {
-  //     return (
-  //       <Button
-  //         label="Export"
-  //         icon="pi pi-upload"
-  //         className="p-button-help"
-  //         onClick={exportCSV}
-  //       />
-  //     );
-  //   };
-
-  //   const priceBodyTemplate = (rowData) => {
-  //     return formatCurrency(rowData.price);
-  //   };
-
-  //   const ratingBodyTemplate = (rowData) => {
-  //     return <Rating value={rowData.rating} readOnly cancel={false} />;
-  //   };
-
-  //   const statusBodyTemplate = (rowData) => {
-  //     return (
-  //       <Tag
-  //         value={rowData.inventoryStatus}
-  //         severity={getSeverity(rowData)}
-  //       ></Tag>
-  //     );
-  //   };
 
   const actionBodyTemplate = (rowData) => {
     return (
@@ -335,25 +577,11 @@ export default function PeakHours({
     );
   };
 
-  //   const getSeverity = (product) => {
-  //     switch (product.inventoryStatus) {
-  //       case "INSTOCK":
-  //         return "success";
-
-  //       case "LOWSTOCK":
-  //         return "warning";
-
-  //       case "OUTOFSTOCK":
-  //         return "danger";
-
-  //       default:
-  //         return null;
-  //     }
-  //   };
-
   const header = (
     <div className="flex flex-wrap gap-2 align-items-center justify-content-between">
-      <h4 className="m-0">{pageTitle}</h4>
+      <h4 className="m-0">
+        {displayRange + " Change the Filters for other date range."}
+      </h4>
       <IconField iconPosition="left">
         <InputIcon className="pi pi-search" />
         <InputText
@@ -367,7 +595,13 @@ export default function PeakHours({
   const productDialogFooter = (
     <React.Fragment>
       <Button label="Cancel" icon="pi pi-times" outlined onClick={hideDialog} />
-      <Button label="Save" icon="pi pi-check" onClick={saveProduct} />
+      <Button
+        label="Save"
+        icon="pi pi-check"
+        onClick={() => {
+          saveProduct();
+        }}
+      />
     </React.Fragment>
   );
   const deleteProductDialogFooter = (
@@ -405,16 +639,13 @@ export default function PeakHours({
 
   return (
     <BaseLayout title={pageTitle} breadcrumb={breadcrumb}>
-      {/* <div className="flex justify-content-center">
-        <div className="card"> */}
-
-      <div>
+      <React.Fragment>
         <Toast ref={toast} />
         <div className="card">
           <Toolbar
             className="mb-4"
-            left={leftToolbarTemplate}
-            // right={rightToolbarTemplate}
+            start={startToolbarTemplate}
+            end={endToolbarTemplate}
           ></Toolbar>
 
           <DataTable
@@ -423,8 +654,10 @@ export default function PeakHours({
             selection={selectedProducts}
             onSelectionChange={(e) => setSelectedProducts(e.value)}
             dataKey="id"
+            showGridlines
             paginator
             rows={10}
+            removableSort
             // rowsPerPageOptions={[5, 10, 25]}
             paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} products"
@@ -432,41 +665,42 @@ export default function PeakHours({
             header={header}
           >
             <Column selectionMode="multiple" exportable={false}></Column>
-            <Column
+            {/* <Column
               field="id"
               header="ID"
-              sortable
+              sortable={sortInUse["id"]}
               style={{ minWidth: "12rem" }}
               hidden={!dataToDisplay["id"]}
-            ></Column>
+            ></Column> */}
             <Column
-              field="filename"
+              field="fileName"
               header="File Name"
-              sortable={false}
-              style={{ minWidth: "16rem" }}
-              hidden={!dataToDisplay["filename"]}
+              body={fileNameBodyTemplate}
+              sortable={sortInUse["fileName"]}
+              style={{ minWidth: "20rem" }}
+              hidden={!dataToDisplay["fileName"]}
             ></Column>
             <Column
               field="fileDate"
               header="Date (dd/mm/yyyy)"
               body={dateBodyTemplate}
-              sortable={false}
+              sortable={sortInUse["fileDate"]}
               style={{ minWidth: "10rem" }}
               hidden={!dataToDisplay["fileDate"]}
             ></Column>
             <Column
               field="weekStartsEnds"
-              header="Week (Starts-Ends)"
+              header="Week (Starts-Ends) (dd/mm/yyyy)"
               body={weekBodyTemplate}
-              sortable={false}
+              sortable={sortInUse["weekStartsEnds"]}
               style={{ minWidth: "12rem" }}
               hidden={!dataToDisplay["weekStartsEnds"]}
             ></Column>
-            {/*<Column
+            <Column
               field="month"
               header="Month"
-              //   body={statusBodyTemplate}
-              sortable={false}
+              body={monthBodyTemplate}
+              sortable={sortInUse["month"]}
               style={{ minWidth: "12rem" }}
               hidden={!dataToDisplay["month"]}
             ></Column>
@@ -474,58 +708,67 @@ export default function PeakHours({
               field="quarter"
               header="Quarter"
               //   body={statusBodyTemplate}
-              sortable={false}
+              sortable={sortInUse["quarter"]}
               style={{ minWidth: "12rem" }}
               hidden={!dataToDisplay["quarter"]}
             ></Column>
             <Column
               field="year"
               header="Year"
-              //   body={statusBodyTemplate}
-              sortable={false}
+              body={yearBodyTemplate}
+              sortable={sortInUse["year"]}
               style={{ minWidth: "12rem" }}
               hidden={!dataToDisplay["year"]}
             ></Column>
             <Column
               field="fy"
               header="Financial Year"
-              //   body={statusBodyTemplate}
-              sortable={false}
+              // body={statusBodyTemplate}
+              sortable={sortInUse["fy"]}
               style={{ minWidth: "12rem" }}
               hidden={!dataToDisplay["fy"]}
             ></Column>
             <Column
               field="fileDateFromTo"
-              header="File Date (From-To)"
-              //   body={statusBodyTemplate}
-              sortable={false}
+              header="File Date (From-To) (dd/mm/yyyy)"
+              body={fileDateFromToBodyTemplate}
+              sortable={sortInUse["fileDateFromTo"]}
               style={{ minWidth: "12rem" }}
               hidden={!dataToDisplay["fileDateFromTo"]}
             ></Column>
             <Column
               field="uploadedOn"
-              header="Upload Date"
-              //   body={statusBodyTemplate}
-              sortable={false}
+              header="Upload Date (dd/mm/yyyy)"
+              body={uploadDateBodyTemplate}
+              sortable={sortInUse["uploadedOn"]}
               style={{ minWidth: "12rem" }}
               hidden={!dataToDisplay["uploadedOn"]}
             ></Column>
+
             <Column
+              field="uploadedBy"
+              header="Uploaded By"
+              sortable={sortInUse["uploadedBy"]}
+              style={{ minWidth: "12rem" }}
+              hidden={!dataToDisplay["uploadedBy"]}
+            ></Column>
+
+            {/* <Column
               field="actualUploadDate"
               header="Actual Upload Date"
               //   body={statusBodyTemplate}
               sortable={false}
               style={{ minWidth: "12rem" }}
               hidden={!dataToDisplay["actualUploadDate"]}
-            ></Column>
+            ></Column> */}
             <Column
               field="size"
-              header="File Size (In Kb)"
-              //   body={statusBodyTemplate}
-              sortable={false}
+              header="File Size"
+              body={fileSizeBodyTemplate}
+              sortable={sortInUse["size"]}
               style={{ minWidth: "12rem" }}
               hidden={!dataToDisplay["size"]}
-            ></Column> */}
+            ></Column>
             <Column
               header="Download"
               body={downloadBodyTemplate}
@@ -545,30 +788,12 @@ export default function PeakHours({
           visible={productDialog}
           style={{ width: "32rem" }}
           breakpoints={{ "960px": "75vw", "641px": "90vw" }}
-          header={pageTitle}
+          header={product.fileName ? `${product.fileName}` : pageTitle}
           modal
           className="p-fluid"
           footer={productDialogFooter}
           onHide={hideDialog}
         >
-          <div className="field" hidden={!uploadPoints["filename"]}>
-            <label htmlFor="filename" className="font-bold">
-              File Name
-            </label>
-            <InputText
-              id="filename"
-              value={product.filename}
-              onChange={(e) => onInputChange(e, "filename")}
-              required
-              // autoFocus
-              className={classNames({
-                "p-invalid": submitted && !product.filename,
-              })}
-            />
-            {submitted && !product.filename && (
-              <small className="p-error">File Name is required.</small>
-            )}
-          </div>
           <div className="field" hidden={!uploadPoints["fileDate"]}>
             <label htmlFor="fileDate" className="font-bold">
               File Date
@@ -577,7 +802,7 @@ export default function PeakHours({
               id="fileDate"
               value={product.fileDate}
               onChange={(e) => {
-                e.preventDefault();
+                // e.preventDefault();
                 onInputChange(e, "fileDate");
               }}
               dateFormat="dd/mm/yy"
@@ -586,6 +811,7 @@ export default function PeakHours({
               className={classNames({
                 "p-invalid": submitted && !product.fileDate,
               })}
+              placeholder="Select Date"
             />
             {submitted && !product.fileDate && (
               <small className="p-error">Date is required.</small>
@@ -608,13 +834,19 @@ export default function PeakHours({
               selectionMode="range"
               readOnlyInput
               hideOnRangeSelection
+              placeholder="Select Week"
             />
-            {submitted && !product.weekStartsEnds && (
-              <small className="p-error">Week (Starts-Ends) is required.</small>
-            )}
+            {submitted &&
+              (!product.weekStartsEnds ||
+                !product.weekStartsEnds[0] ||
+                !product.weekStartsEnds[1]) && (
+                <small className="p-error">
+                  Week (Starts-Ends) is required.
+                </small>
+              )}
           </div>
 
-          {/* <div className="field" hidden={!uploadPoints["month"]}>
+          <div className="field" hidden={!uploadPoints["month"]}>
             <label htmlFor="month" className="font-bold">
               Month
             </label>
@@ -630,6 +862,7 @@ export default function PeakHours({
               })}
               view="month"
               dateFormat="mm/yy"
+              placeholder="Select Month"
             />
 
             {submitted && !product.month && (
@@ -650,14 +883,9 @@ export default function PeakHours({
               className={classNames({
                 "p-invalid": submitted && !product.quarter,
               })}
-              options={[
-                { quarter: "Q1" },
-                { quarter: "Q2" },
-                { quarter: "Q3" },
-                { quarter: "Q4" },
-              ]}
-              optionLabel="quarter"
-              // placeholder="Select a City"
+              options={quarterList}
+              // optionLabel="quarter"
+              placeholder="Select Quarter"
             />
             {submitted && !product.quarter && (
               <small className="p-error">Quarter is required.</small>
@@ -682,6 +910,7 @@ export default function PeakHours({
               })}
               view="year"
               dateFormat="yy"
+              placeholder="Select Year"
             />
             {submitted && !product.year && (
               <small className="p-error">Year is required.</small>
@@ -702,16 +931,9 @@ export default function PeakHours({
               className={classNames({
                 "p-invalid": submitted && !product.fy,
               })}
-              options={[
-                { fy: "2020-21" },
-                { fy: "2021-22" },
-                { fy: "2022-23" },
-                { fy: "2023-24" },
-                { fy: "2024-25" },
-                { fy: "2025-26" },
-              ]}
-              optionLabel="fy"
-              // placeholder="Select a City"
+              options={fyList}
+              // optionLabel="fy"
+              placeholder="Select Financial Year"
             />
             {submitted && !product.fy && (
               <small className="p-error">Financial Year is required.</small>
@@ -733,12 +955,16 @@ export default function PeakHours({
               selectionMode="range"
               readOnlyInput
               hideOnRangeSelection
+              placeholder="Select File Date Range"
             />
-            {submitted && !product.fileDateFromTo && (
-              <small className="p-error">
-                File Date (From-To) is required.
-              </small>
-            )}
+            {submitted &&
+              (!product.fileDateFromTo ||
+                !product.fileDateFromTo[0] ||
+                !product.fileDateFromTo[1]) && (
+                <small className="p-error">
+                  File Date (From-To) is required.
+                </small>
+              )}
           </div>
           <div className="field" hidden={!uploadPoints["uploadedOn"]}>
             <label htmlFor="uploadedOn" className="font-bold">
@@ -747,21 +973,50 @@ export default function PeakHours({
             <Calendar
               id="uploadedOn"
               value={product.uploadedOn}
-              onChange={(e) => {
-                e.preventDefault();
-                onInputChange(e, "uploadedOn");
-              }}
+              onChange={(e) => onInputChange(e, "uploadedOn")}
               dateFormat="dd/mm/yy"
               required
               // autoFocus
               className={classNames({
                 "p-invalid": submitted && !product.uploadedOn,
               })}
+              placeholder="Select Upload Date"
             />
             {submitted && !product.uploadedOn && (
               <small className="p-error">Upload Date is required.</small>
             )}
-          </div> */}
+          </div>
+
+          <div className="field">
+            <label htmlFor="attachedFiles" className="font-bold">
+              Attach File
+            </label>
+            <FileUpload
+              id="attachedFiles"
+              name="attachedFiles[]"
+              ref={uploadRef}
+              // mode="basic"
+              // url={"/api/upload"}
+              multiple={multipleUploads && !product.id}
+              accept="*"
+              maxFileSize={25 * 1000000} // It is 25Mb
+              emptyTemplate={
+                <p className="m-0">Drag and drop files to here to upload.</p>
+              }
+              customUpload={true}
+              // uploadHandler={customBase64Uploader}
+              uploadHandler={() => {
+                console.log("Use the default Save Button!!");
+              }}
+              // chooseOptions={chooseOptions}
+              uploadOptions={{
+                className: "hidden ",
+              }}
+              // cancelOptions={cancelOptions}
+            />
+
+            {submitted && <small className="p-error">File is required.</small>}
+          </div>
         </Dialog>
 
         <Dialog
@@ -780,7 +1035,7 @@ export default function PeakHours({
             />
             {product && (
               <span>
-                Are you sure you want to delete <b>{product.filename}</b>?
+                Are you sure you want to delete <b>{product.fileName}</b>?
               </span>
             )}
           </div>
@@ -807,9 +1062,7 @@ export default function PeakHours({
             )}
           </div>
         </Dialog>
-      </div>
-      {/* </div>
-      </div> */}
+      </React.Fragment>
     </BaseLayout>
   );
 }

@@ -55,7 +55,7 @@ function DefaultNavbarDropdown({
       <MKBox
         {...rest}
         mx={0}
-        p={1}
+        p={0.25}
         // mx={0}
         // p={0}
         display="flex"
@@ -85,7 +85,11 @@ function DefaultNavbarDropdown({
         >
           {name}
         </MKTypography>
-        <MKTypography variant="body2" color={light ? "white" : "dark"} ml="auto">
+        <MKTypography
+          variant="body2"
+          color={light ? "white" : "dark"}
+          ml="auto"
+        >
           <Icon sx={{ fontWeight: "normal", verticalAlign: "middle" }}>
             {collapse && "keyboard_arrow_down"}
           </Icon>
