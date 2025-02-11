@@ -68,8 +68,8 @@ import PageHeaders from "layouts/sections/page-sections/page-headers";
 // import ProgressBars from "layouts/sections/elements/progress-bars";
 // import Toggles from "layouts/sections/elements/toggles";
 // import Typography from "layouts/sections/elements/typography";
-import UserProfile from "pages/FunctionalPages/UserProfile";
-import SignIn from "pages/FunctionalPages/SignIn";
+import UserProfile from "pages/FunctionalPages/Auth/UserProfile";
+import SignIn from "pages/FunctionalPages/Auth/SignIn";
 import PeakHours from "pages/Departmental/Scheduling/PeakHours.js";
 
 const routes = [
@@ -923,7 +923,7 @@ const routes = [
     collapse: [
       {
         name: "HR",
-        hindiName:"मानव संसाधन",
+        hindiName: "मानव संसाधन",
         dropdown: true,
         collapse: [
           {
@@ -990,7 +990,7 @@ const routes = [
           },
           {
             name: "Single Tender",
-            hindiName: "एकल निविदा", 
+            hindiName: "एकल निविदा",
             route: "/sections/page-sections/page-headers",
           },
         ],

@@ -45,6 +45,8 @@ import {
   fileSizeBodyTemplate,
 } from "./CommonDataTableUtility";
 
+import PleaseSignIn from "pages/TemplatePage/PleaseSignIn.js";
+
 export default function CommonDataTable({
   dataToDisplay = {},
   uploadPoints = {},
@@ -55,6 +57,8 @@ export default function CommonDataTable({
   breadcrumb = [],
   targetTableClass = null,
   multipleUploads = false,
+  readPermission = false,
+  writePermission = false,
 }) {
   const { user } = useContext(AuthContext);
 
@@ -70,7 +74,7 @@ export default function CommonDataTable({
     fileDateFromTo: null,
     uploadedOn: null,
     uploadedBy: null,
-    actualUploadDate: null,
+    // actualUploadDate: null,
     attachedFiles: null,
     size: 0,
   };
@@ -96,7 +100,7 @@ export default function CommonDataTable({
   // const [attachedFiles, setAttachedFiles] = useState([]);
   const [productDialog, setProductDialog] = useState(false);
   const [deleteProductDialog, setDeleteProductDialog] = useState(false);
-  const [deleteProductsDialog, setDeleteProductsDialog] = useState(false);
+  // const [deleteProductsDialog, setDeleteProductsDialog] = useState(false);
   const [product, setProduct] = useState(emptyProduct);
   const [selectedProducts, setSelectedProducts] = useState(null);
   const [submitted, setSubmitted] = useState(false);
@@ -107,16 +111,16 @@ export default function CommonDataTable({
 
   const fetchAllStandardData = async () => {
     try {
-      console.log({
-        filterOptions: {
-          filterBy: filterBy,
-          filterRange: filterRange,
-          filterFY: filterFY,
-          filterQuarter: filterQuarter,
-          defaultFiltering: defaultFiltering,
-        },
-        targetTableClass: targetTableClass,
-      });
+      // console.log({
+      //   filterOptions: {
+      //     filterBy: filterBy,
+      //     filterRange: filterRange,
+      //     filterFY: filterFY,
+      //     filterQuarter: filterQuarter,
+      //     defaultFiltering: defaultFiltering,
+      //   },
+      //   targetTableClass: targetTableClass,
+      // });
 
       // return;
 
@@ -175,6 +179,41 @@ export default function CommonDataTable({
     }
   };
 
+  const downloadStandardData = async (product) => {
+    try {
+      let response = await axios({
+        method: "post",
+        url: "http://10.3.101.179:4001/downloadStandardData",
+        headers: {},
+        data: {
+          productIdToDownload: product.id,
+          targetTableClass: targetTableClass,
+        },
+        responseType: "blob",
+      });
+
+      console.log(response);
+      // return;
+      // Create a Blob URL for the downloaded file
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", product.fileName); // Set the file name
+      document.body.appendChild(link);
+      link.click(); // Simulate click to download
+      link.remove(); // Cleanup
+    } catch (e) {
+      const responseData = e.response?.data;
+
+      const toastDetails = {
+        severity: responseData?.type,
+        summary: responseData?.summary,
+        deatil: responseData?.message,
+      };
+      showToastMessage(toast, toastDetails);
+    }
+  };
+
   useEffect(() => {
     // ProductService.getProducts().then((data) => setProducts(data));
     fetchAllStandardData();
@@ -196,16 +235,16 @@ export default function CommonDataTable({
     setDeleteProductDialog(false);
   };
 
-  const hideDeleteProductsDialog = () => {
-    setDeleteProductsDialog(false);
-  };
+  // const hideDeleteProductsDialog = () => {
+  //   setDeleteProductsDialog(false);
+  // };
 
   const saveProduct = async () => {
     setSubmitted(true);
 
     /////////////////////  Reading the Files ///////////////////////////////////
     const files = uploadRef.current.getFiles();
-
+    // In case it is an Update Extry Query, surely files.length will be 1 only.
     if (files.length == 0) return;
 
     for (let key in uploadPoints) {
@@ -265,7 +304,7 @@ export default function CommonDataTable({
     // console.log(product);
 
     if (product.id) {
-      // So, this is a update call. Because product.id is not null.
+      // So, this is an update call. Because product.id is not null.
       // Also we are sure that we are working with 1 File only.
       const index = findIndexById(product.id);
 
@@ -274,12 +313,19 @@ export default function CommonDataTable({
         _attachedFiles
       );
 
+      // Since it is an update call, newIDs will the [id_of_product]
+      // It wil lbe the same ID as it was and newIDs.length will be 1 only.
+
       if (!success) {
         showToastMessage(toast, toastDetails);
         return;
       }
 
       // So, update is successful.
+      // _product.id = newIDs[0];
+      _product.fileName = _attachedFiles[0]["fileName"];
+      _product.size = _attachedFiles[0]["size"];
+
       _products[index] = _product;
       showToastMessage(toast, toastDetails);
     } else {
@@ -316,6 +362,8 @@ export default function CommonDataTable({
   };
 
   const addProductDetails = async (_product, _attachedFiles) => {
+    // If it is an update call, _product.id will be not null.
+    // Check the same in Backend.
     try {
       let response = await axios({
         method: "post",
@@ -323,6 +371,7 @@ export default function CommonDataTable({
         headers: {},
         data: {
           product: _product,
+          uploadPoints: uploadPoints,
           files: _attachedFiles,
           targetTableClass: targetTableClass,
         },
@@ -364,18 +413,41 @@ export default function CommonDataTable({
     setDeleteProductDialog(true);
   };
 
-  const deleteProduct = () => {
-    let _products = products.filter((val) => val.id !== product.id);
+  const deleteProduct = async () => {
+    try {
+      let response = await axios({
+        method: "post",
+        url: "http://10.3.101.179:4001/deleteStandardData",
+        headers: {},
+        data: {
+          productIdToDelete: product.id,
+          targetTableClass: targetTableClass,
+        },
+      });
+      // console.log(response.data["data"]["productIDs"]);
+      const responseData = response.data;
+      const toastDetails = {
+        severity: responseData.type,
+        summary: responseData.summary,
+        deatil: responseData.message,
+      };
+      showToastMessage(toast, toastDetails);
+      let _products = products.filter((val) => val.id !== product.id);
+      setProducts(_products);
+    } catch (e) {
+      // console.log(e.response.data);
+      const responseData = e.response?.data;
 
-    setProducts(_products);
+      const toastDetails = {
+        severity: responseData?.type,
+        summary: responseData?.summary,
+        deatil: responseData?.message,
+      };
+      showToastMessage(toast, toastDetails);
+    }
+
     setDeleteProductDialog(false);
     setProduct(emptyProduct);
-    toast.current.show({
-      severity: "success",
-      summary: "Successful",
-      detail: "Product Deleted",
-      life: 3000,
-    });
   };
 
   const findIndexById = (id) => {
@@ -390,23 +462,23 @@ export default function CommonDataTable({
 
     return index;
   };
-  const confirmDeleteSelected = () => {
-    setDeleteProductsDialog(true);
-  };
+  // const confirmDeleteSelected = () => {
+  //   setDeleteProductsDialog(true);
+  // };
 
-  const deleteSelectedProducts = () => {
-    let _products = products.filter((val) => !selectedProducts.includes(val));
+  // const deleteSelectedProducts = () => {
+  //   let _products = products.filter((val) => !selectedProducts.includes(val));
 
-    setProducts(_products);
-    setDeleteProductsDialog(false);
-    setSelectedProducts(null);
-    toast.current.show({
-      severity: "success",
-      summary: "Successful",
-      detail: "Products Deleted",
-      life: 3000,
-    });
-  };
+  //   setProducts(_products);
+  //   setDeleteProductsDialog(false);
+  //   setSelectedProducts(null);
+  //   toast.current.show({
+  //     severity: "success",
+  //     summary: "Successful",
+  //     detail: "Products Deleted",
+  //     life: 3000,
+  //   });
+  // };
 
   const onInputChange = (e, name) => {
     // console.log(e.target);
@@ -522,21 +594,16 @@ export default function CommonDataTable({
 
   const endToolbarTemplate = () => {
     return (
-      <div className="flex flex-wrap gap-2">
-        <Button
-          label={`Upload Data`}
-          icon="pi pi-plus"
-          severity="success"
-          onClick={openNew}
-        />
-        <Button
-          label="Delete"
-          icon="pi pi-trash"
-          severity="danger"
-          onClick={confirmDeleteSelected}
-          disabled={!selectedProducts || !selectedProducts.length}
-        />
-      </div>
+      writePermission && (
+        <div className="flex flex-wrap gap-2">
+          <Button
+            label={`Upload Data`}
+            icon="pi pi-plus"
+            severity="success"
+            onClick={openNew}
+          />
+        </div>
+      )
     );
   };
 
@@ -569,9 +636,7 @@ export default function CommonDataTable({
           rounded
           outlined
           className="mr-2"
-          onClick={() => {
-            console.log("Downloaded");
-          }}
+          onClick={() => downloadStandardData(rowData)}
         />
       </React.Fragment>
     );
@@ -620,24 +685,31 @@ export default function CommonDataTable({
       />
     </React.Fragment>
   );
-  const deleteProductsDialogFooter = (
-    <React.Fragment>
-      <Button
-        label="No"
-        icon="pi pi-times"
-        outlined
-        onClick={hideDeleteProductsDialog}
-      />
-      <Button
-        label="Yes"
-        icon="pi pi-check"
-        severity="danger"
-        onClick={deleteSelectedProducts}
-      />
-    </React.Fragment>
-  );
+  // const deleteProductsDialogFooter = (
+  //   <React.Fragment>
+  //     <Button
+  //       label="No"
+  //       icon="pi pi-times"
+  //       outlined
+  //       onClick={hideDeleteProductsDialog}
+  //     />
+  //     <Button
+  //       label="Yes"
+  //       icon="pi pi-check"
+  //       severity="danger"
+  //       onClick={deleteSelectedProducts}
+  //     />
+  //   </React.Fragment>
+  // );
 
-  return (
+  // console.log(readPermission);
+
+  return !readPermission ? (
+    <PleaseSignIn
+      breadcrumb={breadcrumb}
+      redirectionURL={breadcrumb[1].redirectionURL}
+    />
+  ) : (
     <BaseLayout title={pageTitle} breadcrumb={breadcrumb}>
       <React.Fragment>
         <Toast ref={toast} />
@@ -651,20 +723,22 @@ export default function CommonDataTable({
           <DataTable
             ref={dt}
             value={products}
-            selection={selectedProducts}
-            onSelectionChange={(e) => setSelectedProducts(e.value)}
+            // selection={selectedProducts}
+            // onSelectionChange={(e) => setSelectedProducts(e.value)}
             dataKey="id"
-            showGridlines
+            // showGridlines
+            stripedRows
             paginator
             rows={10}
             removableSort
+            tableStyle={{ minWidth: "50rem" }}
             // rowsPerPageOptions={[5, 10, 25]}
             paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} products"
             globalFilter={globalFilter}
             header={header}
           >
-            <Column selectionMode="multiple" exportable={false}></Column>
+            {/* <Column selectionMode="multiple" exportable={false}></Column> */}
             {/* <Column
               field="id"
               header="ID"
@@ -780,6 +854,7 @@ export default function CommonDataTable({
               body={actionBodyTemplate}
               exportable={false}
               style={{ minWidth: "12rem" }}
+              hidden={!writePermission}
             ></Column>
           </DataTable>
         </div>
@@ -1041,7 +1116,7 @@ export default function CommonDataTable({
           </div>
         </Dialog>
 
-        <Dialog
+        {/* <Dialog
           visible={deleteProductsDialog}
           style={{ width: "32rem" }}
           breakpoints={{ "960px": "75vw", "641px": "90vw" }}
@@ -1056,12 +1131,10 @@ export default function CommonDataTable({
               style={{ fontSize: "2rem" }}
             />
             {product && (
-              <span>
-                Are you sure you want to delete the selected products?
-              </span>
+              <span>Are you sure you want to delete the selected files?</span>
             )}
           </div>
-        </Dialog>
+        </Dialog> */}
       </React.Fragment>
     </BaseLayout>
   );

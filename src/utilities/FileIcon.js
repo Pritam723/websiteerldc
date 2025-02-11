@@ -18,8 +18,11 @@ export const getFileIcon = (fileName) => {
   } else if (ext == "docx" || ext == "doc") {
     iconClass = "pi pi-file-word";
     colorClass = "slateblue";
-  } else if (ext == "png" || ext == "jpeg" || ext == "jpg") {
+  } else if (ext == "png" || ext == "jpeg" || ext == "jpg" || ext == "gif") {
     iconClass = "pi pi-image";
+    colorClass = "orange";
+  } else if (ext == "mp4" || ext == "mov" || ext == "wmv" || ext == "mkv") {
+    iconClass = "pi pi-video";
     colorClass = "orange";
   }
   return <i className={iconClass} style={{ color: colorClass }}></i>;

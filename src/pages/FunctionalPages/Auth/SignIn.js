@@ -22,13 +22,15 @@ import "./SignIn.css";
 import BaseLayout from "layouts/sections/components/BaseLayout";
 import axios from "axios";
 import { AuthContext, AuthProvider } from "context/AuthContext";
-
 import UserProfile from "./UserProfile";
 
-export default function SignIn({ redirectionURL = "/" }) {
+export default function SignIn() {
   const navigate = useNavigate();
-  // const location = useLocation();
+  const location = useLocation();
   // console.log(redirectionURL);
+
+  const { redirectionURL } = location.state || {}; // Handle case where state is undefined
+
   const { user, loginUser, namecontext } = useContext(AuthContext);
 
   const [showMessage, setShowMessage] = useState(false);
@@ -104,7 +106,7 @@ export default function SignIn({ redirectionURL = "/" }) {
         autoFocus
         onClick={() => {
           setShowMessage(false);
-          // navigate(redirectionURL);
+          navigate(redirectionURL);
         }}
       />
     </div>

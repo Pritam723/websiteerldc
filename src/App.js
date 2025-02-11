@@ -29,7 +29,7 @@ import Presentation from "layouts/pages/presentation";
 // Material Kit 2 React routes
 import routes from "routes";
 import { AuthContext, AuthProvider } from "context/AuthContext";
-import UserProfile from "pages/FunctionalPages/UserProfile";
+import UserProfile from "pages/FunctionalPages/Auth/UserProfile";
 import Test from "./Test";
 
 export default function App() {

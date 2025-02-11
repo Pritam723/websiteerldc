@@ -9,6 +9,8 @@ import moment from "moment";
 
 import { getFileIcon } from "utilities/FileIcon";
 
+/////////////////////  Datatable Body Templetes //////////////////////////////////////////////
+
 export const fileNameBodyTemplate = (rowData) => {
   // return rowData.fileDate.toString();
 
@@ -93,3 +95,5 @@ export const fileSizeBodyTemplate = (rowData) => {
     return `${(bytes / (1024 * 1024)).toFixed(2)}MB`;
   }
 };
+
+//////////////////////////////////////////////////////////////////////////////////////////////
