@@ -9,10 +9,14 @@ export const showToastMessage = (
     deatil = "Not able to reach server",
   }
 ) => {
-  return toastRef.current.show({
-    severity: severity,
-    summary: summary,
-    detail: deatil,
-    life: 3000,
-  });
+  // console.log(toastRef.current);
+  if (!toastRef || !toastRef.current) return;
+  else {
+    return toastRef.current.show({
+      severity: severity,
+      summary: summary,
+      detail: deatil,
+      life: 3000,
+    });
+  }
 };

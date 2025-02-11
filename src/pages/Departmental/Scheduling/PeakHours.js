@@ -119,6 +119,7 @@ export default function PeakHours() {
       setWritePermission(response.data["data"]["writePermission"]);
     } catch (e) {
       console.log(e);
+      // console.log(e.response.data);
     }
   };
 

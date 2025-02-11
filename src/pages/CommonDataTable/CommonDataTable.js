@@ -60,7 +60,7 @@ export default function CommonDataTable({
   readPermission = false,
   writePermission = false,
 }) {
-  const { user } = useContext(AuthContext);
+  const { user, authTokens } = useContext(AuthContext);
 
   let emptyProduct = {
     id: null,
@@ -102,7 +102,6 @@ export default function CommonDataTable({
   const [deleteProductDialog, setDeleteProductDialog] = useState(false);
   // const [deleteProductsDialog, setDeleteProductsDialog] = useState(false);
   const [product, setProduct] = useState(emptyProduct);
-  const [selectedProducts, setSelectedProducts] = useState(null);
   const [submitted, setSubmitted] = useState(false);
   const [globalFilter, setGlobalFilter] = useState(null);
   const toast = useRef(null);
@@ -111,23 +110,18 @@ export default function CommonDataTable({
 
   const fetchAllStandardData = async () => {
     try {
-      // console.log({
-      //   filterOptions: {
-      //     filterBy: filterBy,
-      //     filterRange: filterRange,
-      //     filterFY: filterFY,
-      //     filterQuarter: filterQuarter,
-      //     defaultFiltering: defaultFiltering,
-      //   },
-      //   targetTableClass: targetTableClass,
-      // });
+      let headers = {
+        "Content-Type": "application/json",
+      };
 
-      // return;
+      if (authTokens?.access_token) {
+        headers["Authorization"] = `Bearer ${authTokens.access_token}`;
+      }
 
       let response = await axios({
         method: "post",
         url: "http://10.3.101.179:4001/fetchAllStandardData",
-        headers: {},
+        headers: headers,
         data: {
           filterOptions: {
             filterBy: filterBy,
@@ -181,10 +175,17 @@ export default function CommonDataTable({
 
   const downloadStandardData = async (product) => {
     try {
+      let headers = {
+        "Content-Type": "application/json",
+      };
+
+      if (authTokens?.access_token) {
+        headers["Authorization"] = `Bearer ${authTokens.access_token}`;
+      }
       let response = await axios({
         method: "post",
         url: "http://10.3.101.179:4001/downloadStandardData",
-        headers: {},
+        headers: headers,
         data: {
           productIdToDownload: product.id,
           targetTableClass: targetTableClass,
@@ -364,11 +365,18 @@ export default function CommonDataTable({
   const addProductDetails = async (_product, _attachedFiles) => {
     // If it is an update call, _product.id will be not null.
     // Check the same in Backend.
+    let headers = {
+      "Content-Type": "application/json",
+    };
+
+    if (authTokens?.access_token) {
+      headers["Authorization"] = `Bearer ${authTokens.access_token}`;
+    }
     try {
       let response = await axios({
         method: "post",
         url: "http://10.3.101.179:4001/addStandardData",
-        headers: {},
+        headers: headers,
         data: {
           product: _product,
           uploadPoints: uploadPoints,
@@ -414,11 +422,18 @@ export default function CommonDataTable({
   };
 
   const deleteProduct = async () => {
+    let headers = {
+      "Content-Type": "application/json",
+    };
+
+    if (authTokens?.access_token) {
+      headers["Authorization"] = `Bearer ${authTokens.access_token}`;
+    }
     try {
       let response = await axios({
         method: "post",
         url: "http://10.3.101.179:4001/deleteStandardData",
-        headers: {},
+        headers: headers,
         data: {
           productIdToDelete: product.id,
           targetTableClass: targetTableClass,
@@ -462,23 +477,6 @@ export default function CommonDataTable({
 
     return index;
   };
-  // const confirmDeleteSelected = () => {
-  //   setDeleteProductsDialog(true);
-  // };
-
-  // const deleteSelectedProducts = () => {
-  //   let _products = products.filter((val) => !selectedProducts.includes(val));
-
-  //   setProducts(_products);
-  //   setDeleteProductsDialog(false);
-  //   setSelectedProducts(null);
-  //   toast.current.show({
-  //     severity: "success",
-  //     summary: "Successful",
-  //     detail: "Products Deleted",
-  //     life: 3000,
-  //   });
-  // };
 
   const onInputChange = (e, name) => {
     // console.log(e.target);
@@ -685,29 +683,11 @@ export default function CommonDataTable({
       />
     </React.Fragment>
   );
-  // const deleteProductsDialogFooter = (
-  //   <React.Fragment>
-  //     <Button
-  //       label="No"
-  //       icon="pi pi-times"
-  //       outlined
-  //       onClick={hideDeleteProductsDialog}
-  //     />
-  //     <Button
-  //       label="Yes"
-  //       icon="pi pi-check"
-  //       severity="danger"
-  //       onClick={deleteSelectedProducts}
-  //     />
-  //   </React.Fragment>
-  // );
-
-  // console.log(readPermission);
 
   return !readPermission ? (
     <PleaseSignIn
       breadcrumb={breadcrumb}
-      redirectionURL={breadcrumb[1].redirectionURL}
+      redirectionURL={breadcrumb[breadcrumb.length - 1].redirectionURL}
     />
   ) : (
     <BaseLayout title={pageTitle} breadcrumb={breadcrumb}>
