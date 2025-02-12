@@ -68,7 +68,7 @@ export default function PeakHours() {
       }
       let response = await axios({
         method: "POST",
-        url: `${process.env.READ_API}/fetchStandardPageMetaData`,
+        url: `${process.env.REACT_APP_READ_API}/fetchStandardPageMetaData`,
         headers: headers,
         data: { targetTableClass: targetTableClass },
       });

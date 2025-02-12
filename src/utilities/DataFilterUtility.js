@@ -14,7 +14,7 @@ export const getFinancialYearList = async (setFyList, toast) => {
   try {
     let response = await axios({
       method: "GET",
-      url: `${process.env.READ_API}/getFYList`,
+      url: `${process.env.REACT_APP_READ_API}/getFYList`,
     });
     setFyList(response.data);
   } catch (e) {

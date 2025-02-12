@@ -124,7 +124,7 @@ export default function CommonDataTable({
 
       let response = await axios({
         method: "post",
-        url: `${process.env.READ_API}/fetchAllStandardData`,
+        url: `${process.env.REACT_APP_READ_API}/fetchAllStandardData`,
         headers: headers,
         data: {
           filterOptions: {
@@ -190,7 +190,7 @@ export default function CommonDataTable({
       }
       let response = await axios({
         method: "post",
-        url: `${process.env.READ_API}/downloadStandardData`,
+        url: `${process.env.REACT_APP_READ_API}/downloadStandardData`,
 
         headers: headers,
         data: {
@@ -382,7 +382,7 @@ export default function CommonDataTable({
     try {
       let response = await axios({
         method: "post",
-        url: `${process.env.WRITE_API}/addStandardData`,
+        url: `${process.env.REACT_APP_WRITE_API}/addStandardData`,
         headers: headers,
         data: {
           product: _product,
@@ -439,7 +439,7 @@ export default function CommonDataTable({
     try {
       let response = await axios({
         method: "post",
-        url: `${process.env.WRITE_API}/deleteStandardData`,
+        url: `${process.env.REACT_APP_WRITE_API}/deleteStandardData`,
         headers: headers,
         data: {
           productIdToDelete: product.id,
@@ -701,9 +701,6 @@ export default function CommonDataTable({
             start={startToolbarTemplate}
             end={endToolbarTemplate}
           ></Toolbar>
-
-          {process.env.TEST_ENV_VARIABLE}
-
           {isLoading ? (
             <LoadingScreen />
           ) : (
