@@ -68,141 +68,164 @@ import PageHeaders from "layouts/sections/page-sections/page-headers";
 // import ProgressBars from "layouts/sections/elements/progress-bars";
 // import Toggles from "layouts/sections/elements/toggles";
 // import Typography from "layouts/sections/elements/typography";
-import UserProfile from "pages/FunctionalPages/UserProfile";
-import SignIn from "pages/FunctionalPages/SignIn";
+import UserProfile from "pages/FunctionalPages/Auth/UserProfile";
+import SignIn from "pages/FunctionalPages/Auth/SignIn";
+import PeakHours from "pages/Departmental/Scheduling/PeakHours.js";
 
 const routes = [
   // {
-  //           name: <b>Home</b>,
+  //           name: "Home",
   //           route: "layouts/pages/presentation",
   // },
 
   {
     name: "About Us",
+    hindiName: "हमारे बारे में",
     // icon: <Icon>InfoIcon</Icon>,
     collapse: [
       {
-        name: (
-          <b style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-            <LightbulbIcon style={{ color: "gold", fontSize: "24px" }} />{" "}
-            Vision/Mission
-          </b>
-        ),
+        name: "Vision/Mission",
+        hindiName: "दृष्टि/उद्देश्य",
         route: "/sections/page-sections/page-headers",
         component: <PageHeaders />,
       },
       {
-        name: <b>Salient features</b>,
+        name: "Salient features",
+        hindiName: "मुख्य विशेषताएं",
         route: "/sections/page-sections/page-headers",
         component: <PageHeaders />,
       },
 
       {
-        name: <b>GRID-INDIA Annual Reports</b>,
+        name: "GRID-INDIA Annual Reports",
+        hindiName: "ग्रिड-इंडिया वार्षिक रिपोर्ट्स",
         href: "http://posoco.in/about-us/annual-reports/",
       },
     ],
   },
   {
     name: "System Operation",
+    hindiName: "सिस्टम संचालन",
     // icon: <Icon>article</Icon>,
     collapse: [
       {
-        name: <b>TTC/ATC</b>,
+        name: "TTC/ATC",
+        hindiName: "TTC/ATC",
         href: "https://posoco.in/market/monthly-atc-intra-regional",
       },
 
       {
-        name: <b>Outage</b>,
+        name: "Outage",
+        hindiName: "आउटेज",
         dropdown: true,
         collapse: [
           {
-            name: <b>Outage Software LC Module</b>,
+            name: "Outage Software LC Module",
+            hindiName: "आउटेज सॉफ्टवेयर एलसी मॉड्यूल",
             href: "https://mdp.erldc.in/en/outage/",
           },
           {
-            name: <b>E-Logbook Software</b>,
+            name: "E-Logbook Software",
+            hindiName: "ई-लॉगबुक सॉफ्टवेयर",
             href: "https://logbook.erldc.in/en/",
           },
           {
-            name: <b>Shutdown Availed List</b>,
+            name: "Shutdown Availed List",
+            hindiName: "शटडाउन प्राप्त सूची",
             route: "/sections/page-sections/page-headers",
             component: <PageHeaders />,
           },
           {
-            name: <b>OCC Approved List</b>,
+            name: "OCC Approved List",
+            hindiName: "ओसीसी अनुमोदित सूची",
             href: "http://erpc.gov.in/approved-shutdown/",
           },
           {
-            name: <b>ERLDC Outage Procedure</b>,
+            name: "ERLDC Outage Procedure",
+            hindiName: "ईआरएलडीसी आउटेज प्रक्रिया",
             route: "/sections/page-sections/page-headers",
             component: <PageHeaders />,
           },
           {
-            name: <b>LGBR</b>,
+            name: "LGBR",
+            hindiName: "एलजीबीआर",
             href: "http://erpc.gov.in/meeting-2/lgbr/",
           },
         ],
       },
 
       {
-        name: <b>Forecasting</b>,
+        name: "Forecasting",
+        hindiName: "पूर्वानुमान",
         dropdown: true,
         collapse: [
           {
-            name: <b>Day Ahead Forecasting error</b>,
+            name: "Day Ahead Forecasting error",
+            hindiName: "आगे के दिन का पूर्वानुमान त्रुटि",
             route: "/sections/page-sections/page-headers",
           },
           {
-            name: <b>Intra Day Forecasting error</b>,
+            name: "Intra Day Forecasting error",
+            hindiName: "इंट्राडे  का पूर्वानुमान त्रुटि",
             route: "/sections/page-sections/page-headers",
           },
           {
-            name: <b>Week Ahead Forecasting error</b>,
-            route: "/sections/page-sections/page-headers",
-            component: <PageHeaders />,
-          },
-          {
-            name: <b>Week ahead rolling Forecast</b>,
-            route: "/sections/page-sections/page-headers",
-          },
-          {
-            name: <b>Month Ahead Forecasting error</b>,
+            name: "Week Ahead Forecasting error",
+            hindiName: "आगे के सप्ताह का पूर्वानुमान त्रुटि",
             route: "/sections/page-sections/page-headers",
             component: <PageHeaders />,
           },
           {
-            name: <b>Year Ahead Forecasting error</b>,
+            name: "Week ahead rolling Forecast",
+            hindiName: "आगे के सप्ताह का रोलिंग पूर्वानुमान",
+            route: "/sections/page-sections/page-headers",
+          },
+          {
+            name: "Month Ahead Forecasting error",
+            hindiName: "आगे के महीने का पूर्वानुमान त्रुटि",
+            route: "/sections/page-sections/page-headers",
+            component: <PageHeaders />,
+          },
+          {
+            name: "Year Ahead Forecasting error",
+            hindiName: "आगे के साल का पूर्वानुमान त्रुटि",
             route: "/sections/page-sections/page-headers",
           },
         ],
       },
       {
-        name: <b>FRC</b>,
+        name: "FRC",
+        hindiName: "एफआरसी",
         route: "/sections/page-sections/page-headers",
       },
       {
-        name: <b>Transmission Element Availability</b>,
+        name: "Transmission Element Availability",
+        hindiName: "संचरण तत्व उपलब्धता",
         route: "/sections/page-sections/page-headers",
       },
       {
-        name: <b>System Reliability Indices</b>,
+        name: "System Reliability Indices",
+        hindiName: "प्रणाली विश्वसनीयता सूचकांक",
         dropdown: true,
         collapse: [
           {
-            name: <b>Inter-Regional</b>,
+            name: "Inter-Regional",
+            hindiName: "अंतर क्षेत्रीय",
             route: "/sections/page-sections/page-headers",
           },
           {
-            name: <b>Intra Regional ATC Violation Daily</b>,
+            name: "Intra Regional ATC Violation Daily",
+            hindiName: "दैनिक अंतर क्षेत्रीय एटीसी उल्लंघन",
             route: "/sections/page-sections/page-headers",
           },
           {
-            name: <b>Intra Regional ATC Violation Weekly</b>,
+            name: "Intra Regional ATC Violation Weekly",
+            hindiName: "साप्ताहिक अंतर क्षेत्रीय एटीसी उल्लंघन",
             route: "/sections/page-sections/page-headers",
           },
           {
-            name: <b>Intra Regional ATC Violation Monthly</b>,
+            name: "Intra Regional ATC Violation Monthly",
+            hindiName: "मासिक अंतर क्षेत्रीय एटीसी उल्लंघन",
             route: "/sections/page-sections/page-headers",
           },
         ],
@@ -211,278 +234,341 @@ const routes = [
   },
   {
     name: "Scheduling",
+    hindiName: "निर्धारण",
     // icon: <Icon>article</Icon>,
     collapse: [
       {
-        name: <b>ISGS Real Time Data</b>,
+        name: "ISGS Real Time Data",
+        hindiName: "आईएसजीएस वास्तविक काल डेटा",
         route: "/sections/page-sections/page-headers",
       },
 
       {
-        name: <b>Share Table</b>,
+        name: "Share Table",
+        hindiName: "साझा टैबल",
         route: "/sections/page-sections/page-headers",
       },
 
       {
-        name: <b>Final Schedule</b>,
+        name: "Final Schedule",
+        hindiName: "अंतिम निर्धारण",
         route: "/sections/page-sections/page-headers",
       },
       {
-        name: <b>WEB Based Application</b>,
+        name: "WEB Based Application",
+        hindiName: "वेब आधारित एप्लिकेशन",
         dropdown: true,
         collapse: [
           {
-            name: <b>New WBES</b>,
+            name: "New WBES",
+            hindiName: "नई डब्ल्यूबीईएस",
             href: "https://newwbes.grid-india.in/",
           },
           {
-            name: <b>OLD Web Based Application</b>,
+            name: "OLD Web Based Application",
+            hindiName: "पुरानी वेब आधारित एप्लिकेशन",
             href: "https://wbes.erldc.in/Account/Login?ReturnUrl=%2f",
           },
         ],
       },
       {
-        name: <b>Payment Security Mechanism</b>,
+        name: "Payment Security Mechanism",
+        hindiName: "भुगतान सुरक्षा तंत्र",
         href: "http://posoco.in/reports/psm-daily-reports/",
       },
       {
-        name: <b>Peak Hours and Season Declaration</b>,
-        route: "/sections/page-sections/page-headers",
+        cssOverlap: true,
+        name: "Peak Hours and Season Declaration",
+        hindiName: "पीक घंटे और सीजन घोषणा",
+        route: "/scheduling/peakhours",
+        component: <PeakHours />,
       },
     ],
   },
 
   {
     name: "Market Operation",
+    hindiName: "बाजार संचालन",
     // icon: <Icon>article</Icon>,
     collapse: [
       {
-        name: <b>TGNA</b>,
+        name: "TGNA",
+        hindiName: "टीजीएनए",
         dropdown: true,
         collapse: [
           {
-            name: <b>Reconciliation CTU</b>,
+            name: "Reconciliation CTU",
+            hindiName: "सुलह सीटीयू",
             route: "/sections/page-sections/page-headers",
           },
           {
-            name: <b>Reconciliation Applicant</b>,
+            name: "Reconciliation Applicant",
+            hindiName: "सुलह आवेदक",
             route: "/sections/page-sections/page-headers",
           },
 
           {
-            name: <b>Disbursement</b>,
+            name: "Disbursement",
+            hindiName: "संवितरण",
             route: "/sections/page-sections/page-headers",
           },
           {
-            name: <b>NOAR</b>,
+            name: "NOAR",
+            hindiName: "एनओएआर",
             href: "https://noar.in/landing",
           },
         ],
       },
       {
-        name: <b>FTC</b>,
+        name: "FTC",
+        hindiName: "एफटीसी",
         dropdown: true,
         collapse: [
           {
-            name: <b>First Time Charging Documents</b>,
+            name: "First Time Charging Documents",
+            hindiName: "पहली बार चार्जिंग दस्तावेज",
             route: "/sections/page-sections/page-headers",
           },
         ],
       },
 
       {
-        name: <b>DSM</b>,
+        name: "DSM",
+        hindiName: "डीएसएम",
         dropdown: true,
         collapse: [
           {
-            name: <b>DSM rate</b>,
+            name: "DSM rate",
+            hindiName: "डीएसएम दर",
             href: "https://dsm.posoco.in/newdsm",
           },
           {
-            name: <b>DSM Disbursement Letter</b>,
+            name: "DSM Disbursement Letter",
+            hindiName: "डीएसएम संवितरण पत्र",
             route: "/sections/page-sections/page-headers",
           },
           {
-            name: <b>DSM Reconciliation</b>,
+            name: "DSM Reconciliation",
+            hindiName: "डीएसएम सुलह",
             route: "/sections/page-sections/page-headers",
           },
         ],
       },
 
       {
-        name: <b>Reactive</b>,
+        name: "Reactive",
+        hindiName: "रिएक्टिव",
         dropdown: true,
         collapse: [
           {
-            name: <b>Reactive Reconciliation</b>,
+            name: "Reactive Reconciliation",
+            hindiName: "रिएक्टिव सुलह",
             route: "/sections/page-sections/page-headers",
           },
           {
-            name: <b>Reactive Disbursement Letter</b>,
+            name: "Reactive Disbursement Letter",
+            hindiName: "रिएक्टिव संवितरण पत्र",
             route: "/sections/page-sections/page-headers",
           },
         ],
       },
       {
-        name: <b>Ancilliary Services</b>,
+        name: "Ancilliary Services",
+        hindiName: "सहायक सेवाएं",
         dropdown: true,
         collapse: [
           {
-            name: <b>RRAS Reconciliation</b>,
+            name: "RRAS Reconciliation",
+            hindiName: "आरआरएस सुलह",
             route: "/sections/page-sections/page-headers",
           },
           {
-            name: <b>AGC Reconciliation</b>,
+            name: "AGC Reconciliation",
+            hindiName: "एजीसी सुलह",
             route: "/sections/page-sections/page-headers",
           },
         ],
       },
       {
-        name: <b>Metering</b>,
+        name: "Metering",
+        hindiName: "मीटरिंग",
         dropdown: true,
         collapse: [
           {
-            name: <b>SEM data</b>,
+            name: "SEM data",
+            hindiName: "एसईएम डेटा",
             route: "/sections/page-sections/page-headers",
           },
           {
-            name: <b>Metering Software</b>,
+            name: "Metering Software",
+            hindiName: "मीटरिंग सॉफ्टवेयर",
             route: "/sections/page-sections/page-headers",
           },
           {
-            name: <b>Time Correction manual</b>,
+            name: "Time Correction manual",
+            hindiName: "समय सुधार पुस्तिका",
             route: "/sections/page-sections/page-headers",
           },
           {
-            name: <b>Metering Manual</b>,
+            name: "Metering Manual",
+            hindiName: "मीटरिंग पुस्तिका",
             route: "/sections/page-sections/page-headers",
           },
           {
-            name: <b>Metering Error</b>,
+            name: "Metering Error",
+            hindiName: "मीटरिंग त्रुटि",
             route: "/sections/page-sections/page-headers",
           },
         ],
       },
       {
-        name: <b>Fees & Charges</b>,
+        name: "Fees & Charges",
+        hindiName: "फीस एवं शुल्क",
         dropdown: true,
         collapse: [
           {
-            name: <b>F&C User List</b>,
+            name: "F&C User List",
+            hindiName: "एफ&सी उपयोगकर्ता सूची",
             href: "http://fc.posoco.in/FnCWeb/#/landing/reg-users",
           },
           {
-            name: <b>Monthly Bill Statement</b>,
+            name: "Monthly Bill Statement",
+            hindiName: "मासिक बिल विवरण",
             route: "/sections/page-sections/page-headers",
           },
           {
-            name: <b>Supplementary & PLI Bill</b>,
+            name: "Supplementary & PLI Bill",
+            hindiName: "अनुपूरक एवं पीएलआई बिल",
             route: "/sections/page-sections/page-headers",
           },
           {
-            name: <b>Quarterly Reconciliation Statement</b>,
+            name: "Quarterly Reconciliation Statement",
+            hindiName: "त्रैमासिक सुलह विवरण",
             route: "/sections/page-sections/page-headers",
           },
         ],
       },
       {
-        name: <b>Reports</b>,
+        name: "Reports",
+        hindiName: "रिपोर्ट्स",
         dropdown: true,
         collapse: [
           {
-            name: <b>Congestion Report</b>,
+            name: "Congestion Report",
+            hindiName: "कंगेसन रिपोर्ट",
             route: "/sections/page-sections/page-headers",
           },
         ],
       },
       {
-        name: <b>PSDF</b>,
+        name: "PSDF",
+        hindiName: "पीएसडीएफ",
         route: "/sections/page-sections/page-headers",
       },
       {
-        name: <b>Bank Details</b>,
+        name: "Bank Details",
+        hindiName: "बैंक विवरण",
         route: "/sections/page-sections/page-headers",
       },
     ],
   },
   {
     name: "Open Access",
+    hindiName: "ओपन एक्सेस",
     // icon: <Icon>article</Icon>,
     collapse: [
       {
-        name: <b>Interest</b>,
+        name: "Interest",
+        hindiName: "ब्याज",
         route: "/sections/page-sections/page-headers",
       },
       {
-        name: <b>Regional Entities</b>,
+        name: "Regional Entities",
+        hindiName: "क्षेत्रीय प्रतिनिधित्व",
       },
 
       {
-        name: <b>Regulation</b>,
+        name: "Regulation",
+        hindiName: "अधिनियम",
         href: "http://cercind.gov.in/Current_reg.html",
       },
 
       {
-        name: <b>Transaction</b>,
+        name: "Transaction",
+        hindiName: "लेन-देन विधि",
       },
       {
-        name: <b>STOA Summary</b>,
+        name: "STOA Summary",
+        hindiName: "एसटीओए सारांश",
         dropdown: true,
         collapse: [
           {
-            name: <b>Categorized No. of Approval</b>,
+            name: "Categorized No. of Approval",
+            hindiName: "अनुमोदन की वर्गीकृत संख्या",
             href: "http://noar.in/landing",
           },
           {
-            name: <b>Categorized MU</b>,
+            name: "Categorized MU",
+            hindiName: "वर्गीकृत एमयू",
             href: "http://noar.in/landing",
           },
           {
-            name: <b>Summary</b>,
+            name: "Summary",
+            hindiName: "सारांश",
             href: "http://noar.in/landing",
           },
           {
-            name: <b>Approved Transaction</b>,
+            name: "Approved Transaction",
+            hindiName: "अनुमोदित लेन-देन विधि",
             href: "http://noar.in/landing",
           },
         ],
       },
       {
-        name: <b>Transmission Loss</b>,
+        name: "Transmission Loss",
+        hindiName: "ट्रांसमिशन हानि",
         href: "http://posoco.in/side-menu-pages/applicable-transmission-losses/",
       },
       {
-        name: <b>Transmission Charges</b>,
+        name: "Transmission Charges",
+        hindiName: "ट्रांसमिशन शुल्क",
         href: "http://noar.in/landing",
       },
       {
-        name: <b>Reconciliation</b>,
+        name: "Reconciliation",
+        hindiName: "सुलह",
         dropdown: true,
         collapse: [
           {
-            name: <b>Applicant Amount</b>,
+            name: "Applicant Amount",
+            hindiName: "आवेदक राशि",
             route: "/sections/page-sections/page-headers",
           },
           {
-            name: <b>Beneficiary Amount</b>,
+            name: "Beneficiary Amount",
+            hindiName: "लाभार्थी राशि",
             route: "/sections/page-sections/page-headers",
           },
           {
-            name: <b>TDS Certificate</b>,
+            name: "TDS Certificate",
+            hindiName: "टीडीएस प्रमाणपत्र",
             route: "/sections/page-sections/page-headers",
           },
           {
-            name: <b>Interest</b>,
+            name: "Interest",
+            hindiName: "ब्याज",
             route: "/sections/page-sections/page-headers",
           },
         ],
       },
       {
-        name: <b>Procedures</b>,
+        name: "Procedures",
+        hindiName: "प्रक्रिया",
         href: "http://noar.in/procedures",
       },
       {
-        name: <b>Web based Application</b>,
+        name: "Web based Application",
+        hindiName: "वेब आधारित एप्लिकेशन",
         href: "http://noar.in/landing",
       },
     ],
@@ -490,141 +576,172 @@ const routes = [
 
   {
     name: "Reports",
+    hindiName: "रिपोर्ट्स",
     // icon: <Icon>article</Icon>,
     collapse: [
       {
-        name: <b>ER Utility Performance</b>,
+        name: "ER Utility Performance",
+        hindiName: "ईआर उपयोगिता प्रदर्शन",
         dropdown: true,
         collapse: [
           {
-            name: <b>Hydro Reservoir</b>,
+            name: "Hydro Reservoir",
+            hindiName: "जलाशय",
             route: "/sections/page-sections/page-headers",
           },
         ],
       },
       {
-        name: <b>Daily Report</b>,
+        name: "Daily Report",
+        hindiName: "दैनिक रिपोर्ट",
         dropdown: true,
         collapse: [
           {
-            name: <b>Daily PSP report</b>,
+            name: "Daily PSP report",
+            hindiName: "दैनिक पीएसपी रिपोर्ट",
             route: "/sections/page-sections/page-headers",
           },
           {
-            name: <b>Generation Outage</b>,
+            name: "Generation Outage",
+            hindiName: "उत्पादन आउटेज",
             route: "/sections/page-sections/page-headers",
           },
         ],
       },
 
       {
-        name: <b>Weekly Reports</b>,
+        name: "Weekly Reports",
+        hindiName: "साप्ताहिक रिपोर्ट्स",
         route: "/sections/page-sections/page-headers",
       },
       {
-        name: <b>Monthly Reports</b>,
+        name: "Monthly Reports",
+        hindiName: "मासिक रिपोर्ट्स",
         route: "/sections/page-sections/page-headers",
       },
       {
-        name: <b>Quarterly Reports</b>,
+        name: "Quarterly Reports",
+        hindiName: "त्रीमासिक रिपोर्ट्स",
         route: "/sections/page-sections/page-headers",
       },
       {
-        name: <b>Annual Reports</b>,
+        name: "Annual Reports",
+        hindiName: "वार्षिक रिपोर्ट्स",
         route: "/sections/page-sections/page-headers",
       },
       {
-        name: <b>Disturbance Reports</b>,
+        name: "Disturbance Reports",
+        hindiName: "डिस्टर्बेंस रिपोर्ट्स",
         href: "http://posoco.in/grid-disturbancesincidence/",
       },
 
       {
-        name: <b>Voltage Deviation Index</b>,
+        name: "Voltage Deviation Index",
+        hindiName: "वोल्टेज विचलन सूचकांक",
         dropdown: true,
         collapse: [
           {
-            name: <b>Daily</b>,
+            name: "Daily",
+            hindiName: "दैनिक",
             route: "/sections/page-sections/page-headers",
           },
           {
-            name: <b>Weekly</b>,
+            name: "Weekly",
+            hindiName: "साप्ताहिक",
             route: "/sections/page-sections/page-headers",
           },
           {
-            name: <b>Monthly</b>,
+            name: "Monthly",
+            hindiName: "मासिक",
             route: "/sections/page-sections/page-headers",
           },
         ],
       },
       {
-        name: <b>Monthly Deviation Report</b>,
+        name: "Monthly Deviation Report",
+        hindiName: "मासिक विचलन रिपोर्ट",
         route: "/sections/page-sections/page-headers",
       },
       {
-        name: <b>Annual Compendium</b>,
+        name: "Annual Compendium",
+        hindiName: "वार्षिक सारांश",
         route: "/sections/page-sections/page-headers",
       },
       {
-        name: <b>Grid Events (Flash report)</b>,
+        name: "Grid Events (Flash report)",
+        hindiName: "ग्रिड इवेंट्स (फ्लैश रिपोर्ट)",
         route: "/sections/page-sections/page-headers",
       },
       {
-        name: <b>Weather related events</b>,
+        name: "Weather related events",
+        hindiName: "मौसम संबंधित घटनाएँ",
         route: "/sections/page-sections/page-headers",
       },
       {
-        name: <b>Technical Reports</b>,
+        name: "Technical Reports",
+        hindiName: "तकनीकी रिपोर्ट्स",
         route: "/sections/page-sections/page-headers",
       },
     ],
   },
   {
     name: "SCADA",
+    hindiName: "स्काडा",
     // icon: <Icon>article</Icon>,
     collapse: [
       {
         xp: "gii",
-        name: <b>Telemetry</b>,
+        name: "Telemetry",
+        hindiName: "टेलीमेट्री",
         route: "/sections/page-sections/page-headers",
         isPrivate: true,
       },
       {
-        name: <b>Scada vs SEM Report</b>,
+        name: "Scada vs SEM Report",
+        hindiName: "स्काडा बनाम एसईएम रिपोर्ट",
         route: "/sections/page-sections/page-headers",
       },
 
       {
-        name: <b>Real-Time Data</b>,
+        name: "Real-Time Data",
+        hindiName: "वास्तविक काल डेटा",
         dropdown: true,
         collapse: [
           {
-            name: <b>Constituent Wise Schedule & Actual</b>,
+            name: "Constituent Wise Schedule & Actual",
+            hindiName: "गठन वार निर्धारण और वास्तविक",
             route: "/sections/page-sections/page-headers",
           },
           {
-            name: <b>Inter-Regional Wise Deviation</b>,
+            name: "Inter-Regional Wise Deviation",
+            hindiName: "अंतर-क्षेत्रीय वार विचलन",
             route: "/sections/page-sections/page-headers",
           },
           {
-            name: <b>Constituent Wise Generation</b>,
+            name: "Constituent Wise Generation",
+            hindiName: "गठन वार उत्पादन",
             route: "/sections/page-sections/page-headers",
           },
           {
-            name: <b>Station Wise Voltage</b>,
+            name: "Station Wise Voltage",
+            hindiName: "स्टेशन वार वोल्टेज",
             route: "/sections/page-sections/page-headers",
           },
           {
-            name: <b>Station Wise Generation</b>,
+            name: "Station Wise Generation",
+            hindiName: "स्टेशन वार उत्पादन",
             route: "/sections/page-sections/page-headers",
           },
           {
-            name: <b>ER Generation</b>,
+            name: "ER Generation",
+            hindiName: "ईआर उत्पादन",
             route: "/sections/page-sections/page-headers",
           },
         ],
       },
       {
-        name: <b>SCADA TeST Meeting</b>,
+        name: "SCADA TeST Meeting",
+        hindiName: "स्काडा टेस्ट बैठक",
         href: "http://erpc.gov.in/test-meetings/",
       },
     ],
@@ -632,125 +749,154 @@ const routes = [
 
   {
     name: "Useful Links",
+    hindiName: "उपयोगी लिंक्स",
     // icon: <Icon>article</Icon>,
     collapse: [
       {
-        name: <b>Grid-India Website</b>,
+        name: "Grid-India Website",
+        hindiName: "ग्रिड-इंडिया वेबसाइट",
         href: "https://grid-india.in/",
       },
 
       {
-        name: <b>OTHER LINKS</b>,
+        name: "OTHER LINKS",
+        hindiName: "अन्य लिंक्स",
         dropdown: true,
         collapse: [
           {
-            name: <b>FOLD</b>,
+            name: "FOLD",
+            hindiName: "फोल्ड",
             href: "http://forumofld.in/",
           },
           {
-            name: <b>PSDF</b>,
+            name: "PSDF",
+            hindiName: "पीएसडीएफ",
             href: "http://psdfindia.in/",
           },
           {
-            name: <b>Vidyut PRAVAH</b>,
+            name: "Vidyut PRAVAH",
+            hindiName: "विद्युत प्रवाह",
             href: "http://vidyutpravah.in/",
           },
           {
-            name: <b>MoP</b>,
+            name: "MoP",
+            hindiName: "एमओपी",
             href: "http://powermin.gov.in/",
           },
           {
-            name: <b>CERC</b>,
+            name: "CERC",
+            hindiName: "सीईआरसी",
             href: "http://cercind.gov.in/",
           },
           {
-            name: <b>MNRE</b>,
+            name: "MNRE",
+            hindiName: "एमएनआरई",
             href: "http://mnre.gov.in/",
           },
         ],
       },
       {
-        name: <b>Govt./PSU</b>,
+        name: "Govt./PSU",
+        hindiName: "सरकारी/पीएसयू",
         href: "http://indianpsu.com/",
       },
       {
-        name: <b>Application</b>,
+        name: "Application",
+        hindiName: "एप्लिकेशन",
         dropdown: true,
         collapse: [
           {
-            name: <b>WBES</b>,
+            name: "WBES",
+            hindiName: "डब्ल्यूबीईएस",
             href: "https://wbes.erldc.in/",
           },
           {
-            name: <b>WBES Old</b>,
+            name: "WBES Old",
+            hindiName: "पुराना डब्ल्यूबीईएस",
             href: "https://wbes.erldc.in/wbes_test",
           },
           {
-            name: <b>Fees & Charges</b>,
+            name: "Fees & Charges",
+            hindiName: "फीस एवं शुल्क",
             href: "http://fc.posoco.in/FnCWeb/",
           },
           {
-            name: <b>Meter Data</b>,
+            name: "Meter Data",
+            hindiName: "मीटर डेटा",
             href: "https://mdp.erldc.in/ERLDC_MDP",
           },
           {
-            name: <b>E-Log Book</b>,
+            name: "E-Log Book",
+            hindiName: "ई-कार्यपंजी",
             href: "https://logbook.erldc.in/en",
           },
           {
-            name: <b>Open Access</b>,
+            name: "Open Access",
+            hindiName: "ओपन एक्सेस",
             href: "http://mnre.gov.in/",
           },
           {
-            name: <b>Web-base report</b>,
+            name: "Web-base report",
+            hindiName: "वेब आधारित रिपोर्ट",
             href: "https://report.erldc.in/POSOCO/",
           },
         ],
       },
       {
-        name: <b>RLDCs/NLDC</b>,
+        name: "RLDCs/NLDC",
+        hindiName: "आरएलडीसी/एनएलडीसी",
         dropdown: true,
         collapse: [
           {
-            name: <b>WRLDC</b>,
+            name: "WRLDC",
+            hindiName: "डब्ल्यूआरएलडीसी",
             href: "http://www.wrldc.in/",
           },
           {
-            name: <b>SRLDC</b>,
+            name: "SRLDC",
+            hindiName: "एसआरएलडीसी",
             href: "http://www.srldc.in/",
           },
           {
-            name: <b>NRLDC</b>,
+            name: "NRLDC",
+            hindiName: "एनआरएलडीसी",
             href: "http://nrldc.in/",
           },
           {
-            name: <b>NERLDC</b>,
+            name: "NERLDC",
+            hindiName: "एनईआरएलडीसी",
             href: "https://www.nerldc.in/",
           },
           {
-            name: <b>NLDC</b>,
+            name: "NLDC",
+            hindiName: "एनएलडीसी",
             href: "http://posoco.in/",
           },
         ],
       },
       {
-        name: <b>Renewable</b>,
+        name: "Renewable",
+        hindiName: "नवीकरणीय",
         route: "/sections/page-sections/page-headers",
       },
       {
-        name: <b>REC Mechanism</b>,
+        name: "REC Mechanism",
+        hindiName: "आरईसी क्रियाविधि",
         href: "http://www.recregistryindia.nic.in/index.php/publics/Reference_Documents",
       },
       {
-        name: <b>Weather</b>,
+        name: "Weather",
+        hindiName: "मौसम",
         dropdown: true,
         collapse: [
           {
-            name: <b>ER Weather Information</b>,
+            name: "ER Weather Information",
+            hindiName: "ईआर मौसम की जानकारी",
             href: "http://14.139.247.5/power/ERLDC/MAIN.html",
           },
           {
-            name: <b>IMD</b>,
+            name: "IMD",
+            hindiName: "आईएमडी",
             href: "http://mausam.imd.gov.in/",
           },
         ],
@@ -759,94 +905,102 @@ const routes = [
   },
   {
     name: "Documents",
+    hindiName: "दस्तावेज",
     // icon: <Icon>article</Icon>,
     dropdown: true,
     collapse: [
       {
-        name: <b>Documents</b>,
+        name: "Documents",
+        hindiName: "दस्तावेज",
         route: "/sections/page-sections/page-headers",
       },
     ],
   },
   {
     name: "More",
+    hindiName: "अतिरिक्त",
     // icon: <Icon>article</Icon>,
     collapse: [
       {
-        name: <b>Telemetry</b>,
-        route: "/sections/page-sections/page-headers",
-      },
-      {
-        name: <b>Scada vs SEM Report</b>,
-        route: "/sections/page-sections/page-headers",
-      },
-
-      {
-        name: <b>HR</b>,
+        name: "HR",
+        hindiName: "मानव संसाधन",
         dropdown: true,
         collapse: [
           {
-            name: <b>HR Initiatives</b>,
+            name: "HR Initiatives",
+            hindiName: "मानव संसाधन पहल",
             route: "/sections/page-sections/page-headers",
           },
           {
-            name: <b>Organizational Chart</b>,
+            name: "Organizational Chart",
+            hindiName: "संगठन चार्ट",
             route: "/sections/page-sections/page-headers",
           },
           {
-            name: <b>Our Employees</b>,
+            name: "Our Employees",
+            hindiName: "हमारे कर्मचारी",
             route: "/sections/page-sections/page-headers",
           },
           {
-            name: <b>Empaneled Hospitals</b>,
+            name: "Empaneled Hospitals",
+            hindiName: "सूचीबद्ध अस्पताल",
             route: "/sections/page-sections/page-headers",
           },
           {
-            name: <b>Summer Internship</b>,
+            name: "Summer Internship",
+            hindiName: "ग्रीष्म प्रशिक्षण",
             route: "/sections/page-sections/page-headers",
           },
           {
-            name: <b>Careers</b>,
+            name: "Careers",
+            hindiName: "करियर",
             route: "/sections/page-sections/page-headers",
           },
         ],
       },
       {
-        name: <b>Live Map</b>,
+        name: "Live Map",
+        hindiName: "लाइव मैप",
         route: "/sections/page-sections/page-headers",
       },
       {
-        name: <b>Download Map</b>,
+        name: "Download Map",
+        hindiName: "डाउनलोड मैप",
         route: "/sections/page-sections/page-headers",
       },
       {
-        name: <b>Tender</b>,
+        name: "Tender",
+        hindiName: "निविदा",
         route: "/sections/page-sections/page-headers",
       },
       {
-        name: <b>Contracts Awarded</b>,
+        name: "Contracts Awarded",
+        hindiName: "प्रदान किये गये अनुबंध",
         dropdown: true,
         collapse: [
           {
-            name: <b>Open Tender</b>,
+            name: "Open Tender",
+            hindiName: "खुली निविदा",
             route: "/sections/page-sections/page-headers",
           },
           {
-            name: <b>Limited Tender</b>,
+            name: "Limited Tender",
+            hindiName: "सीमित निविदा",
             route: "/sections/page-sections/page-headers",
           },
           {
-            name: <b>Single Tender</b>,
+            name: "Single Tender",
+            hindiName: "एकल निविदा",
             route: "/sections/page-sections/page-headers",
           },
         ],
       },
       {
-        name: <b>राजभाषा</b>,
+        name: "राजभाषा",
         dropdown: true,
         collapse: [
           {
-            name: <b>राजभाषा पत्रिका</b>,
+            name: "राजभाषा पत्रिका",
             route: "/sections/page-sections/page-headers",
             isPrivate: true,
             // cssOverlap: true,
@@ -863,6 +1017,7 @@ const routes = [
   {
     isDynamic: true,
     name: "Login",
+    hindiName: "लॉगिन",
     // icon: <FaceIcon />,
     // route: "/sections/page-sections/page-headers",
     route: "/user/signin",

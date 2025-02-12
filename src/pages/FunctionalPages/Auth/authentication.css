@@ -28,11 +28,8 @@
 
 }
 .otp-notification {
-  /* padding: 0.1px; */
-/* padding-top: 10px; */
 border: 2px solid rgb(0, 152, 94);
 border-radius: 5px;
   background-color: rgb(213, 255, 226);
   color: rgb(0, 152, 94);
-  /* margin: 2%; */
 }

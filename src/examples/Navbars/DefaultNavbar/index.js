@@ -65,7 +65,7 @@ function DefaultNavbar({
   relative,
   center,
 }) {
-  const { user, namecontext } = useContext(AuthContext);
+  const { user, namecontext, languagePreference } = useContext(AuthContext);
   const [dropdown, setDropdown] = useState("");
   const [dropdownEl, setDropdownEl] = useState("");
   const [dropdownName, setDropdownName] = useState("");
@@ -101,7 +101,7 @@ function DefaultNavbar({
   }, []);
 
   const renderNavbarItems = routes.map(
-    ({ isDynamic, name, icon, href, route, collapse }) => (
+    ({ isDynamic, hindiName, name, icon, href, route, collapse }) => (
       // <div key={name}>hihihihi</div>
       <DefaultNavbarDropdown
         key={name}
@@ -110,6 +110,9 @@ function DefaultNavbar({
             ? "Welcome " + namecontext.split(" ")[0]
             : name
         }
+        // name={
+        //   languagePreference == "English" ? name : hindiName ? hindiName : name
+        // }
         icon={icon}
         href={href}
         route={route}

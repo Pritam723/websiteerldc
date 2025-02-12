@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useContext } from "react";
 import AppBar from "@mui/material/AppBar";
 import { styled, alpha } from "@mui/material/styles";
 import InputBase from "@mui/material/InputBase";
@@ -9,6 +9,7 @@ import IconButton from "@mui/material/IconButton";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import SearchIcon from "@mui/icons-material/Search";
 import Container from "@mui/material/Container";
+import { AuthContext, AuthProvider } from "context/AuthContext";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -56,6 +57,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function MyAppBar() {
+  const { setLanguagePreference } = useContext(AuthContext);
+
   const [isSearchVisible, setSearchVisible] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const searchRef = useRef(null);
@@ -162,9 +165,15 @@ export default function MyAppBar() {
 
                   <a
                     href="#"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    // target="_blank"
+                    // rel="noopener noreferrer"
                     style={{ textDecoration: "none", marginRight: "-8px" }}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      // console.log("works");
+                      localStorage.setItem("languagePreference", "English");
+                      setLanguagePreference("English");
+                    }}
                   >
                     <Typography
                       component="div"
@@ -178,9 +187,15 @@ export default function MyAppBar() {
                   </a>
                   <a
                     href="#"
-                    target="_blank"
-                    rel="noopener noreferrer"
                     style={{ textDecoration: "none" }}
+                    // target="_blank"
+                    // rel="noopener noreferrer"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      // console.log("works");
+                      localStorage.setItem("languagePreference", "Hindi");
+                      setLanguagePreference("Hindi");
+                    }}
                   >
                     <Typography
                       component="div"

@@ -363,6 +363,23 @@ export default function ReactFinalFormDemo() {
                     </form>
                   )}
                 />
+                <div className="text-center mt-2">
+                  <Link
+                    key={"forgotpassword"}
+                    to={"/user/forgotpassword"}
+                    className="forgot-password-link"
+                  >
+                    Forgot Password?
+                  </Link>
+
+                  <Link
+                    key={"SignIn"}
+                    to={"/user/signin"}
+                    className="forgot-password-link"
+                  >
+                    Already have an account?
+                  </Link>
+                </div>
               </>
             )}
 

@@ -82,7 +82,7 @@ function Presentation() {
 
   return (
     <>
-      <Banner />
+      {/* <Banner /> */}
       <Disclaimer />
       <AppBar />
       <DefaultNavbar routes={routes} sticky />

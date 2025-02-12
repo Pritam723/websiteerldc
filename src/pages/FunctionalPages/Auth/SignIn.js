@@ -1,38 +1,30 @@
 import "primeicons/primeicons.css";
-import "primereact/resources/themes/lara-light-indigo/theme.css";
+// import "primereact/resources/themes/lara-light-indigo/theme.css";
+import "primereact/resources/themes/mdc-light-indigo/theme.css";
 import "primereact/resources/primereact.css";
 import "primeflex/primeflex.css";
-// import ReactDOM from "react-dom";
-import { useNavigate, useLocation, Link } from "react-router-dom";
 
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import React, { useEffect, useState, useContext } from "react";
 import { Form, Field } from "react-final-form";
 import { InputText } from "primereact/inputtext";
 import { Button } from "primereact/button";
-// import { Dropdown } from "primereact/dropdown";
-// import { Calendar } from "primereact/calendar";
 import { Password } from "primereact/password";
-// import { Checkbox } from "primereact/checkbox";
 import { Dialog } from "primereact/dialog";
-// import { Divider } from "primereact/divider";
 import { classNames } from "primereact/utils";
 import "./authentication.css";
 import BaseLayout from "layouts/sections/components/BaseLayout";
 import axios from "axios";
 import { AuthContext, AuthProvider } from "context/AuthContext";
-
 import UserProfile from "./UserProfile";
 
-export default function SignIn({ redirectionURL = "/" }) {
+export default function SignIn() {
   const navigate = useNavigate();
-  // const location = useLocation();
-  // console.log(redirectionURL);
+  const location = useLocation();
+  const { redirectionURL } = location.state || {}; // Handle case where state is undefined
   const { user, loginUser, namecontext } = useContext(AuthContext);
-
   const [showMessage, setShowMessage] = useState(false);
-  // const [formData, setFormData] = useState({});
   const [isLoginSuccessful, setIsLoginSuccessful] = useState(false);
-  // const [username, setUsername] = useState("");
 
   const validate = (data) => {
     let errors = {};
@@ -49,25 +41,10 @@ export default function SignIn({ redirectionURL = "/" }) {
   };
 
   const onSubmit = async (data, form) => {
-    // setFormData(data);
-    // setShowMessage(true);
-    // const formData = new FormData();
-    // for (const key in data) {
-    //   formData.append(key, data[key]);
-    // }
-
-    // console.log(formData);
-    // console.log(data);
-
     const loginFlag = await loginUser(data);
-    // console.log(loginFlag);
-    // await setUsername(namecontext);
-
     console.log(namecontext);
-
     await setIsLoginSuccessful(loginFlag);
     await setShowMessage(true);
-
     if (!loginFlag) return;
   };
 
@@ -86,7 +63,7 @@ export default function SignIn({ redirectionURL = "/" }) {
         autoFocus
         onClick={() => {
           setShowMessage(false);
-          // navigate(redirectionURL);
+          navigate(redirectionURL);
         }}
       />
     </div>
@@ -100,7 +77,6 @@ export default function SignIn({ redirectionURL = "/" }) {
         autoFocus
         onClick={() => {
           setShowMessage(false);
-          // navigate("/");
         }}
       />
     </div>
@@ -155,12 +131,6 @@ export default function SignIn({ redirectionURL = "/" }) {
     </Dialog>
   );
 
-  // useEffect(() => {
-  //   if (user) {
-  //     navigate("/user/userprofile");
-  //   }
-  // }, []);
-
   return user ? (
     <div>
       {SuccessDialouge()}
@@ -177,7 +147,6 @@ export default function SignIn({ redirectionURL = "/" }) {
       ]}
     >
       <div className="form-demo">
-        {/* {isLoginSuccessful ? SuccessDialouge() : FailureDialouge()} */}
         {FailureDialouge()}
         <div className="flex justify-content-center">
           <div className="card">
@@ -230,8 +199,6 @@ export default function SignIn({ redirectionURL = "/" }) {
                               "p-invalid": isFormFieldValid(meta),
                             })}
                             feedback={false}
-                            // header={passwordHeader}
-                            // footer={passwordFooter}
                           />
                           <label
                             htmlFor="password"
@@ -253,7 +220,6 @@ export default function SignIn({ redirectionURL = "/" }) {
 
             <div className="text-center mt-2">
               <Link
-                // onClick={() => navigate("/user/forgotpassword")}
                 key={"forgotpassword"}
                 to={"/user/forgotpassword"}
                 className="forgot-password-link"
@@ -262,12 +228,11 @@ export default function SignIn({ redirectionURL = "/" }) {
               </Link>
 
               <Link
-                // onClick={() => navigate("/user/forgotpassword")}
                 key={"register"}
                 to={"/user/register"}
                 className="forgot-password-link"
               >
-                Don’t have an account? Please Sign up
+                Don’t have an account? Sign up
               </Link>
             </div>
           </div>
