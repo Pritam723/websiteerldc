@@ -20,8 +20,8 @@ import { Dialog } from "primereact/dialog";
 import { classNames } from "primereact/utils";
 import "./SignIn.css";
 import BaseLayout from "layouts/sections/components/BaseLayout";
-import axios from "axios";
-import { AuthContext, AuthProvider } from "context/AuthContext";
+// import axios from "axios";
+import { AuthContext } from "context/AuthContext";
 import UserProfile from "./UserProfile";
 
 export default function SignIn() {
@@ -35,7 +35,7 @@ export default function SignIn() {
 
   const [showMessage, setShowMessage] = useState(false);
   // const [formData, setFormData] = useState({});
-  const [isLoginSuccessful, setIsLoginSuccessful] = useState(false);
+  // const [isLoginSuccessful, setIsLoginSuccessful] = useState(false);
   // const [username, setUsername] = useState("");
 
   const validate = (data) => {
@@ -69,26 +69,10 @@ export default function SignIn() {
 
     console.log(namecontext);
 
-    await setIsLoginSuccessful(loginFlag);
-    await setShowMessage(true);
+    // setIsLoginSuccessful(loginFlag);
+    setShowMessage(true);
 
-    if (!loginFlag) return;
-    // console.log(loginFlag);
-    // console.log("user is ");
-    // console.log(user);
-
-    // axios
-    //   .post("http://10.3.101.179:4001/login", data)
-    //   .then(function (response) {
-    //     console.log(response.data.access_token);
-    //     const token = response.data.access_token;
-    //     localStorage.setItem("token", token);
-    //   })
-    //   .catch(function (error) {
-    //     console.log(error);
-    //   });
-
-    // form.restart();
+    // if (!loginFlag) return;
   };
 
   const isFormFieldValid = (meta) => !!(meta.touched && meta.error);
@@ -182,10 +166,10 @@ export default function SignIn() {
   // }, []);
 
   return user ? (
-    <div>
+    <React.Fragment>
       {SuccessDialouge()}
       <UserProfile />
-    </div>
+    </React.Fragment>
   ) : (
     <BaseLayout
       title={"Sign In"}
