@@ -13,8 +13,14 @@ Coded by www.creative-tim.com
 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
+//IMS logos
+import IMSLogo1 from "assets/images/IMS Policy Logos/iso-logo-14001.png";
+import IMSLogo2 from "assets/images/IMS Policy Logos/iso-logo-27001.png";
+import IMSLogo3 from "assets/images/IMS Policy Logos/iso-logo-45001.png";
+import IMSLogo4 from "assets/images/IMS Policy Logos/iso-logo-90001.png";
+import IMSLogo5 from "assets/images/IMS Policy Logos/yogaLogo.png";
 
-import { Fragment, useState, useEffect } from "react";
+import { Fragment, useState, useEffect, useContext } from "react";
 
 // react-router components
 import { Link } from "react-router-dom";
@@ -43,7 +49,11 @@ import DefaultNavbarMobile from "examples/Navbars/DefaultNavbar/DefaultNavbarMob
 // Material Kit 2 React base styles
 import breakpoints from "assets/theme/base/breakpoints";
 import GridLogo from "assets/images/GridIndiaLogo1.png";
-
+import { blueGrey } from "@mui/material/colors";
+import Button from "assets/theme/components/button";
+import { AuthContext, AuthProvider } from "context/AuthContext";
+import CssBaseline from "@mui/material/CssBaseline";
+import "./flags.css";
 function DefaultNavbar({
   brand,
   routes,
@@ -55,6 +65,7 @@ function DefaultNavbar({
   relative,
   center,
 }) {
+  const { user, namecontext } = useContext(AuthContext);
   const [dropdown, setDropdown] = useState("");
   const [dropdownEl, setDropdownEl] = useState("");
   const [dropdownName, setDropdownName] = useState("");
@@ -89,204 +100,226 @@ function DefaultNavbar({
     return () => window.removeEventListener("resize", displayMobileNavbar);
   }, []);
 
-  const renderNavbarItems = routes.map(({ name, icon, href, route, collapse }) => (
-    // <div key={name}>hihihihi</div>
-    <DefaultNavbarDropdown
-      key={name}
-      name={name}
-      icon={icon}
-      href={href}
-      route={route}
-      collapse={Boolean(collapse)}
-      onMouseEnter={({ currentTarget }) => {
-        if (collapse) {
-          setDropdown(currentTarget);
-          setDropdownEl(currentTarget);
-          setDropdownName(name);
+  const renderNavbarItems = routes.map(
+    ({ isDynamic, name, icon, href, route, collapse }) => (
+      // <div key={name}>hihihihi</div>
+      <DefaultNavbarDropdown
+        key={name}
+        name={
+          isDynamic && namecontext
+            ? "Welcome " + namecontext.split(" ")[0]
+            : name
         }
-      }}
-      onMouseLeave={() => collapse && setDropdown(null)}
-      light={light}
-    />
-  ));
+        icon={icon}
+        href={href}
+        route={route}
+        collapse={Boolean(collapse)}
+        onMouseEnter={({ currentTarget }) => {
+          if (collapse) {
+            setDropdown(currentTarget);
+            setDropdownEl(currentTarget);
+            setDropdownName(name);
+          }
+        }}
+        onMouseLeave={() => collapse && setDropdown(null)}
+        light={light}
+      />
+    )
+  );
 
   // Render the routes on the dropdown menu
-  const renderRoutes = routes.map(({ name, collapse, columns, rowsPerColumn }) => {
-    let template;
+  const renderRoutes = routes.map(
+    ({ name, collapse, columns, rowsPerColumn }) => {
+      let template;
 
-    // Render the dropdown menu that should be display as columns
-    if (collapse && columns && name === dropdownName) {
-      const calculateColumns = collapse.reduce((resultArray, item, index) => {
-        const chunkIndex = Math.floor(index / rowsPerColumn);
+      // Render the dropdown menu that should be display as columns
+      if (collapse && columns && name === dropdownName) {
+        const calculateColumns = collapse.reduce((resultArray, item, index) => {
+          const chunkIndex = Math.floor(index / rowsPerColumn);
 
-        if (!resultArray[chunkIndex]) {
-          resultArray[chunkIndex] = [];
-        }
+          if (!resultArray[chunkIndex]) {
+            resultArray[chunkIndex] = [];
+          }
 
-        resultArray[chunkIndex].push(item);
+          resultArray[chunkIndex].push(item);
 
-        return resultArray;
-      }, []);
+          return resultArray;
+        }, []);
 
-      template = (
-        <Grid key={name} container spacing={3} py={1} px={1.5}>
-          {calculateColumns.map((cols, key) => {
-            const gridKey = `grid-${key}`;
-            const dividerKey = `divider-${key}`;
+        template = (
+          <Grid key={name} container spacing={3} py={1} px={1.5}>
+            {calculateColumns.map((cols, key) => {
+              const gridKey = `grid-${key}`;
+              const dividerKey = `divider-${key}`;
 
-            return (
-              <Grid key={gridKey} item xs={12 / columns} sx={{ position: "relative" }}>
-                {cols.map((col, index) => (
-                  <Fragment key={col.name}>
-                    <MKTypography
-                      display="block"
-                      variant="button"
-                      fontWeight="bold"
-                      textTransform="capitalize"
-                      py={1}
-                      px={0.5}
-                      mt={index !== 0 ? 2 : 0}
-                    >
-                      {col.name}
-                    </MKTypography>
-                    {col.collapse.map((item) => (
+              return (
+                <Grid
+                  key={gridKey}
+                  item
+                  xs={12 / columns}
+                  sx={{ position: "relative" }}
+                >
+                  {cols.map((col, index) => (
+                    <Fragment key={col.name}>
                       <MKTypography
-                        key={item.name}
-                        component={item.route ? Link : MuiLink}
-                        to={item.route ? item.route : ""}
-                        href={item.href ? item.href : (e) => e.preventDefault()}
-                        target={item.href ? "_blank" : ""}
-                        rel={item.href ? "noreferrer" : "noreferrer"}
-                        minWidth="11.25rem"
                         display="block"
                         variant="button"
-                        color="text"
+                        fontWeight="bold"
                         textTransform="capitalize"
-                        fontWeight="regular"
-                        py={0.625}
-                        px={2}
-                        sx={({ palette: { grey, dark }, borders: { borderRadius } }) => ({
-                          borderRadius: borderRadius.md,
-                          cursor: "pointer",
-                          transition: "all 300ms linear",
-
-                          "&:hover": {
-                            backgroundColor: grey[200],
-                            color: dark.main,
-                          },
-                        })}
+                        py={1}
+                        px={0.5}
+                        mt={index !== 0 ? 2 : 0}
                       >
-                        {item.name}
+                        {col.name}
                       </MKTypography>
-                    ))}
-                  </Fragment>
-                ))}
-                {key !== 0 && (
-                  <Divider
-                    key={dividerKey}
-                    orientation="vertical"
-                    sx={{
-                      position: "absolute",
-                      top: "50%",
-                      left: "-4px",
-                      transform: "translateY(-45%)",
-                      height: "90%",
-                    }}
-                  />
-                )}
-              </Grid>
-            );
-          })}
-        </Grid>
-      );
+                      {col.collapse.map((item) => (
+                        <MKTypography
+                          key={item.name}
+                          component={item.route ? Link : MuiLink}
+                          to={item.route ? item.route : ""}
+                          href={
+                            item.href ? item.href : (e) => e.preventDefault()
+                          }
+                          target={item.href ? "_blank" : ""}
+                          rel={item.href ? "noreferrer" : "noreferrer"}
+                          minWidth="11.25rem"
+                          display="block"
+                          variant="button"
+                          color="text"
+                          textTransform="capitalize"
+                          fontWeight="regular"
+                          py={0.625}
+                          px={2}
+                          sx={({
+                            palette: { grey, dark },
+                            borders: { borderRadius },
+                          }) => ({
+                            borderRadius: borderRadius.md,
+                            cursor: "pointer",
+                            transition: "all 300ms linear",
 
-      // Render the dropdown menu that should be display as list items
-    } else if (collapse && name === dropdownName) {
-      template = collapse.map((item) => {
-        const linkComponent = {
-          component: MuiLink,
-          href: item.href,
-          target: "_blank",
-          rel: "noreferrer",
-        };
-
-        const routeComponent = {
-          component: Link,
-          to: item.route,
-        };
-
-        return (
-          <MKTypography
-            key={item.name}
-            {...(item.route ? routeComponent : linkComponent)}
-            display="flex"
-            justifyContent="space-between"
-            alignItems="center"
-            variant="button"
-            textTransform="capitalize"
-            minWidth={item.description ? "14rem" : "12rem"}
-            color={item.description ? "dark" : "text"}
-            fontWeight={item.description ? "bold" : "regular"}
-            py={item.description ? 1 : 0.625}
-            px={2}
-            sx={({ palette: { grey, dark }, borders: { borderRadius } }) => ({
-              borderRadius: borderRadius.md,
-              cursor: "pointer",
-              transition: "all 300ms linear",
-
-              "&:hover": {
-                backgroundColor: grey[200],
-                color: dark.main,
-
-                "& *": {
-                  color: dark.main,
-                },
-              },
+                            "&:hover": {
+                              backgroundColor: grey[200],
+                              color: dark.main,
+                            },
+                          })}
+                        >
+                          {item.name}
+                        </MKTypography>
+                      ))}
+                    </Fragment>
+                  ))}
+                  {key !== 0 && (
+                    <Divider
+                      key={dividerKey}
+                      orientation="vertical"
+                      sx={{
+                        position: "absolute",
+                        top: "50%",
+                        left: "-4px",
+                        transform: "translateY(-45%)",
+                        height: "90%",
+                      }}
+                    />
+                  )}
+                </Grid>
+              );
             })}
-            onMouseEnter={({ currentTarget }) => {
-              if (item.dropdown) {
-                setNestedDropdown(currentTarget);
-                setNestedDropdownEl(currentTarget);
-                setNestedDropdownName(item.name);
-              }
-            }}
-            onMouseLeave={() => {
-              if (item.dropdown) {
-                setNestedDropdown(null);
-              }
-            }}
-          >
-            {item.description ? (
-              <MKBox>
-                {item.name}
-                <MKTypography
-                  display="block"
-                  variant="button"
-                  color="text"
-                  fontWeight="regular"
-                  sx={{ transition: "all 300ms linear" }}
-                >
-                  {item.description}
-                </MKTypography>
-              </MKBox>
-            ) : (
-              item.name
-            )}
-            {item.collapse && (
-              <Icon
-                fontSize="small"
-                sx={{ fontWeight: "normal", verticalAlign: "middle", mr: -0.5 }}
-              >
-                keyboard_arrow_right
-              </Icon>
-            )}
-          </MKTypography>
+          </Grid>
         );
-      });
-    }
 
-    return template;
-  });
+        // Render the dropdown menu that should be display as list items
+      } else if (collapse && name === dropdownName) {
+        template = collapse.map((item) => {
+          const linkComponent = {
+            component: MuiLink,
+            href: item.href,
+            target: "_blank",
+            rel: "noreferrer",
+          };
+
+          const routeComponent = {
+            component: Link,
+            to: item.route,
+          };
+
+          return (
+            <MKTypography
+              key={item.name}
+              {...(item.route ? routeComponent : linkComponent)}
+              display="flex"
+              justifyContent="space-between"
+              alignItems="center"
+              variant="button"
+              textTransform="capitalize"
+              minWidth={item.description ? "14rem" : "12rem"}
+              color={item.description ? "dark" : "text"}
+              fontWeight={item.description ? "bold" : "regular"}
+              py={item.description ? 1 : 0.625}
+              px={2}
+              sx={({ palette: { grey, dark }, borders: { borderRadius } }) => ({
+                borderRadius: borderRadius.md,
+                cursor: "pointer",
+                transition: "all 300ms linear",
+
+                "&:hover": {
+                  backgroundColor: grey[200],
+                  color: dark.main,
+
+                  "& *": {
+                    color: dark.main,
+                  },
+                },
+              })}
+              onMouseEnter={({ currentTarget }) => {
+                if (item.dropdown) {
+                  setNestedDropdown(currentTarget);
+                  setNestedDropdownEl(currentTarget);
+                  setNestedDropdownName(item.name);
+                }
+              }}
+              onMouseLeave={() => {
+                if (item.dropdown) {
+                  setNestedDropdown(null);
+                }
+              }}
+            >
+              {item.description ? (
+                <MKBox>
+                  {item.name}
+                  <MKTypography
+                    display="block"
+                    variant="button"
+                    color="text"
+                    fontWeight="regular"
+                    sx={{ transition: "all 300ms linear" }}
+                  >
+                    {item.description}
+                  </MKTypography>
+                </MKBox>
+              ) : (
+                item.name
+              )}
+              {item.collapse && (
+                <Icon
+                  fontSize="small"
+                  sx={{
+                    fontWeight: "normal",
+                    verticalAlign: "middle",
+                    mr: -0.5,
+                  }}
+                >
+                  keyboard_arrow_right
+                </Icon>
+              )}
+            </MKTypography>
+          );
+        });
+      }
+
+      return template;
+    }
+  );
 
   // Routes dropdown menu
   const dropdownMenu = (
@@ -373,7 +406,10 @@ function DefaultNavbar({
                     fontWeight={item.description ? "bold" : "regular"}
                     py={item.description ? 1 : 0.625}
                     px={2}
-                    sx={({ palette: { grey, dark }, borders: { borderRadius } }) => ({
+                    sx={({
+                      palette: { grey, dark },
+                      borders: { borderRadius },
+                    }) => ({
                       borderRadius: borderRadius.md,
                       cursor: "pointer",
                       transition: "all 300ms linear",
@@ -407,7 +443,11 @@ function DefaultNavbar({
                     {item.collapse && (
                       <Icon
                         fontSize="small"
-                        sx={{ fontWeight: "normal", verticalAlign: "middle", mr: -0.5 }}
+                        sx={{
+                          fontWeight: "normal",
+                          verticalAlign: "middle",
+                          mr: -0.5,
+                        }}
                       >
                         keyboard_arrow_right
                       </Icon>
@@ -460,11 +500,16 @@ function DefaultNavbar({
 
   return (
     // <div>hii</div>
-    <Container sx={sticky ? { position: "sticky", top: 0, zIndex: 10 } : null}>
+    // <CssBaseline/>
+    <Container
+      sx={sticky ? { position: "sticky", top: 0, zIndex: 10 } : null}
+      className="mui-container"
+    >
+      {/* <CssBaseline /> */}
       <MKBox
         py={0}
         px={{ xs: 4, sm: transparent ? 2 : 3, lg: transparent ? 0 : 2 }}
-        my={relative ? 0 : 2}
+        my={relative ? 0 : 0.5}
         mx={relative ? 0 : 3}
         // width="100%"
         width={relative ? "100%" : "calc(100% - 20px)"}
@@ -474,27 +519,33 @@ function DefaultNavbar({
         position={relative ? "relative" : "absolute"}
         left={0}
         zIndex={3}
-        sx={({ palette: { transparent: transparentColor, white }, functions: { rgba } }) => ({
-          backgroundColor: transparent ? transparentColor.main : rgba(white.main, 0.8),
+        sx={({
+          palette: { transparent: transparentColor, white },
+          functions: { rgba },
+        }) => ({
+          backgroundColor: transparent
+            ? transparentColor.main
+            : rgba(white.main, 0.8),
           backdropFilter: transparent ? "none" : `saturate(200%) blur(30px)`,
         })}
       >
-        <MKBox display="flex" justifyContent="space-between" alignItems="center">
+        <MKBox
+          display="flex"
+          justifyContent="space-between"
+          alignItems="center"
+        >
           {/* Component for GRID-INDIA Logo Start*/}
           <MKBox
-            // component={Link}
-            // to="https://erldc.in/en/"
-
             component="a"
-            // href="https://posoco.in/" // Replace with your desired URL
             href="/"
             target="_blank" // Open in a new tab
             lineHeight={1}
             py={transparent ? 1.5 : 0.75}
             pl={relative || transparent ? 0 : { xs: 0, lg: 1 }}
           >
-            {/* updated by 00339  */}
-            {brand.endsWith(".png") || brand.endsWith(".jpg") || brand.endsWith(".svg") ? (
+            {brand.endsWith(".png") ||
+            brand.endsWith(".jpg") ||
+            brand.endsWith(".svg") ? (
               <MKBox
                 component="img"
                 src={brand}
@@ -514,20 +565,18 @@ function DefaultNavbar({
                 {brand}
               </MKTypography>
             )}
-            {/* updated by 00339  */}
           </MKBox>
           {/* Component for GRID-INDIA Logo End*/}
 
           <MKBox
             color="inherit"
             display={{ xs: "none", lg: "flex" }}
-            // ml="auto"
-            // mr={center ? "auto" : 0}
             ml={0}
             mr={0}
           >
             {renderNavbarItems}
           </MKBox>
+
           <MKBox ml={{ xs: "auto", lg: 0 }}>
             {action &&
               (action.type === "internal" ? (
@@ -581,9 +630,12 @@ function DefaultNavbar({
           borderRadius="xl"
           px={transparent ? 2 : 0}
         >
-          {mobileView && <DefaultNavbarMobile routes={routes} open={mobileNavbar} />}
+          {mobileView && (
+            <DefaultNavbarMobile routes={routes} open={mobileNavbar} />
+          )}
         </MKBox>
       </MKBox>
+
       {dropdownMenu}
       {nestedDropdownMenu}
     </Container>

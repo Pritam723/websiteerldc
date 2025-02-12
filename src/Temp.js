@@ -1,274 +1,485 @@
-import React, { useState, useEffect } from "react";
-import {
-  ComposableMap,
-  Geographies,
-  Geography,
-  Annotation,
-  ZoomableGroup,
-} from "react-simple-maps";
+import "primeicons/primeicons.css";
+import "primereact/resources/themes/lara-light-indigo/theme.css";
+import "primereact/resources/primereact.css";
+import "primeflex/primeflex.css";
+// import ReactDOM from "react-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
-import { scaleQuantile } from "d3-scale";
-import { geoCentroid } from "d3-geo";
-import axios from "axios";
-// import Container1 from "./Container1.js";
-// import Container3 from "./Container3.js";
-// import { geoPolyhedralWaterman } from "d3-geo-projection";
+import React, { useEffect, useState, useContext } from "react";
+import { Form, Field } from "react-final-form";
+import { InputText } from "primereact/inputtext";
+import { Button } from "primereact/button";
+// import { Dropdown } from "primereact/dropdown";
+// import { Calendar } from "primereact/calendar";
+import { Password } from "primereact/password";
+// import { Checkbox } from "primereact/checkbox";
 import { Dialog } from "primereact/dialog";
-import "./App.css";
-const COLOR_RANGE = [
-  "#ffedea",
-  "#ffcec5",
-  "#ffad9f",
-  "#ff8a75",
-  "#ff5533",
-  "#e2492d",
-  "#be3d26",
-  "#9a311f",
-  "#782618",
-];
+// import { Divider } from "primereact/divider";
+import { classNames } from "primereact/utils";
+import "./authentication.css";
+import BaseLayout from "layouts/sections/components/BaseLayout";
+import axios from "axios";
+import { AuthContext, AuthProvider } from "context/AuthContext";
 
-const INDIA_TOPO_JSON = require("./eastcopy.json");
-const DEFAULT_COLOR = "#ffedea";
-// const DEFAULT_COLOR = "#00FF00";
+import UserProfile from "./UserProfile";
 
-const geographyStyle = {
-  default: {
-    outline: "none",
-  },
-  hover: {
-    fill: "#ccc",
-    transition: "all 250ms",
-    outline: "none",
-  },
-  pressed: {
-    outline: "none",
-  },
-};
+import { InputOtp } from "primereact/inputotp";
+import validation from "ajv/dist/vocabularies/validation";
 
-function Eastern2(props) {
-  // const [tooltipContent, setTooltipContent] = useState("");
-  const [data, setData] = useState([
-    {
-      id: "BR",
-      name: "Bihar",
-      color: "#f8c460",
-      content: "Bihar demand: 6500 MW",
-      clatlong: [84.9629, 25.5937],
-      tooltiplatlong: [109, 67],
+export default function SignIn({ redirectionURL = "/" }) {
+  const navigate = useNavigate();
 
-      // color: "#6cecf8",
-    },
-    {
-      id: "JH",
-      name: "Jharkhand",
-      color: "#cccdfb",
-      content: "Jharkhand demand: 3000 MW",
-      clatlong: [84.3629, 23.4937],
-      tooltiplatlong: [109, 190],
+  const { user, loginUser, namecontext } = useContext(AuthContext);
 
-      // color: "#f8c460",
-    },
-    {
-      id: "OR",
-      name: "Odisha",
-      color: "#6cecf8",
-      content: "Odisha demand: 5500 MW",
-      tooltiplatlong: [109, 337],
-      clatlong: [84.9629, 20.5937],
-    },
-    {
-      id: "WB",
-      name: "West Bengal",
-      color: "#8bf579",
-      content: "WB demand: 7000 MW",
-      clatlong: [88.9629, 23.5937],
-      tooltiplatlong: [109, 137],
+  const [showMessage, setShowMessage] = useState(false);
+  const [errorMessage, setErrorMessage] = useState();
 
-      // color: "#6cecf8",
-    },
-    {
-      id: "SK",
-      name: "Sikkim",
-      color: "#ded946",
-      content: "Sikkim demand: 90 MW",
-      clatlong: [87.9629, 27.5937],
-      tooltiplatlong: [109, 87],
-    },
-    {
-      id: "DVC",
-      name: "DVC",
-      color: "#ffad9f",
-      content: "DVC demand: 4500 MW",
-      clatlong: [85.8629, 23.6937],
-      tooltiplatlong: [109, 157],
-    },
-  ]);
+  const [isLoginSuccessful, setIsLoginSuccessful] = useState(false);
 
-  const [keyList, setKeyList] = useState([]);
+  const [step, setStep] = useState(1);
+  const [otp, setOtp] = useState();
+  const [password, setPassword] = useState();
+  const [email, setEmail] = useState();
 
-  const [showdailog, setshowdailog] = useState(false);
-  const [clickdata, setclickdata] = useState([]);
-
-  var temp_list = [...keyList];
-  temp_list.splice(0, 3);
-
-  const onMouseclick = (e) => {
-    var x = e[0];
-    console.log(e[0], e[1], e[2]);
-
-    setclickdata([x]);
-    setshowdailog(true);
+  const handleOtpSuccess = () => {
+    setStep(2); // Move to OTP verification
   };
 
-  const onMouseLeave = () => {
-    setshowdailog(false);
+  const handleVerifyOtpSuccess = () => {
+    setStep(3); // Move to password reset
   };
 
-  const [tooltip, setTooltip] = useState({
-    visible: false,
-    x: 0,
-    y: 0,
-    content: "by default",
-  });
-  const [showDialog, setShowDialog] = useState(false);
-  const [clickData, setClickData] = useState(null);
+  //////////////////////////////////////// Send OTP  validation/////////////////////////////////////////////////////
+  const validatesendotp = (data) => {
+    let errors = {};
 
-  const handleMouseEnter = (e, region) => {
-    console.log(e);
-    console.log(region[0].clatlong[0]);
-    const rect = e.target.getBoundingClientRect();
-    console.log(rect);
-
-    setTooltip({
-      visible: true,
-      // x: region[0].clatlong[0],
-      // y: region[0].clatlong[0] + window.scrollY,
-      x: region[0].tooltiplatlong[0],
-      y: region[0].tooltiplatlong[1],
-      // x: 109,
-      // y: 63,
-      content: region[0].content,
-    });
+    if (!data.email) {
+      errors.email = "Email is required.";
+    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(data.email)) {
+      errors.email = "Invalid email address. E.g. example@email.com";
+    }
+    return errors;
   };
 
-  const handleMouseLeave = () => {
-    setTooltip({ ...tooltip, visible: false });
+  ///////////////////////////////////////////////// Send OTP  Submission////////////////////////////////////////////
+  const onSubmitsendotp = async (data, form) => {
+    if (!data.email) {
+      return;
+    }
+    setEmail(data.email);
+    handleOtpSuccess();
+    // console.log(data);
   };
 
-  // const handleClick = (region) => {
-  //   setClickData(region);
-  //   setShowDialog(true);
+  /////////////////////////////////////////////////////// Verify OTP validation//////////////////////////////////
+  const validateverifyotp = (data) => {
+    let errors = {};
+
+    if (!otp) {
+      errors.otp = "OTP is required.";
+    } else if (!/^\d{6}$/.test(otp)) {
+      errors.otp = "OTP must be a 6-digit numeric code.";
+    }
+
+    // if (!data.newPassword) {
+    //   errors.newPassword = "Password is required.";
+    // }
+    // if (!data.confirmPassword) {
+    //   errors.confirmPassword = "Confirm Password is required.";
+    // } else if (data.confirmPassword != data.newPassword) {
+    //   errors.confirmPassword =
+    //     "Confirm Password is not matched with new Password.";
+    // }
+    return errors;
+  };
+
+  /////////////////////////////////////////// Verify OTP Submission////////////////////////////////////////////
+  const onSubmitverifyotp = async (data) => {
+    if (!otp || !/^\d{6}$/.test(otp)) {
+      return;
+    }
+    if (
+      !data.confirmPassword ||
+      !data.newPassword ||
+      data.confirmPassword !== data.newPassword
+    ) {
+      return;
+    }
+    setOtp(otp);
+    setPassword(data.newPassword);
+    setShowMessage(true);
+    // form.restart();
+    // handleVerifyOtpSuccess();
+  };
+
+  /////////////////////// Verify Change Password validation//////////////////////////////////////////////////////
+  // const validatechangepassword = (data) => {
+  //   let errors = {};
+
+  //   if (!data.newPassword) {
+  //     errors.newPassword = "Password is required.";
+  //   }
+  //   if (!data.confirmPassword) {
+  //     errors.confirmPassword = "Confirm Password is required.";
+  //   } else if (data.confirmPassword != data.newPassword) {
+  //     errors.confirmPassword =
+  //       "Confirm Password is not matched with new Password.";
+  //   }
+  //   return errors;
   // };
+  ////////////////////////// Verify Change Password Submission////////////////////////////////////////////////////
+  // const onSubmitchangepassword = async (data, form) => {
+  //   if (
+  //     !data.confirmPassword ||
+  //     !data.newPassword ||
+  //     data.confirmPassword !== data.newPassword
+  //   ) {
+  //     return;
+  //   }
+  //   setPassword(data.newPassword);
+  //   setShowMessage(true);
+  //   form.restart();
+  // };
+
+  const isFormFieldValid = (meta) => !!(meta.touched && meta.error);
+  const getFormErrorMessage = (meta) => {
+    return (
+      isFormFieldValid(meta) && <small className="p-error">{meta.error}</small>
+    );
+  };
+
+  const dialogFooterSuccess = (
+    <div className="flex justify-content-center">
+      <Button
+        label="Proceed"
+        className="p-button-text"
+        autoFocus
+        onClick={() => {
+          setShowMessage(false);
+        }}
+      />
+    </div>
+  );
+
+  const dialogFooterFailure = (
+    <div className="flex justify-content-center">
+      <Button
+        label="Close"
+        className="p-button-text"
+        autoFocus
+        onClick={() => {
+          setShowMessage(false);
+        }}
+      />
+    </div>
+  );
+
+  const SuccessDialouge = () => (
+    <Dialog
+      visible={showMessage}
+      onHide={() => setShowMessage(false)}
+      position="top"
+      footer={dialogFooterSuccess}
+      showHeader={false}
+      breakpoints={{ "960px": "80vw" }}
+      style={{ width: "30vw" }}
+    >
+      <div className="flex align-items-center flex-column pt-6 px-3">
+        <i
+          className="pi pi-check-circle"
+          style={{ fontSize: "5rem", color: "var(--green-500)" }}
+        ></i>
+        <h5>Your Password has been changed</h5>
+        <p style={{ lineHeight: 1.5, textIndent: "1rem" }}>
+          You can now access password protected pages. Please Proceed. In case
+          of any difficulty accessing the pages, please reach us at{" "}
+          <b>erldcit@grid-india.in</b>.
+        </p>
+      </div>
+    </Dialog>
+  );
+
+  const FailureDialouge = () => (
+    <Dialog
+      visible={showMessage}
+      onHide={() => setShowMessage(false)}
+      position="top"
+      footer={dialogFooterFailure}
+      showHeader={false}
+      breakpoints={{ "960px": "80vw" }}
+      style={{ width: "30vw" }}
+    >
+      <div className="flex align-items-center flex-column pt-6 px-3">
+        <i
+          className="pi pi-times"
+          style={{ fontSize: "5rem", color: "var(--red-500)" }}
+        ></i>
+        <h5>Wrong Email/ UserID or Password!</h5>
+        <p style={{ lineHeight: 1.5, textIndent: "1rem" }}>
+          In case you are facing difficulty loggin in, please reach us at{" "}
+          <b>erldcit@grid-india.in</b>.
+        </p>
+      </div>
+    </Dialog>
+  );
+
   return (
-    <>
-      <div className="full-width-height ">
-        <h2 className="no-margin center">Eastern Regional Map</h2>
-        {/* <h1 className="no-margin center">Eastern Regional {Energy} map</h1> */}
-        <div className="devider">
-          <div className="container_1">
-            <ComposableMap
-              width={1742}
-              height={2307}
-              projection="geoMercator"
-              // projection="geoAzimuthalEqualArea"
-              projectionConfig={{
-                rotate: [-87.0, -22.0, 10],
-                center: [0, 0],
-                scale: 10000,
-              }}
-            >
-              <Geographies geography={INDIA_TOPO_JSON}>
-                {({ geographies }) =>
-                  geographies.map((geo) => {
-                    const current = [
-                      data.find((s) => {
-                        return s["id"] === geo.properties.id;
-                      }),
-                    ];
+    <BaseLayout
+      title={"Reset Password"}
+      breadcrumb={[
+        {
+          label: "User",
+        },
+        { label: "Reset Password", route: "/user/forgotpassword" },
+      ]}
+    >
+      <div className="form-demo">
+        {FailureDialouge()}
+        {SuccessDialouge()}
+        <div className="flex justify-content-center">
+          <div className="card">
+            {step === 1 && (
+              <>
+                <h1 className="text-center">Forgot Username / Password?</h1>
+                <h4 className="text-center">
+                  Enter your email to reset your password.
+                </h4>
 
-                    return (
-                      <g key={geo.rsmKey}>
-                        <Geography
-                          geography={geo}
-                          fill={current[0].color}
-                          style={geographyStyle}
-                          onMouseEnter={(e) => handleMouseEnter(e, current)}
-                          onMouseLeave={handleMouseLeave}
-                        />
+                {/* send an OTP to your registered email id */}
+                <Form
+                  onSubmit={onSubmitsendotp}
+                  initialValues={{
+                    email: "",
+                  }}
+                  validate={validatesendotp}
+                  render={({ handleSubmit }) => (
+                    <form onSubmit={handleSubmit} className="p-fluid">
+                      <Field
+                        name="email"
+                        render={({ input, meta }) => (
+                          <div className="field">
+                            <span className="p-float-label p-input-icon-right">
+                              {/* <i className="pi pi-envelope" /> */}
+                              <InputText
+                                id="email"
+                                {...input}
+                                className={classNames({
+                                  "p-invalid": isFormFieldValid(meta),
+                                })}
+                              />
+                              <label
+                                htmlFor="email"
+                                className={classNames({
+                                  "p-error": isFormFieldValid(meta),
+                                })}
+                              >
+                                Email*
+                              </label>
+                            </span>
+                            {getFormErrorMessage(meta)}
+                          </div>
+                        )}
+                      />
 
-                        <Annotation
-                          subject={current[0].clatlong}
-                          dx={0}
-                          dy={0}
-                          connectorProps={{
-                            stroke: "#FF5533",
-                            strokeWidth: 1,
-                            strokeLinecap: "round",
-                          }}
-                        >
-                          <text
-                            x="130"
-                            textAnchor="end"
-                            alignmentBaseline="middle"
-                            fill="black"
-                            style={{
-                              fontSize: "64px", // Adjust the font size to make the text larger
-                            }}
-                          >
-                            {current[0].name}
-                          </text>
-                        </Annotation>
-                      </g>
-                    );
-                  })
-                }
-              </Geographies>
-            </ComposableMap>
+                      <Button type="submit" label="Send OTP" className="mt-2" />
+                    </form>
+                  )}
+                />
+              </>
+            )}
+            {/* send an OTP to your registered email id */}
+
+            {/* VerifyOTP */}
+            {step === 2 && (
+              <>
+                <h4 className="text-center">
+                  A one-time password has been sent to {email}
+                </h4>
+
+                <h4 className="text-center">
+                  Enter the 6 digit code we sent you via email.
+                </h4>
+
+                <h4 className="text-center">OTP is valid for 5 minutes</h4>
+                <Form
+                  onSubmit={onSubmitverifyotp}
+                  initialValues={{
+                    otp: "",
+                    // newPassword: "",
+                    // confirmPassword: "",
+                  }}
+                  validate={validateverifyotp}
+                  render={({ handleSubmit }) => (
+                    <form onSubmit={handleSubmit} className="p-fluid">
+                      <Field
+                        name="otp"
+                        render={({ input, meta }) => (
+                          <div className="field">
+                            <span className="p-float-label p-input-icon-right">
+                              {/* <div className="card flex justify-content-center"> */}
+                              <InputOtp
+                                id="otp"
+                                value={otp}
+                                // {...input}
+                                onChange={(e) => setOtp(e.value)}
+                                length={6}
+                                style={{ width: "400px" }}
+                                className={classNames({
+                                  "p-invalid": isFormFieldValid(meta),
+                                })}
+                              />
+                            </span>
+                            {getFormErrorMessage(meta)}
+                          </div>
+                        )}
+                      />
+                      {/* <Field
+                        name="newPassword"
+                        render={({ input, meta }) => (
+                          <div className="field">
+                            <span className="p-float-label">
+                              <Password
+                                id="newPassword"
+                                {...input}
+                                toggleMask
+                                className={classNames({
+                                  "p-invalid": isFormFieldValid(meta),
+                                })}
+                              />
+                              <label
+                                htmlFor="newPassword"
+                                className={classNames({
+                                  "p-error": isFormFieldValid(meta),
+                                })}
+                              >
+                                New Password*
+                              </label>
+                            </span>
+                            {getFormErrorMessage(meta)}
+                          </div>
+                        )}
+                      />
+                      <Field
+                        name="confirmPassword"
+                        render={({ input, meta }) => (
+                          <div className="field">
+                            <span className="p-float-label">
+                              <Password
+                                id="confirmPassword"
+                                {...input}
+                                toggleMask
+                                className={classNames({
+                                  "p-invalid": isFormFieldValid(meta),
+                                })}
+                              />
+                              <label
+                                htmlFor="confirmPassword"
+                                className={classNames({
+                                  "p-error": isFormFieldValid(meta),
+                                })}
+                              >
+                                Confirm Password*
+                              </label>
+                            </span>
+                            {getFormErrorMessage(meta)}
+                          </div>
+                        )}
+                      /> */}
+
+                      <Button
+                        type="submit"
+                        label="Change Password"
+                        className="mt-2"
+                      />
+                    </form>
+                  )}
+                />
+              </>
+            )}
+            {/* VerifyOTP */}
+
+            {/* Password and Confirm Pasword*/}
+
+            {/* {step === 3 && (
+              <>
+                <h1 className="text-center">Reset Password</h1>
+                <Form
+                  onSubmit={onSubmitchangepassword}
+                  initialValues={{
+                    newPassword: "",
+                    confirmPassword: "",
+                  }}
+                  validate={validatechangepassword}
+                  render={({ handleSubmit }) => (
+                    <form onSubmit={handleSubmit} className="p-fluid">
+                      <Field
+                        name="newPassword"
+                        render={({ input, meta }) => (
+                          <div className="field">
+                            <span className="p-float-label">
+                              <Password
+                                id="newPassword"
+                                {...input}
+                                toggleMask
+                                className={classNames({
+                                  "p-invalid": isFormFieldValid(meta),
+                                })}
+                              />
+                              <label
+                                htmlFor="newPassword"
+                                className={classNames({
+                                  "p-error": isFormFieldValid(meta),
+                                })}
+                              >
+                                New Password*
+                              </label>
+                            </span>
+                            {getFormErrorMessage(meta)}
+                          </div>
+                        )}
+                      />
+
+                      <Field
+                        name="confirmPassword"
+                        render={({ input, meta }) => (
+                          <div className="field">
+                            <span className="p-float-label">
+                              <Password
+                                id="confirmPassword"
+                                {...input}
+                                toggleMask
+                                className={classNames({
+                                  "p-invalid": isFormFieldValid(meta),
+                                })}
+                              />
+                              <label
+                                htmlFor="confirmPassword"
+                                className={classNames({
+                                  "p-error": isFormFieldValid(meta),
+                                })}
+                              >
+                                Confirm Password*
+                              </label>
+                            </span>
+                            {getFormErrorMessage(meta)}
+                          </div>
+                        )}
+                      />
+
+                      <Button
+                        type="submit"
+                        label="Reset Password"
+                        className="mt-2"
+                      />
+                    </form>
+                  )}
+                />
+              </>
+            )} */}
+            {/* Password and Confirm Pasword*/}
           </div>
         </div>
       </div>
-      {tooltip.visible && (
-        <div
-          style={{
-            position: "absolute",
-            top: tooltip.y,
-            left: tooltip.x,
-            backgroundColor: "rgba(8, 110, 141, 0.75)",
-            color: "white",
-            padding: "2px",
-            borderRadius: "4px",
-            pointerEvents: "none",
-            fontSize: "14px",
-            // transform: "translate(-50%, 200%)",
-          }}
-        >
-          {tooltip.content}
-        </div>
-      )}
-      {/* <Button size="small">See ER Power Map</Button> */}
-      <Dialog
-        header="Values"
-        visible={showdailog}
-        style={{ width: "13vw", height: "18vw" }}
-        onHide={() => setshowdailog(false)}
-      >
-        {clickdata[0] ? (
-          <div>
-            <p>State : {clickdata[0].name}</p>
-            {/* <p>District : {clickdata[0].District}</p> */}
-            {/* <p>Ac_name : {clickdata[0].Ac_name}</p> */}
-            {temp_list.map((item) => (
-              <p>
-                {item} : {clickdata[0][item] ? clickdata[0][item] : "NA"}
-              </p>
-            ))}
-          </div>
-        ) : (
-          ""
-        )}
-      </Dialog>
-    </>
+    </BaseLayout>
   );
 }
-
-export default Eastern2;

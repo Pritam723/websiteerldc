@@ -29,11 +29,22 @@ import DefaultNavbar from "examples/Navbars/DefaultNavbar";
 import CenteredFooter from "examples/Footers/CenteredFooter";
 import DefaultFooter from "examples/Footers/DefaultFooter";
 import footerRoutes from "footer.routes";
-
+import CssBaseline from "@mui/material/CssBaseline";
 import Breadcrumbs from "examples/Breadcrumbs";
-
+import "./Baselayout.css";
 // Routes
 import routes from "routes";
+import { Global } from "@emotion/react";
+
+// const MuiScopedCssBaseline = () => (
+//   <Global
+//     styles={{
+//       ".mui-container *": {
+//         all: "unset", // Reset only inside MUI container
+//       },
+//     }}
+//   />
+// );
 
 function BaseLayout({ breadcrumb, title, children }) {
   return (
@@ -43,19 +54,13 @@ function BaseLayout({ breadcrumb, title, children }) {
       bgColor="white"
       minHeight="100vh"
     >
-      <MKBox bgColor="white" shadow="sm" py={0.25}>
-        <DefaultNavbar
-          routes={routes}
-          // action={{
-          //   type: "external",
-          //   route: "https://www.creative-tim.com/product/material-kit-react",
-          //   label: "free download",
-          //   color: "info",
-          // }}
-          transparent
-          relative
-        />
+      <MKBox bgColor="white" shadow="sm" py={0.25} className="mui-container">
+        {/* <MuiScopedCssBaseline /> */}
+        {/* <CssBaseline /> */}
+        <DefaultNavbar routes={routes} transparent relative />
+        {/* </CssBaseline> */}
       </MKBox>
+
       <Container sx={{ mt: 6 }}>
         <Grid
           container
@@ -71,7 +76,17 @@ function BaseLayout({ breadcrumb, title, children }) {
           <MKTypography variant="h3" mb={1}>
             {title}
           </MKTypography>
-          {children}
+          <MKBox
+            width="100%"
+            position="relative"
+            borderRadius="xl"
+            shadow="lg"
+            mb={12}
+            sx={{ overflow: "hidden" }}
+          >
+            <div className="prime-react-wrapper">{children}</div>
+            {/* {children} */}
+          </MKBox>
         </Grid>
       </Container>
       <MKBox mt="auto">

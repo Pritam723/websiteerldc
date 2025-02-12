@@ -25,7 +25,7 @@ import MKSocialButton from "components/MKSocialButton";
 
 // Material Kit 2 React examples
 import DefaultNavbar from "examples/Navbars/DefaultNavbar";
-import Navbar from "examples/Navbars/DefaultNavbar/Navbar";
+// import Navbar from "examples/Navbars/DefaultNavbar/Navbar";
 
 import DefaultFooter from "examples/Footers/DefaultFooter";
 import FilledInfoCard from "examples/Cards/InfoCards/FilledInfoCard";
@@ -38,6 +38,7 @@ import DesignBlocks from "pages/Presentation/sections/DesignBlocks";
 import Pages from "pages/Presentation/sections/Pages";
 import Testimonials from "pages/Presentation/sections/Testimonials";
 import Download from "pages/Presentation/sections/Download";
+import Disclaimer from "examples/Disclaimer/Disclaimer.js";
 
 // Presentation page components
 import Highlights from "pages/Presentation/components/Highlights/Highlights";
@@ -60,6 +61,7 @@ import Chip from "@mui/material/Chip";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import MKBadge from "components/MKBadge";
 import AppBar from "examples/AppBar/AppBar";
+import Banner from "examples/Banner/Banner";
 
 function Presentation() {
   useEffect(() => {
@@ -80,6 +82,8 @@ function Presentation() {
 
   return (
     <>
+      <Banner />
+      <Disclaimer />
       <AppBar />
       <DefaultNavbar routes={routes} sticky />
 

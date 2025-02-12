@@ -38,14 +38,18 @@ const SearchIconWrapper = styled("div")(({ theme }) => ({
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: "inherit",
   width: "100%",
+  "& .MuiInputBase-input::placeholder": {
+    fontSize: "12px", // Adjust the size here
+    color: theme.palette.text.secondary, // Adjust the color
+  },
   "& .MuiInputBase-input": {
     padding: theme.spacing(1, 1, 1, 0),
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create("width"),
     [theme.breakpoints.up("sm")]: {
-      width: "12ch",
+      width: "6ch",
       "&:focus": {
-        width: "20ch",
+        width: "10ch",
       },
     },
   },
@@ -137,25 +141,25 @@ export default function MyAppBar() {
                 fontSize: fontSizeContent, // Dynamic font size for second div
               }}
             >
-              {isSearchVisible && (
-                <Search ref={searchRef}>
-                  <SearchIconWrapper>
-                    <SearchIcon />
-                  </SearchIconWrapper>
-                  <StyledInputBase
-                    placeholder="Search…"
-                    inputProps={{ "aria-label": "search" }}
-                  />
-                </Search>
-              )}
-              {!isSearchVisible && (
-                <IconButton onClick={toggleSearch} color="inherit">
-                  <SearchIcon />
-                </IconButton>
-              )}
-
               {windowWidth > 1200 && (
                 <>
+                  {isSearchVisible && (
+                    <Search ref={searchRef}>
+                      <SearchIconWrapper>
+                        <SearchIcon />
+                      </SearchIconWrapper>
+                      <StyledInputBase
+                        placeholder="Search…"
+                        inputProps={{ "aria-label": "search" }}
+                      />
+                    </Search>
+                  )}
+                  {!isSearchVisible && (
+                    <IconButton onClick={toggleSearch} color="inherit">
+                      <SearchIcon />
+                    </IconButton>
+                  )}
+
                   <a
                     href="#"
                     target="_blank"
@@ -188,6 +192,7 @@ export default function MyAppBar() {
                       हिन्दी
                     </Typography>
                   </a>
+
                   <a
                     href="#"
                     target="_blank"
@@ -266,9 +271,9 @@ export default function MyAppBar() {
                   {/* Add other links as needed */}
                 </>
               )}
-              <IconButton sx={{ flexShrink: 0 }}>
-                <AccountCircle />
-              </IconButton>
+              {/* <IconButton sx={{ flexShrink: 0 }}>
+                <AccountCircle /> Logout
+              </IconButton> */}
             </div>
           </Toolbar>
         </AppBar>

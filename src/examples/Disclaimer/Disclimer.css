@@ -1,0 +1,51 @@
+.sliding-box-container {
+  position: relative;
+}
+
+/* Button styling */ 
+.toggle-button {
+  font-weight: bold;
+  position: fixed;
+  font-size: small;
+  /* font-style: italic; */
+  font-family: sans-serif;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%) rotate(90deg);
+  transform-origin: right center;
+  background-color: #1a73e8;
+  color: white;
+  border: none;
+  border-radius: 6.5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+/* Disclaimer content styling */
+.disclaimer-content {
+    text-align: justify;
+  text-justify: inter-word;
+  position: fixed;
+  bottom: 250px;
+  right: -400px; /* Initially hidden outside the viewport */
+  font-size: small;
+  background-color: #f8f9fa;
+  border: 1px solid #faf5f5;
+  border-radius: 5px;
+  padding: 15px;
+  height: 400px;
+  width: 370px;
+  overflow-y: scroll;
+  z-index: 999;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  transition: right 0.5s ease-in-out; /* Smooth sliding effect */
+}
+
+.disclaimer-content.open {
+  right: 20px; /* Fully visible when open */
+}
+
+.disclaimer-content.closed {
+  right: -400px; /* Hidden outside the viewport */
+}

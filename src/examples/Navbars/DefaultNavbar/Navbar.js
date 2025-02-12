@@ -96,7 +96,11 @@ export default function TemplateDemo() {
   );
   const end = (
     <div className="flex align-items-center gap-2">
-      <InputText placeholder="Search" type="text" className="w-8rem sm:w-auto" />
+      <InputText
+        placeholder="Search"
+        type="text"
+        className="w-8rem sm:w-auto"
+      />
       <Avatar
         image="https://primefaces.org/cdn/primereact/images/avatar/amyelsner.png"
         shape="circle"
