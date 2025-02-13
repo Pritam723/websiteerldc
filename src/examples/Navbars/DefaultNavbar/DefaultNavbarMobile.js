@@ -57,7 +57,7 @@ function DefaultNavbarMobile({ routes, open }) {
           isDynamic && namecontext
             ? "Welcome " + namecontext.split(" ")[0]
             : name
-        }
+        } // Change here
         icon={icon}
         collapseStatus={name === collapse}
         onClick={() => handleSetCollapse(name)}

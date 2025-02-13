@@ -14,8 +14,8 @@ import { Dialog } from "primereact/dialog";
 import { classNames } from "primereact/utils";
 import "./authentication.css";
 import BaseLayout from "layouts/sections/components/BaseLayout";
-import axios from "axios";
-import { AuthContext, AuthProvider } from "context/AuthContext";
+// import axios from "axios";
+import { AuthContext } from "context/AuthContext";
 import UserProfile from "./UserProfile";
 
 export default function SignIn() {
@@ -24,7 +24,9 @@ export default function SignIn() {
   const { redirectionURL } = location.state || {}; // Handle case where state is undefined
   const { user, loginUser, namecontext } = useContext(AuthContext);
   const [showMessage, setShowMessage] = useState(false);
-  const [isLoginSuccessful, setIsLoginSuccessful] = useState(false);
+  // const [formData, setFormData] = useState({});
+  // const [isLoginSuccessful, setIsLoginSuccessful] = useState(false);
+  // const [username, setUsername] = useState("");
 
   const validate = (data) => {
     let errors = {};
@@ -43,9 +45,11 @@ export default function SignIn() {
   const onSubmit = async (data, form) => {
     const loginFlag = await loginUser(data);
     console.log(namecontext);
-    await setIsLoginSuccessful(loginFlag);
-    await setShowMessage(true);
-    if (!loginFlag) return;
+
+    // setIsLoginSuccessful(loginFlag);
+    setShowMessage(true);
+
+    // if (!loginFlag) return;
   };
 
   const isFormFieldValid = (meta) => !!(meta.touched && meta.error);
@@ -132,10 +136,10 @@ export default function SignIn() {
   );
 
   return user ? (
-    <div>
+    <React.Fragment>
       {SuccessDialouge()}
       <UserProfile />
-    </div>
+    </React.Fragment>
   ) : (
     <BaseLayout
       title={"Sign In"}

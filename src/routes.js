@@ -71,6 +71,7 @@ import PageHeaders from "layouts/sections/page-sections/page-headers";
 import UserProfile from "pages/FunctionalPages/Auth/UserProfile";
 import SignIn from "pages/FunctionalPages/Auth/SignIn";
 import PeakHours from "pages/Departmental/Scheduling/PeakHours.js";
+import ShutdownAvailedList from "pages/Departmental/SystemOperation/ShutdownAvailedList.js";
 
 const routes = [
   // {
@@ -132,8 +133,8 @@ const routes = [
           {
             name: "Shutdown Availed List",
             hindiName: "शटडाउन प्राप्त सूची",
-            route: "/sections/page-sections/page-headers",
-            component: <PageHeaders />,
+            route: "/systemoperation/outage/shutdownavailedlist",
+            component: <ShutdownAvailedList />,
           },
           {
             name: "OCC Approved List",

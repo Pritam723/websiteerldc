@@ -109,10 +109,11 @@ function DefaultNavbar({
           isDynamic && namecontext
             ? "Welcome " + namecontext.split(" ")[0]
             : name
-        }
+        } // Change here
         // name={
         //   languagePreference == "English" ? name : hindiName ? hindiName : name
         // }
+        // name="name"
         icon={icon}
         href={href}
         route={route}
