@@ -43,7 +43,7 @@ export const AuthProvider = ({ children }) => {
     try {
       let response = await axios({
         method: "post",
-        url: "http://10.3.101.179:4001/login",
+        url: `${process.env.REACT_APP_READ_API}/login`,
         headers: {},
         data: data,
       });

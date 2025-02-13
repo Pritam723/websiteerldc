@@ -45,7 +45,7 @@ import {
   fileSizeBodyTemplate,
 } from "./CommonDataTableUtility";
 
-import PleaseSignIn from "pages/TemplatePage/PleaseSignIn.js";
+import LoadingScreen from "pages/TemplatePage/LoadingScreen.js";
 
 export default function CommonDataTable({
   dataToDisplay = {},
@@ -96,6 +96,8 @@ export default function CommonDataTable({
 
   //////////////////////////////////////////////////////////////////////////////////////////////
 
+  const [isLoading, setIsLoading] = useState(true);
+
   const [products, setProducts] = useState([]);
   // const [attachedFiles, setAttachedFiles] = useState([]);
   const [productDialog, setProductDialog] = useState(false);
@@ -104,11 +106,13 @@ export default function CommonDataTable({
   const [product, setProduct] = useState(emptyProduct);
   const [submitted, setSubmitted] = useState(false);
   const [globalFilter, setGlobalFilter] = useState(null);
+
   const toast = useRef(null);
   const dt = useRef(null);
   const uploadRef = useRef(null);
 
   const fetchAllStandardData = async () => {
+    setIsLoading(true);
     try {
       let headers = {
         "Content-Type": "application/json",
@@ -120,7 +124,7 @@ export default function CommonDataTable({
 
       let response = await axios({
         method: "post",
-        url: "http://10.3.101.179:4001/fetchAllStandardData",
+        url: `${process.env.REACT_APP_READ_API}/fetchAllStandardData`,
         headers: headers,
         data: {
           filterOptions: {
@@ -133,8 +137,8 @@ export default function CommonDataTable({
           targetTableClass: targetTableClass,
         },
       });
-      console.log(response);
-      console.log(response.data["data"]["products"]);
+      // console.log(response);
+      // console.log(response.data["data"]["products"]);
       const responseData = response.data;
 
       // Convert timestamps to Date objects, keeping null values unchanged
@@ -158,7 +162,8 @@ export default function CommonDataTable({
 
       setDisplayRange(responseData["data"]["dataInfo"]);
       setProducts(convertedProducts);
-      console.log("Done");
+      // console.log("Done");
+      setIsLoading(false);
     } catch (e) {
       // console.log(e.response.data);
       const responseData = e.response?.data;
@@ -169,6 +174,7 @@ export default function CommonDataTable({
         summary: responseData?.summary,
         deatil: responseData?.message,
       };
+      setIsLoading(false);
       showToastMessage(toast, toastDetails);
     }
   };
@@ -184,7 +190,8 @@ export default function CommonDataTable({
       }
       let response = await axios({
         method: "post",
-        url: "http://10.3.101.179:4001/downloadStandardData",
+        url: `${process.env.REACT_APP_READ_API}/downloadStandardData`,
+
         headers: headers,
         data: {
           productIdToDownload: product.id,
@@ -375,7 +382,7 @@ export default function CommonDataTable({
     try {
       let response = await axios({
         method: "post",
-        url: "http://10.3.101.179:4001/addStandardData",
+        url: `${process.env.REACT_APP_WRITE_API}/addStandardData`,
         headers: headers,
         data: {
           product: _product,
@@ -432,7 +439,7 @@ export default function CommonDataTable({
     try {
       let response = await axios({
         method: "post",
-        url: "http://10.3.101.179:4001/deleteStandardData",
+        url: `${process.env.REACT_APP_WRITE_API}/deleteStandardData`,
         headers: headers,
         data: {
           productIdToDelete: product.id,
@@ -684,12 +691,7 @@ export default function CommonDataTable({
     </React.Fragment>
   );
 
-  return !readPermission ? (
-    <PleaseSignIn
-      breadcrumb={breadcrumb}
-      redirectionURL={breadcrumb[breadcrumb.length - 1].redirectionURL}
-    />
-  ) : (
+  return (
     <BaseLayout title={pageTitle} breadcrumb={breadcrumb}>
       <React.Fragment>
         <Toast ref={toast} />
@@ -699,115 +701,117 @@ export default function CommonDataTable({
             start={startToolbarTemplate}
             end={endToolbarTemplate}
           ></Toolbar>
-
-          <DataTable
-            ref={dt}
-            value={products}
-            // selection={selectedProducts}
-            // onSelectionChange={(e) => setSelectedProducts(e.value)}
-            dataKey="id"
-            // showGridlines
-            stripedRows
-            paginator
-            rows={10}
-            removableSort
-            tableStyle={{ minWidth: "50rem" }}
-            // rowsPerPageOptions={[5, 10, 25]}
-            paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
-            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} products"
-            globalFilter={globalFilter}
-            header={header}
-          >
-            {/* <Column selectionMode="multiple" exportable={false}></Column> */}
-            {/* <Column
+          {isLoading ? (
+            <LoadingScreen />
+          ) : (
+            <DataTable
+              ref={dt}
+              value={products}
+              // selection={selectedProducts}
+              // onSelectionChange={(e) => setSelectedProducts(e.value)}
+              dataKey="id"
+              // showGridlines
+              stripedRows
+              paginator
+              rows={10}
+              removableSort
+              tableStyle={{ minWidth: "50rem" }}
+              // rowsPerPageOptions={[5, 10, 25]}
+              paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
+              currentPageReportTemplate="Showing {first} to {last} of {totalRecords} products"
+              globalFilter={globalFilter}
+              header={header}
+            >
+              {/* <Column selectionMode="multiple" exportable={false}></Column> */}
+              {/* <Column
               field="id"
               header="ID"
               sortable={sortInUse["id"]}
               style={{ minWidth: "12rem" }}
               hidden={!dataToDisplay["id"]}
             ></Column> */}
-            <Column
-              field="fileName"
-              header="File Name"
-              body={fileNameBodyTemplate}
-              sortable={sortInUse["fileName"]}
-              style={{ minWidth: "20rem" }}
-              hidden={!dataToDisplay["fileName"]}
-            ></Column>
-            <Column
-              field="fileDate"
-              header="Date (dd/mm/yyyy)"
-              body={dateBodyTemplate}
-              sortable={sortInUse["fileDate"]}
-              style={{ minWidth: "10rem" }}
-              hidden={!dataToDisplay["fileDate"]}
-            ></Column>
-            <Column
-              field="weekStartsEnds"
-              header="Week (Starts-Ends) (dd/mm/yyyy)"
-              body={weekBodyTemplate}
-              sortable={sortInUse["weekStartsEnds"]}
-              style={{ minWidth: "12rem" }}
-              hidden={!dataToDisplay["weekStartsEnds"]}
-            ></Column>
-            <Column
-              field="month"
-              header="Month"
-              body={monthBodyTemplate}
-              sortable={sortInUse["month"]}
-              style={{ minWidth: "12rem" }}
-              hidden={!dataToDisplay["month"]}
-            ></Column>
-            <Column
-              field="quarter"
-              header="Quarter"
-              //   body={statusBodyTemplate}
-              sortable={sortInUse["quarter"]}
-              style={{ minWidth: "12rem" }}
-              hidden={!dataToDisplay["quarter"]}
-            ></Column>
-            <Column
-              field="year"
-              header="Year"
-              body={yearBodyTemplate}
-              sortable={sortInUse["year"]}
-              style={{ minWidth: "12rem" }}
-              hidden={!dataToDisplay["year"]}
-            ></Column>
-            <Column
-              field="fy"
-              header="Financial Year"
-              // body={statusBodyTemplate}
-              sortable={sortInUse["fy"]}
-              style={{ minWidth: "12rem" }}
-              hidden={!dataToDisplay["fy"]}
-            ></Column>
-            <Column
-              field="fileDateFromTo"
-              header="File Date (From-To) (dd/mm/yyyy)"
-              body={fileDateFromToBodyTemplate}
-              sortable={sortInUse["fileDateFromTo"]}
-              style={{ minWidth: "12rem" }}
-              hidden={!dataToDisplay["fileDateFromTo"]}
-            ></Column>
-            <Column
-              field="uploadedOn"
-              header="Upload Date (dd/mm/yyyy)"
-              body={uploadDateBodyTemplate}
-              sortable={sortInUse["uploadedOn"]}
-              style={{ minWidth: "12rem" }}
-              hidden={!dataToDisplay["uploadedOn"]}
-            ></Column>
+              <Column
+                field="fileName"
+                header="File Name"
+                body={fileNameBodyTemplate}
+                sortable={sortInUse["fileName"]}
+                style={{ minWidth: "20rem" }}
+                hidden={!dataToDisplay["fileName"]}
+              ></Column>
+              <Column
+                field="fileDate"
+                header="Date (dd/mm/yyyy)"
+                body={dateBodyTemplate}
+                sortable={sortInUse["fileDate"]}
+                style={{ minWidth: "10rem" }}
+                hidden={!dataToDisplay["fileDate"]}
+              ></Column>
+              <Column
+                field="weekStartsEnds"
+                header="Week (Starts-Ends) (dd/mm/yyyy)"
+                body={weekBodyTemplate}
+                sortable={sortInUse["weekStartsEnds"]}
+                style={{ minWidth: "12rem" }}
+                hidden={!dataToDisplay["weekStartsEnds"]}
+              ></Column>
+              <Column
+                field="month"
+                header="Month"
+                body={monthBodyTemplate}
+                sortable={sortInUse["month"]}
+                style={{ minWidth: "12rem" }}
+                hidden={!dataToDisplay["month"]}
+              ></Column>
+              <Column
+                field="quarter"
+                header="Quarter"
+                //   body={statusBodyTemplate}
+                sortable={sortInUse["quarter"]}
+                style={{ minWidth: "12rem" }}
+                hidden={!dataToDisplay["quarter"]}
+              ></Column>
+              <Column
+                field="year"
+                header="Year"
+                body={yearBodyTemplate}
+                sortable={sortInUse["year"]}
+                style={{ minWidth: "12rem" }}
+                hidden={!dataToDisplay["year"]}
+              ></Column>
+              <Column
+                field="fy"
+                header="Financial Year"
+                // body={statusBodyTemplate}
+                sortable={sortInUse["fy"]}
+                style={{ minWidth: "12rem" }}
+                hidden={!dataToDisplay["fy"]}
+              ></Column>
+              <Column
+                field="fileDateFromTo"
+                header="File Date (From-To) (dd/mm/yyyy)"
+                body={fileDateFromToBodyTemplate}
+                sortable={sortInUse["fileDateFromTo"]}
+                style={{ minWidth: "12rem" }}
+                hidden={!dataToDisplay["fileDateFromTo"]}
+              ></Column>
+              <Column
+                field="uploadedOn"
+                header="Upload Date (dd/mm/yyyy)"
+                body={uploadDateBodyTemplate}
+                sortable={sortInUse["uploadedOn"]}
+                style={{ minWidth: "12rem" }}
+                hidden={!dataToDisplay["uploadedOn"]}
+              ></Column>
 
-            <Column
-              field="uploadedBy"
-              header="Uploaded By"
-              sortable={sortInUse["uploadedBy"]}
-              style={{ minWidth: "12rem" }}
-              hidden={!dataToDisplay["uploadedBy"]}
-            ></Column>
+              <Column
+                field="uploadedBy"
+                header="Uploaded By"
+                sortable={sortInUse["uploadedBy"]}
+                style={{ minWidth: "12rem" }}
+                hidden={!dataToDisplay["uploadedBy"]}
+              ></Column>
 
-            {/* <Column
+              {/* <Column
               field="actualUploadDate"
               header="Actual Upload Date"
               //   body={statusBodyTemplate}
@@ -815,28 +819,29 @@ export default function CommonDataTable({
               style={{ minWidth: "12rem" }}
               hidden={!dataToDisplay["actualUploadDate"]}
             ></Column> */}
-            <Column
-              field="size"
-              header="File Size"
-              body={fileSizeBodyTemplate}
-              sortable={sortInUse["size"]}
-              style={{ minWidth: "12rem" }}
-              hidden={!dataToDisplay["size"]}
-            ></Column>
-            <Column
-              header="Download"
-              body={downloadBodyTemplate}
-              exportable={false}
-              style={{ minWidth: "12rem" }}
-            ></Column>
-            <Column
-              header="Action"
-              body={actionBodyTemplate}
-              exportable={false}
-              style={{ minWidth: "12rem" }}
-              hidden={!writePermission}
-            ></Column>
-          </DataTable>
+              <Column
+                field="size"
+                header="File Size"
+                body={fileSizeBodyTemplate}
+                sortable={sortInUse["size"]}
+                style={{ minWidth: "12rem" }}
+                hidden={!dataToDisplay["size"]}
+              ></Column>
+              <Column
+                header="Download"
+                body={downloadBodyTemplate}
+                exportable={false}
+                style={{ minWidth: "12rem" }}
+              ></Column>
+              <Column
+                header="Action"
+                body={actionBodyTemplate}
+                exportable={false}
+                style={{ minWidth: "12rem" }}
+                hidden={!writePermission}
+              ></Column>
+            </DataTable>
+          )}
         </div>
 
         <Dialog
@@ -1095,26 +1100,6 @@ export default function CommonDataTable({
             )}
           </div>
         </Dialog>
-
-        {/* <Dialog
-          visible={deleteProductsDialog}
-          style={{ width: "32rem" }}
-          breakpoints={{ "960px": "75vw", "641px": "90vw" }}
-          header="Confirm"
-          modal
-          footer={deleteProductsDialogFooter}
-          onHide={hideDeleteProductsDialog}
-        >
-          <div className="confirmation-content">
-            <i
-              className="pi pi-exclamation-triangle mr-3"
-              style={{ fontSize: "2rem" }}
-            />
-            {product && (
-              <span>Are you sure you want to delete the selected files?</span>
-            )}
-          </div>
-        </Dialog> */}
       </React.Fragment>
     </BaseLayout>
   );
