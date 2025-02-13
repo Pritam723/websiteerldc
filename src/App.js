@@ -29,6 +29,8 @@ import Presentation from "layouts/pages/presentation";
 // Material Kit 2 React routes
 import routes from "routes";
 import { AuthContext, AuthProvider } from "context/AuthContext";
+import ForgotPassword from "pages/FunctionalPages/Auth/ForgotPassword";
+import Register from "pages/FunctionalPages/Auth/Register";
 import UserProfile from "pages/FunctionalPages/Auth/UserProfile";
 import Test from "./Test";
 
@@ -66,6 +68,7 @@ export default function App() {
       <AuthProvider>
         <Routes>
           {getRoutes(routes)}
+
           <Route
             key="LandingPage"
             path="/"
@@ -75,8 +78,11 @@ export default function App() {
                 <Presentation />
               </React.Fragment>
             }
-            // element={<Presentation />}
           />
+
+          <Route path="user/forgotpassword" element={<ForgotPassword />} />
+          <Route path="user/register" element={<Register />} />
+          {/* <Route path="*" element={<Navigate to="/" />} /> */}
           <Route key="default" path="*" element={<Navigate to="/" />} />
           {/* <Route path="/user/userprofile" element={<UserProfile />} /> */}
         </Routes>

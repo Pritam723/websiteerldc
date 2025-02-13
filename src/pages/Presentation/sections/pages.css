@@ -19,7 +19,7 @@
 
 @keyframes scroll-up {
   0% {
-    transform: translateY(0);
+    transform: translateY(50%);
   }
   100% {
     transform: translateY(-100%);
@@ -46,9 +46,8 @@
 .courasol-head {
   border-radius: 8px;
   padding: 5px;
-  /* margin-top: 0.1px; */
-  /* margin-left: 1px; */
-  /* margin-right: 1px; */
+
+  
   height: 35px;
   font-family: "Times New Roman", Times, serif;
   font-size: 15px;

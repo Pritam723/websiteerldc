@@ -53,7 +53,7 @@ import { blueGrey } from "@mui/material/colors";
 import Button from "assets/theme/components/button";
 import { AuthContext, AuthProvider } from "context/AuthContext";
 import CssBaseline from "@mui/material/CssBaseline";
-
+import "./flags.css";
 function DefaultNavbar({
   brand,
   routes,
@@ -504,7 +504,11 @@ function DefaultNavbar({
 
   return (
     // <div>hii</div>
-    <Container sx={sticky ? { position: "sticky", top: 0, zIndex: 10 } : null}>
+    // <CssBaseline/>
+    <Container
+      sx={sticky ? { position: "sticky", top: 0, zIndex: 10 } : null}
+      className="mui-container"
+    >
       {/* <CssBaseline /> */}
       <MKBox
         py={0}
@@ -536,18 +540,13 @@ function DefaultNavbar({
         >
           {/* Component for GRID-INDIA Logo Start*/}
           <MKBox
-            // component={Link}
-            // to="https://erldc.in/en/"
-
             component="a"
-            // href="https://posoco.in/" // Replace with your desired URL
             href="/"
             target="_blank" // Open in a new tab
             lineHeight={1}
             py={transparent ? 1.5 : 0.75}
             pl={relative || transparent ? 0 : { xs: 0, lg: 1 }}
           >
-            {/* updated by 00339  */}
             {brand.endsWith(".png") ||
             brand.endsWith(".jpg") ||
             brand.endsWith(".svg") ? (
@@ -570,20 +569,18 @@ function DefaultNavbar({
                 {brand}
               </MKTypography>
             )}
-            {/* updated by 00339  */}
           </MKBox>
           {/* Component for GRID-INDIA Logo End*/}
 
           <MKBox
             color="inherit"
             display={{ xs: "none", lg: "flex" }}
-            // ml="auto"
-            // mr={center ? "auto" : 0}
             ml={0}
             mr={0}
           >
             {renderNavbarItems}
           </MKBox>
+
           <MKBox ml={{ xs: "auto", lg: 0 }}>
             {action &&
               (action.type === "internal" ? (
@@ -642,6 +639,7 @@ function DefaultNavbar({
           )}
         </MKBox>
       </MKBox>
+
       {dropdownMenu}
       {nestedDropdownMenu}
     </Container>

@@ -6,6 +6,10 @@
 img.flag {
   width: 30px;
 }
+.mui-container {
+  all: unset;
+}
+
 .flag {
   background: url(https://primefaces.org/cdn/primereact/images/flag/flags_responsive.png)
     no-repeat;

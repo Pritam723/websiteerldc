@@ -115,7 +115,7 @@ function Presentation() {
         }}
       >
         <FlasherSlider />
-        {/* <div>ghghg</div> */}
+
         <Counters />
         <Information />
         {/* <DesignBlocks /> */}

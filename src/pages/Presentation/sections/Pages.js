@@ -36,6 +36,7 @@ import MKTypography from "components/MKTypography";
 
 // Presentation page components
 import ExampleCard from "pages/Presentation/components/ExampleCard";
+import EasternMap from "examples/Easternmap/EasternMap";
 
 // Data
 import data from "pages/Presentation/sections/data/pagesData";
@@ -56,9 +57,11 @@ import RotatingCardBack from "examples/Cards/RotatingCard/RotatingCardBack";
 import bgFront from "assets/images/Flower-offering.jpg";
 import bgBack from "assets/images/nscb.jpg";
 
-import EasternMap from "examples/Easternmap/EasternMap";
+// import EasternMap from "examples/Easternmap/EasternMap";
 
 function Pages() {
+  const [content, setContent] = useState("ghgh");
+
   useEffect(() => {
     //Runs only on the first render
     const observer = new IntersectionObserver((entries) => {
