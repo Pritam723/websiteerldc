@@ -82,6 +82,7 @@ function DefaultNavbarMobile({ routes, open }) {
                       px={0.5}
                     >
                       {item.name}
+                      {/* Change here */}
                     </MKTypography>
                     {item.collapse.map((el) => (
                       <MKTypography
@@ -114,6 +115,7 @@ function DefaultNavbarMobile({ routes, open }) {
                         })}
                       >
                         {el.name}
+                        {/* Change here */}
                       </MKTypography>
                     ))}
                   </>
@@ -153,6 +155,7 @@ function DefaultNavbarMobile({ routes, open }) {
                       textTransform="capitalize"
                     >
                       {item.name}
+                      {/* Change here */}
                     </MKTypography>
                     <MKTypography
                       display="block"

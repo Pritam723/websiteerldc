@@ -53,7 +53,7 @@ import { blueGrey } from "@mui/material/colors";
 import Button from "assets/theme/components/button";
 import { AuthContext, AuthProvider } from "context/AuthContext";
 import CssBaseline from "@mui/material/CssBaseline";
-
+import { getNavbarDisplayName } from "./NavbarUtility.js";
 function DefaultNavbar({
   brand,
   routes,
@@ -105,15 +105,13 @@ function DefaultNavbar({
       // <div key={name}>hihihihi</div>
       <DefaultNavbarDropdown
         key={name}
-        name={
-          isDynamic && namecontext
-            ? "Welcome " + namecontext.split(" ")[0]
-            : name
-        } // Change here
-        // name={
-        //   languagePreference == "English" ? name : hindiName ? hindiName : name
-        // }
-        // name="name"
+        name={getNavbarDisplayName(
+          name,
+          hindiName,
+          namecontext,
+          languagePreference,
+          isDynamic
+        )}
         icon={icon}
         href={href}
         route={route}
@@ -302,7 +300,14 @@ function DefaultNavbar({
                   </MKTypography>
                 </MKBox>
               ) : (
-                item.name
+                // Change Here
+                getNavbarDisplayName(
+                  item.name,
+                  item.hindiName,
+                  namecontext,
+                  languagePreference,
+                  item.isDynamic
+                )
               )}
               {item.collapse && (
                 <Icon
@@ -442,7 +447,14 @@ function DefaultNavbar({
                         </MKTypography>
                       </MKBox>
                     ) : (
-                      item.name
+                      // Change Here
+                      getNavbarDisplayName(
+                        item.name,
+                        item.hindiName,
+                        namecontext,
+                        languagePreference,
+                        item.isDynamic
+                      )
                     )}
                     {item.collapse && (
                       <Icon

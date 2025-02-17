@@ -63,7 +63,7 @@ export default function CircularDemo() {
     <div className="slider-goi">
       {/* <div className="slide-track-goi"> */}
       <Marquee pauseOnHover={true} direction="left">
-        <div class="slide-goi">
+        <div className="slide-goi">
           <a
             href="http://urjaindia.co.in/"
             target="_blank"
@@ -73,7 +73,7 @@ export default function CircularDemo() {
           </a>
         </div>
 
-        <div class="slide-goi">
+        <div className="slide-goi">
           <a
             href="http://urjaindia.co.in/"
             target="_blank"
@@ -82,7 +82,7 @@ export default function CircularDemo() {
             <img src={pic2} />
           </a>
         </div>
-        <div class="slide-goi">
+        <div className="slide-goi">
           <a
             href="http://urjaindia.co.in/"
             target="_blank"
@@ -91,7 +91,7 @@ export default function CircularDemo() {
             <img src={pic3} />
           </a>
         </div>
-        <div class="slide-goi">
+        <div className="slide-goi">
           <a
             href="http://urjaindia.co.in/"
             target="_blank"
@@ -100,7 +100,7 @@ export default function CircularDemo() {
             <img src={pic4} />
           </a>
         </div>
-        <div class="slide-goi">
+        <div className="slide-goi">
           <a
             href="http://urjaindia.co.in/"
             target="_blank"
@@ -109,7 +109,7 @@ export default function CircularDemo() {
             <img src={pic5} />
           </a>
         </div>
-        <div class="slide-goi">
+        <div className="slide-goi">
           <a
             href="http://urjaindia.co.in/"
             target="_blank"
@@ -118,7 +118,7 @@ export default function CircularDemo() {
             <img src={pic6} />
           </a>
         </div>
-        <div class="slide-goi">
+        <div className="slide-goi">
           <a
             href="https://www.digitalindia.gov.in/"
             target="_blank"

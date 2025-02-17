@@ -71,6 +71,7 @@ import PageHeaders from "layouts/sections/page-sections/page-headers";
 import UserProfile from "pages/FunctionalPages/Auth/UserProfile";
 import SignIn from "pages/FunctionalPages/Auth/SignIn";
 import PeakHours from "pages/Departmental/Scheduling/PeakHours.js";
+import LimitedTender from "pages/Departmental/More/Contracts Awarded/LimitedTender.js";
 
 const routes = [
   // {
@@ -986,7 +987,8 @@ const routes = [
           {
             name: "Limited Tender",
             hindiName: "सीमित निविदा",
-            route: "/sections/page-sections/page-headers",
+            route: "/more/contractsawarded/limitedtender",
+            component: <LimitedTender />,
           },
           {
             name: "Single Tender",

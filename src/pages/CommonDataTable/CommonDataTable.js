@@ -930,28 +930,6 @@ export default function CommonDataTable({
             )}
           </div>
 
-          <div className="field" hidden={!uploadPoints["quarter"]}>
-            <label htmlFor="quarter" className="font-bold">
-              Quarter
-            </label>
-            <Dropdown
-              id="quarter"
-              value={product.quarter}
-              onChange={(e) => onInputChange(e, "quarter")}
-              required
-              // autoFocus
-              className={classNames({
-                "p-invalid": submitted && !product.quarter,
-              })}
-              options={quarterList}
-              // optionLabel="quarter"
-              placeholder="Select Quarter"
-            />
-            {submitted && !product.quarter && (
-              <small className="p-error">Quarter is required.</small>
-            )}
-          </div>
-
           <div className="field" hidden={!uploadPoints["year"]}>
             <label htmlFor="year" className="font-bold">
               Year
@@ -999,6 +977,29 @@ export default function CommonDataTable({
               <small className="p-error">Financial Year is required.</small>
             )}
           </div>
+
+          <div className="field" hidden={!uploadPoints["quarter"]}>
+            <label htmlFor="quarter" className="font-bold">
+              Quarter
+            </label>
+            <Dropdown
+              id="quarter"
+              value={product.quarter}
+              onChange={(e) => onInputChange(e, "quarter")}
+              required
+              // autoFocus
+              className={classNames({
+                "p-invalid": submitted && !product.quarter,
+              })}
+              options={quarterList}
+              // optionLabel="quarter"
+              placeholder="Select Quarter"
+            />
+            {submitted && !product.quarter && (
+              <small className="p-error">Quarter is required.</small>
+            )}
+          </div>
+
           <div className="field" hidden={!uploadPoints["fileDateFromTo"]}>
             <label htmlFor="fileDateFromTo" className="font-bold">
               File Date (From-To)
