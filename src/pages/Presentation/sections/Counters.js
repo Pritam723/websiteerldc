@@ -30,19 +30,17 @@ function Counters() {
       <Container>
         <Grid container item xs={12} lg={12} sx={{ mx: "auto" }}>
           <Grid item xs={12} md={3} display="centre">
-            <DefaultCounterCard
-              // count={70}
-              // prefix="hj"
-              suffix="11:04:22 AM"
-              title="Last Updated On"
-              // description="From buttons, to inputs, navbars, alerts or cards, you are covered"
-            />
+            <div class="MuiBox-root css-1qqu4ux">
+              <h2 class="MuiTypography-root MuiTypography-h2 css-zg0wqh-MuiTypography-root">
+                <span>11:04:22 AM</span>
+              </h2>
+              <h5 class="MuiTypography-root MuiTypography-h5 css-1itq6nk-MuiTypography-root">
+                Last Updated On
+              </h5>
+            </div>
           </Grid>
 
           <Grid item xs={12} md={3} display="centre">
-            {/* <Divider orientation="vertical" sx={{ display: { xs: "none", md: "block" }, mx: 0 }} /> */}
-            {/* <Divider orientation="vertical" sx={{ display: { xs: "none", md: "block" }, ml: 0 }} /> */}
-
             <DefaultCounterCard
               count={25070}
               suffix=" MW"

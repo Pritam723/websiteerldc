@@ -71,8 +71,13 @@ import PageHeaders from "layouts/sections/page-sections/page-headers";
 import UserProfile from "pages/FunctionalPages/Auth/UserProfile";
 import SignIn from "pages/FunctionalPages/Auth/SignIn";
 import PeakHours from "pages/Departmental/Scheduling/PeakHours.js";
-import ShutdownAvailedList from "pages/Departmental/SystemOperation/ShutdownAvailedList.js";
-
+import ShutdownAvailedList from "pages/Departmental/SystemOperation/Outage/ShutdownAvailedList.js";
+import DayAheadForecastingError from "pages/Departmental/SystemOperation/Forecasting/DayAheadForecastingError.js";
+import IntraDayForecastingError from "pages/Departmental/SystemOperation/Forecasting/IntraDayForecastingError.js";
+import WeekAheadForecastingError from "pages/Departmental/SystemOperation/Forecasting/WeekAheadForecastingError.js";
+import WeekAheadRollingForecast from "pages/Departmental/SystemOperation/Forecasting/WeekAheadRollingForecast.js";
+import MonthAheadForecastingError from "pages/Departmental/SystemOperation/Forecasting/MonthAheadForecastingError.js";
+import YearAheadForecastingError from "pages/Departmental/SystemOperation/Forecasting/YearAheadForecastingError.js";
 const routes = [
   // {
   //           name: "Home",
@@ -163,34 +168,38 @@ const routes = [
           {
             name: "Day Ahead Forecasting error",
             hindiName: "आगे के दिन का पूर्वानुमान त्रुटि",
-            route: "/sections/page-sections/page-headers",
+            route: "/systemoperation/forecasting/dayaheadforecastingerror",
+            component: <DayAheadForecastingError />,
           },
           {
             name: "Intra Day Forecasting error",
             hindiName: "इंट्राडे  का पूर्वानुमान त्रुटि",
-            route: "/sections/page-sections/page-headers",
+            route: "/systemoperation/forecasting/intradayforecastingerror",
+            component: <IntraDayForecastingError />,
           },
           {
             name: "Week Ahead Forecasting error",
             hindiName: "आगे के सप्ताह का पूर्वानुमान त्रुटि",
-            route: "/sections/page-sections/page-headers",
-            component: <PageHeaders />,
+            route: "/systemoperation/forecasting/weekaheadforecastingerror",
+            component: <WeekAheadForecastingError />,
           },
           {
             name: "Week ahead rolling Forecast",
             hindiName: "आगे के सप्ताह का रोलिंग पूर्वानुमान",
-            route: "/sections/page-sections/page-headers",
+            route: "/systemoperation/forecasting/weekaheadrollingforecast",
+            component: <WeekAheadRollingForecast />,
           },
           {
             name: "Month Ahead Forecasting error",
             hindiName: "आगे के महीने का पूर्वानुमान त्रुटि",
-            route: "/sections/page-sections/page-headers",
-            component: <PageHeaders />,
+            route: "/systemoperation/forecasting/monthaheadforecastingerror",
+            component: <MonthAheadForecastingError />,
           },
           {
             name: "Year Ahead Forecasting error",
             hindiName: "आगे के साल का पूर्वानुमान त्रुटि",
-            route: "/sections/page-sections/page-headers",
+            route: "/systemoperation/forecasting/yearaheadforecastingerror",
+            component: <YearAheadForecastingError />,
           },
         ],
       },
