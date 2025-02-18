@@ -21,7 +21,7 @@ export default function PeakHours() {
   /////////////////// Page Meta Data ////////////////////////////////////////
 
   ///////////////// Static Meta Data ///////////////////////////////////////
-  const targetTableClass = "PeakHour";
+  const targetTableClass = "PeakHours";
   // Must be same as it is in Flask -> ORM Class(Model) -> __tablename__
   const pageTitle = "Peak Hours & Season Declaration";
 
