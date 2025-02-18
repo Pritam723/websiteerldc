@@ -6,7 +6,7 @@ import "primeflex/primeflex.css";
 import React, { useContext } from "react";
 import { Avatar } from "primereact/avatar";
 import { Button } from "primereact/button";
-import "./SignIn.css";
+import "./authentication.css";
 import BaseLayout from "layouts/sections/components/BaseLayout";
 import { AuthContext, AuthProvider } from "context/AuthContext";
 
