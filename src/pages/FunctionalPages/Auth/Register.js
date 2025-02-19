@@ -2,35 +2,32 @@ import "primeicons/primeicons.css";
 import "primereact/resources/themes/lara-light-indigo/theme.css";
 import "primereact/resources/primereact.css";
 import "primeflex/primeflex.css";
-import ReactDOM from "react-dom";
+
 import { useNavigate, useLocation, Link } from "react-router-dom";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Form, Field } from "react-final-form";
 import { InputText } from "primereact/inputtext";
 import { Button } from "primereact/button";
-import { Dropdown } from "primereact/dropdown";
-import { Calendar } from "primereact/calendar";
+
 import { Password } from "primereact/password";
-import { Checkbox } from "primereact/checkbox";
 import { Dialog } from "primereact/dialog";
 import { Divider } from "primereact/divider";
 import { classNames } from "primereact/utils";
 import "./authentication.css";
 import { InputOtp } from "primereact/inputotp";
 import BaseLayout from "layouts/sections/components/BaseLayout";
-import View from "layouts/sections/components/View";
 // import MKBox from "components/MKBox";
+import axios from "axios";
+import { Toast } from "primereact/toast";
+import { showToastMessage } from "utilities/ToastMessage";
 
-export default function ReactFinalFormDemo() {
+export default function Register() {
   const navigate = useNavigate();
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState("");
   const [showMessage, setShowMessage] = useState(false);
   const [formData, setFormData] = useState({});
   const [otp, setOtp] = useState();
-
-  const onOtpregister = () => {
-    setStep(2); // Move to OTP verification
-  };
+  const toast = useRef(null);
 
   /////////////////////////////////////////////////////// Validate Registration//////////////////////////////////
   const validate_register = (data) => {
@@ -55,12 +52,23 @@ export default function ReactFinalFormDemo() {
     }
 
     if (!data.password) {
-      errors.password = " Password is required.";
+      errors.password = "Password is required.";
+    } else if (data.password) {
+      const hasLowercase = /[a-z]/.test(data.password);
+      const hasUppercase = /[A-Z]/.test(data.password);
+      const hasNumber = /\d/.test(data.password);
+      const hasMinLength = data.password.length >= 8;
+
+      if (!(hasLowercase && hasUppercase && hasNumber && hasMinLength)) {
+        errors.password = "Choose a strong password";
+      }
     }
+
     if (!data.confirmPassword) {
-      errors.confirmPassword = " Confirm Password is required.";
+      errors.confirmPassword = "Confirm Password is required.";
     } else if (data.confirmPassword != data.password) {
-      errors.confirmPassword = "Confirm Password is not matched with Password.";
+      errors.confirmPassword =
+        "Confirm Password is not same as chosen Password.";
     }
 
     return errors;
@@ -69,7 +77,7 @@ export default function ReactFinalFormDemo() {
 
   /////////////////////////////////////////////////////// Submit Registration//////////////////////////////////
 
-  const submit_register = (data, form) => {
+  const register_user = async (data) => {
     if (
       !data.name ||
       !data.email ||
@@ -81,15 +89,37 @@ export default function ReactFinalFormDemo() {
       return;
     }
 
-    setFormData(data);
-    onOtpregister();
-    form.restart();
+    try {
+      let response = await axios({
+        method: "post",
+        url: `${process.env.REACT_APP_READ_API}/register`,
+        headers: {},
+        data: data,
+      });
+      console.log(response);
+      setFormData(data);
+      setStep("RegisteredNotVerified"); // Move to OTP verification
+      // form.restart();
+    } catch (e) {
+      // console.log(e.response);
+      // console.log("Bad Request");
+
+      const responseData = e.response?.data;
+      console.log(responseData);
+
+      const toastDetails = {
+        severity: responseData?.type,
+        summary: responseData?.summary,
+        deatil: responseData?.message,
+      };
+      showToastMessage(toast, toastDetails);
+    }
   };
 
   /////////////////////////////////////////////////////// Submit Registration//////////////////////////////////
 
   /////////////////////////////////////////////////////// Verify OTP validation//////////////////////////////////
-  const registervalidateotp = (data) => {
+  const registerValidateOTP = () => {
     let errors = {};
 
     if (!otp) {
@@ -102,15 +132,42 @@ export default function ReactFinalFormDemo() {
   };
 
   /////////////////////////////////////////// Verify OTP Submission////////////////////////////////////////////
-  const registerverifyotp = async (data) => {
+  const registerVerifyOTP = async () => {
+    console.log(otp);
     if (!otp || !/^\d{6}$/.test(otp)) {
       return;
     }
 
-    setOtp(otp);
-    setShowMessage(true);
-    // form.restart();
-    // handleVerifyOtpSuccess();
+    const data = { otp: otp, userData: formData };
+
+    try {
+      let response = await axios({
+        method: "post",
+        url: `${process.env.REACT_APP_READ_API}/registerVerifyOTP`,
+        headers: {},
+        data: data,
+      });
+      console.log(response);
+      setOtp(otp);
+      setShowMessage(true);
+      // form.restart();
+      // handleVerifyOtpSuccess();
+
+      // form.restart();
+    } catch (e) {
+      console.log(e);
+      // console.log("Bad Request");
+
+      const responseData = e.response?.data;
+      console.log(responseData);
+
+      const toastDetails = {
+        severity: responseData?.type,
+        summary: responseData?.summary,
+        deatil: responseData?.message,
+      };
+      showToastMessage(toast, toastDetails);
+    }
   };
 
   /////////////////////// Verify Change Password validation//////////////////////////////////////////////////////
@@ -125,14 +182,14 @@ export default function ReactFinalFormDemo() {
   const dialogFooter = (
     <div className="flex justify-content-center">
       <Button
-        label="OK"
+        label="Sign In"
         className="p-button-text"
         autoFocus
-        onClick={() => navigate("/")}
+        onClick={() => navigate("/user/signin")}
       />
     </div>
   );
-  const passwordHeader = <h6>Pick a password</h6>;
+  // const passwordHeader = <h6>Pick a password</h6>;
   const passwordFooter = (
     <React.Fragment>
       <Divider />
@@ -156,6 +213,8 @@ export default function ReactFinalFormDemo() {
         { label: "Register", route: "/user/register" },
       ]}
     >
+      <Toast ref={toast} />
+
       <div className="form-demo">
         <Dialog
           visible={showMessage}
@@ -173,196 +232,205 @@ export default function ReactFinalFormDemo() {
             ></i>
             <h5>Registration Successful!</h5>
             <p style={{ lineHeight: 1.5, textIndent: "1rem" }}>
-              Your account is registered under name <b>{formData.name}</b> ;
-              it'll be valid next 30 days without activation. Please check{" "}
-              <b>{formData.email}</b> for activation instructions.
+              Your account is registered under name <b>{formData.name}</b> Use
+              your Email ID: <b>{formData.email}</b> and <b>Password</b> to
+              login.
             </p>
           </div>
         </Dialog>
 
         <div className="flex justify-content-center">
           <div className="card">
-            {step === 1 && (
-              <>
-                <h1 className="text-center">Register for this site!</h1>
-                <h4 className="text-center">Sign up now for the good stuff.</h4>
-                <Form
-                  onSubmit={submit_register}
-                  initialValues={{
-                    name: "",
-                    email: "",
-                    password: "",
-                    date: null,
-                    country: null,
-                    accept: false,
-                  }}
-                  validate={validate_register}
-                  render={({ handleSubmit }) => (
-                    <form onSubmit={handleSubmit} className="p-fluid">
-                      <Field
-                        name="name"
-                        render={({ input, meta }) => (
-                          <div className="field">
-                            <span className="p-float-label">
-                              <InputText
-                                id="name"
-                                {...input}
-                                // autoFocus
-                                className={classNames({
-                                  "p-invalid": isFormFieldValid(meta),
-                                })}
-                              />
-                              <label
-                                htmlFor="name"
-                                className={classNames({
-                                  "p-error": isFormFieldValid(meta),
-                                })}
-                              >
-                                Name*
-                              </label>
-                            </span>
-                            {getFormErrorMessage(meta)}
-                          </div>
-                        )}
-                      />
+            <>
+              <h1 className="text-center">Register for this site!</h1>
+              <h4 className="text-center">Sign up now for the good stuff.</h4>
+              <Form
+                onSubmit={register_user}
+                initialValues={{
+                  name: "",
+                  email: "",
+                  organization: "",
+                  mobilenumber: "",
+                  password: "",
+                  confirmPassword: "",
+                }}
+                validate={validate_register}
+                render={({ handleSubmit }) => (
+                  <form onSubmit={handleSubmit} className="p-fluid">
+                    <Field
+                      name="name"
+                      render={({ input, meta }) => (
+                        <div className="field">
+                          <span className="p-float-label">
+                            <InputText
+                              id="name"
+                              disabled={step == "RegisteredNotVerified"}
+                              {...input}
+                              // autoFocus
+                              className={classNames({
+                                "p-invalid": isFormFieldValid(meta),
+                              })}
+                            />
+                            <label
+                              htmlFor="name"
+                              className={classNames({
+                                "p-error": isFormFieldValid(meta),
+                              })}
+                            >
+                              Name*
+                            </label>
+                          </span>
+                          {getFormErrorMessage(meta)}
+                        </div>
+                      )}
+                    />
 
-                      <Field
-                        name="email"
-                        render={({ input, meta }) => (
-                          <div className="field">
-                            <span className="p-float-label p-input-icon-right">
-                              {/* <i className="pi pi-envelope" /> */}
-                              <InputText
-                                id="email"
-                                {...input}
-                                className={classNames({
-                                  "p-invalid": isFormFieldValid(meta),
-                                })}
-                              />
-                              <label
-                                htmlFor="email"
-                                className={classNames({
-                                  "p-error": isFormFieldValid(meta),
-                                })}
-                              >
-                                Email*
-                              </label>
-                            </span>
-                            {getFormErrorMessage(meta)}
-                          </div>
-                        )}
-                      />
-                      <Field
-                        name="organization"
-                        render={({ input, meta }) => (
-                          <div className="field">
-                            <span className="p-float-label p-input-icon-right">
-                              {/* <i className="pi pi-envelope" /> */}
-                              <InputText
-                                id="organization"
-                                {...input}
-                                className={classNames({
-                                  "p-invalid": isFormFieldValid(meta),
-                                })}
-                              />
-                              <label
-                                htmlFor="organization"
-                                className={classNames({
-                                  "p-error": isFormFieldValid(meta),
-                                })}
-                              >
-                                Organization*
-                              </label>
-                            </span>
-                            {getFormErrorMessage(meta)}
-                          </div>
-                        )}
-                      />
-                      <Field
-                        name="mobilenumber"
-                        render={({ input, meta }) => (
-                          <div className="field">
-                            <span className="p-float-label p-input-icon-right">
-                              {/* <i className="pi pi-envelope" /> */}
-                              <InputText
-                                id="mobilenumber"
-                                {...input}
-                                className={classNames({
-                                  "p-invalid": isFormFieldValid(meta),
-                                })}
-                              />
-                              <label
-                                htmlFor="mobilenumber"
-                                className={classNames({
-                                  "p-error": isFormFieldValid(meta),
-                                })}
-                              >
-                                Mobile Number*
-                              </label>
-                            </span>
-                            {getFormErrorMessage(meta)}
-                          </div>
-                        )}
-                      />
-                      <Field
-                        name="password"
-                        render={({ input, meta }) => (
-                          <div className="field">
-                            <span className="p-float-label">
-                              <Password
-                                id="password"
-                                {...input}
-                                toggleMask
-                                className={classNames({
-                                  "p-invalid": isFormFieldValid(meta),
-                                })}
-                              />
-                              <label
-                                htmlFor="password"
-                                className={classNames({
-                                  "p-error": isFormFieldValid(meta),
-                                })}
-                              >
-                                Password*
-                              </label>
-                            </span>
-                            {getFormErrorMessage(meta)}
-                          </div>
-                        )}
-                      />
+                    <Field
+                      name="email"
+                      render={({ input, meta }) => (
+                        <div className="field">
+                          <span className="p-float-label p-input-icon-right">
+                            {/* <i className="pi pi-envelope" /> */}
+                            <InputText
+                              id="email"
+                              {...input}
+                              disabled={step == "RegisteredNotVerified"}
+                              className={classNames({
+                                "p-invalid": isFormFieldValid(meta),
+                              })}
+                            />
+                            <label
+                              htmlFor="email"
+                              className={classNames({
+                                "p-error": isFormFieldValid(meta),
+                              })}
+                            >
+                              Email*
+                            </label>
+                          </span>
+                          {getFormErrorMessage(meta)}
+                        </div>
+                      )}
+                    />
+                    <Field
+                      name="organization"
+                      render={({ input, meta }) => (
+                        <div className="field">
+                          <span className="p-float-label p-input-icon-right">
+                            {/* <i className="pi pi-envelope" /> */}
+                            <InputText
+                              id="organization"
+                              {...input}
+                              disabled={step == "RegisteredNotVerified"}
+                              className={classNames({
+                                "p-invalid": isFormFieldValid(meta),
+                              })}
+                            />
+                            <label
+                              htmlFor="organization"
+                              className={classNames({
+                                "p-error": isFormFieldValid(meta),
+                              })}
+                            >
+                              Organization*
+                            </label>
+                          </span>
+                          {getFormErrorMessage(meta)}
+                        </div>
+                      )}
+                    />
+                    <Field
+                      name="mobilenumber"
+                      render={({ input, meta }) => (
+                        <div className="field">
+                          <span className="p-float-label p-input-icon-right">
+                            {/* <i className="pi pi-envelope" /> */}
+                            <InputText
+                              id="mobilenumber"
+                              {...input}
+                              disabled={step == "RegisteredNotVerified"}
+                              className={classNames({
+                                "p-invalid": isFormFieldValid(meta),
+                              })}
+                            />
+                            <label
+                              htmlFor="mobilenumber"
+                              className={classNames({
+                                "p-error": isFormFieldValid(meta),
+                              })}
+                            >
+                              Mobile Number*
+                            </label>
+                          </span>
+                          {getFormErrorMessage(meta)}
+                        </div>
+                      )}
+                    />
+                    <Field
+                      name="password"
+                      render={({ input, meta }) => (
+                        <div className="field">
+                          <span className="p-float-label">
+                            <Password
+                              id="password"
+                              {...input}
+                              disabled={step == "RegisteredNotVerified"}
+                              toggleMask
+                              className={classNames({
+                                "p-invalid": isFormFieldValid(meta),
+                              })}
+                              footer={passwordFooter}
+                            />
+                            <label
+                              htmlFor="password"
+                              className={classNames({
+                                "p-error": isFormFieldValid(meta),
+                              })}
+                            >
+                              Password*
+                            </label>
+                          </span>
+                          {getFormErrorMessage(meta)}
+                        </div>
+                      )}
+                    />
 
-                      <Field
-                        name="confirmPassword"
-                        render={({ input, meta }) => (
-                          <div className="field">
-                            <span className="p-float-label">
-                              <Password
-                                id="confirmPassword"
-                                {...input}
-                                toggleMask
-                                className={classNames({
-                                  "p-invalid": isFormFieldValid(meta),
-                                })}
-                                feedback={false}
-                              />
-                              <label
-                                htmlFor="confirmPassword"
-                                className={classNames({
-                                  "p-error": isFormFieldValid(meta),
-                                })}
-                              >
-                                Confirm Password*
-                              </label>
-                            </span>
-                            {getFormErrorMessage(meta)}
-                          </div>
-                        )}
-                      />
+                    <Field
+                      name="confirmPassword"
+                      render={({ input, meta }) => (
+                        <div className="field">
+                          <span className="p-float-label">
+                            <Password
+                              id="confirmPassword"
+                              {...input}
+                              disabled={step == "RegisteredNotVerified"}
+                              toggleMask
+                              className={classNames({
+                                "p-invalid": isFormFieldValid(meta),
+                              })}
+                              feedback={false}
+                            />
+                            <label
+                              htmlFor="confirmPassword"
+                              className={classNames({
+                                "p-error": isFormFieldValid(meta),
+                              })}
+                            >
+                              Confirm Password*
+                            </label>
+                          </span>
+                          {getFormErrorMessage(meta)}
+                        </div>
+                      )}
+                    />
 
+                    {step != "RegisteredNotVerified" && (
                       <Button type="submit" label="Sign Up" className="mt-2" />
-                    </form>
-                  )}
-                />
+                    )}
+                  </form>
+                )}
+              />
+              {step != "RegisteredNotVerified" && (
                 <div className="text-center mt-2">
                   <Link
                     key={"forgotpassword"}
@@ -380,20 +448,21 @@ export default function ReactFinalFormDemo() {
                     Already have an account?
                   </Link>
                 </div>
-              </>
-            )}
+              )}
+            </>
 
-            {step === 2 && (
+            {step === "RegisteredNotVerified" && (
               <>
-                <h1 className="text-center">OTP verification</h1>
+                <h3 className="text-center">
+                  Account is registered, verify within 5 minutes.
+                </h3>
 
-                <h4 className="text-center">OTP is valid for 5 minutes</h4>
                 <Form
-                  onSubmit={registerverifyotp}
+                  onSubmit={registerVerifyOTP}
                   initialValues={{
                     otp: "",
                   }}
-                  validate={registervalidateotp}
+                  validate={registerValidateOTP}
                   render={({ handleSubmit }) => (
                     <form onSubmit={handleSubmit} className="p-fluid">
                       <Field
@@ -422,6 +491,10 @@ export default function ReactFinalFormDemo() {
                     </form>
                   )}
                 />
+
+                <h4 className="text-center">
+                  Check your email for the OTP. It is valid for 5 minutes
+                </h4>
               </>
             )}
           </div>

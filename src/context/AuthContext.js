@@ -48,7 +48,7 @@ export const AuthProvider = ({ children }) => {
         data: data,
       });
       console.log(response);
-      let tokenData = await response.data;
+      let tokenData = await response.data.data;
       setAuthTokens(tokenData);
       setUser(jwtDecode(tokenData.access_token).user_info);
       setNameContext(jwtDecode(tokenData.access_token).user_info.name);

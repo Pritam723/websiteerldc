@@ -52,7 +52,7 @@ import GridLogo from "assets/images/GridIndiaLogo1.png";
 import { blueGrey } from "@mui/material/colors";
 import Button from "assets/theme/components/button";
 import { AuthContext, AuthProvider } from "context/AuthContext";
-import CssBaseline from "@mui/material/CssBaseline";
+// import CssBaseline from "@mui/material/CssBaseline";
 import { getNavbarDisplayName } from "./NavbarUtility.js";
 import "./flags.css";
 function DefaultNavbar({

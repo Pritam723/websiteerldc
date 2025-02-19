@@ -710,7 +710,7 @@ export default function CommonDataTable({
               // selection={selectedProducts}
               // onSelectionChange={(e) => setSelectedProducts(e.value)}
               dataKey="id"
-              // showGridlines
+              showGridlines
               stripedRows
               paginator
               rows={10}
