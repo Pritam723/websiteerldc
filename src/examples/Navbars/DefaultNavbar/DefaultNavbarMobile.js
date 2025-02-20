@@ -32,9 +32,10 @@ import MKTypography from "components/MKTypography";
 // Material Kit 2 React example components
 import DefaultNavbarDropdown from "examples/Navbars/DefaultNavbar/DefaultNavbarDropdown";
 import { AuthContext, AuthProvider } from "context/AuthContext";
+import { getNavbarDisplayName } from "./NavbarUtility.js";
 
 function DefaultNavbarMobile({ routes, open }) {
-  const { user, namecontext } = useContext(AuthContext);
+  const { namecontext, languagePreference } = useContext(AuthContext);
 
   const [collapse, setCollapse] = useState("");
 
@@ -45,6 +46,7 @@ function DefaultNavbarMobile({ routes, open }) {
     ({
       isDynamic,
       name,
+      hindiName,
       icon,
       collapse: routeCollapses,
       href,
@@ -53,11 +55,13 @@ function DefaultNavbarMobile({ routes, open }) {
     }) => (
       <DefaultNavbarDropdown
         key={name}
-        name={
-          isDynamic && namecontext
-            ? "Welcome " + namecontext.split(" ")[0]
-            : name
-        } // Change here
+        name={getNavbarDisplayName(
+          name,
+          hindiName,
+          namecontext,
+          languagePreference,
+          isDynamic
+        )} // Change here
         icon={icon}
         collapseStatus={name === collapse}
         onClick={() => handleSetCollapse(name)}
@@ -81,7 +85,14 @@ function DefaultNavbarMobile({ routes, open }) {
                       py={1}
                       px={0.5}
                     >
-                      {item.name}
+                      {/* {item.name} */}
+                      {getNavbarDisplayName(
+                        item.name,
+                        item.hindiName,
+                        namecontext,
+                        languagePreference,
+                        item.isDynamic
+                      )}
                       {/* Change here */}
                     </MKTypography>
                     {item.collapse.map((el) => (
@@ -114,8 +125,15 @@ function DefaultNavbarMobile({ routes, open }) {
                           },
                         })}
                       >
-                        {el.name}
+                        {/* {el.name} */}
                         {/* Change here */}
+                        {getNavbarDisplayName(
+                          el.name,
+                          el.hindiName,
+                          namecontext,
+                          languagePreference,
+                          el.isDynamic
+                        )}
                       </MKTypography>
                     ))}
                   </>
@@ -154,7 +172,14 @@ function DefaultNavbarMobile({ routes, open }) {
                       fontWeight="bold"
                       textTransform="capitalize"
                     >
-                      {item.name}
+                      {/* {item.name} */}
+                      {getNavbarDisplayName(
+                        item.name,
+                        item.hindiName,
+                        namecontext,
+                        languagePreference,
+                        item.isDynamic
+                      )}
                       {/* Change here */}
                     </MKTypography>
                     <MKTypography

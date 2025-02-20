@@ -106,6 +106,7 @@ export default function CommonDataTable({
   const [product, setProduct] = useState(emptyProduct);
   const [submitted, setSubmitted] = useState(false);
   const [globalFilter, setGlobalFilter] = useState(null);
+  const [isSaveClicked, setIsSaveClicked] = useState(false);
 
   const toast = useRef(null);
   const dt = useRef(null);
@@ -249,14 +250,20 @@ export default function CommonDataTable({
 
   const saveProduct = async () => {
     setSubmitted(true);
+    setIsSaveClicked(true);
 
     /////////////////////  Reading the Files ///////////////////////////////////
     const files = uploadRef.current.getFiles();
     // In case it is an Update Extry Query, surely files.length will be 1 only.
-    if (files.length == 0) return;
-
+    if (files.length == 0) {
+      setIsSaveClicked(false);
+      return;
+    }
     for (let key in uploadPoints) {
-      if (uploadPoints[key] && !product[key]) return;
+      if (uploadPoints[key] && !product[key]) {
+        setIsSaveClicked(false);
+        return;
+      }
     }
 
     // if (!product.weekStartsEnds || !product.uploadedOn || files.length == 0)
@@ -326,6 +333,7 @@ export default function CommonDataTable({
 
       if (!success) {
         showToastMessage(toast, toastDetails);
+        setIsSaveClicked(false);
         return;
       }
 
@@ -336,6 +344,7 @@ export default function CommonDataTable({
 
       _products[index] = _product;
       showToastMessage(toast, toastDetails);
+      setIsSaveClicked(false);
     } else {
       // So, this is a new entry call. Because product.id is null.
       // We need to create ID which will come from backend actually.
@@ -348,6 +357,7 @@ export default function CommonDataTable({
       );
 
       if (!success) {
+        setIsSaveClicked(false);
         showToastMessage(toast, toastDetails);
         return;
       }
@@ -358,15 +368,17 @@ export default function CommonDataTable({
         _cloneProduct.id = newID;
         _cloneProduct.fileName = _attachedFiles[index]["fileName"];
         _cloneProduct.size = _attachedFiles[index]["size"];
-        _products.push(_cloneProduct);
+        _products.unshift(_cloneProduct);
       });
 
       showToastMessage(toast, toastDetails);
+      setIsSaveClicked(false);
     }
 
     setProducts(_products);
     setProductDialog(false);
     setProduct(emptyProduct);
+    setIsSaveClicked(false);
   };
 
   const addProductDetails = async (_product, _attachedFiles) => {
@@ -664,10 +676,17 @@ export default function CommonDataTable({
   );
   const productDialogFooter = (
     <React.Fragment>
-      <Button label="Cancel" icon="pi pi-times" outlined onClick={hideDialog} />
       <Button
+        disabled={isSaveClicked}
+        label="Cancel"
+        icon="pi pi-times"
+        outlined
+        onClick={hideDialog}
+      />
+      <Button
+        disabled={isSaveClicked}
         label="Save"
-        icon="pi pi-check"
+        icon={isSaveClicked ? "pi pi-spin pi-spinner" : "pi pi-check"}
         onClick={() => {
           saveProduct();
         }}
@@ -1076,7 +1095,9 @@ export default function CommonDataTable({
               // cancelOptions={cancelOptions}
             />
 
-            {submitted && <small className="p-error">File is required.</small>}
+            {!isSaveClicked && submitted && (
+              <small className="p-error">File is required.</small>
+            )}
           </div>
         </Dialog>
 

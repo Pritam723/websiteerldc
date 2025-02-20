@@ -66,7 +66,7 @@ function DefaultNavbar({
   relative,
   center,
 }) {
-  const { user, namecontext, languagePreference } = useContext(AuthContext);
+  const { namecontext, languagePreference } = useContext(AuthContext);
   const [dropdown, setDropdown] = useState("");
   const [dropdownEl, setDropdownEl] = useState("");
   const [dropdownName, setDropdownName] = useState("");
