@@ -17,25 +17,26 @@ import { showToastMessage } from "utilities/ToastMessage";
 
 // import { redirect } from "react-router-dom";
 
-export default function PeakHours() {
+export default function VDIMonthly() {
   /////////////////// Page Meta Data ////////////////////////////////////////
 
   ///////////////// Static Meta Data ///////////////////////////////////////
-  const targetTableClass = "PeakHours";
+  const targetTableClass = "VDIMonthly";
   // Must be same as it is in Flask -> ORM Class(Model) -> __tablename__
-  const pageTitle = "Peak Hours & Season Declaration";
+  const pageTitle = "Voltage Deviation Index – Monthly";
 
   const breadcrumb = [
     // { label: "Home" },
 
-    { label: "Scheduling" },
+    // { label: "Reports" },
+    { label: "MIS Reports" },
     {
-      label: "Peak Hours & Season Declaration",
+      label: "Voltage Deviation Index – Monthly",
     },
     // { label: "User Profile", route: "/user/userprofile" },
   ];
 
-  const redirectionURL = "/scheduling/peakhours";
+  const redirectionURL = "/reports/voltagedeviationindex/monthly";
 
   ///////////////// Dynamic Meta Data Fetched from Backend /////////////////
   const emptyDynamicMetaData = {

@@ -17,25 +17,24 @@ import { showToastMessage } from "utilities/ToastMessage";
 
 // import { redirect } from "react-router-dom";
 
-export default function PeakHours() {
+export default function MeteringError() {
   /////////////////// Page Meta Data ////////////////////////////////////////
 
   ///////////////// Static Meta Data ///////////////////////////////////////
-  const targetTableClass = "PeakHours";
+  const targetTableClass = "MeteringError";
   // Must be same as it is in Flask -> ORM Class(Model) -> __tablename__
-  const pageTitle = "Peak Hours & Season Declaration";
+  const pageTitle = "Metering Error";
 
   const breadcrumb = [
-    // { label: "Home" },
+    { label: "Market Operation" },
 
-    { label: "Scheduling" },
     {
-      label: "Peak Hours & Season Declaration",
+      label: "Metering Error",
     },
     // { label: "User Profile", route: "/user/userprofile" },
   ];
 
-  const redirectionURL = "/scheduling/peakhours";
+  const redirectionURL = "/marketoperation/metering/meteringerror";
 
   ///////////////// Dynamic Meta Data Fetched from Backend /////////////////
   const emptyDynamicMetaData = {
