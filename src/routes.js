@@ -71,7 +71,17 @@ import PageHeaders from "layouts/sections/page-sections/page-headers";
 import UserProfile from "pages/FunctionalPages/Auth/UserProfile";
 import SignIn from "pages/FunctionalPages/Auth/SignIn";
 import PeakHours from "pages/Departmental/Scheduling/PeakHours.js";
+import FinalSchedule from "pages/Departmental/Scheduling/FinalSchedule.js";
 import ShutdownAvailedList from "pages/Departmental/SystemOperation/ShutdownAvailedList.js";
+import ReconciliationCTU from "pages/Departmental/MarketOperation/TGNA/ReconciliationCTU.js";
+import ReconciliationApplicant from "pages/Departmental/MarketOperation/TGNA/ReconciliationApplicant.js";
+import Disbursements from "pages/Departmental/MarketOperation/TGNA/Disbursements.js";
+import DSMDisbursementLetter from "pages/Departmental/MarketOperation/DSM/DSMDisbursementLetter.js";
+import DSMReconcilation from "pages/Departmental/MarketOperation/DSM/DSMReconcilation.js";
+import ReactiveReconcilation from "pages/Departmental/MarketOperation/Reactive/ReactiveReconcilation.js";
+import ReactiveDisbursementLetter from "pages/Departmental/MarketOperation/Reactive/ReactiveDisbursementLetter.js";
+import RRASReconciliation from "pages/Departmental/MarketOperation/AncilliaryServices/RRASReconciliation.js";
+import AGCReconciliation from "pages/Departmental/MarketOperation/AncilliaryServices/AGCReconciliation.js";
 
 const routes = [
   // {
@@ -253,7 +263,8 @@ const routes = [
       {
         name: "Final Schedule",
         hindiName: "अंतिम निर्धारण",
-        route: "/sections/page-sections/page-headers",
+        route: "/scheduling/finalschedule",
+        component: <FinalSchedule />,
       },
       {
         name: "WEB Based Application",
@@ -300,18 +311,21 @@ const routes = [
           {
             name: "Reconciliation CTU",
             hindiName: "सुलह सीटीयू",
-            route: "/sections/page-sections/page-headers",
+            route: "/marketoperation/tgna/reconciliationctu",
+            component: <ReconciliationCTU />,
           },
           {
             name: "Reconciliation Applicant",
             hindiName: "सुलह आवेदक",
-            route: "/sections/page-sections/page-headers",
+            route: "/marketoperation/tgna/reconciliationapplicant",
+            component: <ReconciliationApplicant />,
           },
 
           {
             name: "Disbursement",
             hindiName: "संवितरण",
-            route: "/sections/page-sections/page-headers",
+            route: "/marketoperation/tgna/disbursements",
+            component: <Disbursements />,
           },
           {
             name: "NOAR",
@@ -346,12 +360,14 @@ const routes = [
           {
             name: "DSM Disbursement Letter",
             hindiName: "डीएसएम संवितरण पत्र",
-            route: "/sections/page-sections/page-headers",
+            route: "/marketoperation/dsm/dsmdisbursementletter",
+            component: <DSMDisbursementLetter />,
           },
           {
             name: "DSM Reconciliation",
             hindiName: "डीएसएम सुलह",
-            route: "/sections/page-sections/page-headers",
+            route: "/marketoperation/dsm/dsmreconcilation",
+            component: <DSMReconcilation />,
           },
         ],
       },
@@ -364,12 +380,14 @@ const routes = [
           {
             name: "Reactive Reconciliation",
             hindiName: "रिएक्टिव सुलह",
-            route: "/sections/page-sections/page-headers",
+            route: "/marketoperation/reactive/reactivereconcilation",
+            component: <ReactiveReconcilation />,
           },
           {
             name: "Reactive Disbursement Letter",
             hindiName: "रिएक्टिव संवितरण पत्र",
-            route: "/sections/page-sections/page-headers",
+            route: "/marketoperation/reactive/reactivedisbursementletter",
+            component: <ReactiveDisbursementLetter />,
           },
         ],
       },
@@ -381,12 +399,14 @@ const routes = [
           {
             name: "RRAS Reconciliation",
             hindiName: "आरआरएस सुलह",
-            route: "/sections/page-sections/page-headers",
+            route: "/marketoperation/ancilliaryservices/rrasreconciliation",
+            component: <RRASReconciliation />,
           },
           {
             name: "AGC Reconciliation",
             hindiName: "एजीसी सुलह",
-            route: "/sections/page-sections/page-headers",
+            route: "/marketoperation/ancilliaryservices/agcreconciliation",
+            component: <AGCReconciliation />,
           },
         ],
       },

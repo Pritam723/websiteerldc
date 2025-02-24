@@ -41,6 +41,7 @@ export const AuthProvider = ({ children }) => {
     // console.log(data);
 
     try {
+      
       let response = await axios({
         method: "post",
         url: `${process.env.REACT_APP_READ_API}/login`,
@@ -53,7 +54,7 @@ export const AuthProvider = ({ children }) => {
       setUser(jwtDecode(tokenData.access_token).user_info);
       setNameContext(jwtDecode(tokenData.access_token).user_info.name);
 
-      console.log(jwtDecode(tokenData.access_token).user_info.name);
+      console.log("hiiiiiiiiii", jwtDecode(tokenData.access_token).user_info.name);
 
       localStorage.setItem("authTokens", JSON.stringify(tokenData));
       return true;
@@ -61,7 +62,7 @@ export const AuthProvider = ({ children }) => {
       //   console.log("works");
       //   console.log(jwtDecode(tokenData.access_token));
     } catch {
-      console.log("Bad Request");
+      console.log("hiiiiiiiiiiiiii Bad Request");
       return false;
     }
   };
