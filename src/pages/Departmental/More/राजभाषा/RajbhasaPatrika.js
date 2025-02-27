@@ -17,25 +17,21 @@ import { showToastMessage } from "utilities/ToastMessage";
 
 // import { redirect } from "react-router-dom";
 
-export default function PeakHours() {
+export default function RajbhasaPatrika() {
   /////////////////// Page Meta Data ////////////////////////////////////////
 
   ///////////////// Static Meta Data ///////////////////////////////////////
-  const targetTableClass = "PeakHours";
+  const targetTableClass = "RajbhasaPatrika";
   // Must be same as it is in Flask -> ORM Class(Model) -> __tablename__
-  const pageTitle = "Peak Hours & Season Declaration";
+  const pageTitle = "राजभाषा पत्रिका";
 
   const breadcrumb = [
-    // { label: "Home" },
+    { label: "Home" },
 
-    { label: "Scheduling" },
-    {
-      label: "Peak Hours & Season Declaration",
-    },
-    // { label: "User Profile", route: "/user/userprofile" },
+    { label: "राजभाषा पत्रिका", route: "/राजभाषापत्रिका" },
   ];
 
-  const redirectionURL = "/scheduling/peakhours";
+  const redirectionURL = "/राजभाषापत्रिका";
 
   ///////////////// Dynamic Meta Data Fetched from Backend /////////////////
   const emptyDynamicMetaData = {

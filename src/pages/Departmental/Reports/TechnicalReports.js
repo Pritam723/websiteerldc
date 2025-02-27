@@ -17,25 +17,26 @@ import { showToastMessage } from "utilities/ToastMessage";
 
 // import { redirect } from "react-router-dom";
 
-export default function PeakHours() {
+export default function TechnicalReports() {
   /////////////////// Page Meta Data ////////////////////////////////////////
 
   ///////////////// Static Meta Data ///////////////////////////////////////
-  const targetTableClass = "PeakHours";
+  const targetTableClass = "TechnicalReports";
   // Must be same as it is in Flask -> ORM Class(Model) -> __tablename__
-  const pageTitle = "Peak Hours & Season Declaration";
+  const pageTitle = "Technical Reports";
 
   const breadcrumb = [
     // { label: "Home" },
 
-    { label: "Scheduling" },
+    // { label: "Reports" },
+    { label: "MIS Reports" },
     {
-      label: "Peak Hours & Season Declaration",
+      label: "Technical Reports",
     },
     // { label: "User Profile", route: "/user/userprofile" },
   ];
 
-  const redirectionURL = "/scheduling/peakhours";
+  const redirectionURL = "/reports/technicalreports";
 
   ///////////////// Dynamic Meta Data Fetched from Backend /////////////////
   const emptyDynamicMetaData = {

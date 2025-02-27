@@ -15,27 +15,31 @@ import PleaseSignIn from "pages/TemplatePage/PleaseSignIn.js";
 import { Toast } from "primereact/toast";
 import { showToastMessage } from "utilities/ToastMessage";
 
-// import { redirect } from "react-router-dom";
+// import { redirect } from "react-router-dom";0
 
-export default function PeakHours() {
+export default function ATCViolationMonthly() {
   /////////////////// Page Meta Data ////////////////////////////////////////
 
   ///////////////// Static Meta Data ///////////////////////////////////////
-  const targetTableClass = "PeakHours";
+  const targetTableClass = "ATCViolationMonthly";
   // Must be same as it is in Flask -> ORM Class(Model) -> __tablename__
-  const pageTitle = "Peak Hours & Season Declaration";
+  const pageTitle = "ATC Violation Monthly";
 
   const breadcrumb = [
     // { label: "Home" },
 
-    { label: "Scheduling" },
+    { label: "System Operation" },
     {
-      label: "Peak Hours & Season Declaration",
+      label: "System Reliability Indices",
+    },
+    {
+      label: "ATC Violation Monthly",
     },
     // { label: "User Profile", route: "/user/userprofile" },
   ];
 
-  const redirectionURL = "/scheduling/peakhours";
+  const redirectionURL =
+    "/systemoperation/systemreliabilityindices/atcviolationmonthly";
 
   ///////////////// Dynamic Meta Data Fetched from Backend /////////////////
   const emptyDynamicMetaData = {

@@ -15,27 +15,30 @@ import PleaseSignIn from "pages/TemplatePage/PleaseSignIn.js";
 import { Toast } from "primereact/toast";
 import { showToastMessage } from "utilities/ToastMessage";
 
-// import { redirect } from "react-router-dom";
+// import { redirect } from "react-router-dom";0
 
-export default function PeakHours() {
+export default function Disbursements() {
   /////////////////// Page Meta Data ////////////////////////////////////////
 
   ///////////////// Static Meta Data ///////////////////////////////////////
-  const targetTableClass = "PeakHours";
-  // Must be same as it is in Flask -> ORM Class(Model) -> __tablename__
-  const pageTitle = "Peak Hours & Season Declaration";
+  const targetTableClass = "Disbursements";
+  // Must be same as it is in Flask -> ORM Class(Model) -> _tablename_
+  const pageTitle = "Disbursements";
 
   const breadcrumb = [
     // { label: "Home" },
 
-    { label: "Scheduling" },
+    { label: "Market Operation" },
     {
-      label: "Peak Hours & Season Declaration",
+      label: "TGNA",
+    },
+    {
+      label: "Disbursements",
     },
     // { label: "User Profile", route: "/user/userprofile" },
   ];
 
-  const redirectionURL = "/scheduling/peakhours";
+  const redirectionURL = "/marketoperation/tgna/disbursements";
 
   ///////////////// Dynamic Meta Data Fetched from Backend /////////////////
   const emptyDynamicMetaData = {
