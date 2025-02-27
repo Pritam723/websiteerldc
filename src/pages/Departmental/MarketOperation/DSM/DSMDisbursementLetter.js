@@ -22,7 +22,7 @@ export default function DSMDisbursementLetter() {
 
   ///////////////// Static Meta Data ///////////////////////////////////////
   const targetTableClass = "DSMDisbursementLetter";
-  // Must be same as it is in Flask -> ORM Class(Model) -> _tablename_
+  // Must be same as it is in Flask -> ORM Class(Model) -> __tablename__
   const pageTitle = "DSM Disbursement Letter";
 
   const breadcrumb = [

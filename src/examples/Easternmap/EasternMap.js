@@ -16,6 +16,23 @@ import {
 import { Dialog } from "primereact/dialog";
 import "./App.css";
 
+// Function to lighten color on hover
+const lightenColor = (color, percent) => {
+  const num = parseInt(color.slice(1), 16),
+    amt = Math.round(2.55 * percent),
+    r = (num >> 16) + amt,
+    g = ((num >> 8) & 0x00ff) + amt,
+    b = (num & 0x0000ff) + amt;
+  return `#${(
+    0x1000000 +
+    (r < 255 ? r : 255) * 0x10000 +
+    (g < 255 ? g : 255) * 0x100 +
+    (b < 255 ? b : 255)
+  )
+    .toString(16)
+    .slice(1)}`;
+};
+
 const INDIA_TOPO_JSON = require("./eastcopy.json");
 // const DEFAULT_COLOR = "#ffedea";
 // const DEFAULT_COLOR = "#00FF00";
@@ -23,11 +40,13 @@ const INDIA_TOPO_JSON = require("./eastcopy.json");
 const geographyStyle = {
   default: {
     outline: "none",
+    cursor: "pointer", // Makes the pointer a hand by default
   },
   hover: {
     fill: "#ccc",
     transition: "all 250ms",
     outline: "none",
+    cursor: "pointer", // Ensures the hand pointer on hover
   },
   pressed: {
     outline: "none",
@@ -173,7 +192,7 @@ function Eastern2(props) {
   };
 
   return (
-    <>
+    <React.Fragment>
       <ComposableMap
         width={1742}
         height={2307}
@@ -240,15 +259,17 @@ function Eastern2(props) {
         <div
           style={{
             position: "absolute",
-            top: tooltip.y,
-            left: tooltip.x,
-            backgroundColor: "rgba(8, 110, 141, 0.75)",
-            color: "white",
-            padding: "2px",
-            borderRadius: "4px",
-            pointerEvents: "none",
+            left: tooltip.x + 10,
+            top: tooltip.y + 10,
+            backgroundColor: "rgba(0, 0, 0, 0.8)",
+            color: "#fff",
+            padding: "8px 12px",
+            borderRadius: "8px",
             fontSize: "14px",
-            // transform: "translate(-50%, 200%)",
+            pointerEvents: "none",
+            transform: "translate(-50%, -100%)",
+            boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)",
+            whiteSpace: "nowrap",
           }}
         >
           {tooltip.content}
@@ -276,7 +297,7 @@ function Eastern2(props) {
           ""
         )}
       </Dialog>
-    </>
+    </React.Fragment>
   );
 }
 

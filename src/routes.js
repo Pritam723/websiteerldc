@@ -51,28 +51,45 @@ import Author from "layouts/pages/landing-pages/author";
 
 // Sections
 import PageHeaders from "layouts/sections/page-sections/page-headers";
-// import Features from "layouts/sections/page-sections/featuers";
-// import Navbars from "layouts/sections/navigation/navbars";
-// import NavTabs from "layouts/sections/navigation/nav-tabs";
-// import Pagination from "layouts/sections/navigation/pagination";
-// import Inputs from "layouts/sections/input-areas/inputs";
-// import Forms from "layouts/sections/input-areas/forms";
-// import Alerts from "layouts/sections/attention-catchers/alerts";
-// import Modals from "layouts/sections/attention-catchers/modals";
-// import TooltipsPopovers from "layouts/sections/attention-catchers/tooltips-popovers";
-// import Avatars from "layouts/sections/elements/avatars";
-// import Badges from "layouts/sections/elements/badges";
-// import BreadcrumbsEl from "layouts/sections/elements/breadcrumbs";
-// import Buttons from "layouts/sections/elements/buttons";
-// import Dropdowns from "layouts/sections/elements/dropdowns";
-// import ProgressBars from "layouts/sections/elements/progress-bars";
-// import Toggles from "layouts/sections/elements/toggles";
-// import Typography from "layouts/sections/elements/typography";
+
 import UserProfile from "pages/FunctionalPages/Auth/UserProfile";
 import SignIn from "pages/FunctionalPages/Auth/SignIn";
 import PeakHours from "pages/Departmental/Scheduling/PeakHours.js";
+import LimitedTender from "pages/Departmental/More/Contracts Awarded/LimitedTender.js";
+import SingleTender from "pages/Departmental/More/Contracts Awarded/SingleTender.js";
+import OpenTender from "pages/Departmental/More/Contracts Awarded/OpenTender.js";
+import RajbhasaPatrika from "pages/Departmental/More/राजभाषा/RajbhasaPatrika.js";
+
+import ShutdownAvailedList from "pages/Departmental/SystemOperation/Outage/ShutdownAvailedList.js";
+import DayAheadForecastingError from "pages/Departmental/SystemOperation/Forecasting/DayAheadForecastingError.js";
+import IntraDayForecastingError from "pages/Departmental/SystemOperation/Forecasting/IntraDayForecastingError.js";
+import WeekAheadForecastingError from "pages/Departmental/SystemOperation/Forecasting/WeekAheadForecastingError.js";
+import WeekAheadRollingForecast from "pages/Departmental/SystemOperation/Forecasting/WeekAheadRollingForecast.js";
+import MonthAheadForecastingError from "pages/Departmental/SystemOperation/Forecasting/MonthAheadForecastingError.js";
+import YearAheadForecastingError from "pages/Departmental/SystemOperation/Forecasting/YearAheadForecastingError.js";
+import ATCViolationDaily from "pages/Departmental/SystemOperation/System Reliability Indices/ATCViolationDaily.js";
+import ATCViolationMonthly from "pages/Departmental/SystemOperation/System Reliability Indices/ATCViolationMonthly.js";
+import ATCViolationWeekly from "pages/Departmental/SystemOperation/System Reliability Indices/ATCViolationWeekly.js";
+import FRC from "pages/Departmental/SystemOperation/FRC.js";
+import TransmissionElementAvailability from "pages/Departmental/SystemOperation/TransmissionElementAvailability.js";
 import FinalSchedule from "pages/Departmental/Scheduling/FinalSchedule.js";
-import ShutdownAvailedList from "pages/Departmental/SystemOperation/ShutdownAvailedList.js";
+import Telemetry from "pages/Departmental/Scada/Telemetry.js";
+import ScadavsSEM from "pages/Departmental/Scada/ScadavsSEM.js";
+import DailyPSPReport from "pages/Departmental/Reports/Daily Report/DailyPSPReport";
+import GenerationOutage from "pages/Departmental/Reports/Daily Report/GenerationOutage";
+import QuarterlyReports from "pages/Departmental/Reports/QuarterlyReports";
+import MonthlyReports from "pages/Departmental/Reports/MonthlyReports";
+import WeeklyReports from "pages/Departmental/Reports/WeeklyReports";
+import AnnualReports from "pages/Departmental/Reports/AnnualReports";
+import VDIDaily from "pages/Departmental/Reports/Voltage Deviation Index/VDIDaily";
+import VDIMonthly from "pages/Departmental/Reports/Voltage Deviation Index/VDIMonthly";
+import VDIWeekly from "pages/Departmental/Reports/Voltage Deviation Index/VDIWeekly";
+import MonthlyDeviationReport from "pages/Departmental/Reports/MonthlyDeviationReport";
+import AnnualCompendium from "pages/Departmental/Reports/AnnualCompendium";
+import GridEventsFlashreport from "pages/Departmental/Reports/GridEventsFlashreport";
+import TechnicalReports from "pages/Departmental/Reports/TechnicalReports";
+import WeatherRelatedEvents from "pages/Departmental/Reports/WeatherRelatedEvents";
+
 import ReconciliationCTU from "pages/Departmental/MarketOperation/TGNA/ReconciliationCTU.js";
 import ReconciliationApplicant from "pages/Departmental/MarketOperation/TGNA/ReconciliationApplicant.js";
 import Disbursements from "pages/Departmental/MarketOperation/TGNA/Disbursements.js";
@@ -82,6 +99,17 @@ import ReactiveReconcilation from "pages/Departmental/MarketOperation/Reactive/R
 import ReactiveDisbursementLetter from "pages/Departmental/MarketOperation/Reactive/ReactiveDisbursementLetter.js";
 import RRASReconciliation from "pages/Departmental/MarketOperation/AncilliaryServices/RRASReconciliation.js";
 import AGCReconciliation from "pages/Departmental/MarketOperation/AncilliaryServices/AGCReconciliation.js";
+
+import SEMData from "pages/Departmental/MarketOperation/Metering/SEMData.js";
+import MeteringError from "pages/Departmental/MarketOperation/Metering/MeteringError.js";
+import MeteringManual from "pages/Departmental/MarketOperation/Metering/MeteringManual.js";
+import MeteringSoftware from "pages/Departmental/MarketOperation/Metering/MeteringSoftware.js";
+import TimeCorrectionManual from "pages/Departmental/MarketOperation/Metering/TimeCorrectionManual.js";
+
+import SupplementaryAndPLIBill from "pages/Departmental/MarketOperation/Fees & Charges/SupplementaryAndPLIBill.js";
+import QuarterlyReconciliationStatement from "pages/Departmental/MarketOperation/Fees & Charges/QuarterlyReconciliationStatement.js";
+import CongestionReport from "pages/Departmental/MarketOperation/Reports/CongestionReport.js";
+import PSDF from "pages/Departmental/MarketOperation/PSDF.js";
 
 const routes = [
   // {
@@ -173,46 +201,52 @@ const routes = [
           {
             name: "Day Ahead Forecasting error",
             hindiName: "आगे के दिन का पूर्वानुमान त्रुटि",
-            route: "/sections/page-sections/page-headers",
+            route: "/systemoperation/forecasting/dayaheadforecastingerror",
+            component: <DayAheadForecastingError />,
           },
           {
             name: "Intra Day Forecasting error",
             hindiName: "इंट्राडे  का पूर्वानुमान त्रुटि",
-            route: "/sections/page-sections/page-headers",
+            route: "/systemoperation/forecasting/intradayforecastingerror",
+            component: <IntraDayForecastingError />,
           },
           {
             name: "Week Ahead Forecasting error",
             hindiName: "आगे के सप्ताह का पूर्वानुमान त्रुटि",
-            route: "/sections/page-sections/page-headers",
-            component: <PageHeaders />,
+            route: "/systemoperation/forecasting/weekaheadforecastingerror",
+            component: <WeekAheadForecastingError />,
           },
           {
             name: "Week ahead rolling Forecast",
             hindiName: "आगे के सप्ताह का रोलिंग पूर्वानुमान",
-            route: "/sections/page-sections/page-headers",
+            route: "/systemoperation/forecasting/weekaheadrollingforecast",
+            component: <WeekAheadRollingForecast />,
           },
           {
             name: "Month Ahead Forecasting error",
             hindiName: "आगे के महीने का पूर्वानुमान त्रुटि",
-            route: "/sections/page-sections/page-headers",
-            component: <PageHeaders />,
+            route: "/systemoperation/forecasting/monthaheadforecastingerror",
+            component: <MonthAheadForecastingError />,
           },
           {
             name: "Year Ahead Forecasting error",
             hindiName: "आगे के साल का पूर्वानुमान त्रुटि",
-            route: "/sections/page-sections/page-headers",
+            route: "/systemoperation/forecasting/yearaheadforecastingerror",
+            component: <YearAheadForecastingError />,
           },
         ],
       },
       {
         name: "FRC",
         hindiName: "एफआरसी",
-        route: "/sections/page-sections/page-headers",
+        route: "/systemoperation/frc",
+        component: <FRC />,
       },
       {
         name: "Transmission Element Availability",
         hindiName: "संचरण तत्व उपलब्धता",
-        route: "/sections/page-sections/page-headers",
+        route: "/systemoperation/transmissionelementavailability",
+        component: <TransmissionElementAvailability />,
       },
       {
         name: "System Reliability Indices",
@@ -227,17 +261,23 @@ const routes = [
           {
             name: "Intra Regional ATC Violation Daily",
             hindiName: "दैनिक अंतर क्षेत्रीय एटीसी उल्लंघन",
-            route: "/sections/page-sections/page-headers",
+            route:
+              "/systemoperation/systemreliabilityindices/atcviolationdaily",
+            component: <ATCViolationDaily />,
           },
           {
             name: "Intra Regional ATC Violation Weekly",
             hindiName: "साप्ताहिक अंतर क्षेत्रीय एटीसी उल्लंघन",
-            route: "/sections/page-sections/page-headers",
+            route:
+              "/systemoperation/systemreliabilityindices/atcviolationweekly",
+            component: <ATCViolationWeekly />,
           },
           {
             name: "Intra Regional ATC Violation Monthly",
             hindiName: "मासिक अंतर क्षेत्रीय एटीसी उल्लंघन",
-            route: "/sections/page-sections/page-headers",
+            route:
+              "/systemoperation/systemreliabilityindices/atcviolationmonthly",
+            component: <ATCViolationMonthly />,
           },
         ],
       },
@@ -297,6 +337,193 @@ const routes = [
       },
     ],
   },
+
+  // {
+  //   name: "Market Operation",
+  //   hindiName: "बाजार संचालन",
+  //   // icon: <Icon>article</Icon>,
+  //   collapse: [
+  //     {
+  //       name: "TGNA",
+  //       hindiName: "टीजीएनए",
+  //       dropdown: true,
+  //       collapse: [
+  //         {
+  //           name: "Reconciliation CTU",
+  //           hindiName: "सुलह सीटीयू",
+  //           route: "/sections/page-sections/page-headers",
+  //         },
+  //         {
+  //           name: "Reconciliation Applicant",
+  //           hindiName: "सुलह आवेदक",
+  //           route: "/sections/page-sections/page-headers",
+  //         },
+
+  //         {
+  //           name: "Disbursement",
+  //           hindiName: "संवितरण",
+  //           route: "/sections/page-sections/page-headers",
+  //         },
+  //         {
+  //           name: "NOAR",
+  //           hindiName: "एनओएआर",
+  //           href: "https://noar.in/landing",
+  //         },
+  //       ],
+  //     },
+  //     {
+  //       name: "FTC",
+  //       hindiName: "एफटीसी",
+  //       dropdown: true,
+  //       collapse: [
+  //         {
+  //           name: "First Time Charging Documents",
+  //           hindiName: "पहली बार चार्जिंग दस्तावेज",
+  //           route: "/sections/page-sections/page-headers",
+  //         },
+  //       ],
+  //     },
+
+  //     {
+  //       name: "DSM",
+  //       hindiName: "डीएसएम",
+  //       dropdown: true,
+  //       collapse: [
+  //         {
+  //           name: "DSM rate",
+  //           hindiName: "डीएसएम दर",
+  //           href: "https://dsm.posoco.in/newdsm",
+  //         },
+  //         {
+  //           name: "DSM Disbursement Letter",
+  //           hindiName: "डीएसएम संवितरण पत्र",
+  //           route: "/sections/page-sections/page-headers",
+  //         },
+  //         {
+  //           name: "DSM Reconciliation",
+  //           hindiName: "डीएसएम सुलह",
+  //           route: "/sections/page-sections/page-headers",
+  //         },
+  //       ],
+  //     },
+
+  //     {
+  //       name: "Reactive",
+  //       hindiName: "रिएक्टिव",
+  //       dropdown: true,
+  //       collapse: [
+  //         {
+  //           name: "Reactive Reconciliation",
+  //           hindiName: "रिएक्टिव सुलह",
+  //           route: "/sections/page-sections/page-headers",
+  //         },
+  //         {
+  //           name: "Reactive Disbursement Letter",
+  //           hindiName: "रिएक्टिव संवितरण पत्र",
+  //           route: "/sections/page-sections/page-headers",
+  //         },
+  //       ],
+  //     },
+  //     {
+  //       name: "Ancilliary Services",
+  //       hindiName: "सहायक सेवाएं",
+  //       dropdown: true,
+  //       collapse: [
+  //         {
+  //           name: "RRAS Reconciliation",
+  //           hindiName: "आरआरएस सुलह",
+  //           route: "/sections/page-sections/page-headers",
+  //         },
+  //         {
+  //           name: "AGC Reconciliation",
+  //           hindiName: "एजीसी सुलह",
+  //           route: "/sections/page-sections/page-headers",
+  //         },
+  //       ],
+  //     },
+  //     {
+  //       name: "Metering",
+  //       hindiName: "मीटरिंग",
+  //       dropdown: true,
+  //       collapse: [
+  //         {
+  //           name: "SEM data",
+  //           hindiName: "एसईएम डेटा",
+  //           route: "/sections/page-sections/page-headers",
+  //         },
+  //         {
+  //           name: "Metering Software",
+  //           hindiName: "मीटरिंग सॉफ्टवेयर",
+  //           route: "/sections/page-sections/page-headers",
+  //         },
+  //         {
+  //           name: "Time Correction manual",
+  //           hindiName: "समय सुधार पुस्तिका",
+  //           route: "/sections/page-sections/page-headers",
+  //         },
+  //         {
+  //           name: "Metering Manual",
+  //           hindiName: "मीटरिंग पुस्तिका",
+  //           route: "/sections/page-sections/page-headers",
+  //         },
+  //         {
+  //           name: "Metering Error",
+  //           hindiName: "मीटरिंग त्रुटि",
+  //           route: "/sections/page-sections/page-headers",
+  //         },
+  //       ],
+  //     },
+  //     {
+  //       name: "Fees & Charges",
+  //       hindiName: "फीस एवं शुल्क",
+  //       dropdown: true,
+  //       collapse: [
+  //         {
+  //           name: "F&C User List",
+  //           hindiName: "एफ&सी उपयोगकर्ता सूची",
+  //           href: "http://fc.posoco.in/FnCWeb/#/landing/reg-users",
+  //         },
+  //         {
+  //           name: "Monthly Bill Statement",
+  //           hindiName: "मासिक बिल विवरण",
+  //           route: "/sections/page-sections/page-headers",
+  //         },
+  //         {
+  //           name: "Supplementary & PLI Bill",
+  //           hindiName: "अनुपूरक एवं पीएलआई बिल",
+  //           route: "/sections/page-sections/page-headers",
+  //         },
+  //         {
+  //           name: "Quarterly Reconciliation Statement",
+  //           hindiName: "त्रैमासिक सुलह विवरण",
+  //           route: "/sections/page-sections/page-headers",
+  //         },
+  //       ],
+  //     },
+  //     {
+  //       name: "Reports",
+  //       hindiName: "रिपोर्ट्स",
+  //       dropdown: true,
+  //       collapse: [
+  //         {
+  //           name: "Congestion Report",
+  //           hindiName: "कंगेसन रिपोर्ट",
+  //           route: "/sections/page-sections/page-headers",
+  //         },
+  //       ],
+  //     },
+  //     {
+  //       name: "PSDF",
+  //       hindiName: "पीएसडीएफ",
+  //       route: "/sections/page-sections/page-headers",
+  //     },
+  //     {
+  //       name: "Bank Details",
+  //       hindiName: "बैंक विवरण",
+  //       route: "/sections/page-sections/page-headers",
+  //     },
+  //   ],
+  // },
 
   {
     name: "Market Operation",
@@ -418,27 +645,32 @@ const routes = [
           {
             name: "SEM data",
             hindiName: "एसईएम डेटा",
-            route: "/sections/page-sections/page-headers",
+            route: "/marketoperation/metering/semdata",
+            component: <SEMData />,
           },
           {
             name: "Metering Software",
             hindiName: "मीटरिंग सॉफ्टवेयर",
-            route: "/sections/page-sections/page-headers",
+            route: "/marketoperation/metering/meteringsoftware",
+            component: <MeteringSoftware />,
           },
           {
             name: "Time Correction manual",
             hindiName: "समय सुधार पुस्तिका",
-            route: "/sections/page-sections/page-headers",
+            route: "/marketoperation/metering/timecorrectionmanual",
+            component: <TimeCorrectionManual />,
           },
           {
             name: "Metering Manual",
             hindiName: "मीटरिंग पुस्तिका",
-            route: "/sections/page-sections/page-headers",
+            route: "/marketoperation/metering/meteringmanual",
+            component: <MeteringManual />,
           },
           {
             name: "Metering Error",
             hindiName: "मीटरिंग त्रुटि",
-            route: "/sections/page-sections/page-headers",
+            route: "/marketoperation/metering/meterringerror",
+            component: <MeteringError />,
           },
         ],
       },
@@ -460,12 +692,15 @@ const routes = [
           {
             name: "Supplementary & PLI Bill",
             hindiName: "अनुपूरक एवं पीएलआई बिल",
-            route: "/sections/page-sections/page-headers",
+            route: "/marketoperation/feesandcharges/supplementaryandplibill",
+            component: <SupplementaryAndPLIBill />,
           },
           {
             name: "Quarterly Reconciliation Statement",
             hindiName: "त्रैमासिक सुलह विवरण",
-            route: "/sections/page-sections/page-headers",
+            route:
+              "/marketoperation/feesandcharges/quarterlyreconciliationstatement",
+            component: <QuarterlyReconciliationStatement />,
           },
         ],
       },
@@ -477,14 +712,16 @@ const routes = [
           {
             name: "Congestion Report",
             hindiName: "कंगेसन रिपोर्ट",
-            route: "/sections/page-sections/page-headers",
+            route: "/marketoperation/reports/congestionreport",
+            component: <CongestionReport />,
           },
         ],
       },
       {
         name: "PSDF",
         hindiName: "पीएसडीएफ",
-        route: "/sections/page-sections/page-headers",
+        route: "/marketoperation/psdf",
+        component: <PSDF />,
       },
       {
         name: "Bank Details",
@@ -493,107 +730,108 @@ const routes = [
       },
     ],
   },
-  {
-    name: "Open Access",
-    hindiName: "ओपन एक्सेस",
-    // icon: <Icon>article</Icon>,
-    collapse: [
-      {
-        name: "Interest",
-        hindiName: "ब्याज",
-        route: "/sections/page-sections/page-headers",
-      },
-      {
-        name: "Regional Entities",
-        hindiName: "क्षेत्रीय प्रतिनिधित्व",
-      },
 
-      {
-        name: "Regulation",
-        hindiName: "अधिनियम",
-        href: "http://cercind.gov.in/Current_reg.html",
-      },
+  // {
+  //   name: "Open Access",
+  //   hindiName: "ओपन एक्सेस",
+  //   // icon: <Icon>article</Icon>,
+  //   collapse: [
+  //     {
+  //       name: "Interest",
+  //       hindiName: "ब्याज",
+  //       route: "/sections/page-sections/page-headers",
+  //     },
+  //     {
+  //       name: "Regional Entities",
+  //       hindiName: "क्षेत्रीय प्रतिनिधित्व",
+  //     },
 
-      {
-        name: "Transaction",
-        hindiName: "लेन-देन विधि",
-      },
-      {
-        name: "STOA Summary",
-        hindiName: "एसटीओए सारांश",
-        dropdown: true,
-        collapse: [
-          {
-            name: "Categorized No. of Approval",
-            hindiName: "अनुमोदन की वर्गीकृत संख्या",
-            href: "http://noar.in/landing",
-          },
-          {
-            name: "Categorized MU",
-            hindiName: "वर्गीकृत एमयू",
-            href: "http://noar.in/landing",
-          },
-          {
-            name: "Summary",
-            hindiName: "सारांश",
-            href: "http://noar.in/landing",
-          },
-          {
-            name: "Approved Transaction",
-            hindiName: "अनुमोदित लेन-देन विधि",
-            href: "http://noar.in/landing",
-          },
-        ],
-      },
-      {
-        name: "Transmission Loss",
-        hindiName: "ट्रांसमिशन हानि",
-        href: "http://posoco.in/side-menu-pages/applicable-transmission-losses/",
-      },
-      {
-        name: "Transmission Charges",
-        hindiName: "ट्रांसमिशन शुल्क",
-        href: "http://noar.in/landing",
-      },
-      {
-        name: "Reconciliation",
-        hindiName: "सुलह",
-        dropdown: true,
-        collapse: [
-          {
-            name: "Applicant Amount",
-            hindiName: "आवेदक राशि",
-            route: "/sections/page-sections/page-headers",
-          },
-          {
-            name: "Beneficiary Amount",
-            hindiName: "लाभार्थी राशि",
-            route: "/sections/page-sections/page-headers",
-          },
-          {
-            name: "TDS Certificate",
-            hindiName: "टीडीएस प्रमाणपत्र",
-            route: "/sections/page-sections/page-headers",
-          },
-          {
-            name: "Interest",
-            hindiName: "ब्याज",
-            route: "/sections/page-sections/page-headers",
-          },
-        ],
-      },
-      {
-        name: "Procedures",
-        hindiName: "प्रक्रिया",
-        href: "http://noar.in/procedures",
-      },
-      {
-        name: "Web based Application",
-        hindiName: "वेब आधारित एप्लिकेशन",
-        href: "http://noar.in/landing",
-      },
-    ],
-  },
+  //     {
+  //       name: "Regulation",
+  //       hindiName: "अधिनियम",
+  //       href: "http://cercind.gov.in/Current_reg.html",
+  //     },
+
+  //     {
+  //       name: "Transaction",
+  //       hindiName: "लेन-देन विधि",
+  //     },
+  //     {
+  //       name: "STOA Summary",
+  //       hindiName: "एसटीओए सारांश",
+  //       dropdown: true,
+  //       collapse: [
+  //         {
+  //           name: "Categorized No. of Approval",
+  //           hindiName: "अनुमोदन की वर्गीकृत संख्या",
+  //           href: "http://noar.in/landing",
+  //         },
+  //         {
+  //           name: "Categorized MU",
+  //           hindiName: "वर्गीकृत एमयू",
+  //           href: "http://noar.in/landing",
+  //         },
+  //         {
+  //           name: "Summary",
+  //           hindiName: "सारांश",
+  //           href: "http://noar.in/landing",
+  //         },
+  //         {
+  //           name: "Approved Transaction",
+  //           hindiName: "अनुमोदित लेन-देन विधि",
+  //           href: "http://noar.in/landing",
+  //         },
+  //       ],
+  //     },
+  //     {
+  //       name: "Transmission Loss",
+  //       hindiName: "ट्रांसमिशन हानि",
+  //       href: "http://posoco.in/side-menu-pages/applicable-transmission-losses/",
+  //     },
+  //     {
+  //       name: "Transmission Charges",
+  //       hindiName: "ट्रांसमिशन शुल्क",
+  //       href: "http://noar.in/landing",
+  //     },
+  //     {
+  //       name: "Reconciliation",
+  //       hindiName: "सुलह",
+  //       dropdown: true,
+  //       collapse: [
+  //         {
+  //           name: "Applicant Amount",
+  //           hindiName: "आवेदक राशि",
+  //           route: "/sections/page-sections/page-headers",
+  //         },
+  //         {
+  //           name: "Beneficiary Amount",
+  //           hindiName: "लाभार्थी राशि",
+  //           route: "/sections/page-sections/page-headers",
+  //         },
+  //         {
+  //           name: "TDS Certificate",
+  //           hindiName: "टीडीएस प्रमाणपत्र",
+  //           route: "/sections/page-sections/page-headers",
+  //         },
+  //         {
+  //           name: "Interest",
+  //           hindiName: "ब्याज",
+  //           route: "/sections/page-sections/page-headers",
+  //         },
+  //       ],
+  //     },
+  //     {
+  //       name: "Procedures",
+  //       hindiName: "प्रक्रिया",
+  //       href: "http://noar.in/procedures",
+  //     },
+  //     {
+  //       name: "Web based Application",
+  //       hindiName: "वेब आधारित एप्लिकेशन",
+  //       href: "http://noar.in/landing",
+  //     },
+  //   ],
+  // },
 
   {
     name: "Reports",
@@ -620,12 +858,14 @@ const routes = [
           {
             name: "Daily PSP report",
             hindiName: "दैनिक पीएसपी रिपोर्ट",
-            route: "/sections/page-sections/page-headers",
+            route: "/reports/dailyreport/misreports/dailypspreport",
+            component: <DailyPSPReport />,
           },
           {
             name: "Generation Outage",
             hindiName: "उत्पादन आउटेज",
-            route: "/sections/page-sections/page-headers",
+            route: "/reports/dailyreport/misreports/generationoutage",
+            component: <GenerationOutage />,
           },
         ],
       },
@@ -633,22 +873,26 @@ const routes = [
       {
         name: "Weekly Reports",
         hindiName: "साप्ताहिक रिपोर्ट्स",
-        route: "/sections/page-sections/page-headers",
+        route: "/reports/weeklyreports",
+        component: <WeeklyReports />,
       },
       {
         name: "Monthly Reports",
         hindiName: "मासिक रिपोर्ट्स",
-        route: "/sections/page-sections/page-headers",
+        route: "/reports/monthlyreports",
+        component: <MonthlyReports />,
       },
       {
         name: "Quarterly Reports",
         hindiName: "त्रीमासिक रिपोर्ट्स",
-        route: "/sections/page-sections/page-headers",
+        route: "/reports/quarterlyreports",
+        component: <QuarterlyReports />,
       },
       {
         name: "Annual Reports",
         hindiName: "वार्षिक रिपोर्ट्स",
-        route: "/sections/page-sections/page-headers",
+        route: "/reports/Annual Reports",
+        component: <AnnualReports />,
       },
       {
         name: "Disturbance Reports",
@@ -665,43 +909,52 @@ const routes = [
             name: "Daily",
             hindiName: "दैनिक",
             route: "/sections/page-sections/page-headers",
+            route: "/reports/voltagedeviationindex/daily",
+            component: <VDIDaily />,
           },
           {
             name: "Weekly",
             hindiName: "साप्ताहिक",
-            route: "/sections/page-sections/page-headers",
+            route: "/reports/voltagedeviationindex/weekly",
+            component: <VDIWeekly />,
           },
           {
             name: "Monthly",
             hindiName: "मासिक",
-            route: "/sections/page-sections/page-headers",
+            route: "/reports/voltagedeviationindex/monthly",
+            component: <VDIMonthly />,
           },
         ],
       },
       {
         name: "Monthly Deviation Report",
         hindiName: "मासिक विचलन रिपोर्ट",
-        route: "/sections/page-sections/page-headers",
+        route: "/reports/monthlydeviationreport",
+        component: <MonthlyDeviationReport />,
       },
       {
         name: "Annual Compendium",
         hindiName: "वार्षिक सारांश",
-        route: "/sections/page-sections/page-headers",
+        route: "/reports/annualcompendium",
+        component: <AnnualCompendium />,
       },
       {
         name: "Grid Events (Flash report)",
         hindiName: "ग्रिड इवेंट्स (फ्लैश रिपोर्ट)",
-        route: "/sections/page-sections/page-headers",
+        route: "/reports/gridevents(flashreport)",
+        component: <GridEventsFlashreport />,
       },
       {
         name: "Weather related events",
         hindiName: "मौसम संबंधित घटनाएँ",
-        route: "/sections/page-sections/page-headers",
+        route: "/reports/weatherrelatedevents",
+        component: <WeatherRelatedEvents />,
       },
       {
         name: "Technical Reports",
         hindiName: "तकनीकी रिपोर्ट्स",
-        route: "/sections/page-sections/page-headers",
+        route: "/reports/technicalreports",
+        component: <TechnicalReports />,
       },
     ],
   },
@@ -714,13 +967,14 @@ const routes = [
         xp: "gii",
         name: "Telemetry",
         hindiName: "टेलीमेट्री",
-        route: "/sections/page-sections/page-headers",
-        isPrivate: true,
+        route: "/scada/telemetry",
+        component: <Telemetry />,
       },
       {
         name: "Scada vs SEM Report",
         hindiName: "स्काडा बनाम एसईएम रिपोर्ट",
-        route: "/sections/page-sections/page-headers",
+        route: "/scada/scadavssem",
+        component: <ScadavsSEM />,
       },
 
       {
@@ -1002,17 +1256,20 @@ const routes = [
           {
             name: "Open Tender",
             hindiName: "खुली निविदा",
-            route: "/sections/page-sections/page-headers",
+            route: "/more/contractsawarded/opentender",
+            component: <OpenTender />,
           },
           {
             name: "Limited Tender",
             hindiName: "सीमित निविदा",
-            route: "/sections/page-sections/page-headers",
+            route: "/more/contractsawarded/limitedtender",
+            component: <LimitedTender />,
           },
           {
             name: "Single Tender",
             hindiName: "एकल निविदा",
-            route: "/sections/page-sections/page-headers",
+            route: "/more/contractsawarded/singletender",
+            component: <SingleTender />,
           },
         ],
       },
@@ -1022,7 +1279,8 @@ const routes = [
         collapse: [
           {
             name: "राजभाषा पत्रिका",
-            route: "/sections/page-sections/page-headers",
+            route: "/राजभाषापत्रिका",
+            component: <RajbhasaPatrika />,
             isPrivate: true,
             // cssOverlap: true,
           },

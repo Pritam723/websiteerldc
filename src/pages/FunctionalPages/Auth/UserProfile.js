@@ -9,6 +9,7 @@ import { Button } from "primereact/button";
 import "./authentication.css";
 import BaseLayout from "layouts/sections/components/BaseLayout";
 import { AuthContext, AuthProvider } from "context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 export default function UserProfile({ redirectionURL = "/" }) {
   //   const user = {
@@ -20,12 +21,13 @@ export default function UserProfile({ redirectionURL = "/" }) {
   //   };
 
   const { user, logoutUser } = useContext(AuthContext);
-
+  console.log(user);
   const nameParts = user.name.split(" ");
   const firstNameInitial = nameParts[0].charAt(0).toUpperCase(); // First character of first name
   const lastNameInitial = nameParts[nameParts.length - 1]
     .charAt(0)
     .toUpperCase(); // First character of last name
+  const navigate = useNavigate();
 
   return (
     <BaseLayout
@@ -51,13 +53,13 @@ export default function UserProfile({ redirectionURL = "/" }) {
           <h2 className="text-center text-900">Welcome, {user.name}</h2>
           <div className="w-full mt-2 mb-3">
             <p className="text-left text-700 mb-1">
-              <strong>Emp ID:</strong> {user.eid}
+              <strong>Name:</strong> {user.name}
             </p>
             <p className="text-left text-700 mb-1">
               <strong>Email:</strong> {user.email}
             </p>
             <p className="text-left text-700">
-              <strong>Department:</strong> {user.department}
+              <strong>Mobile Number:</strong> {user.mobileNumber}
             </p>
             <p className="text-left text-700">
               <strong>Organization:</strong> {user.organization}
@@ -67,9 +69,10 @@ export default function UserProfile({ redirectionURL = "/" }) {
           {/* Buttons */}
           <div className="flex gap-3">
             <Button
-              label="Reset Password"
-              icon="pi pi-pencil"
+              label="Go to Home Page"
+              icon="pi pi-home"
               className="p-button-primary p-button-rounded"
+              onClick={() => navigate("/")}
             />
             <Button
               label="Sign Out"

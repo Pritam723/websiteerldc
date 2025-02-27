@@ -22,7 +22,7 @@ export default function ReactiveDisbursementLetter() {
 
   ///////////////// Static Meta Data ///////////////////////////////////////
   const targetTableClass = "ReactiveDisbursementLetter";
-  // Must be same as it is in Flask -> ORM Class(Model) -> _tablename_
+  // Must be same as it is in Flask -> ORM Class(Model) -> __tablename__
   const pageTitle = "Reactive Disbursement Letter";
 
   const breadcrumb = [

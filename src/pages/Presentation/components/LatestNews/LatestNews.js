@@ -25,22 +25,35 @@ import sampleMouImage from "assets/images/erldcconf.jpg";
 import { Height } from "@mui/icons-material";
 import Marquee from "react-fast-marquee";
 import MKBadge from "components/MKBadge";
+import { useState } from "react";
 
 function BuiltByDevelopers() {
   const bgImage = sampleMouImage;
-  // "https://raw.githubusercontent.com/creativetimofficial/public-assets/master/soft-ui-design-system/assets/img/desktop.jpg";
+  const [newsnumber, setNewsnumber] = useState(0);
 
-  const items = [
+  const latestNews = [
     "Flash report for Grid Event at 220/132 kV Darbhanga (Bihar) Substation",
     "Preliminary Load Crash Report",
     "Transition from existing Web Based Energy Scheduling (WBES) software to the New WBES software scheduled with effect from 05th August’2024.",
     "Flash report for Grid Event at 220/132 kV Bokaro Substation",
     "Hydro power stations would be scheduled maximum during non-solar peak hours",
     "Flash report for Grid Event at 220/132 kV Bokaro Substation",
-    // "Preliminary Load Crash Report",
-    // "Hydro power stations would be scheduled maximum during non-solar peak hours",
+    "Preliminary Load Crash Report",
+    "Hydro power stations would be scheduled maximum during non-solar peak hours",
   ];
 
+  const latestNewsLength = latestNews.length;
+
+  const handlePreviousNewsClick = (event) => {
+    event.preventDefault();
+    setNewsnumber(newsnumber - 1);
+  };
+
+  const handleNextNewsClick = (event) => {
+    event.preventDefault(); // Prevent default anchor behavior
+    // console.log("Next news clicked");
+    setNewsnumber(newsnumber + 1);
+  };
   return (
     <MKBox
       display="flex"
@@ -60,63 +73,109 @@ function BuiltByDevelopers() {
         backgroundSize: "cover",
         backgroundPosition: "center",
         height: "200px",
+        padding: "16px",
       }}
     >
-      {/* <Container> */}
-      <Grid container item xs={12} lg={12} sx={{ ml: { xs: 0, lg: 2 } }}>
-        <MKTypography
-          variant="h5"
-          color="white"
-          fontWeight="bold"
-          // sx={{ mb: 4 }}
-        >
-          Latest News of ERLDC{" "}
-        </MKTypography>
-        {/* <MKTypography variant="h1" color="white" mb={1}>
-            MoU with IIT Bhubaneswar
-          </MKTypography> */}
-        {/* <Marquee style={{ height: 100 }}> */}
-        <MKTypography
-          component="a"
-          variant="body1"
-          href="https://www.creative-tim.com/learning-lab/react/overview/material-kit/"
-          target="_blank"
-          rel="noreferrer"
-          color="white"
-          opacity={0.8}
-          mb={2}
-        >
-          {items[3]}
-        </MKTypography>
-        {/* </Marquee> */}
-        <MKTypography
-          component="a"
-          href="https://www.creative-tim.com/learning-lab/react/overview/material-kit/"
-          target="_blank"
-          rel="noreferrer"
-          variant="body2"
-          color="white"
-          fontWeight="regular"
-          sx={{
-            display: "flex",
-            alignItems: "center",
+      <Grid container item xs={12} sx={{ ml: { xs: 0, lg: 2 } }}>
+        {/* News Heading */}
+        <Grid item xs={12}>
+          <MKTypography variant="h5" color="white" fontWeight="bold">
+            Latest News of ERLDC
+          </MKTypography>
+        </Grid>
 
-            "& .material-icons-round": {
-              fontSize: "1.125rem",
-              transform: `translateX(3px)`,
-              transition: "transform 0.2s cubic-bezier(0.34, 1.61, 0.7, 1.3)",
-            },
+        {/* News Content */}
+        <Grid item xs={12} sx={{ mb: 1, height: "100px" }}>
+          <MKTypography variant="body1" color="white" opacity={0.8}>
+            <a
+              href="https://google.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ color: "white" }}
+            >
+              {latestNews[newsnumber]}
+            </a>
+          </MKTypography>
+        </Grid>
 
-            "&:hover .material-icons-round, &:focus .material-icons-round": {
-              transform: `translateX(6px)`,
-            },
-          }}
+        {/* Navigation Buttons */}
+        <Grid
+          container
+          item
+          xs={12}
+          sx={{ mt: 2, display: "flex", justifyContent: "space-between" }}
         >
-          NEXT NEWS
-          <Icon sx={{ fontWeight: "bold" }}>arrow_forward</Icon>
-        </MKTypography>
+          {/* Previous News Button (Left Side) */}
+          {newsnumber !== 0 ? (
+            <MKTypography
+              component="a"
+              href="#"
+              variant="body2"
+              color="white"
+              fontWeight="regular"
+              onClick={handlePreviousNewsClick}
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                textDecoration: "none",
+                cursor: "pointer",
+
+                "& .material-icons-round": {
+                  fontSize: "1.125rem",
+                  transform: `translateX(3px)`,
+                  transition:
+                    "transform 0.2s cubic-bezier(0.34, 1.61, 0.7, 1.3)",
+                },
+                "&:hover .material-icons-round, &:focus .material-icons-round":
+                  {
+                    transform: `translateX(6px)`,
+                  },
+              }}
+            >
+              <Icon sx={{ fontWeight: "bold", mr: { xs: 0, lg: 1 } }}>
+                arrow_backward
+              </Icon>
+              PREVIOUS NEWS
+            </MKTypography>
+          ) : (
+            <div /> // Empty div to maintain alignment
+          )}
+
+          {/* Next News Button (Right Side) */}
+          {newsnumber !== latestNewsLength - 1 ? (
+            <MKTypography
+              component="a"
+              href="#"
+              variant="body2"
+              color="white"
+              fontWeight="regular"
+              onClick={handleNextNewsClick}
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                textDecoration: "none",
+                cursor: "pointer",
+
+                "& .material-icons-round": {
+                  fontSize: "1.125rem",
+                  transform: `translateX(3px)`,
+                  transition:
+                    "transform 0.2s cubic-bezier(0.34, 1.61, 0.7, 1.3)",
+                },
+                "&:hover .material-icons-round, &:focus .material-icons-round":
+                  {
+                    transform: `translateX(6px)`,
+                  },
+              }}
+            >
+              NEXT NEWS
+              <Icon sx={{ fontWeight: "bold" }}>arrow_forward</Icon>
+            </MKTypography>
+          ) : (
+            <div /> // Empty div to maintain alignment
+          )}
+        </Grid>
       </Grid>
-      {/* </Container> */}
     </MKBox>
   );
 }

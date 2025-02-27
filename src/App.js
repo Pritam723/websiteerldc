@@ -31,6 +31,9 @@ import routes from "routes";
 import { AuthContext, AuthProvider } from "context/AuthContext";
 import ForgotPassword from "pages/FunctionalPages/Auth/ForgotPassword";
 import Register from "pages/FunctionalPages/Auth/Register";
+
+import Gallery from "pages/Gallery/Gallery";
+
 import UserProfile from "pages/FunctionalPages/Auth/UserProfile";
 import Test from "./Test";
 
@@ -82,6 +85,8 @@ export default function App() {
 
           <Route path="user/forgotpassword" element={<ForgotPassword />} />
           <Route path="user/register" element={<Register />} />
+          <Route path="photogallery" element={<Gallery />} />
+
           {/* <Route path="*" element={<Navigate to="/" />} /> */}
           <Route key="default" path="*" element={<Navigate to="/" />} />
           {/* <Route path="/user/userprofile" element={<UserProfile />} /> */}

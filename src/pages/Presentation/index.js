@@ -93,6 +93,7 @@ function Presentation() {
           autoPlay
           loop
           muted
+          style={{height: "auto" }}
           poster={ERLDC_IMG}
           // controls="controls"
           preload="none"

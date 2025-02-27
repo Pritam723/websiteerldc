@@ -16,7 +16,7 @@ Coded by www.creative-tim.com
 // react-router-dom components
 import { useState, useEffect, useRef } from "react";
 
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 // import pic1 from "assets/images/Courasal/1.png";
 // import pic2 from "assets/images/Courasal/2.png";
 // import pic3 from "assets/images/Courasal/3.png";
@@ -26,28 +26,28 @@ import { Link } from "react-router-dom";
 // @mui material components
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
-import DefaultInfoCard from "examples/Cards/InfoCards/DefaultInfoCard";
-import FilledInfoCard from "examples/Cards/InfoCards/FilledInfoCard";
+// import DefaultInfoCard from "examples/Cards/InfoCards/DefaultInfoCard";
+// import FilledInfoCard from "examples/Cards/InfoCards/FilledInfoCard";
 
 // Material Kit 2 React components
 import MKBox from "components/MKBox";
-import MKBadge from "components/MKBadge";
-import MKTypography from "components/MKTypography";
+// import MKBadge from "components/MKBadge";
+// import MKTypography from "components/MKTypography";
 
 // Presentation page components
-import ExampleCard from "pages/Presentation/components/ExampleCard";
+// import ExampleCard from "pages/Presentation/components/ExampleCard";
 import EasternMap from "examples/Easternmap/EasternMap";
 
 // Data
-import data from "pages/Presentation/sections/data/pagesData";
+// import data from "pages/Presentation/sections/data/pagesData";
 
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
+// import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
-import CardMedia from "@mui/material/CardMedia";
-import Typography from "@mui/material/Typography";
-import cmd_image from "assets/images/test.jpg";
+// import CardMedia from "@mui/material/CardMedia";
+// import Typography from "@mui/material/Typography";
+// import cmd_image from "assets/images/test.jpg";
 import "./pages.css";
 
 import RotatingCard from "examples/Cards/RotatingCard";
@@ -60,7 +60,8 @@ import bgBack from "assets/images/nscb.jpg";
 // import EasternMap from "examples/Easternmap/EasternMap";
 
 function Pages() {
-  const [content, setContent] = useState("ghgh");
+  const [content, setContent] = useState("test");
+  const navigate = useNavigate();
 
   useEffect(() => {
     //Runs only on the first render
@@ -151,20 +152,23 @@ function Pages() {
                   // description="You will save a lot of time going from prototyping to full-functional code because all elements are implemented."
                   action={{
                     type: "internal",
-                    route: "/sections/page-sections/page-headers",
+                    route: "/photogallery",
                     label: "Visit our gallery",
                   }}
                 />
               </RotatingCard>
 
               <CardActions>
-                <a
-                  href="https://www.facebook.com/GridIndia1"
-                  target="_blank"
-                  rel="noreferrer"
+                {/* <a href="photogallery" target="_blank" rel="noreferrer"> */}
+                <Button
+                  size="small"
+                  onClick={() => {
+                    navigate("/photogallery");
+                  }}
                 >
-                  <Button size="small">Visit ERLDC Photo Gallery</Button>
-                </a>
+                  Visit ERLDC Photo Gallery
+                </Button>
+                {/* </a> */}
                 {/* <Button size="small">Learn More</Button> */}
               </CardActions>
             </Card>
