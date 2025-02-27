@@ -7,10 +7,10 @@ body {
   background-color: #ffffff;
 }
 
-text {
+/* text {
   user-select: none;
   pointer-events: none;
-}
+} */
 
 #root {
   height: 100%;

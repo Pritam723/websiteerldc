@@ -14,7 +14,7 @@ import {
 // import Container3 from "./Container3.js";
 // import { geoPolyhedralWaterman } from "d3-geo-projection";
 import { Dialog } from "primereact/dialog";
-import "./App.css";
+import "./EasternMap.css";
 
 // Function to lighten color on hover
 const lightenColor = (color, percent) => {
@@ -192,7 +192,7 @@ function Eastern2(props) {
   };
 
   return (
-    <React.Fragment>
+    <React.Fragment className="EasternMap">
       <ComposableMap
         width={1742}
         height={2307}
@@ -242,6 +242,8 @@ function Eastern2(props) {
                       fill="black"
                       style={{
                         fontSize: "70px", // Adjust the font size to make the text larger
+                        userSelect: "none",
+                        pointerEvents: "none",
                       }}
                     >
                       {current[0].name}

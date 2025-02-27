@@ -37,6 +37,8 @@ import Gallery from "pages/Gallery/Gallery";
 import UserProfile from "pages/FunctionalPages/Auth/UserProfile";
 import Test from "./Test";
 
+// import WebSocketComponent from "./WebSocketComponent";
+
 export default function App() {
   const { pathname } = useLocation();
 
