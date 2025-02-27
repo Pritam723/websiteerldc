@@ -92,7 +92,7 @@ export default function Register() {
     try {
       let response = await axios({
         method: "post",
-        url: `${process.env.REACT_APP_READ_API}/register`,
+        url: `${process.env.REACT_APP_WRITE_API_PUBLIC}/register`,
         headers: {},
         data: data,
       });
@@ -143,7 +143,7 @@ export default function Register() {
     try {
       let response = await axios({
         method: "post",
-        url: `${process.env.REACT_APP_READ_API}/registerVerifyOTP`,
+        url: `${process.env.REACT_APP_WRITE_API_PUBLIC}/registerVerifyOTP`,
         headers: {},
         data: data,
       });

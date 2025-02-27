@@ -394,7 +394,7 @@ export default function CommonDataTable({
     try {
       let response = await axios({
         method: "post",
-        url: `${process.env.REACT_APP_WRITE_API}/addStandardData`,
+        url: `${process.env.REACT_APP_WRITE_API_PRIVATE}/addStandardData`,
         headers: headers,
         data: {
           product: _product,
@@ -451,7 +451,7 @@ export default function CommonDataTable({
     try {
       let response = await axios({
         method: "post",
-        url: `${process.env.REACT_APP_WRITE_API}/deleteStandardData`,
+        url: `${process.env.REACT_APP_WRITE_API_PRIVATE}/deleteStandardData`,
         headers: headers,
         data: {
           productIdToDelete: product.id,
@@ -574,6 +574,18 @@ export default function CommonDataTable({
               view="year"
               dateFormat="yy"
             />
+          )}
+
+          {filterBy == "Financial Year" && (
+            <React.Fragment>
+              <Dropdown
+                value={filterFY}
+                onChange={(e) => setFilterFY(e.value)}
+                options={fyList}
+                // optionLabel="fy"
+                placeholder="Select Financial Year"
+              />
+            </React.Fragment>
           )}
 
           {filterBy == "Financial Year & Quarter" && (

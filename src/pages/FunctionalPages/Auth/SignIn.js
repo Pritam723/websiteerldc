@@ -28,6 +28,8 @@ export default function SignIn() {
   // const [isLoginSuccessful, setIsLoginSuccessful] = useState(false);
   // const [username, setUsername] = useState("");
 
+  console.log(redirectionURL);
+
   const validate = (data) => {
     let errors = {};
 
@@ -67,6 +69,8 @@ export default function SignIn() {
         autoFocus
         onClick={() => {
           setShowMessage(false);
+          console.log(redirectionURL);
+
           navigate(redirectionURL);
         }}
       />

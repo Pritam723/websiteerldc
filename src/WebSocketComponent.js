@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { io } from "socket.io-client";
 
-const socket = io("http://10.3.101.179:4001");
+const socket = io(process.env.REACT_APP_WEBSOCKET_API);
 
 function WebSocketComponent() {
   const [messages, setMessages] = useState(null);

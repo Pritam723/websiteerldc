@@ -64,19 +64,12 @@ import BaseLayout from "layouts/sections/components/BaseLayout";
 const albums = [
   {
     title: "R.N. Tagore 163rd Birth Anniversary",
-    cover:
-      "https://erldc.in/wp-content/uploads/2024/05/09720cf2-836e-48ca-a06a-e6638f47eef0.jpg",
+    cover: "http://10.3.101.179:4001/images/image1.jpg",
     images: images,
   },
   {
     title: "International Women's Day 2024",
-    cover:
-      "https://erldc.in/wp-content/uploads/2024/05/781380c5-2862-4ba0-8b9e-1b6934bbc748.jpg",
-    images: images,
-  },
-  {
-    title: "Swachhta Action Plan 2023-24",
-    cover: "https://c2.staticflickr.com/9/8239/28897202241_1497bec71a_b.jpg",
+    cover: "http://10.3.101.179:4001/images/image1.jpg",
     images: images,
   },
 ];

@@ -1,225 +1,91 @@
 import React from "react";
-// import { render } from "react-dom";
-import Highcharts from "highcharts/highstock";
-import HighchartsReact from "highcharts-react-official";
-import "highcharts/modules/drilldown";
-// import "highcharts/modules/exporting";
-// import "highcharts/modules/export-data";
-// import "highcharts/modules/accessibility";
+import {
+  FaGlobe,
+  FaBolt,
+  FaIndustry,
+  FaWater,
+  FaServer,
+  FaLink,
+  FaPlug,
+  FaExchangeAlt,
+  FaMountain,
+} from "react-icons/fa";
 
-// import "highcharts/modules/drilldown";
+const features = [
+  {
+    icon: <FaGlobe className="text-blue-400 text-5xl" />,
+    title: "Eastern Region Connectivity",
+    description:
+      "The Eastern Region is the only region connected with all other regions of India: North, West, South, and North-East, along with Nepal, Bhutan, and Bangladesh.",
+  },
+  {
+    icon: <FaIndustry className="text-green-400 text-5xl" />,
+    title: "ER Grid Power Utilities",
+    description:
+      "Power utilities in ER include Bihar, Jharkhand, DVC, Odisha, Sikkim, and West Bengal.",
+  },
+  {
+    icon: <FaBolt className="text-yellow-400 text-5xl" />,
+    title: "Installed Capacity",
+    description:
+      "Total installed capacity: 41,052 MW (10,460 MW allocated outside ER) as of 31.03.2023.",
+  },
+  {
+    icon: <FaWater className="text-indigo-400 text-5xl" />,
+    title: "Thermal, Hydro, and RES Capacity",
+    description:
+      "Thermal: 82%, Hydro: 15%, Renewable Energy Sources (RES): 3%.",
+  },
+  {
+    icon: <FaServer className="text-gray-400 text-5xl" />,
+    title: "ISGS",
+    description: "ISGS includes NHPC (CS) and NTPC (CS).",
+  },
+  {
+    icon: <FaLink className="text-purple-400 text-5xl" />,
+    title: "ISTS Licensees",
+    description: "The number of ISTS Licensees in ER: 12.",
+  },
+  {
+    icon: <FaExchangeAlt className="text-red-400 text-5xl" />,
+    title: "HVDC Links",
+    description:
+      "Includes Agra-Alipurdwar-Bishwand Chariyali, Talcher-Kolar, and back-to-back links at Gazuwaka, Sasaram, and Bheramara.",
+  },
+  {
+    icon: <FaPlug className="text-orange-400 text-5xl" />,
+    title: "STATCOM Installed",
+    description: "Total number of STATCOM installed in ER: 4.",
+  },
+  {
+    icon: <FaMountain className="text-teal-400 text-5xl" />,
+    title: "Pump Storage Project",
+    description:
+      "The Purulia Pump Storage Project (PPSP) is a successful 900MW closed-loop pumped storage plant under WBSEDCL.",
+  },
+];
 
-// node_modules\highcharts\modules\drilldown.js
-
-const options = {
-  credits: {
-    enabled: false,
-  },
-  chart: {
-    type: "pie",
-  },
-  title: {
-    text: "Easter Regional Demand. 14th January 2025 16:30 Hrs",
-  },
-  subtitle: {
-    text: '<a href="http://statcounter.com" target="_blank"> Click here to see Real-Time Grid Data. </a>',
-  },
-
-  accessibility: {
-    announceNewData: {
-      enabled: true,
-    },
-    // point: {
-    //   valueSuffix: "%",
-    // },
-  },
-
-  plotOptions: {
-    series: {
-      borderRadius: 5,
-      dataLabels: [
-        {
-          enabled: true,
-          distance: 15,
-          format: "{point.name}",
-        },
-        {
-          enabled: true,
-          distance: "-30%",
-          filter: {
-            property: "percentage",
-            operator: ">",
-            value: 5,
-          },
-          format: "{point.y:.1f} MW",
-          style: {
-            fontSize: "0.9em",
-            textOutline: "none",
-          },
-        },
-      ],
-    },
-  },
-
-  tooltip: {
-    headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
-    pointFormat:
-      '<span style="color:{point.color}">{point.name}</span>: ' +
-      "<b>{point.y:.0f}MW</b> of total<br/>",
-  },
-
-  series: [
-    {
-      name: "Constituents",
-      colorByPoint: true,
-      data: [
-        {
-          name: "West Bengal",
-          y: 6204,
-          drilldown: "WB",
-        },
-        {
-          name: "Odisha",
-          y: 5689,
-          drilldown: "OD",
-        },
-        {
-          name: "DVC",
-          y: 5389,
-          drilldown: "DVC",
-        },
-        {
-          name: "Bihar",
-          y: 2764,
-          drilldown: "BH",
-        },
-        {
-          name: "Jharkhand",
-          y: 2096,
-          drilldown: "JH",
-        },
-        {
-          name: "Sikim",
-          y: 92,
-          drilldown: null,
-        },
-      ],
-    },
-  ],
-  drilldown: {
-    series: [
-      {
-        name: "WB",
-        id: "WB",
-        data: [
-          ["v97.0", 36.89],
-          ["v96.0", 18.16],
-          ["v95.0", 0.54],
-          ["v94.0", 0.7],
-          ["v93.0", 0.8],
-          ["v92.0", 0.41],
-          ["v91.0", 0.31],
-          ["v90.0", 0.13],
-          ["v89.0", 0.14],
-          ["v88.0", 0.1],
-          ["v87.0", 0.35],
-          ["v86.0", 0.17],
-          ["v85.0", 0.18],
-          ["v84.0", 0.17],
-          ["v83.0", 0.21],
-          ["v81.0", 0.1],
-          ["v80.0", 0.16],
-          ["v79.0", 0.43],
-          ["v78.0", 0.11],
-          ["v76.0", 0.16],
-          ["v75.0", 0.15],
-          ["v72.0", 0.14],
-          ["v70.0", 0.11],
-          ["v69.0", 0.13],
-          ["v56.0", 0.12],
-          ["v49.0", 0.17],
-        ],
-      },
-      {
-        name: "OD",
-        id: "OD",
-        data: [
-          ["v15.3", 0.1],
-          ["v15.2", 2.01],
-          ["v15.1", 2.29],
-          ["v15.0", 0.49],
-          ["v14.1", 2.48],
-          ["v14.0", 0.64],
-          ["v13.1", 1.17],
-          ["v13.0", 0.13],
-          ["v12.1", 0.16],
-        ],
-      },
-      {
-        name: "JH",
-        id: "JH",
-        data: [
-          ["v97", 6.62],
-          ["v96", 2.55],
-          ["v95", 0.15],
-        ],
-      },
-      {
-        name: "BH",
-        id: "BH",
-        data: [
-          ["v96.0", 4.17],
-          ["v95.0", 3.33],
-          ["v94.0", 0.11],
-          ["v91.0", 0.23],
-          ["v78.0", 0.16],
-          ["v52.0", 0.15],
-        ],
-      },
-      {
-        name: "DVC",
-        id: "DVC",
-        data: [
-          ["v97.0", 36.89],
-          ["v96.0", 18.16],
-          ["v95.0", 0.54],
-          ["v94.0", 0.7],
-          ["v93.0", 0.8],
-          ["v92.0", 0.41],
-          ["v91.0", 0.31],
-          ["v90.0", 0.13],
-          ["v89.0", 0.14],
-          ["v88.0", 0.1],
-          ["v87.0", 0.35],
-          ["v86.0", 0.17],
-          ["v85.0", 0.18],
-          ["v84.0", 0.17],
-          ["v83.0", 0.21],
-          ["v81.0", 0.1],
-          ["v80.0", 0.16],
-          ["v79.0", 0.43],
-          ["v78.0", 0.11],
-          ["v76.0", 0.16],
-          ["v75.0", 0.15],
-          ["v72.0", 0.14],
-          ["v70.0", 0.11],
-          ["v69.0", 0.13],
-          ["v56.0", 0.12],
-          ["v49.0", 0.17],
-        ],
-      },
-    ],
-  },
-};
-
-export default function App() {
+export default function ERPowerFeatures() {
   return (
-    <HighchartsReact
-      highcharts={Highcharts}
-      // constructorType={"stockChart"}
-      options={options}
-    />
+    <div className="bg-gradient-to-br from-gray-900 via-gray-800 to-black min-h-screen flex flex-col items-center justify-center p-8">
+      <h1 className="text-4xl font-extrabold text-white mb-10 text-center">
+        ⚡ Salient Features of ER Power System ⚡
+      </h1>
+
+      <div className="grid md:grid-cols-3 gap-8 max-w-7xl">
+        {features.map((feature, index) => (
+          <div
+            key={index}
+            className="bg-white/10 backdrop-blur-lg shadow-lg rounded-3xl p-8 flex flex-col items-center text-center transition-transform transform hover:scale-105 hover:shadow-2xl"
+          >
+            {feature.icon}
+            <h2 className="text-2xl font-semibold mt-4 text-white">
+              {feature.title}
+            </h2>
+            <p className="text-gray-300 mt-2">{feature.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
   );
 }
-
-//////////////////////////////////////////////////////////////////

@@ -61,7 +61,7 @@ export default function ForgotPassword({ redirectionURL = "/" }) {
     try {
       let response = await axios({
         method: "post",
-        url: `${process.env.REACT_APP_READ_API}/forgotPassword`,
+        url: `${process.env.REACT_APP_WRITE_API_PUBLIC}/forgotPassword`,
         headers: {},
         data: data,
       });
@@ -138,7 +138,7 @@ export default function ForgotPassword({ redirectionURL = "/" }) {
     try {
       let response = await axios({
         method: "post",
-        url: `${process.env.REACT_APP_READ_API}/forgotPasswordVerifyOTP`,
+        url: `${process.env.REACT_APP_WRITE_API_PUBLIC}/forgotPasswordVerifyOTP`,
         headers: {},
         data: newData,
       });

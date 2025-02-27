@@ -53,10 +53,16 @@ export default {
       name: "Quick Links",
       items: [
         { name: "Feedback & Grievance", href: "/presentation" },
-        { name: "Organizational Chart", href: "https://www.creative-tim.com/templates/free" },
-        { name: "Upload Documents", href: "https://www.creative-tim.com/templates/premium" },
+        {
+          name: "Organizational Chart",
+          href: "https://www.creative-tim.com/templates/free",
+        },
+        // { name: "Upload Documents", href: "https://www.creative-tim.com/templates/premium" },
         { name: "RTI", href: "https://www.creative-tim.com/blog" },
-        { name: "GRID-INDIA Website", href: "https://www.creative-tim.com/blog" },
+        {
+          name: "GRID-INDIA Website",
+          href: "https://www.creative-tim.com/blog",
+        },
       ],
     },
     {

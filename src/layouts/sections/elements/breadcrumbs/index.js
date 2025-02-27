@@ -1,19 +1,4 @@
-/*
-=========================================================
-* Material Kit 2 React - v2.1.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/material-kit-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
-// @mui material components
+// Copyright ERLDC Website
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 
@@ -45,7 +30,9 @@ function BreadcrumbsEl() {
             <Grid container spacing={2} item xs={12} lg={10} mx="auto">
               <Grid item xs={12}>
                 <Breadcrumbs
-                  routes={[{ label: "Home", route: "/sections/elements/breadcrumbs" }]}
+                  routes={[
+                    { label: "Home", route: "/sections/elements/breadcrumbs" },
+                  ]}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -60,7 +47,10 @@ function BreadcrumbsEl() {
                 <Breadcrumbs
                   routes={[
                     { label: "Home", route: "/sections/elements/breadcrumbs" },
-                    { label: "Library", route: "/sections/elements/breadcrumbs" },
+                    {
+                      label: "Library",
+                      route: "/sections/elements/breadcrumbs",
+                    },
                     { label: "Data" },
                   ]}
                 />

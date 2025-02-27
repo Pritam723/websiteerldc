@@ -1,19 +1,4 @@
-/*
-=========================================================
-* Material Kit 2 React - v2.1.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/material-kit-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
-// @mui material components
+// Copyright ERLDC Website
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Icon from "@mui/material/Icon";
@@ -33,9 +18,9 @@ function FeaturesOne() {
               Read More About Us
             </MKTypography>
             <MKTypography variant="body2" color="text" mb={2}>
-              Pain is what we go through as we become older. We get insulted by others, lose trust
-              for those others. We get back stabbed by friends. It becomes harder for us to give
-              others a hand.
+              Pain is what we go through as we become older. We get insulted by
+              others, lose trust for those others. We get back stabbed by
+              friends. It becomes harder for us to give others a hand.
             </MKTypography>
             <MKTypography
               component="a"
@@ -51,19 +36,26 @@ function FeaturesOne() {
                 "& .material-icons-round": {
                   fontSize: "1.125rem",
                   transform: "translateX(3px)",
-                  transition: "transform 0.2s cubic-bezier(0.34, 1.61, 0.7, 1.3)",
+                  transition:
+                    "transform 0.2s cubic-bezier(0.34, 1.61, 0.7, 1.3)",
                 },
 
-                "&:hover .material-icons-round, &:focus .material-icons-round": {
-                  transform: "translateX(6px)",
-                },
+                "&:hover .material-icons-round, &:focus .material-icons-round":
+                  {
+                    transform: "translateX(6px)",
+                  },
               }}
             >
               More about us
               <Icon sx={{ fontWeight: "bold" }}>arrow_forward</Icon>
             </MKTypography>
           </Grid>
-          <Grid item xs={12} lg={6} sx={{ ml: { xs: -2, lg: "auto" }, mt: { xs: 6, lg: 0 } }}>
+          <Grid
+            item
+            xs={12}
+            lg={6}
+            sx={{ ml: { xs: -2, lg: "auto" }, mt: { xs: 6, lg: 0 } }}
+          >
             <Stack>
               <MKBox display="flex" alignItems="center" p={2}>
                 <MKBox
