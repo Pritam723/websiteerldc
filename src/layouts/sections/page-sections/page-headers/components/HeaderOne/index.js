@@ -10,7 +10,7 @@ import MKButton from "components/MKButton";
 import MKTypography from "components/MKTypography";
 
 // Images
-import bgImage from "assets/images/bg-coworking.jpeg";
+import bgImage from "assets/images/erldcconf.jpg";
 
 function HeaderOne() {
   return (

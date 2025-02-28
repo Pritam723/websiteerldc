@@ -1,91 +1,81 @@
 import React from "react";
-import {
-  FaGlobe,
-  FaBolt,
-  FaIndustry,
-  FaWater,
-  FaServer,
-  FaLink,
-  FaPlug,
-  FaExchangeAlt,
-  FaMountain,
-} from "react-icons/fa";
+import BaseLayout from "layouts/sections/components/BaseLayout";
+import { useNavigate } from "react-router-dom";
+import { Button } from "primereact/button";
+import { Card } from "primereact/card";
+import { Divider } from "primereact/divider";
+import { Message } from "primereact/message";
+import { ExclamationTriangleIcon } from "primereact/icons/exclamationtriangle";
+import Restricted_access from "assets/images/Restricted_access.gif";
+import { max } from "moment";
 
-const features = [
-  {
-    icon: <FaGlobe className="text-blue-400 text-5xl" />,
-    title: "Eastern Region Connectivity",
-    description:
-      "The Eastern Region is the only region connected with all other regions of India: North, West, South, and North-East, along with Nepal, Bhutan, and Bangladesh.",
-  },
-  {
-    icon: <FaIndustry className="text-green-400 text-5xl" />,
-    title: "ER Grid Power Utilities",
-    description:
-      "Power utilities in ER include Bihar, Jharkhand, DVC, Odisha, Sikkim, and West Bengal.",
-  },
-  {
-    icon: <FaBolt className="text-yellow-400 text-5xl" />,
-    title: "Installed Capacity",
-    description:
-      "Total installed capacity: 41,052 MW (10,460 MW allocated outside ER) as of 31.03.2023.",
-  },
-  {
-    icon: <FaWater className="text-indigo-400 text-5xl" />,
-    title: "Thermal, Hydro, and RES Capacity",
-    description:
-      "Thermal: 82%, Hydro: 15%, Renewable Energy Sources (RES): 3%.",
-  },
-  {
-    icon: <FaServer className="text-gray-400 text-5xl" />,
-    title: "ISGS",
-    description: "ISGS includes NHPC (CS) and NTPC (CS).",
-  },
-  {
-    icon: <FaLink className="text-purple-400 text-5xl" />,
-    title: "ISTS Licensees",
-    description: "The number of ISTS Licensees in ER: 12.",
-  },
-  {
-    icon: <FaExchangeAlt className="text-red-400 text-5xl" />,
-    title: "HVDC Links",
-    description:
-      "Includes Agra-Alipurdwar-Bishwand Chariyali, Talcher-Kolar, and back-to-back links at Gazuwaka, Sasaram, and Bheramara.",
-  },
-  {
-    icon: <FaPlug className="text-orange-400 text-5xl" />,
-    title: "STATCOM Installed",
-    description: "Total number of STATCOM installed in ER: 4.",
-  },
-  {
-    icon: <FaMountain className="text-teal-400 text-5xl" />,
-    title: "Pump Storage Project",
-    description:
-      "The Purulia Pump Storage Project (PPSP) is a successful 900MW closed-loop pumped storage plant under WBSEDCL.",
-  },
-];
+/**
+ * PleaseSignIn Component
+ * This component renders a message prompting the user to sign in to access a restricted page.
+ *
+ * @param {Object} props - Component properties
+ * @param {Array} props.breadcrumb - Breadcrumb navigation data
+ * @param {string} props.redirectionURL - URL to redirect to after sign-in
+ */
+export default function PleaseSignIn({ breadcrumb, redirectionURL }) {
+  const navigate = useNavigate();
 
-export default function ERPowerFeatures() {
+  /**
+   * Redirects the user to the sign-in page with the redirection URL in state.
+   */
+  const handleRedirect = () => {
+    navigate("/user/signIn", { state: { redirectionURL } });
+  };
+
   return (
-    <div className="bg-gradient-to-br from-gray-900 via-gray-800 to-black min-h-screen flex flex-col items-center justify-center p-8">
-      <h1 className="text-4xl font-extrabold text-white mb-10 text-center">
-        ⚡ Salient Features of ER Power System ⚡
-      </h1>
-
-      <div className="grid md:grid-cols-3 gap-8 max-w-7xl">
-        {features.map((feature, index) => (
-          <div
-            key={index}
-            className="bg-white/10 backdrop-blur-lg shadow-lg rounded-3xl p-8 flex flex-col items-center text-center transition-transform transform hover:scale-105 hover:shadow-2xl"
-          >
-            {feature.icon}
-            <h2 className="text-2xl font-semibold mt-4 text-white">
-              {feature.title}
-            </h2>
-            <p className="text-gray-300 mt-2">{feature.description}</p>
-          </div>
-        ))}
-      </div>
-    </div>
+    <BaseLayout breadcrumb={breadcrumb}>
+      <Card className="shadow-3 p-5 text-center w-full max-w-md mx-400">
+        <div>
+          <h1 style={{ color: "#cc8925" }}>RESTRICTED ACCESS</h1>
+        </div>
+        <br />
+        <img
+          src={Restricted_access}
+          alt="Restricted Access"
+          className="w-2 mx-auto mb-4 rounded-full"
+          height={max}
+          width={max}
+        />
+        {/* <Divider /> */}
+        {/* <div><Message severity="warn" text="You need to sign in to view this page" /></div> */}
+        <div>
+          <Message
+            severity="warn"
+            content={
+              <span
+                style={{
+                  fontSize: "1.5rem",
+                  display: "flex",
+                  alignItems: "center",
+                }}
+              >
+                <ExclamationTriangleIcon
+                  style={{
+                    width: "1.5rem",
+                    height: "1.5rem",
+                    marginRight: "0.5rem",
+                  }}
+                />
+                You need to sign in to view this page
+              </span>
+            }
+          />
+        </div>
+        <div className="mt-4">
+          <Button
+            label="Sign In to Continue"
+            style={{ backgroundColor: "#6366f1", borderColor: "#6366f1" }}
+            icon="pi pi-sign-in"
+            className="p-button-warning p-button-rounded p-button-lg"
+            onClick={handleRedirect}
+          />
+        </div>
+      </Card>
+    </BaseLayout>
   );
 }

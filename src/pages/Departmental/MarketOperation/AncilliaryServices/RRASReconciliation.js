@@ -22,7 +22,7 @@ export default function RRASReconciliation() {
 
   ///////////////// Static Meta Data ///////////////////////////////////////
   const targetTableClass = "RRASReconciliation";
-  // Must be same as it is in Flask -> ORM Class(Model) -> _tablename_
+  // Must be same as it is in Flask -> ORM Class(Model) -> __tablename__
   const pageTitle = "RRAS Reconciliation";
 
   const breadcrumb = [

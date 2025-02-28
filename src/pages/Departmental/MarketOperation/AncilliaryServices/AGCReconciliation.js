@@ -22,7 +22,7 @@ export default function AGCReconciliation() {
 
   ///////////////// Static Meta Data ///////////////////////////////////////
   const targetTableClass = "AGCReconciliation";
-  // Must be same as it is in Flask -> ORM Class(Model) -> _tablename_
+  // Must be same as it is in Flask -> ORM Class(Model) -> __tablename__
   const pageTitle = "AGC Reconciliation";
 
   const breadcrumb = [

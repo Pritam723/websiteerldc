@@ -93,6 +93,7 @@ function Presentation() {
           autoPlay
           loop
           muted
+          style={{ height: "auto" }}
           poster={ERLDC_IMG}
           // controls="controls"
           preload="none"
@@ -208,7 +209,7 @@ function Presentation() {
                 // description="Material Kit is giving you a lot of pre-made components, that will help you to build UI's faster."
                 action={{
                   type: "external",
-                  route: "https://fc.posoco.in/FnCWeb/#/landing",
+                  route: "https://fc.grid-india.in/FnCWeb/#/landing",
                   label: "Visit F&C Application",
                 }}
               />

@@ -10,10 +10,10 @@ import MKTypography from "components/MKTypography";
 import HorizontalTeamCard from "examples/Cards/TeamCards/HorizontalTeamCard";
 
 // Images
-import team1 from "assets/images/team-5.jpg";
-import team2 from "assets/images/bruce-mars.jpg";
-import team3 from "assets/images/ivana-squares.jpg";
-import team4 from "assets/images/ivana-square.jpg";
+import team1 from "assets/images/erldcconf.jpg";
+import team2 from "assets/images/erldcconf.jpg";
+import team3 from "assets/images/erldcconf.jpg";
+import team4 from "assets/images/erldcconf.jpg";
 
 function Team() {
   return (

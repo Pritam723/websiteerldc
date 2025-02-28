@@ -95,7 +95,7 @@ export default function MyAppBar() {
   const fontSizeTitle =
     windowWidth > 800 ? "1rem" : windowWidth > 600 ? "0.9rem" : "0.8rem";
   const fontSizeContent =
-    windowWidth > 800 ? "0.7rem" : windowWidth > 600 ? "0.6rem" : "0.5rem";
+    windowWidth > 800 ? "0.85rem" : windowWidth > 600 ? "0.8rem" : "0.75rem";
 
   return (
     <Container>
@@ -111,7 +111,7 @@ export default function MyAppBar() {
           <Toolbar
             variant="dense"
             sx={{
-              minHeight: "40px",
+              minHeight: "48px",
               display: "flex",
               justifyContent: "space-between",
               alignItems: "center",
@@ -144,8 +144,7 @@ export default function MyAppBar() {
                 fontSize: fontSizeContent, // Dynamic font size for second div
               }}
             >
-              {windowWidth > 1200 && (
-                <>
+              
                   {isSearchVisible && (
                     <Search ref={searchRef}>
                       <SearchIconWrapper>
@@ -207,7 +206,8 @@ export default function MyAppBar() {
                       हिन्दी
                     </Typography>
                   </a>
-
+                  {windowWidth > 1200 && (
+                <>
                   <a
                     href="#"
                     target="_blank"

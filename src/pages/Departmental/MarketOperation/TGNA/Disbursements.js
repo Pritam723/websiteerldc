@@ -22,7 +22,7 @@ export default function Disbursements() {
 
   ///////////////// Static Meta Data ///////////////////////////////////////
   const targetTableClass = "Disbursements";
-  // Must be same as it is in Flask -> ORM Class(Model) -> _tablename_
+  // Must be same as it is in Flask -> ORM Class(Model) -> __tablename__
   const pageTitle = "Disbursements";
 
   const breadcrumb = [

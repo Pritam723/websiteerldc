@@ -22,7 +22,7 @@ export default function ReactiveReconcilation() {
 
   ///////////////// Static Meta Data ///////////////////////////////////////
   const targetTableClass = "ReactiveReconcilation";
-  // Must be same as it is in Flask -> ORM Class(Model) -> _tablename_
+  // Must be same as it is in Flask -> ORM Class(Model) -> __tablename__
   const pageTitle = "Reactive Reconcilation";
 
   const breadcrumb = [

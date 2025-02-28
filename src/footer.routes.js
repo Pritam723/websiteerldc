@@ -55,13 +55,14 @@ export default {
         { name: "Feedback & Grievance", href: "/presentation" },
         {
           name: "Organizational Chart",
-          href: "https://www.creative-tim.com/templates/free",
+          href:
+            process.env.REACT_APP_READ_API + "/files/OgranizationalChart.pdf",
         },
         // { name: "Upload Documents", href: "https://www.creative-tim.com/templates/premium" },
         { name: "RTI", href: "https://www.creative-tim.com/blog" },
         {
           name: "GRID-INDIA Website",
-          href: "https://www.creative-tim.com/blog",
+          href: "https://grid-india.in/",
         },
       ],
     },
@@ -81,7 +82,7 @@ export default {
       items: [
         { name: "(+91) 33 30116900-09 (EPABX)" },
         { name: "2423-5875 / 24235265 / 30116990-96 (CONTROL ROOM)" },
-        { name: "erldcinfo@posoco.in", href: "mailto:erldcinfo@posoco.in" },
+        { name: "erldcit@grid-india.in", href: "mailto:erldcit@grid-india.in" },
       ],
     },
     {
