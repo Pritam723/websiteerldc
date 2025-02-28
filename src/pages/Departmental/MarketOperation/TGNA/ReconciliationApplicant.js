@@ -22,7 +22,7 @@ export default function ReconciliationApplicant() {
 
   ///////////////// Static Meta Data ///////////////////////////////////////
   const targetTableClass = "ReconciliationApplicant";
-  // Must be same as it is in Flask -> ORM Class(Model) -> _tablename_
+  // Must be same as it is in Flask -> ORM Class(Model) -> __tablename__
   const pageTitle = "Reconciliation Applicant";
 
   const breadcrumb = [
