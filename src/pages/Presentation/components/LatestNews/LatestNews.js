@@ -17,7 +17,7 @@ Coded by www.creative-tim.com
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Icon from "@mui/material/Icon";
-
+import { motion } from "framer-motion";
 // Material Kit 2 React components
 import MKBox from "components/MKBox";
 import MKTypography from "components/MKTypography";
@@ -43,7 +43,12 @@ function BuiltByDevelopers() {
   ];
 
   const latestNewsLength = latestNews.length;
-
+  // Animation Variants
+  const textVariants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1, transition: { duration: 1.5 } },
+    exit: { opacity: 0, transition: { duration: 1.5 } },
+  };
   const handlePreviousNewsClick = (event) => {
     event.preventDefault();
     setNewsnumber(newsnumber - 1);
@@ -85,7 +90,7 @@ function BuiltByDevelopers() {
         </Grid>
 
         {/* News Content */}
-        <Grid item xs={12} sx={{ mb: 1, height: "100px" }}>
+        {/* <Grid item xs={12} sx={{ mb: 1, height: "100px" }}>
           <MKTypography variant="body1" color="white" opacity={0.8}>
             <a
               href="https://google.com"
@@ -96,6 +101,31 @@ function BuiltByDevelopers() {
               {latestNews[newsnumber]}
             </a>
           </MKTypography>
+        </Grid> */}
+        <Grid item xs={12} sx={{ mb: 1, height: "100px", overflow: "hidden" }}>
+          <motion.div
+            key={newsnumber}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            variants={textVariants}
+          >
+            <MKTypography
+              variant="body1"
+              color="white"
+              opacity={0.8}
+              sx={{ fontSize: "16px" }}
+            >
+              <a
+                href="https://google.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ color: "white" }}
+              >
+                {latestNews[newsnumber]}
+              </a>
+            </MKTypography>
+          </motion.div>
         </Grid>
 
         {/* Navigation Buttons */}
