@@ -6,7 +6,7 @@ import Divider from "@mui/material/Divider";
 import { useEffect, useState } from "react";
 import { io } from "socket.io-client";
 
-const socket = io(process.env.REACT_APP_WEBSOCKET_API);
+// const socket = io(process.env.REACT_APP_WEBSOCKET_API);
 
 // Material Kit 2 React components
 import MKBox from "components/MKBox";
@@ -22,19 +22,19 @@ function Counters() {
     ER_FREQ: -1,
   });
 
-  useEffect(() => {
-    socket.on("connect", () => {
-      console.log("Connected to WebSocket");
-    });
-    socket.on("message", (data) => {
-      console.log(data);
-      setScadaData(data.data);
-    });
+  // useEffect(() => {
+  //   socket.on("connect", () => {
+  //     console.log("Connected to WebSocket");
+  //   });
+  //   socket.on("message", (data) => {
+  //     console.log(data);
+  //     setScadaData(data.data);
+  //   });
 
-    console.log("Runs");
+  //   console.log("Runs");
 
-    return () => socket.disconnect();
-  }, []);
+  //   return () => socket.disconnect();
+  // }, []);
 
   return (
     <MKBox component="section" py={2}>
