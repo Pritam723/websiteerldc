@@ -35,7 +35,7 @@ export default function SingleTender() {
     { label: "Single Tender", route: "/more/contractsawarded/singletender" },
   ];
 
-  const redirectionURL = "more/contractsawarded/limitedtender";
+  const redirectionURL = "more/contractsawarded/singletender";
 
   ///////////////// Dynamic Meta Data Fetched from Backend /////////////////
   const emptyDynamicMetaData = {
