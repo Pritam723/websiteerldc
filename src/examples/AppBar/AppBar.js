@@ -156,7 +156,7 @@ export default function MyAppBar() {
                       />
                     </Search>
                   )}
-                  {!isSearchVisible && (
+                  {windowWidth > 1200 && !isSearchVisible && (
                     <IconButton onClick={toggleSearch} color="inherit">
                       <SearchIcon />
                     </IconButton>
