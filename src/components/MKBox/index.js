@@ -1,17 +1,4 @@
-/**
-=========================================================
-* Material Kit 2 React - v2.1.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/material-kit-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
+// Copyright ERLDC Website
 
 import { forwardRef } from "react";
 
@@ -22,11 +9,31 @@ import PropTypes from "prop-types";
 import MKBoxRoot from "components/MKBox/MKBoxRoot";
 
 const MKBox = forwardRef(
-  ({ variant, bgColor, color, opacity, borderRadius, shadow, coloredShadow, ...rest }, ref) => (
+  (
+    {
+      variant,
+      bgColor,
+      color,
+      opacity,
+      borderRadius,
+      shadow,
+      coloredShadow,
+      ...rest
+    },
+    ref
+  ) => (
     <MKBoxRoot
       {...rest}
       ref={ref}
-      ownerState={{ variant, bgColor, color, opacity, borderRadius, shadow, coloredShadow }}
+      ownerState={{
+        variant,
+        bgColor,
+        color,
+        opacity,
+        borderRadius,
+        shadow,
+        coloredShadow,
+      }}
     />
   )
 );

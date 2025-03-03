@@ -1,17 +1,4 @@
-/**
-=========================================================
-* Material Kit 2 React - v2.1.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/material-kit-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
+// Copyright ERLDC Website
 
 // react-router components
 import { Link } from "react-router-dom";
@@ -58,7 +45,12 @@ function CenteredBlogCard({ image, title, description, action }) {
         />
       </MKBox>
       <MKBox p={3} mt={-1} textAlign="center">
-        <MKTypography display="inline" variant="h5" textTransform="capitalize" fontWeight="regular">
+        <MKTypography
+          display="inline"
+          variant="h5"
+          textTransform="capitalize"
+          fontWeight="regular"
+        >
           {title}
         </MKTypography>
         <MKBox mt={1} mb={3}>

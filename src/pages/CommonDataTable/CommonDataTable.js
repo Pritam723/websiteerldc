@@ -341,7 +341,7 @@ export default function CommonDataTable({
       // _product.id = newIDs[0];
       _product.fileName = _attachedFiles[0]["fileName"];
       _product.size = _attachedFiles[0]["size"];
-
+      _product.uploadedBy = user.user_id;
       _products[index] = _product;
       showToastMessage(toast, toastDetails);
       setIsSaveClicked(false);
@@ -368,6 +368,7 @@ export default function CommonDataTable({
         _cloneProduct.id = newID;
         _cloneProduct.fileName = _attachedFiles[index]["fileName"];
         _cloneProduct.size = _attachedFiles[index]["size"];
+        _cloneProduct.uploadedBy = user.user_id;
         _products.unshift(_cloneProduct);
       });
 
@@ -394,7 +395,7 @@ export default function CommonDataTable({
     try {
       let response = await axios({
         method: "post",
-        url: `${process.env.REACT_APP_WRITE_API}/addStandardData`,
+        url: `${process.env.REACT_APP_WRITE_API_PRIVATE}/addStandardData`,
         headers: headers,
         data: {
           product: _product,
@@ -451,7 +452,7 @@ export default function CommonDataTable({
     try {
       let response = await axios({
         method: "post",
-        url: `${process.env.REACT_APP_WRITE_API}/deleteStandardData`,
+        url: `${process.env.REACT_APP_WRITE_API_PRIVATE}/deleteStandardData`,
         headers: headers,
         data: {
           productIdToDelete: product.id,
@@ -574,6 +575,18 @@ export default function CommonDataTable({
               view="year"
               dateFormat="yy"
             />
+          )}
+
+          {filterBy == "Financial Year" && (
+            <React.Fragment>
+              <Dropdown
+                value={filterFY}
+                onChange={(e) => setFilterFY(e.value)}
+                options={fyList}
+                // optionLabel="fy"
+                placeholder="Select Financial Year"
+              />
+            </React.Fragment>
           )}
 
           {filterBy == "Financial Year & Quarter" && (

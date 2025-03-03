@@ -1,17 +1,4 @@
-/**
-=========================================================
-* Material Kit 2 React - v2.1.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/material-kit-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
+// Copyright ERLDC Website
 
 import { forwardRef, createContext, useContext, useMemo } from "react";
 
@@ -28,7 +15,10 @@ import MKPaginationItemRoot from "components/MKPagination/MKPaginationItemRoot";
 const Context = createContext();
 
 const MKPagination = forwardRef(
-  ({ item, variant, color, size, active, children, placement, ...rest }, ref) => {
+  (
+    { item, variant, color, size, active, children, placement, ...rest },
+    ref
+  ) => {
     const context = item ? useContext(Context) : null;
     const paginationSize = context ? context.size : null;
     const paginationProps = useMemo(() => ({ variant, color, size }), []);

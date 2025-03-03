@@ -1,17 +1,4 @@
-/**
-=========================================================
-* Material Kit 2 React - v2.1.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/material-kit-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
+// Copyright ERLDC Website
 
 /** 
   All of the routes for the Material Kit 2 React are added here,
@@ -148,7 +135,7 @@ const routes = [
       {
         name: "GRID-INDIA Annual Reports",
         hindiName: "ग्रिड-इंडिया वार्षिक रिपोर्ट्स",
-        href: "http://posoco.in/about-us/annual-reports/",
+        href: "http://grid-india.in/about-us/annual-reports/",
       },
     ],
   },
@@ -160,7 +147,7 @@ const routes = [
       {
         name: "TTC/ATC",
         hindiName: "TTC/ATC",
-        href: "https://posoco.in/market/monthly-atc-intra-regional",
+        href: "https://grid-india.in/market/monthly-atc-intra-regional",
       },
 
       {
@@ -336,7 +323,7 @@ const routes = [
       {
         name: "Payment Security Mechanism",
         hindiName: "भुगतान सुरक्षा तंत्र",
-        href: "http://posoco.in/reports/psm-daily-reports/",
+        href: "http://grid-india.in/reports/psm-daily-reports/",
       },
       {
         cssOverlap: true,
@@ -402,7 +389,7 @@ const routes = [
   //         {
   //           name: "DSM rate",
   //           hindiName: "डीएसएम दर",
-  //           href: "https://dsm.posoco.in/newdsm",
+  //           href: "https://dsm.grid-india.in/newdsm",
   //         },
   //         {
   //           name: "DSM Disbursement Letter",
@@ -491,7 +478,7 @@ const routes = [
   //         {
   //           name: "F&C User List",
   //           hindiName: "एफ&सी उपयोगकर्ता सूची",
-  //           href: "http://fc.posoco.in/FnCWeb/#/landing/reg-users",
+  //           href: "http://fc.grid-india.in/FnCWeb/#/landing/reg-users",
   //         },
   //         {
   //           name: "Monthly Bill Statement",
@@ -592,7 +579,7 @@ const routes = [
           {
             name: "DSM rate",
             hindiName: "डीएसएम दर",
-            href: "https://dsm.posoco.in/newdsm",
+            href: "https://dsm.grid-india.in/newdsm",
           },
           {
             name: "DSM Disbursement Letter",
@@ -692,7 +679,7 @@ const routes = [
           {
             name: "F&C User List",
             hindiName: "एफ&सी उपयोगकर्ता सूची",
-            href: "http://fc.posoco.in/FnCWeb/#/landing/reg-users",
+            href: "http://fc.grid-india.in/FnCWeb/#/landing/reg-users",
           },
           {
             name: "Monthly Bill Statement",
@@ -796,7 +783,7 @@ const routes = [
   //     {
   //       name: "Transmission Loss",
   //       hindiName: "ट्रांसमिशन हानि",
-  //       href: "http://posoco.in/side-menu-pages/applicable-transmission-losses/",
+  //       href: "http://grid-india.in/side-menu-pages/applicable-transmission-losses/",
   //     },
   //     {
   //       name: "Transmission Charges",
@@ -907,7 +894,7 @@ const routes = [
       {
         name: "Disturbance Reports",
         hindiName: "डिस्टर्बेंस रिपोर्ट्स",
-        href: "http://posoco.in/grid-disturbancesincidence/",
+        href: "http://grid-india.in/grid-disturbancesincidence/",
       },
 
       {
@@ -1103,7 +1090,7 @@ const routes = [
           {
             name: "Fees & Charges",
             hindiName: "फीस एवं शुल्क",
-            href: "http://fc.posoco.in/FnCWeb/",
+            href: "http://fc.grid-india.in/FnCWeb/",
           },
           {
             name: "Meter Data",
@@ -1155,7 +1142,7 @@ const routes = [
           {
             name: "NLDC",
             hindiName: "एनएलडीसी",
-            href: "http://posoco.in/",
+            href: "http://grid-india.in/",
           },
         ],
       },

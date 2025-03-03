@@ -1,19 +1,4 @@
-/*
-=========================================================
-* Material Kit 2 React - v2.1.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/material-kit-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
-// @mui material components
+// Copyright ERLDC Website
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Icon from "@mui/material/Icon";
@@ -50,14 +35,20 @@ function BuiltByDevelopers() {
       }}
     >
       <Container>
-        <Grid container item xs={12} lg={6} sx={{ ml: { xs: 0, lg: 6 } }}>
+        <Grid container item xs={12} lg={9} sx={{ ml: { xs: 0, lg: 6 } }}>
           <MKTypography variant="h5" color="white" fontWeight="bold">
             Stay tuned with the events and highlights of ERLDC{" "}
           </MKTypography>
           {/* <MKTypography variant="h1" color="white" mb={1}>
             MoU with IIT Bhubaneswar
           </MKTypography> */}
-          <MKTypography variant="body1" color="white" opacity={0.8} mb={2}>
+          <MKTypography
+            variant="body1"
+            color="white"
+            opacity={0.8}
+            mb={2}
+            sx={{ fontSize: "16px" }}
+          >
             An MoU has been signed with Indian Institute Of Technology (IIT)
             Bhubaneswar for Research & Development work in the field of Cyber
             Security

@@ -34,9 +34,8 @@ html {
   width: 100%; /* Full width */
   height: 100%; /* Full height */
   overflow: auto; /* Enable scroll if needed */
- background-color: rgba(0, 0, 0, 0.5); 
+  background-color: rgba(0, 0, 0, 0.5);
 }
-
 
 /* Modal Content (image) */
 .modal-content {
@@ -47,14 +46,12 @@ html {
   max-height: 700px;
 }
 
-
 /* Add Animation */
-.modal-content{
+.modal-content {
   -webkit-animation-name: zoom;
   -webkit-animation-duration: 0.6s;
   animation-name: zoom;
   animation-duration: 0.6s;
-
 }
 
 @-webkit-keyframes zoom {
@@ -98,47 +95,41 @@ html {
   .modal-content {
     width: 100%;
   }
-  .close{
+  .close {
     top: 9.7%;
     right: -0.5%;
   }
 }
 
+body.modal-open {
+  overflow: hidden; /* Prevent scrolling */
+}
 
-
-  body.modal-open {
-    overflow: hidden; /* Prevent scrolling */
-  }
-
-
-
-
-
-  /* Add Closing Animation */
+/* Add Closing Animation */
 .modal.closing .modal-content {
-    animation-name: zoom-out;
-    animation-duration: 0.6s;
+  animation-name: zoom-out;
+  animation-duration: 0.6s;
+}
+
+@keyframes zoom-out {
+  from {
+    transform: scale(1);
   }
-  
-  @keyframes zoom-out {
-    from {
-      transform: scale(1);
-    }
-    to {
-      transform: scale(0);
-    }
+  to {
+    transform: scale(0);
   }
-  
-  /* Fade out the background during close */
-  .modal.closing {
-    animation: fade-out 0.6s;
+}
+
+/* Fade out the background during close */
+.modal.closing {
+  animation: fade-out 0.6s;
+}
+
+@keyframes fade-out {
+  from {
+    background-color: rgba(0, 0, 0, 0.5);
   }
-  
-  @keyframes fade-out {
-    from {
-      background-color: rgba(0, 0, 0, 0.5);
-    }
-    to {
-      background-color: rgba(0, 0, 0, 0);
-    }
+  to {
+    background-color: rgba(0, 0, 0, 0);
   }
+}

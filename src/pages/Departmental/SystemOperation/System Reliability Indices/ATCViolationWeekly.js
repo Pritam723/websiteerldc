@@ -32,7 +32,7 @@ export default function ATCViolationWeekly() {
     {
       label: "System Reliability Indices",
     },
-    {                                                                                                                                                                                                                                                                              
+    {
       label: "ATC Violation Weekly",
     },
     // { label: "User Profile", route: "/user/userprofile" },
@@ -43,9 +43,9 @@ export default function ATCViolationWeekly() {
 
   ///////////////// Dynamic Meta Data Fetched from Backend /////////////////
   const emptyDynamicMetaData = {
-    readPermission: false,
-    writePermission: false,
-    multipleUploads: false,
+    readPermission: null,
+    writePermission: null,
+    multipleUploads: null,
     uploadPoints: {},
     dataToDisplay: {},
     sortInUse: {},
@@ -97,7 +97,11 @@ export default function ATCViolationWeekly() {
       {" "}
       <Toast ref={toast} />
       {!dynamicMetaData.readPermission ? (
-        <PleaseSignIn breadcrumb={breadcrumb} redirectionURL={redirectionURL} />
+        <PleaseSignIn
+          readPermission={dynamicMetaData.readPermission}
+          breadcrumb={breadcrumb}
+          redirectionURL={redirectionURL}
+        />
       ) : (
         <CommonDataTable
           dataToDisplay={dynamicMetaData.dataToDisplay}

@@ -43,9 +43,9 @@ export default function WeekAheadRollingForecast() {
 
   ///////////////// Dynamic Meta Data Fetched from Backend /////////////////
   const emptyDynamicMetaData = {
-    readPermission: false,
-    writePermission: false,
-    multipleUploads: false,
+    readPermission: null,
+    writePermission: null,
+    multipleUploads: null,
     uploadPoints: {},
     dataToDisplay: {},
     sortInUse: {},
@@ -97,7 +97,11 @@ export default function WeekAheadRollingForecast() {
       {" "}
       <Toast ref={toast} />
       {!dynamicMetaData.readPermission ? (
-        <PleaseSignIn breadcrumb={breadcrumb} redirectionURL={redirectionURL} />
+        <PleaseSignIn
+          readPermission={dynamicMetaData.readPermission}
+          breadcrumb={breadcrumb}
+          redirectionURL={redirectionURL}
+        />
       ) : (
         <CommonDataTable
           dataToDisplay={dynamicMetaData.dataToDisplay}

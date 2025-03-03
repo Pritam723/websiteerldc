@@ -1,19 +1,4 @@
-/*
-=========================================================
-* Material Kit 2 React - v2.1.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/material-kit-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
-// @mui material components
+// Copyright ERLDC Website
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 
@@ -25,10 +10,10 @@ import MKTypography from "components/MKTypography";
 import HorizontalTeamCard from "examples/Cards/TeamCards/HorizontalTeamCard";
 
 // Images
-import team1 from "assets/images/team-5.jpg";
-import team2 from "assets/images/bruce-mars.jpg";
-import team3 from "assets/images/ivana-squares.jpg";
-import team4 from "assets/images/ivana-square.jpg";
+import team1 from "assets/images/erldcconf.jpg";
+import team2 from "assets/images/erldcconf.jpg";
+import team3 from "assets/images/erldcconf.jpg";
+import team4 from "assets/images/erldcconf.jpg";
 
 function Team() {
   return (
@@ -48,8 +33,8 @@ function Team() {
               The Executive Team
             </MKTypography>
             <MKTypography variant="body2" color="white" opacity={0.8}>
-              There&apos;s nothing I really wanted to do in life that I wasn&apos;t able to get good
-              at. That&apos;s my skill.
+              There&apos;s nothing I really wanted to do in life that I
+              wasn&apos;t able to get good at. That&apos;s my skill.
             </MKTypography>
           </Grid>
         </Grid>
