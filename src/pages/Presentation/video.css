@@ -1,6 +1,6 @@
 .videoTag {
   width: 100%;
-  height: "auto";
+  height: auto;
   max-height: 750px;
   object-fit: fill;
   z-index: -9999;

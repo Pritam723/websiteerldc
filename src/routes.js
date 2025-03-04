@@ -47,6 +47,10 @@ import SingleTender from "pages/Departmental/More/Contracts Awarded/SingleTender
 import OpenTender from "pages/Departmental/More/Contracts Awarded/OpenTender.js";
 import RajbhasaPatrika from "pages/Departmental/More/राजभाषा/RajbhasaPatrika.js";
 
+import VisionMission from "pages/Departmental/AboutUs/VisionMission.js";
+import ReadAboutERLDC from "pages/Departmental/AboutUs/ReadAboutERLDC.js";
+import SalientFeatures from "pages/Departmental/AboutUs/SalientFeatures.js";
+
 import ShutdownAvailedList from "pages/Departmental/SystemOperation/Outage/ShutdownAvailedList.js";
 import DayAheadForecastingError from "pages/Departmental/SystemOperation/Forecasting/DayAheadForecastingError.js";
 import IntraDayForecastingError from "pages/Departmental/SystemOperation/Forecasting/IntraDayForecastingError.js";
@@ -110,16 +114,22 @@ const routes = [
     // icon: <Icon>InfoIcon</Icon>,
     collapse: [
       {
+        name: "Read About ERLDC",
+        hindiName: "ईआरएलडीसी के बारे में पढ़ें",
+        route: "/aboutus/readaboutus",
+        component: <ReadAboutERLDC />,
+      },
+      {
         name: "Vision/Mission",
         hindiName: "दृष्टि/उद्देश्य",
-        route: "/sections/page-sections/page-headers",
-        component: <PageHeaders />,
+        route: "/aboutus/visionmission",
+        component: <VisionMission />,
       },
       {
         name: "Salient features",
         hindiName: "मुख्य विशेषताएं",
-        route: "/sections/page-sections/page-headers",
-        component: <PageHeaders />,
+        route: "/aboutus/salientfeatures",
+        component: <SalientFeatures />,
       },
 
       {
