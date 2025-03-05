@@ -72,9 +72,13 @@ export default function App() {
             }
           />
 
-          <Route path="user/forgotpassword" element={<ForgotPassword />} />
-          <Route path="user/register" element={<Register />} />
-          <Route path="photogallery" element={<Gallery />} />
+          <Route
+            key="forgotpassword"
+            path="user/forgotpassword"
+            element={<ForgotPassword />}
+          />
+          <Route key="register" path="user/register" element={<Register />} />
+          <Route key="photogallery" path="photogallery" element={<Gallery />} />
 
           {/* <Route path="*" element={<Navigate to="/" />} /> */}
           <Route key="default" path="*" element={<Navigate to="/" />} />
