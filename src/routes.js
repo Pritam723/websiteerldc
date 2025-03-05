@@ -90,6 +90,7 @@ import ReactiveReconcilation from "pages/Departmental/MarketOperation/Reactive/R
 import ReactiveDisbursementLetter from "pages/Departmental/MarketOperation/Reactive/ReactiveDisbursementLetter.js";
 import RRASReconciliation from "pages/Departmental/MarketOperation/AncilliaryServices/RRASReconciliation.js";
 import AGCReconciliation from "pages/Departmental/MarketOperation/AncilliaryServices/AGCReconciliation.js";
+import BankDetails from "pages/Departmental/MarketOperation/BankDetails.js";
 
 import SEMData from "pages/Departmental/MarketOperation/Metering/SEMData.js";
 import MeteringError from "pages/Departmental/MarketOperation/Metering/MeteringError.js";
@@ -101,6 +102,8 @@ import SupplementaryAndPLIBill from "pages/Departmental/MarketOperation/Fees & C
 import QuarterlyReconciliationStatement from "pages/Departmental/MarketOperation/Fees & Charges/QuarterlyReconciliationStatement.js";
 import CongestionReport from "pages/Departmental/MarketOperation/Reports/CongestionReport.js";
 import PSDF from "pages/Departmental/MarketOperation/PSDF.js";
+
+import HRInitiatives from "pages/Departmental/More/HR/HRInitiatives.js";
 
 const routes = [
   // {
@@ -723,7 +726,8 @@ const routes = [
       {
         name: "Bank Details",
         hindiName: "बैंक विवरण",
-        route: "/sections/page-sections/page-headers",
+        route: "/marketoperation/bankdetails",
+        component: <BankDetails />,
       },
     ],
   },
@@ -1201,7 +1205,8 @@ const routes = [
           {
             name: "HR Initiatives",
             hindiName: "मानव संसाधन पहल",
-            route: "/sections/page-sections/page-headers",
+            route: "/more/hr/hrinitiatives",
+            component: <HRInitiatives />,
           },
           {
             name: "Organizational Chart",

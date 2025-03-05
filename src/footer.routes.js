@@ -6,7 +6,6 @@ import XIcon from "@mui/icons-material/X";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import YouTubeIcon from "@mui/icons-material/YouTube";
-
 // Material Kit 2 React components
 import MKTypography from "components/MKTypography";
 
@@ -59,7 +58,7 @@ export default {
             process.env.REACT_APP_READ_API + "/files/OgranizationalChart.pdf",
         },
         // { name: "Upload Documents", href: "https://www.creative-tim.com/templates/premium" },
-        { name: "RTI", href: "https://www.creative-tim.com/blog" },
+        { name: "RTI", route: "/rti"  },
         {
           name: "GRID-INDIA Website",
           href: "https://grid-india.in/",
