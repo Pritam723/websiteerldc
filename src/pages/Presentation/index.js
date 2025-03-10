@@ -44,7 +44,7 @@ import Disclaimer from "examples/Disclaimer/Disclaimer.js";
 import Highlights from "pages/Presentation/components/Highlights/Highlights";
 import LatestNews from "pages/Presentation/components/LatestNews/LatestNews";
 
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 // Routes
 import routes from "routes";
 import footerRoutes from "footer.routes";
@@ -81,7 +81,7 @@ function Presentation() {
   }, []);
 
   return (
-    <>
+    <React.Fragment>
       {/* <Banner /> */}
       <Disclaimer />
       <AppBar />
@@ -133,7 +133,7 @@ function Presentation() {
 
         <Container className="grid-item vertical-courasol-hide">
           <Grid container spacing={1}>
-            <Grid item xs={12} lg={2}>
+            <Grid item xs={6} lg={2}>
               <FilledInfoCard
                 // variant="gradient"
                 color="info"
@@ -147,7 +147,7 @@ function Presentation() {
                 }}
               />
             </Grid>
-            <Grid item xs={12} lg={2}>
+            <Grid item xs={6} lg={2}>
               <FilledInfoCard
                 color="info"
                 icon="earbuds_battery"
@@ -160,7 +160,7 @@ function Presentation() {
                 }}
               />
             </Grid>
-            <Grid item xs={12} lg={2}>
+            <Grid item xs={6} lg={2}>
               <FilledInfoCard
                 color="info"
                 icon="menu_book"
@@ -173,7 +173,7 @@ function Presentation() {
                 }}
               />
             </Grid>
-            <Grid item xs={12} lg={2}>
+            <Grid item xs={6} lg={2}>
               <FilledInfoCard
                 // variant="gradient"
                 color="info"
@@ -187,7 +187,7 @@ function Presentation() {
                 }}
               />
             </Grid>
-            <Grid item xs={12} lg={2}>
+            <Grid item xs={6} lg={2}>
               <FilledInfoCard
                 color="info"
                 icon="assessment"
@@ -200,7 +200,7 @@ function Presentation() {
                 }}
               />
             </Grid>
-            <Grid item xs={12} lg={2}>
+            <Grid item xs={6} lg={2}>
               <FilledInfoCard
                 color="info"
                 icon="currency_rupee"
@@ -221,7 +221,7 @@ function Presentation() {
       <MKBox pt={6} px={1} mt={6}>
         <DefaultFooter content={footerRoutes} />
       </MKBox>
-    </>
+    </React.Fragment>
   );
 }
 

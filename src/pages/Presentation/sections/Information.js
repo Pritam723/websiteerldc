@@ -1,25 +1,23 @@
 // Copyright ERLDC Website
-import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 
 // Material Kit 2 React components
 import MKBox from "components/MKBox";
 import FilledInfoCard from "examples/Cards/InfoCards/FilledInfoCard";
 
-// Material Kit 2 React examples
-import RotatingCard from "examples/Cards/RotatingCard";
-import RotatingCardFront from "examples/Cards/RotatingCard/RotatingCardFront";
-import RotatingCardBack from "examples/Cards/RotatingCard/RotatingCardBack";
 import DefaultInfoCard from "examples/Cards/InfoCards/DefaultInfoCard";
-import Modal from "examples/Modals/Modal.js";
-// Images
-import bgFront from "assets/images/Flower-offering.jpg";
-import bgBack from "assets/images/nscb.jpg";
+
 // import "./information.css";
 
 import GridDataInfographics from "examples/GridDataInfographics/GridDataInfographics.js";
+import { useMediaQuery } from "@mui/material";
+import { Link } from "react-router-dom";
 
 function Information() {
+  const isMobile = useMediaQuery("(max-width:600px)");
+
+  const truncateText = (text, maxLength) =>
+    text.length > maxLength ? text.substring(0, maxLength) + "..." : text;
   return (
     <MKBox
       component="section"
@@ -37,33 +35,13 @@ function Information() {
         alignItems="center"
         sx={{ mx: 0 }}
       >
-        {/* <Grid item xs={12} lg={4} sx={{ mx: "auto" }}>
-            <RotatingCard>
-              <RotatingCardFront
-                image={bgFront}
-                icon="touch_app"
-                title={<>R.N. Tagore 163rd Birth Anniversary</>}
-                description="R.N. Tagore 163rd Birth Anniversary"
-              />
-              <RotatingCardBack
-                image={bgBack}
-                title="Subash Chandra Bose Jayanti"
-                // description="You will save a lot of time going from prototyping to full-functional code because all elements are implemented."
-                action={{
-                  type: "internal",
-                  route: "/sections/page-sections/page-headers",
-                  label: "Visit our gallery",
-                }}
-              />
-            </RotatingCard>
-          </Grid> */}
         <Grid item xs={12} lg={5} sx={{ mx: "auto" }}>
           <GridDataInfographics />
         </Grid>
 
         <Grid item xs={12} lg={7} sx={{ ml: "auto" }}>
           <Grid container spacing={3}>
-            <Grid item xs={12} md={6}>
+            <Grid item xs={6} md={6}>
               <DefaultInfoCard
                 icon="crisis_alert"
                 title="MISSION"
@@ -79,7 +57,7 @@ function Information() {
                 // description="Regardless of the screen size, the website content will naturally fit the given resolution."
               />
             </Grid>
-            <Grid item xs={12} md={6}>
+            <Grid item xs={6} md={6}>
               <DefaultInfoCard
                 icon="visibility"
                 title="VISION"
@@ -109,8 +87,7 @@ function Information() {
                 description="Grid Controller Of India Limited (GRID-INDIA) erstwhile Power System Operation Corporation Limited (POSOCO) is a wholly owned Government of India Enterprise under the Ministry Of Power."
                 action={{
                   type: "external",
-                  route:
-                    "https://www.creative-tim.com/learning-lab/react/overview/datepicker/",
+                  route: "aboutus/readaboutus",
                   label: "Read more about us",
                 }}
               />
