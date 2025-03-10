@@ -70,9 +70,6 @@ export default function ForgotPassword({ redirectionURL = "/" }) {
       console.log(data.email);
       console.log(response);
     } catch (e) {
-      // console.log(e.response);
-      // console.log("Bad Request");
-
       const responseData = e.response?.data;
       console.log(responseData);
 
