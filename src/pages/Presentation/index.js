@@ -44,7 +44,7 @@ import Disclaimer from "examples/Disclaimer/Disclaimer.js";
 import Highlights from "pages/Presentation/components/Highlights/Highlights";
 import LatestNews from "pages/Presentation/components/LatestNews/LatestNews";
 
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 // Routes
 import routes from "routes";
 import footerRoutes from "footer.routes";
@@ -81,7 +81,7 @@ function Presentation() {
   }, []);
 
   return (
-    <>
+    <React.Fragment>
       {/* <Banner /> */}
       <Disclaimer />
       <AppBar />
@@ -221,7 +221,7 @@ function Presentation() {
       <MKBox pt={6} px={1} mt={6}>
         <DefaultFooter content={footerRoutes} />
       </MKBox>
-    </>
+    </React.Fragment>
   );
 }
 

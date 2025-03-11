@@ -20,6 +20,7 @@ import ForgotPassword from "pages/FunctionalPages/Auth/ForgotPassword";
 import Register from "pages/FunctionalPages/Auth/Register";
 
 import Gallery from "pages/Gallery/Gallery";
+import SingleAlbum from "pages/Gallery/SingleAlbum";
 import RTI from "pages/Departmental/More/HR/RTI.js";
 
 import UserProfile from "pages/FunctionalPages/Auth/UserProfile";
@@ -73,10 +74,16 @@ export default function App() {
             }
           />
 
-          <Route path="user/forgotpassword" element={<ForgotPassword />} />
-          <Route path="user/register" element={<Register />} />
-          <Route path="photogallery" element={<Gallery />} />
-          <Route path="rti" element={<RTI/>} />
+          <Route
+            key="forgotpassword"
+            path="user/forgotpassword"
+            element={<ForgotPassword />}
+          />
+          <Route key="register" path="user/register" element={<Register />} />
+          <Route key="photogallery" path="photogallery" element={<Gallery />} />
+          <Route path="photogallery/album/:albumId" element={<SingleAlbum />} />
+
+          <Route path="rti" element={<RTI />} />
           {/* <Route path="*" element={<Navigate to="/" />} /> */}
           <Route key="default" path="*" element={<Navigate to="/" />} />
           {/* <Route path="/user/userprofile" element={<UserProfile />} /> */}
