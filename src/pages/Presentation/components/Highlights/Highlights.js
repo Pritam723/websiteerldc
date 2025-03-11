@@ -32,10 +32,11 @@ function BuiltByDevelopers() {
         backgroundSize: "cover",
         backgroundPosition: "center",
         height: "200px",
-      }}
+      }
+    }
     >
       <Container>
-        <Grid container item xs={12} lg={9} sx={{ ml: { xs: 0, lg: 6 } }}>
+        <Grid container item xs={12} lg={9} sx={{ ml: { xs: 0, lg: 6 }, pt:{ xs: 5, sm: 0, md: 0 }}}>
           <MKTypography variant="h5" color="white" fontWeight="bold">
             Stay tuned with the events and highlights of ERLDC{" "}
           </MKTypography>
