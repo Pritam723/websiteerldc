@@ -106,7 +106,7 @@ function Presentation() {
         sx={{
           p: 2,
           mx: { xs: 2, lg: 3 },
-          mt: -1,
+          mt: { xs: -3.5, lg: -10.3 },
           mb: 4,
           backgroundColor: ({ palette: { white }, functions: { rgba } }) =>
             rgba(white.main, 0.8),

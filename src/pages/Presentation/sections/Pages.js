@@ -124,7 +124,7 @@ function Pages() {
           alignItems="center"
           sx={{
             mx: 2,
-            ml: {xs: -2, sm:0,md: 0 }, // Shift left for xs & sm, keep normal for md+
+            ml: {xs: -2, lg: 2 }, // Shift left for xs & sm, keep normal for md+
           }}
         >
           <Grid
