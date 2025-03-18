@@ -583,7 +583,7 @@ const routes = [
           {
             name: "DSM rate",
             hindiName: "डीएसएम दर",
-            href: "https://dsm.grid-india.in/newdsm",
+            href: "https://dsm.posoco.in/newdsm",
           },
           {
             name: "DSM Disbursement Letter",

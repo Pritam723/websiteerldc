@@ -15,9 +15,6 @@ const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: theme.shape.borderRadius,
   backgroundColor: alpha(theme.palette.common.white, 0.15),
-  "&:hover": {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
-  },
   marginLeft: 0,
   width: "100%",
   [theme.breakpoints.up("sm")]: {
@@ -49,8 +46,10 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     transition: theme.transitions.create("width"),
     [theme.breakpoints.up("sm")]: {
       width: "6ch",
+      height: "3.1ch",
       "&:focus": {
         width: "10ch",
+        height: "3.1ch",
       },
     },
   },
@@ -102,8 +101,9 @@ export default function MyAppBar() {
       <Box
         sx={{
           flexGrow: 1,
-          mt: "-31px",
-          mb: "-17px",
+          // mt: "-29px",
+          mt: { xs: "-29px", md: "-29px", lg: "-33px" },
+          mb: { xs: "-17.5px", md: "-18px", lg: "-21px" },
           backgroundColor: "white",
         }}
       >
@@ -153,6 +153,8 @@ export default function MyAppBar() {
                       <StyledInputBase
                         placeholder="Search…"
                         inputProps={{ "aria-label": "search" }}
+                        sx={{ fontSize: "12px" }}
+                        
                       />
                     </Search>
                   )}
