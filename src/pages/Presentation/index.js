@@ -106,7 +106,7 @@ function Presentation() {
         sx={{
           p: 2,
           mx: { xs: 2, lg: 3 },
-          mt: -8,
+          mt: { xs: -3.5, lg: -10.3 },
           mb: 4,
           backgroundColor: ({ palette: { white }, functions: { rgba } }) =>
             rgba(white.main, 0.8),
@@ -120,7 +120,7 @@ function Presentation() {
         <Information />
         {/* <DesignBlocks /> */}
         <Pages />
-        <Container sx={{ mt: 3 }} className="grid-item vertical-courasol-hide">
+        <Container sx={{ mt: 3 ,ml:2 }} className="grid-item vertical-courasol-hide">
           <Grid container spacing={3}>
             <Grid item xs={12} lg={8}>
               <Highlights />
@@ -131,9 +131,9 @@ function Presentation() {
           </Grid>
         </Container>
 
-        <Container className="grid-item vertical-courasol-hide">
+        <Container sx={{ml:2 }} className="grid-item vertical-courasol-hide">
           <Grid container spacing={1}>
-            <Grid item xs={6} lg={2}>
+            <Grid item xs={6} sm ={4} lg={2}>
               <FilledInfoCard
                 // variant="gradient"
                 color="info"
@@ -147,7 +147,7 @@ function Presentation() {
                 }}
               />
             </Grid>
-            <Grid item xs={6} lg={2}>
+            <Grid item xs={6} sm ={4} lg={2}>
               <FilledInfoCard
                 color="info"
                 icon="earbuds_battery"
@@ -160,7 +160,7 @@ function Presentation() {
                 }}
               />
             </Grid>
-            <Grid item xs={6} lg={2}>
+            <Grid item xs={6} sm ={4} lg={2}>
               <FilledInfoCard
                 color="info"
                 icon="menu_book"
@@ -173,7 +173,7 @@ function Presentation() {
                 }}
               />
             </Grid>
-            <Grid item xs={6} lg={2}>
+            <Grid item xs={6} sm ={4} lg={2}>
               <FilledInfoCard
                 // variant="gradient"
                 color="info"
@@ -187,7 +187,7 @@ function Presentation() {
                 }}
               />
             </Grid>
-            <Grid item xs={6} lg={2}>
+            <Grid item xs={6} sm ={4} lg={2}>
               <FilledInfoCard
                 color="info"
                 icon="assessment"
@@ -200,7 +200,7 @@ function Presentation() {
                 }}
               />
             </Grid>
-            <Grid item xs={6} lg={2}>
+            <Grid item xs={6} sm ={4} lg={2}>
               <FilledInfoCard
                 color="info"
                 icon="currency_rupee"

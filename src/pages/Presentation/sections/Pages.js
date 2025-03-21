@@ -122,7 +122,10 @@ function Pages() {
           xs={12}
           spacing={4}
           alignItems="center"
-          sx={{ mx: 2 }}
+          sx={{
+            mx: 2,
+            ml: {xs: -2, lg: 2 }, // Shift left for xs & sm, keep normal for md+
+          }}
         >
           <Grid
             item

@@ -32,10 +32,12 @@ function BuiltByDevelopers() {
         backgroundSize: "cover",
         backgroundPosition: "center",
         height: "200px",
-      }}
+        
+      }
+    }
     >
       <Container>
-        <Grid container item xs={12} lg={9} sx={{ ml: { xs: 0, lg: 6 } }}>
+        <Grid container item xs={12} lg={9} sx={{ ml: { xs: 0, lg: 6 }}}>
           <MKTypography variant="h5" color="white" fontWeight="bold">
             Stay tuned with the events and highlights of ERLDC{" "}
           </MKTypography>
@@ -46,8 +48,9 @@ function BuiltByDevelopers() {
             variant="body1"
             color="white"
             opacity={0.8}
-            mb={2}
-            sx={{ fontSize: "16px" }}
+            // mb={7}
+            // mt={2}
+            sx={{fontSize: { xs: "12px", sm: "14px", md: "16px" }, mb: { xs: 5, md: 6.5 },mt: { xs: 1, md: 2.5 } }}
           >
             An MoU has been signed with Indian Institute Of Technology (IIT)
             Bhubaneswar for Research & Development work in the field of Cyber
