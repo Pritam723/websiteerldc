@@ -57,7 +57,7 @@ export default function ForgotPassword({ redirectionURL = "/" }) {
     if (!data.email) {
       return;
     }
-
+    setStep("notVerified");
     try {
       let response = await axios({
         method: "post",
@@ -66,7 +66,7 @@ export default function ForgotPassword({ redirectionURL = "/" }) {
         data: data,
       });
       setEmail(data.email);
-      setStep("notVerified"); // Move to OTP verification
+      // setStep("notVerified"); // Move to OTP verification
       console.log(data.email);
       console.log(response);
     } catch (e) {
@@ -139,19 +139,11 @@ export default function ForgotPassword({ redirectionURL = "/" }) {
         headers: {},
         data: newData,
       });
-      // setEmail(data.email);
-      // console.log(data.email);
+
       setShowMessage(true);
-      // setOtp(otp);
-      // setPassword(data.newPassword);
-      // form.restart();
-      // handleVerifyOtpSuccess();
 
       console.log(response);
     } catch (e) {
-      // console.log(e.response);
-      // console.log("Bad Request");
-
       const responseData = e.response?.data;
       console.log(responseData);
 
@@ -287,17 +279,10 @@ export default function ForgotPassword({ redirectionURL = "/" }) {
                   </h4>
                 </div>
 
-                {/* <h4 className="text-center">
-                  Enter the 6 digit code we sent you via email.
-                </h4> */}
-
-                {/* <h4 className="text-center">OTP is valid for 5 minutes</h4> */}
                 <Form
                   onSubmit={onSubmitVerifyOTP}
                   initialValues={{
                     otp: "",
-                    // newPassword: "",
-                    // confirmPassword: "",
                   }}
                   validate={validateVerifyOTP}
                   render={({ handleSubmit }) => (

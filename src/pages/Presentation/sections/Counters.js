@@ -40,7 +40,7 @@ function Counters() {
     <MKBox component="section" py={2}>
       <Container>
         <Grid container item xs={12} lg={12} sx={{ mx: "auto" }}>
-          <Grid item xs={12} md={3} display="centre">
+          <Grid item xs={6} md={3} display="centre">
             <div class="MuiBox-root css-1qqu4ux">
               <h2 class="MuiTypography-root MuiTypography-h2 css-zg0wqh-MuiTypography-root">
                 <span>{scadaData.LAST_UPDATED}</span>
@@ -51,7 +51,7 @@ function Counters() {
             </div>
           </Grid>
 
-          <Grid item xs={12} md={3} display="centre">
+          <Grid item xs={6} md={3} display="centre">
             <DefaultCounterCard
               count={scadaData.ER_DEMAND_MET}
               suffix=" MW"
@@ -60,7 +60,7 @@ function Counters() {
             />
           </Grid>
 
-          <Grid item xs={12} md={3} display="centre">
+          <Grid item xs={6} md={3} display="centre">
             {/* <Divider orientation="vertical" sx={{ display: { xs: "none", md: "block" }, mx: 0 }} /> */}
 
             <DefaultCounterCard
@@ -73,7 +73,7 @@ function Counters() {
             {/* <Divider orientation="vertical" sx={{ display: { xs: "none", md: "block" }, mx: 0 }} /> */}
           </Grid>
 
-          <Grid item xs={12} md={3} display="centre">
+          <Grid item xs={6} md={3} display="centre">
             {/* <Divider orientation="vertical" sx={{ display: { xs: "none", md: "block" }, ml: 0 }} /> */}
 
             <DefaultCounterCard
