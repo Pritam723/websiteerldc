@@ -401,7 +401,7 @@ export default function Tender() {
         <Button
           severity="success"
           icon="pi pi-plus"
-          label="Add album"
+          label="Add Tender"
           onClick={() => {
             setProduct(emptyProduct);
             setSubmitted(false);
@@ -411,16 +411,6 @@ export default function Tender() {
       )
     );
   };
-
-  const openAlbum = (albumIndex) => {
-    navigate(`/photogallery/album/${albumIndex}`);
-  };
-
-  // const deleteAlbum = (albumIndex) => {
-  //   if (window.confirm("Are you sure you want to delete this album?")) {
-  //     setProducts(products.filter((_, idx) => idx !== albumIndex));
-  //   }
-  // };
 
   const editProduct = (product) => {
     // console.log(product);
@@ -527,9 +517,6 @@ export default function Tender() {
     <BaseLayout title={pageTitle} breadcrumb={breadcrumb}>
       <div className="gallery-container">
         <Toast ref={toast} />
-
-        <>The table here</>
-
         <div className="card">
           <Toolbar
             className="mb-4"
