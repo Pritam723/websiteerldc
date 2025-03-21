@@ -105,6 +105,7 @@ import CongestionReport from "pages/Departmental/MarketOperation/Reports/Congest
 import PSDF from "pages/Departmental/MarketOperation/PSDF.js";
 
 import HRInitiatives from "pages/Departmental/More/HR/HRInitiatives.js";
+import SummerInternship from "pages/Departmental/More/HR/SummerInternship.js";
 
 const routes = [
   // {
@@ -604,7 +605,7 @@ const routes = [
           {
             name: "DSM rate",
             hindiName: "डीएसएम दर",
-            href: "https://dsm.grid-india.in/newdsm",
+            href: "https://dsm.posoco.in/newdsm",
           },
           {
             name: "DSM Disbursement Letter",
@@ -1248,7 +1249,9 @@ const routes = [
           {
             name: "Summer Internship",
             hindiName: "ग्रीष्म प्रशिक्षण",
-            route: "/sections/page-sections/page-headers",
+            route: "/more/hr/summerinternship",
+            component: <SummerInternship />,
+            
           },
           {
             name: "Careers",

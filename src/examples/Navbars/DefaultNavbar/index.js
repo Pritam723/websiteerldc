@@ -527,7 +527,7 @@ function DefaultNavbar({
         py={0}
         px={{ xs: 4, sm: transparent ? 2 : 3, lg: transparent ? 0 : 2 }}
         my={relative ? 0 : 0.5}
-        mx={relative ? 0 : 3}
+        mx={relative ? 0 : 1.3}
         // width="100%"
         width={relative ? "100%" : "calc(100% - 20px)"}
         borderRadius="xl"
