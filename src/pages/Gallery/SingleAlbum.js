@@ -65,7 +65,7 @@ export default function MultiGallery() {
         })),
       };
 
-      // console.log(transformedData);
+      console.log(transformedData);
       setAlbum(transformedData);
     } catch (e) {
       // console.log(e.response.data);

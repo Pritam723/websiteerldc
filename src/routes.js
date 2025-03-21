@@ -102,7 +102,7 @@ import SupplementaryAndPLIBill from "pages/Departmental/MarketOperation/Fees & C
 import QuarterlyReconciliationStatement from "pages/Departmental/MarketOperation/Fees & Charges/QuarterlyReconciliationStatement.js";
 import CongestionReport from "pages/Departmental/MarketOperation/Reports/CongestionReport.js";
 import PSDF from "pages/Departmental/MarketOperation/PSDF.js";
-
+import Tender from "pages/Departmental/More/Tender/Tender.js";
 import HRInitiatives from "pages/Departmental/More/HR/HRInitiatives.js";
 
 const routes = [
@@ -1248,7 +1248,8 @@ const routes = [
       {
         name: "Tender",
         hindiName: "निविदा",
-        route: "/sections/page-sections/page-headers",
+        route: "/more/tender",
+        component: <Tender />,
       },
       {
         name: "Contracts Awarded",
