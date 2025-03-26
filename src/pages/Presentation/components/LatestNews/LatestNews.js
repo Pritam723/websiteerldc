@@ -56,7 +56,7 @@ function BuiltByDevelopers() {
 
   const handleNextNewsClick = (event) => {
     event.preventDefault(); // Prevent default anchor behavior
-    // console.log("Next news clicked");
+    // // console.log("Next news clicked");
     setNewsnumber(newsnumber + 1);
   };
   return (

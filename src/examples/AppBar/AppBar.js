@@ -144,71 +144,69 @@ export default function MyAppBar() {
                 fontSize: fontSizeContent, // Dynamic font size for second div
               }}
             >
-              
-                  {isSearchVisible && (
-                    <Search ref={searchRef}>
-                      <SearchIconWrapper>
-                        <SearchIcon />
-                      </SearchIconWrapper>
-                      <StyledInputBase
-                        placeholder="Search…"
-                        inputProps={{ "aria-label": "search" }}
-                        sx={{ fontSize: "12px" }}
-                        
-                      />
-                    </Search>
-                  )}
-                  {windowWidth > 1200 && !isSearchVisible && (
-                    <IconButton onClick={toggleSearch} color="inherit">
-                      <SearchIcon />
-                    </IconButton>
-                  )}
+              {isSearchVisible && (
+                <Search ref={searchRef}>
+                  <SearchIconWrapper>
+                    <SearchIcon />
+                  </SearchIconWrapper>
+                  <StyledInputBase
+                    placeholder="Search…"
+                    inputProps={{ "aria-label": "search" }}
+                    sx={{ fontSize: "12px" }}
+                  />
+                </Search>
+              )}
+              {windowWidth > 1200 && !isSearchVisible && (
+                <IconButton onClick={toggleSearch} color="inherit">
+                  <SearchIcon />
+                </IconButton>
+              )}
 
-                  <a
-                    href="#"
-                    // target="_blank"
-                    // rel="noopener noreferrer"
-                    style={{ textDecoration: "none", marginRight: "-8px" }}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      // console.log("works");
-                      localStorage.setItem("languagePreference", "English");
-                      setLanguagePreference("English");
-                    }}
-                  >
-                    <Typography
-                      component="div"
-                      fontSize="inherit"
-                      color="#1c94d2"
-                      fontWeight="bold"
-                      noWrap
-                    >
-                      EN |
-                    </Typography>
-                  </a>
-                  <a
-                    href="#"
-                    style={{ textDecoration: "none" }}
-                    // target="_blank"
-                    // rel="noopener noreferrer"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      // console.log("works");
-                      localStorage.setItem("languagePreference", "Hindi");
-                      setLanguagePreference("Hindi");
-                    }}
-                  >
-                    <Typography
-                      component="div"
-                      fontSize="inherit"
-                      color="#1c94d2"
-                      fontWeight="bold"
-                      noWrap
-                    >
-                      हिन्दी
-                    </Typography>
-                  </a>
-                  {windowWidth > 1200 && (
+              <a
+                href="#"
+                // target="_blank"
+                // rel="noopener noreferrer"
+                style={{ textDecoration: "none", marginRight: "-8px" }}
+                onClick={(e) => {
+                  e.preventDefault();
+                  // // console.log("works");
+                  localStorage.setItem("languagePreference", "English");
+                  setLanguagePreference("English");
+                }}
+              >
+                <Typography
+                  component="div"
+                  fontSize="inherit"
+                  color="#1c94d2"
+                  fontWeight="bold"
+                  noWrap
+                >
+                  EN |
+                </Typography>
+              </a>
+              <a
+                href="#"
+                style={{ textDecoration: "none" }}
+                // target="_blank"
+                // rel="noopener noreferrer"
+                onClick={(e) => {
+                  e.preventDefault();
+                  // // console.log("works");
+                  localStorage.setItem("languagePreference", "Hindi");
+                  setLanguagePreference("Hindi");
+                }}
+              >
+                <Typography
+                  component="div"
+                  fontSize="inherit"
+                  color="#1c94d2"
+                  fontWeight="bold"
+                  noWrap
+                >
+                  हिन्दी
+                </Typography>
+              </a>
+              {windowWidth > 1200 && (
                 <>
                   <a
                     href="#"

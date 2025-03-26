@@ -59,7 +59,7 @@ import bgBack from "assets/images/nscb.jpg";
 
 // import EasternMap from "examples/Easternmap/EasternMap";
 
-function Pages() {
+function Pages({ demandData, drawlData }) {
   const [content, setContent] = useState("test");
   const navigate = useNavigate();
 
@@ -93,7 +93,7 @@ function Pages() {
         (total, item) => total + item.offsetHeight,
         0
       );
-      console.log(itemsHeight);
+      // console.log(itemsHeight);
       if (itemsHeight > containerHeight) {
         scrollItems.style.animationPlayState = "running";
       } else {
@@ -124,7 +124,7 @@ function Pages() {
           alignItems="center"
           sx={{
             mx: 2,
-            ml: {xs: -2, lg: 2 }, // Shift left for xs & sm, keep normal for md+
+            ml: { xs: -2, lg: 2 }, // Shift left for xs & sm, keep normal for md+
           }}
         >
           <Grid
@@ -287,7 +287,7 @@ function Pages() {
               <h6 className="no-margin center">
                 Constituents of Eastern Region
               </h6>
-              <EasternMap />
+              <EasternMap demandData={demandData} drawlData={drawlData} />
               <CardActions>
                 <a
                   href="https://www.facebook.com/GridIndia1"

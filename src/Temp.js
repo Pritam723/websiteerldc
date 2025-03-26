@@ -68,7 +68,7 @@
 //     }
 //     setEmail(data.email);
 //     handleOtpSuccess();
-//     // console.log(data);
+//     // // console.log(data);
 //   };
 
 //   /////////////////////////////////////////////////////// Verify OTP validation//////////////////////////////////
@@ -552,7 +552,7 @@
 //     }
 //     setEmail(data.email);
 //     handleOtpSuccess();
-//     // console.log(data);
+//     // // console.log(data);
 //   };
 
 //   /////////////////////////////////////////////////////// Verify OTP validation//////////////////////////////////

@@ -65,12 +65,12 @@ export default function MultiGallery() {
         })),
       };
 
-      console.log(transformedData);
+      // console.log(transformedData);
       setAlbum(transformedData);
     } catch (e) {
-      // console.log(e.response.data);
+      // // console.log(e.response.data);
       const responseData = e.response?.data;
-      console.log(responseData);
+      // console.log(responseData);
       const toastDetails = {
         severity: responseData?.type,
         summary: responseData?.summary,

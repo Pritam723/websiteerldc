@@ -114,7 +114,7 @@ function Eastern2(props) {
 
   const onMouseclick = (e) => {
     var x = e[0];
-    console.log(e[0], e[1], e[2]);
+    // console.log(e[0], e[1], e[2]);
 
     setclickdata([x]);
     setshowdailog(true);
@@ -134,10 +134,10 @@ function Eastern2(props) {
   const [clickData, setClickData] = useState(null);
 
   const handleMouseEnter = (e, region) => {
-    console.log(e);
-    console.log(region[0].clatlong[0]);
+    // console.log(e);
+    // console.log(region[0].clatlong[0]);
     const rect = e.target.getBoundingClientRect();
-    console.log(rect);
+    // console.log(rect);
 
     setTooltip({
       visible: true,

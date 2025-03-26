@@ -48,18 +48,20 @@ const geographyStyle = {
   },
 };
 
-function Eastern2(props) {
+function EasternMap({ demandData, drawlData }) {
   // const [tooltipContent, setTooltipContent] = useState("");
   const [visible, setVisible] = useState(false);
   const [position, setPosition] = useState("center");
-  const [data, setData] = useState([
+
+  const data = [
     {
       id: "BR",
       name: "Bihar",
       color: "#f8c460",
-      demand: "Demand: 6280 MW",
-      generation: "Generation: 6789 MW",
-      drawal: "Drawal: 4560 MW",
+      demand: "Demand: " + demandData.BH + " MW",
+      // generation: "Generation: 4560 MW",
+      drawal: "Drawal: " + drawlData.BH + " MW",
+
       clatlong: [84.9629, 25.5937],
       tooltiplatlong: [109, 67],
       content:
@@ -71,9 +73,9 @@ function Eastern2(props) {
       id: "JH",
       name: "Jharkhand",
       color: "#cccdfb",
-      demand: "Demand: 9807 MW",
-      generation: "Generation: 4597 MW",
-      drawal: "Drawal: 5389 MW",
+      demand: "Demand: " + demandData.JH + " MW",
+      // generation: "Generation: 4560 MW",
+      drawal: "Drawal: " + drawlData.JH + " MW",
       clatlong: [84.3629, 23.4937],
       tooltiplatlong: [109, 190],
       content:
@@ -85,9 +87,9 @@ function Eastern2(props) {
       id: "OR",
       name: "Odisha",
       color: "#6cecf8",
-      demand: "Demand: 6533 MW",
-      generation: "Generation: 987 MW",
-      drawal: "Drawal: 567 MW",
+      demand: "Demand: " + demandData.OD + " MW",
+      // generation: "Generation: 4560 MW",
+      drawal: "Drawal: " + drawlData.OD + " MW",
       tooltiplatlong: [109, 337],
       clatlong: [84.9629, 20.5937],
       content:
@@ -97,9 +99,9 @@ function Eastern2(props) {
       id: "WB",
       name: "West Bengal",
       color: "#8bf579",
-      demand: "Demand: 4567 MW",
-      generation: "Generation: 985 MW",
-      drawal: "Drawal: 457 MW",
+      demand: "Demand: " + demandData.WB + " MW",
+      // generation: "Generation: 4560 MW",
+      drawal: "Drawal: " + drawlData.WB + " MW",
       clatlong: [88.9629, 23.5937],
       tooltiplatlong: [109, 137],
       content:
@@ -111,9 +113,9 @@ function Eastern2(props) {
       id: "SK",
       name: "Sikkim",
       color: "#ded946",
-      demand: "Demand: 7070 MW",
-      generation: "Generation: 896 MW",
-      drawal: "Drawal: 4578 MW",
+      demand: "Demand: " + demandData.SI + " MW",
+      // generation: "Generation: 4560 MW",
+      drawal: "Drawal: " + drawlData.SI + " MW",
       clatlong: [87.9629, 27.5937],
       tooltiplatlong: [109, 87],
       content:
@@ -123,15 +125,15 @@ function Eastern2(props) {
       id: "DVC",
       name: "DVC",
       color: "#ffad9f",
-      demand: "Demand: 981 MW",
-      generation: "Generation: 567 MW",
-      drawal: "Drawal: 983 MW",
+      demand: "Demand: " + demandData.DVC + " MW",
+      // generation: "Generation: 4560 MW",
+      drawal: "Drawal: " + drawlData.DVC + " MW",
       clatlong: [85.8629, 23.6937],
       tooltiplatlong: [109, 157],
       content:
         "DVC  is Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do",
     },
-  ]);
+  ];
 
   const [keyList, setKeyList] = useState([]);
 
@@ -145,15 +147,15 @@ function Eastern2(props) {
     setPosition(position);
     setVisible(true);
   };
-  const onMouseclick = (e, region) => {
-    show("right");
-    console.log(region);
-    setTooltip2({
-      header: region[0].name,
-      visible: true,
-      content: region[0].content,
-    });
-  };
+  // const onMouseclick = (e, region) => {
+  //   show("right");
+  //   // console.log(region);
+  //   setTooltip2({
+  //     header: region[0].name,
+  //     visible: true,
+  //     content: region[0].content,
+  //   });
+  // };
 
   const onMouseLeave = () => {
     setshowdailog(false);
@@ -165,7 +167,7 @@ function Eastern2(props) {
     y: 0,
     content: "Data not available",
     demand: "Demand: 0 MW",
-    generation: "Generation: 0 MW",
+    // generation: "Generation: 0 MW",
     drawal: "Drawal: 0 MW",
   });
 
@@ -185,7 +187,7 @@ function Eastern2(props) {
         <div>
           Constituent: {region[0].name}. <br /> {region[0].demand}
           <br /> {region[0].drawal}
-          <br /> {region[0].generation}
+          {/* <br /> {region[0].generation} */}
         </div>
       ),
     });
@@ -225,7 +227,7 @@ function Eastern2(props) {
                     fill={current[0].color}
                     style={geographyStyle}
                     onMouseEnter={(e) => handleMouseEnter(e, current)}
-                    onClick={(e) => onMouseclick(e, current)}
+                    // onClick={(e) => onMouseclick(e, current)}
                     onMouseLeave={handleMouseLeave}
                   />
 
@@ -333,4 +335,4 @@ function Eastern2(props) {
   );
 }
 
-export default Eastern2;
+export default EasternMap;

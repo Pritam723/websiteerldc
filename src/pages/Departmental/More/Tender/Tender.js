@@ -89,7 +89,7 @@ export default function Tender() {
           targetTableClass: targetTableClass,
         },
       });
-      console.log(response.data["data"]["data"]);
+      // console.log(response.data["data"]["data"]);
 
       // const transformedData = response.data["data"]["data"];
 
@@ -104,12 +104,12 @@ export default function Tender() {
         downloadedTimes: item.downloadedTimes,
       }));
 
-      // console.log(transformedData);
+      // // console.log(transformedData);
       setProducts(transformedData);
     } catch (e) {
-      // console.log(e.response.data);
+      // // console.log(e.response.data);
       const responseData = e.response?.data;
-      console.log(responseData);
+      // console.log(responseData);
       const toastDetails = {
         severity: responseData?.type,
         summary: responseData?.summary,
@@ -141,7 +141,7 @@ export default function Tender() {
         responseType: "blob",
       });
 
-      // console.log(response);
+      // // console.log(response);
       // return;
       // Create a Blob URL for the downloaded file
       const url = window.URL.createObjectURL(new Blob([response.data]));
@@ -178,14 +178,14 @@ export default function Tender() {
         headers: headers,
         data: { targetTableClass: targetTableClass },
       });
-      console.log(response.data["data"]);
+      // console.log(response.data["data"]);
       // setReadPermission(response.data["data"]["readPermission"]);
       // setWritePermission(response.data["data"]["writePermission"]);
       // setDynamicMetaData({})
       setDynamicMetaData(response.data["data"]["dynamicMetaData"]);
     } catch (e) {
-      console.log(e);
-      // console.log(e.response.data);
+      // console.log(e);
+      // // console.log(e.response.data);
       showToastMessage(toast, {});
     }
   };
@@ -243,8 +243,8 @@ export default function Tender() {
     // Wait for all files to be processed before continuing
     await processFiles();
 
-    // console.log(_attachedFiles);
-    // console.log(_attachedFiles.length);
+    // // console.log(_attachedFiles);
+    // // console.log(_attachedFiles.length);
     /////////////////////  Done with Reading Files /////////////////////////////
 
     // if (product.fileName.trim()) {
@@ -254,13 +254,13 @@ export default function Tender() {
     let _products = [...products];
     let _product = { ...product };
 
-    // console.log(_product);
-    // console.log(product);
+    // // console.log(_product);
+    // // console.log(product);
 
     // So, this is a new entry call. Because product.id is null.
     // We need to create ID which will come from backend actually.
 
-    // console.log(_product);
+    // // console.log(_product);
 
     const [success, toastDetails] = await addProductDetails(
       _product,
@@ -303,7 +303,7 @@ export default function Tender() {
           targetTableClass: targetTableClass,
         },
       });
-      console.log(response.data["data"]["productIDs"]);
+      // console.log(response.data["data"]["productIDs"]);
       const responseData = response.data;
       return [
         true,
@@ -314,7 +314,7 @@ export default function Tender() {
         },
       ];
     } catch (e) {
-      // console.log(e.response.data);
+      // // console.log(e.response.data);
       const responseData = e.response?.data;
 
       return [
@@ -334,7 +334,7 @@ export default function Tender() {
   };
 
   const deleteProduct = async () => {
-    console.log(product);
+    // console.log(product);
     let headers = {
       "Content-Type": "application/json",
     };
@@ -354,9 +354,9 @@ export default function Tender() {
       });
       window.location.reload();
     } catch (e) {
-      // console.log(e.response.data);
+      // // console.log(e.response.data);
       const responseData = e.response?.data;
-      console.log(responseData);
+      // console.log(responseData);
       const toastDetails = {
         severity: responseData?.type,
         summary: responseData?.summary,
@@ -372,13 +372,13 @@ export default function Tender() {
   };
 
   const onInputChange = (e, name) => {
-    // console.log(e.target);
-    console.log(e.target.value);
+    // // console.log(e.target);
+    // console.log(e.target.value);
 
-    // console.log(typeof e.target);
-    console.log(typeof e.target.value);
+    // // console.log(typeof e.target);
+    // console.log(typeof e.target.value);
 
-    // console.log(e.target.value[0] instanceof Date);
+    // // console.log(e.target.value[0] instanceof Date);
 
     const val = (e.target && e.target.value) || "";
     let _product = { ...product };
@@ -413,7 +413,7 @@ export default function Tender() {
   };
 
   const editProduct = (product) => {
-    // console.log(product);
+    // // console.log(product);
     setProduct({ ...product });
     setProductDialog(true);
   };
@@ -613,7 +613,7 @@ export default function Tender() {
             <InputTextarea
               value={product.description}
               onChange={(e) => {
-                console.log(e);
+                // console.log(e);
                 onInputChange(e, "description");
               }}
               required
@@ -637,7 +637,7 @@ export default function Tender() {
             <InputText
               value={product.nitRef}
               onChange={(e) => {
-                console.log(e);
+                // console.log(e);
                 onInputChange(e, "nitRef");
               }}
               required
@@ -686,7 +686,7 @@ export default function Tender() {
             <InputText
               value={product.bidEndDate}
               onChange={(e) => {
-                console.log(e);
+                // console.log(e);
                 onInputChange(e, "bidEndDate");
               }}
               required
@@ -709,7 +709,7 @@ export default function Tender() {
             <InputText
               value={product.bidOpeningDate}
               onChange={(e) => {
-                console.log(e);
+                // console.log(e);
                 onInputChange(e, "bidOpeningDate");
               }}
               required
@@ -743,7 +743,7 @@ export default function Tender() {
               customUpload={true}
               // uploadHandler={customBase64Uploader}
               uploadHandler={() => {
-                console.log("Use the default Save Button!!");
+                // console.log("Use the default Save Button!!");
               }}
               // chooseOptions={chooseOptions}
               uploadOptions={{

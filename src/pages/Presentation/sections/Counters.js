@@ -14,7 +14,7 @@ import MKBox from "components/MKBox";
 // Material Kit 2 React examples
 import DefaultCounterCard from "examples/Cards/CounterCards/DefaultCounterCard";
 
-function Counters() {
+function Counters({ counterData }) {
   const [scadaData, setScadaData] = useState({
     LAST_UPDATED: "Loading...",
     ER_DEMAND_MET: -1,
@@ -22,19 +22,38 @@ function Counters() {
     ER_FREQ: -1,
   });
 
+  useEffect(() => {
+    setScadaData(counterData);
+  }, [counterData]);
+
+  // const [data, setData] = useState(null);
+
   // useEffect(() => {
   //   socket.on("connect", () => {
-  //     console.log("Connected to WebSocket");
+  //     // console.log("Connected to WebSocket");
   //   });
   //   socket.on("message", (data) => {
-  //     console.log(data);
+  //     // console.log(data);
   //     setScadaData(data.data);
   //   });
 
-  //   console.log("Runs");
+  //   // console.log("Runs");
 
   //   return () => socket.disconnect();
   // }, []);
+
+  // const fetchData = async () => {
+  //   console.log("Fetching SCADA Data");
+  //   try {
+  //     const response = await fetch("http://localhost:4001/getScadaData");
+  //     const result = await response.json();
+  //     console.log(result);
+  //     setScadaData(result.counterData);
+  //   } catch (error) {
+  //     // console.error("Error fetching data:", error);
+  //     return;
+  //   }
+  // };
 
   return (
     <MKBox component="section" py={2}>

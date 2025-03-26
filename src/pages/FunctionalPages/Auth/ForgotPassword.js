@@ -67,11 +67,11 @@ export default function ForgotPassword({ redirectionURL = "/" }) {
       });
       setEmail(data.email);
       // setStep("notVerified"); // Move to OTP verification
-      console.log(data.email);
-      console.log(response);
+      // console.log(data.email);
+      // console.log(response);
     } catch (e) {
       const responseData = e.response?.data;
-      console.log(responseData);
+      // console.log(responseData);
 
       const toastDetails = {
         severity: responseData?.type,
@@ -127,7 +127,7 @@ export default function ForgotPassword({ redirectionURL = "/" }) {
       return;
     }
 
-    // console.log(otp, data.newPassword, data.confirmPassword);
+    // // console.log(otp, data.newPassword, data.confirmPassword);
     const newData = { ...data };
     newData["email"] = email;
     newData["otp"] = otp;
@@ -142,10 +142,10 @@ export default function ForgotPassword({ redirectionURL = "/" }) {
 
       setShowMessage(true);
 
-      console.log(response);
+      // console.log(response);
     } catch (e) {
       const responseData = e.response?.data;
-      console.log(responseData);
+      // console.log(responseData);
 
       const toastDetails = {
         severity: responseData?.type,

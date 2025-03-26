@@ -138,8 +138,8 @@ export default function CommonDataTable({
           targetTableClass: targetTableClass,
         },
       });
-      // console.log(response);
-      // console.log(response.data["data"]["products"]);
+      // // console.log(response);
+      // // console.log(response.data["data"]["products"]);
       const responseData = response.data;
 
       // Convert timestamps to Date objects, keeping null values unchanged
@@ -163,12 +163,12 @@ export default function CommonDataTable({
 
       setDisplayRange(responseData["data"]["dataInfo"]);
       setProducts(convertedProducts);
-      // console.log("Done");
+      // // console.log("Done");
       setIsLoading(false);
     } catch (e) {
-      // console.log(e.response.data);
+      // // console.log(e.response.data);
       const responseData = e.response?.data;
-      console.log(responseData);
+      // console.log(responseData);
 
       const toastDetails = {
         severity: responseData?.type,
@@ -201,7 +201,7 @@ export default function CommonDataTable({
         responseType: "blob",
       });
 
-      console.log(response);
+      // console.log(response);
       // return;
       // Create a Blob URL for the downloaded file
       const url = window.URL.createObjectURL(new Blob([response.data]));
@@ -304,8 +304,8 @@ export default function CommonDataTable({
     // Wait for all files to be processed before continuing
     await processFiles();
 
-    // console.log(_attachedFiles);
-    // console.log(_attachedFiles.length);
+    // // console.log(_attachedFiles);
+    // // console.log(_attachedFiles.length);
     /////////////////////  Done with Reading Files /////////////////////////////
 
     // if (product.fileName.trim()) {
@@ -315,8 +315,8 @@ export default function CommonDataTable({
     let _products = [...products];
     let _product = { ...product };
 
-    // console.log(_product);
-    // console.log(product);
+    // // console.log(_product);
+    // // console.log(product);
 
     if (product.id) {
       // So, this is an update call. Because product.id is not null.
@@ -349,7 +349,7 @@ export default function CommonDataTable({
       // So, this is a new entry call. Because product.id is null.
       // We need to create ID which will come from backend actually.
 
-      // console.log(_product);
+      // // console.log(_product);
 
       const [newIDs, success, toastDetails] = await addProductDetails(
         _product,
@@ -362,7 +362,7 @@ export default function CommonDataTable({
         return;
       }
 
-      // console.log(newIDs);
+      // // console.log(newIDs);
       newIDs.forEach((newID, index) => {
         const _cloneProduct = { ..._product };
         _cloneProduct.id = newID;
@@ -404,7 +404,7 @@ export default function CommonDataTable({
           targetTableClass: targetTableClass,
         },
       });
-      console.log(response.data["data"]["productIDs"]);
+      // console.log(response.data["data"]["productIDs"]);
       const responseData = response.data;
       return [
         responseData["data"]["productIDs"],
@@ -416,7 +416,7 @@ export default function CommonDataTable({
         },
       ];
     } catch (e) {
-      // console.log(e.response.data);
+      // // console.log(e.response.data);
       const responseData = e.response?.data;
 
       return [
@@ -459,7 +459,7 @@ export default function CommonDataTable({
           targetTableClass: targetTableClass,
         },
       });
-      // console.log(response.data["data"]["productIDs"]);
+      // // console.log(response.data["data"]["productIDs"]);
       const responseData = response.data;
       const toastDetails = {
         severity: responseData.type,
@@ -470,7 +470,7 @@ export default function CommonDataTable({
       let _products = products.filter((val) => val.id !== product.id);
       setProducts(_products);
     } catch (e) {
-      // console.log(e.response.data);
+      // // console.log(e.response.data);
       const responseData = e.response?.data;
 
       const toastDetails = {
@@ -499,13 +499,13 @@ export default function CommonDataTable({
   };
 
   const onInputChange = (e, name) => {
-    // console.log(e.target);
-    console.log(e.target.value);
+    // // console.log(e.target);
+    // console.log(e.target.value);
 
-    // console.log(typeof e.target);
-    console.log(typeof e.target.value);
+    // // console.log(typeof e.target);
+    // console.log(typeof e.target.value);
 
-    // console.log(e.target.value[0] instanceof Date);
+    // // console.log(e.target.value[0] instanceof Date);
 
     const val = (e.target && e.target.value) || "";
     let _product = { ...product };
@@ -542,7 +542,7 @@ export default function CommonDataTable({
               placeholder="Select Date Range"
               value={filterRange}
               onChange={(e) => {
-                console.log(e.target.value);
+                // console.log(e.target.value);
                 setFilterRange(e.target.value);
               }}
               selectionMode="range"
@@ -556,7 +556,7 @@ export default function CommonDataTable({
               placeholder="Select Month"
               value={filterRange}
               onChange={(e) => {
-                console.log(e.target.value);
+                // console.log(e.target.value);
                 setFilterRange(e.target.value);
               }}
               view="month"
@@ -569,7 +569,7 @@ export default function CommonDataTable({
               placeholder="Select Year"
               value={filterRange}
               onChange={(e) => {
-                console.log(e.target.value);
+                // console.log(e.target.value);
                 setFilterRange(e.target.value);
               }}
               view="year"
@@ -970,7 +970,7 @@ export default function CommonDataTable({
               id="year"
               value={product.year}
               onChange={(e) => {
-                console.log(e);
+                // console.log(e);
                 onInputChange(e, "year");
               }}
               required
@@ -1099,7 +1099,7 @@ export default function CommonDataTable({
               customUpload={true}
               // uploadHandler={customBase64Uploader}
               uploadHandler={() => {
-                console.log("Use the default Save Button!!");
+                // console.log("Use the default Save Button!!");
               }}
               // chooseOptions={chooseOptions}
               uploadOptions={{

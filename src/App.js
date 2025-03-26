@@ -39,7 +39,7 @@ export default function App() {
 
   const getRoutes = (allRoutes) =>
     allRoutes.map((route, index) => {
-      // console.log(route.name + index.toString());
+      // // console.log(route.name + index.toString());
       if (route.collapse) {
         return getRoutes(route.collapse);
       }
