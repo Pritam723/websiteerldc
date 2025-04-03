@@ -30,7 +30,7 @@ import GridLogo from "assets/images/GridIndiaLogo1.png";
 
 function DefaultFooter({ content, views }) {
   const { brand, socials, menus, copyright } = content;
-
+  const currentViews = views;
   return (
     <MKBox component="footer">
       <Container>
@@ -141,7 +141,7 @@ function DefaultFooter({ content, views }) {
               variant="button"
               fontWeight="regular"
             >
-              Total Website Views: {views}.
+              Total Website Visits: {currentViews}
             </MKTypography>{" "}
             {copyright}
             {/* <MKBox> */}
