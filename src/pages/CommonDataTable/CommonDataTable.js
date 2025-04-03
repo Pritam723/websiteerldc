@@ -675,7 +675,7 @@ export default function CommonDataTable({
   const header = (
     <div className="flex flex-wrap gap-2 align-items-center justify-content-between">
       <h4 className="m-0">
-        {displayRange + " Change the Filters for other date range."}
+        {!(Object.values(filtersInUse).every(value => value === false)) && displayRange + " Change the Filters for other date range."}
       </h4>
       <IconField iconPosition="left">
         <InputIcon className="pi pi-search" />

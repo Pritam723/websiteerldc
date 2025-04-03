@@ -91,6 +91,7 @@ import ReactiveDisbursementLetter from "pages/Departmental/MarketOperation/React
 import RRASReconciliation from "pages/Departmental/MarketOperation/AncilliaryServices/RRASReconciliation.js";
 import AGCReconciliation from "pages/Departmental/MarketOperation/AncilliaryServices/AGCReconciliation.js";
 import BankDetails from "pages/Departmental/MarketOperation/BankDetails.js";
+import FTCDocuments from "pages/Departmental/MarketOperation/FTC/FTCDocuments.js";
 
 import SEMData from "pages/Departmental/MarketOperation/Metering/SEMData.js";
 import MeteringError from "pages/Departmental/MarketOperation/Metering/MeteringError.js";
@@ -570,7 +571,8 @@ const routes = [
           {
             name: "First Time Charging Documents",
             hindiName: "पहली बार चार्जिंग दस्तावेज",
-            route: "/sections/page-sections/page-headers",
+            route: "/marketoperation/ftc/ftcdocuments",
+            component: <FTCDocuments />,
           },
         ],
       },
