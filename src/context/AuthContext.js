@@ -37,32 +37,31 @@ export const AuthProvider = ({ children }) => {
   let loginUser = async (data) => {
     // data.preventDefault()
 
-    // console.log("login works");
-    // console.log(data);
+    // // console.log("login works");
+    // // console.log(data);
 
     try {
-      
       let response = await axios({
         method: "post",
         url: `${process.env.REACT_APP_READ_API}/login`,
         headers: {},
         data: data,
       });
-      console.log(response);
+      // console.log(response);
       let tokenData = await response.data.data;
       setAuthTokens(tokenData);
       setUser(jwtDecode(tokenData.access_token).user_info);
       setNameContext(jwtDecode(tokenData.access_token).user_info.name);
 
-      console.log("hiiiiiiiiii", jwtDecode(tokenData.access_token).user_info.name);
+      // console.log("hiiiiiiiiii", jwtDecode(tokenData.access_token).user_info.name);
 
       localStorage.setItem("authTokens", JSON.stringify(tokenData));
       return true;
       //   navigate("/");
-      //   console.log("works");
-      //   console.log(jwtDecode(tokenData.access_token));
+      //   // console.log("works");
+      //   // console.log(jwtDecode(tokenData.access_token));
     } catch {
-      console.log("hiiiiiiiiiiiiii Bad Request");
+      // console.log("hiiiiiiiiiiiiii Bad Request");
       return false;
     }
   };
@@ -85,19 +84,19 @@ export const AuthProvider = ({ children }) => {
   };
 
   let tokenValidity = async (token) => {
-    // console.log("I am here");
-    // console.log(jwtDecode(token.access_token));
+    // // console.log("I am here");
+    // // console.log(jwtDecode(token.access_token));
     const tokenExp = jwtDecode(token.access_token)?.exp;
 
-    // console.log(tokenExp * 1000);
+    // // console.log(tokenExp * 1000);
 
-    console.log(Date.now());
+    // console.log(Date.now());
     if (!tokenExp || tokenExp * 1000 < Date.now()) {
-      console.log("Token expired. Logging Out.");
+      // console.log("Token expired. Logging Out.");
       logoutUser();
       return;
     }
-    console.log("Token still valid");
+    // console.log("Token still valid");
     return;
   };
 

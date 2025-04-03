@@ -75,14 +75,14 @@ export default function DSMDisbursementLetter() {
         headers: headers,
         data: { targetTableClass: targetTableClass },
       });
-      console.log(response.data["data"]);
+      // console.log(response.data["data"]);
       // setReadPermission(response.data["data"]["readPermission"]);
       // setWritePermission(response.data["data"]["writePermission"]);
       // setDynamicMetaData({})
       setDynamicMetaData(response.data["data"]["dynamicMetaData"]);
     } catch (e) {
-      console.log(e);
-      // console.log(e.response.data);
+      // console.log(e);
+      // // console.log(e.response.data);
       showToastMessage(toast, {});
     }
   };

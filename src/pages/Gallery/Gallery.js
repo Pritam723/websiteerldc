@@ -72,7 +72,7 @@ export default function MultiGallery() {
           year: filterRange.getFullYear(),
         },
       });
-      console.log(response.data["data"]["data"]);
+      // console.log(response.data["data"]["data"]);
 
       const transformedData = response.data["data"]["data"].map((item) => ({
         id: item.id,
@@ -82,12 +82,12 @@ export default function MultiGallery() {
         year: new Date(), // Assign the current date
       }));
 
-      console.log(transformedData);
+      // console.log(transformedData);
       setProducts(transformedData);
     } catch (e) {
-      // console.log(e.response.data);
+      // // console.log(e.response.data);
       const responseData = e.response?.data;
-      console.log(responseData);
+      // console.log(responseData);
       const toastDetails = {
         severity: responseData?.type,
         summary: responseData?.summary,
@@ -113,14 +113,14 @@ export default function MultiGallery() {
         headers: headers,
         data: { targetTableClass: targetTableClass },
       });
-      console.log(response.data["data"]);
+      // console.log(response.data["data"]);
       // setReadPermission(response.data["data"]["readPermission"]);
       // setWritePermission(response.data["data"]["writePermission"]);
       // setDynamicMetaData({})
       setDynamicMetaData(response.data["data"]["dynamicMetaData"]);
     } catch (e) {
-      console.log(e);
-      // console.log(e.response.data);
+      // console.log(e);
+      // // console.log(e.response.data);
       showToastMessage(toast, {});
     }
   };
@@ -178,8 +178,8 @@ export default function MultiGallery() {
     // Wait for all files to be processed before continuing
     await processFiles();
 
-    // console.log(_attachedFiles);
-    // console.log(_attachedFiles.length);
+    // // console.log(_attachedFiles);
+    // // console.log(_attachedFiles.length);
     /////////////////////  Done with Reading Files /////////////////////////////
 
     // if (product.fileName.trim()) {
@@ -189,13 +189,13 @@ export default function MultiGallery() {
     let _products = [...products];
     let _product = { ...product };
 
-    // console.log(_product);
-    // console.log(product);
+    // // console.log(_product);
+    // // console.log(product);
 
     // So, this is a new entry call. Because product.id is null.
     // We need to create ID which will come from backend actually.
 
-    // console.log(_product);
+    // // console.log(_product);
 
     const [success, toastDetails] = await addProductDetails(
       _product,
@@ -238,7 +238,7 @@ export default function MultiGallery() {
           targetTableClass: targetTableClass,
         },
       });
-      console.log(response.data["data"]["productIDs"]);
+      // console.log(response.data["data"]["productIDs"]);
       const responseData = response.data;
       return [
         true,
@@ -249,7 +249,7 @@ export default function MultiGallery() {
         },
       ];
     } catch (e) {
-      // console.log(e.response.data);
+      // // console.log(e.response.data);
       const responseData = e.response?.data;
 
       return [
@@ -269,7 +269,7 @@ export default function MultiGallery() {
   };
 
   const deleteProduct = async () => {
-    console.log(product);
+    // console.log(product);
     let headers = {
       "Content-Type": "application/json",
     };
@@ -289,9 +289,9 @@ export default function MultiGallery() {
       });
       window.location.reload();
     } catch (e) {
-      // console.log(e.response.data);
+      // // console.log(e.response.data);
       const responseData = e.response?.data;
-      console.log(responseData);
+      // console.log(responseData);
       const toastDetails = {
         severity: responseData?.type,
         summary: responseData?.summary,
@@ -307,13 +307,13 @@ export default function MultiGallery() {
   };
 
   const onInputChange = (e, name) => {
-    // console.log(e.target);
-    console.log(e.target.value);
+    // // console.log(e.target);
+    // console.log(e.target.value);
 
-    // console.log(typeof e.target);
-    console.log(typeof e.target.value);
+    // // console.log(typeof e.target);
+    // console.log(typeof e.target.value);
 
-    // console.log(e.target.value[0] instanceof Date);
+    // // console.log(e.target.value[0] instanceof Date);
 
     const val = (e.target && e.target.value) || "";
     let _product = { ...product };
@@ -336,7 +336,7 @@ export default function MultiGallery() {
           placeholder="Select Year"
           value={filterRange}
           onChange={(e) => {
-            console.log(e.target.value);
+            // console.log(e.target.value);
             setFilterRange(e.target.value);
           }}
           view="year"
@@ -490,7 +490,7 @@ export default function MultiGallery() {
             <InputText
               value={product.title}
               onChange={(e) => {
-                console.log(e);
+                // console.log(e);
                 onInputChange(e, "title");
               }}
               required
@@ -513,7 +513,7 @@ export default function MultiGallery() {
               id="year"
               value={product.year}
               onChange={(e) => {
-                console.log(e);
+                // console.log(e);
                 onInputChange(e, "year");
               }}
               required
@@ -549,7 +549,7 @@ export default function MultiGallery() {
               customUpload={true}
               // uploadHandler={customBase64Uploader}
               uploadHandler={() => {
-                console.log("Use the default Save Button!!");
+                // console.log("Use the default Save Button!!");
               }}
               // chooseOptions={chooseOptions}
               uploadOptions={{

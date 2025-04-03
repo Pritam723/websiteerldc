@@ -96,16 +96,16 @@ export default function Register() {
         headers: {},
         data: data,
       });
-      console.log(response);
+      // console.log(response);
       setFormData(data);
       setStep("RegisteredNotVerified"); // Move to OTP verification
       // form.restart();
     } catch (e) {
-      // console.log(e.response);
-      // console.log("Bad Request");
+      // // console.log(e.response);
+      // // console.log("Bad Request");
 
       const responseData = e.response?.data;
-      console.log(responseData);
+      // console.log(responseData);
 
       const toastDetails = {
         severity: responseData?.type,
@@ -133,7 +133,7 @@ export default function Register() {
 
   /////////////////////////////////////////// Verify OTP Submission////////////////////////////////////////////
   const registerVerifyOTP = async () => {
-    console.log(otp);
+    // console.log(otp);
     if (!otp || !/^\d{6}$/.test(otp)) {
       return;
     }
@@ -147,7 +147,7 @@ export default function Register() {
         headers: {},
         data: data,
       });
-      console.log(response);
+      // console.log(response);
       setOtp(otp);
       setShowMessage(true);
       // form.restart();
@@ -155,11 +155,11 @@ export default function Register() {
 
       // form.restart();
     } catch (e) {
-      console.log(e);
-      // console.log("Bad Request");
+      // console.log(e);
+      // // console.log("Bad Request");
 
       const responseData = e.response?.data;
-      console.log(responseData);
+      // console.log(responseData);
 
       const toastDetails = {
         severity: responseData?.type,

@@ -9,7 +9,7 @@ export const showToastMessage = (
     deatil = "Not able to reach server",
   }
 ) => {
-  // console.log(toastRef.current);
+  // // console.log(toastRef.current);
   if (!toastRef || !toastRef.current) return;
   else {
     return toastRef.current.show({

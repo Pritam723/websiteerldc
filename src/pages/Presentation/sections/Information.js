@@ -13,7 +13,7 @@ import GridDataInfographics from "examples/GridDataInfographics/GridDataInfograp
 import { useMediaQuery } from "@mui/material";
 import { Link } from "react-router-dom";
 
-function Information() {
+function Information({ demandData }) {
   const isMobile = useMediaQuery("(max-width:600px)");
 
   const truncateText = (text, maxLength) =>
@@ -35,13 +35,13 @@ function Information() {
         alignItems="center"
         sx={{ mx: 0 }}
       >
-        <Grid item xs={12} lg={5} sx={{ mx: "auto" ,ml: { xs: -2 ,lg:0}}}>
-          <GridDataInfographics />
+        <Grid item xs={12} lg={5} sx={{ mx: "auto", ml: { xs: -2, lg: 0 } }}>
+          <GridDataInfographics demandData={demandData} />
         </Grid>
 
         <Grid item xs={12} lg={7} sx={{ ml: "auto" }}>
           <Grid container spacing={3}>
-            <Grid item xs={12} md={6}  sx={{ ml: { xs: -.5 ,lg:0} }}>
+            <Grid item xs={12} md={6} sx={{ ml: { xs: -0.5, lg: 0 } }}>
               <DefaultInfoCard
                 icon="crisis_alert"
                 title="MISSION"
@@ -57,7 +57,12 @@ function Information() {
                 // description="Regardless of the screen size, the website content will naturally fit the given resolution."
               />
             </Grid>
-            <Grid item xs={12} md={6}   sx={{ ml: { xs: -.5,lg:0 } ,mb: { xs: 2 } }} > 
+            <Grid
+              item
+              xs={12}
+              md={6}
+              sx={{ ml: { xs: -0.5, lg: 0 }, mb: { xs: 2 } }}
+            >
               <DefaultInfoCard
                 icon="visibility"
                 title="VISION"
@@ -66,7 +71,11 @@ function Information() {
               />
             </Grid>
           </Grid>
-          <Grid container spacing={3} sx={{ mt: { xs: 0, md: 6 } ,ml: { xs: -1.8, lg:-3} }}>
+          <Grid
+            container
+            spacing={3}
+            sx={{ mt: { xs: 0, md: 6 }, ml: { xs: -1.8, lg: -3 } }}
+          >
             <Grid
               style={{ paddingLeft: 0, paddingTop: 0 }}
               item

@@ -28,7 +28,7 @@ export default function SignIn() {
   // const [isLoginSuccessful, setIsLoginSuccessful] = useState(false);
   // const [username, setUsername] = useState("");
 
-  console.log(redirectionURL);
+  // console.log(redirectionURL);
 
   const validate = (data) => {
     let errors = {};
@@ -46,7 +46,7 @@ export default function SignIn() {
 
   const onSubmit = async (data, form) => {
     const loginFlag = await loginUser(data);
-    console.log(namecontext);
+    // console.log(namecontext);
 
     // setIsLoginSuccessful(loginFlag);
     setShowMessage(true);
@@ -69,7 +69,7 @@ export default function SignIn() {
         autoFocus
         onClick={() => {
           setShowMessage(false);
-          console.log(redirectionURL);
+          // console.log(redirectionURL);
 
           navigate(redirectionURL);
         }}

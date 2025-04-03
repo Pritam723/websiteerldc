@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { Dialog } from "primereact/dialog";
+import { Button } from "primereact/button";
 import {
   ComposableMap,
   Geographies,
@@ -7,13 +9,6 @@ import {
   ZoomableGroup,
 } from "react-simple-maps";
 
-// import { scaleQuantile } from "d3-scale";
-// import { geoCentroid } from "d3-geo";
-// import axios from "axios";
-// import Container1 from "./Container1.js";
-// import Container3 from "./Container3.js";
-// import { geoPolyhedralWaterman } from "d3-geo-projection";
-import { Dialog } from "primereact/dialog";
 import "./EasternMap.css";
 
 // Function to lighten color on hover
@@ -53,18 +48,24 @@ const geographyStyle = {
   },
 };
 
-function Eastern2(props) {
+function EasternMap({ demandData, drawlData }) {
   // const [tooltipContent, setTooltipContent] = useState("");
-  const [data, setData] = useState([
+  const [visible, setVisible] = useState(false);
+  const [position, setPosition] = useState("center");
+
+  const data = [
     {
       id: "BR",
       name: "Bihar",
       color: "#f8c460",
-      demand: "Demand: 6280 MW",
-      generation: "Generation: 6789 MW",
-      drawal: "Drawal: 4560 MW",
+      demand: "Demand: " + demandData.BH + " MW",
+      // generation: "Generation: 4560 MW",
+      drawal: "Drawal: " + drawlData.BH + " MW",
+
       clatlong: [84.9629, 25.5937],
       tooltiplatlong: [109, 67],
+      content:
+        "Bihar  is Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do",
 
       // color: "#6cecf8",
     },
@@ -72,11 +73,13 @@ function Eastern2(props) {
       id: "JH",
       name: "Jharkhand",
       color: "#cccdfb",
-      demand: "Demand: 9807 MW",
-      generation: "Generation: 4597 MW",
-      drawal: "Drawal: 5389 MW",
+      demand: "Demand: " + demandData.JH + " MW",
+      // generation: "Generation: 4560 MW",
+      drawal: "Drawal: " + drawlData.JH + " MW",
       clatlong: [84.3629, 23.4937],
       tooltiplatlong: [109, 190],
+      content:
+        "Jharkhand  is Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do",
 
       // color: "#f8c460",
     },
@@ -84,21 +87,25 @@ function Eastern2(props) {
       id: "OR",
       name: "Odisha",
       color: "#6cecf8",
-      demand: "Demand: 6533 MW",
-      generation: "Generation: 987 MW",
-      drawal: "Drawal: 567 MW",
+      demand: "Demand: " + demandData.OD + " MW",
+      // generation: "Generation: 4560 MW",
+      drawal: "Drawal: " + drawlData.OD + " MW",
       tooltiplatlong: [109, 337],
       clatlong: [84.9629, 20.5937],
+      content:
+        "Bihar  is Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do",
     },
     {
       id: "WB",
       name: "West Bengal",
       color: "#8bf579",
-      demand: "Demand: 4567 MW",
-      generation: "Generation: 985 MW",
-      drawal: "Drawal: 457 MW",
+      demand: "Demand: " + demandData.WB + " MW",
+      // generation: "Generation: 4560 MW",
+      drawal: "Drawal: " + drawlData.WB + " MW",
       clatlong: [88.9629, 23.5937],
       tooltiplatlong: [109, 137],
+      content:
+        "WB  is Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do",
 
       // color: "#6cecf8",
     },
@@ -106,23 +113,27 @@ function Eastern2(props) {
       id: "SK",
       name: "Sikkim",
       color: "#ded946",
-      demand: "Demand: 7070 MW",
-      generation: "Generation: 896 MW",
-      drawal: "Drawal: 4578 MW",
+      demand: "Demand: " + demandData.SI + " MW",
+      // generation: "Generation: 4560 MW",
+      drawal: "Drawal: " + drawlData.SI + " MW",
       clatlong: [87.9629, 27.5937],
       tooltiplatlong: [109, 87],
+      content:
+        "SIkkim  is Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do",
     },
     {
       id: "DVC",
       name: "DVC",
       color: "#ffad9f",
-      demand: "Demand: 981 MW",
-      generation: "Generation: 567 MW",
-      drawal: "Drawal: 983 MW",
+      demand: "Demand: " + demandData.DVC + " MW",
+      // generation: "Generation: 4560 MW",
+      drawal: "Drawal: " + drawlData.DVC + " MW",
       clatlong: [85.8629, 23.6937],
       tooltiplatlong: [109, 157],
+      content:
+        "DVC  is Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do",
     },
-  ]);
+  ];
 
   const [keyList, setKeyList] = useState([]);
 
@@ -132,26 +143,23 @@ function Eastern2(props) {
   var temp_list = [...keyList];
   temp_list.splice(0, 3);
 
-  const onMouseclick = (e) => {
-    var x = e[0];
-    console.log(e[0], e[1], e[2]);
-    // var Ac_name = "Ac_name";
-    // x["District"] = e[1];
-    // x["Ac_name"] = e[2];
-    setclickdata([x]);
-    setshowdailog(true);
+  const show = (position) => {
+    setPosition(position);
+    setVisible(true);
   };
+  // const onMouseclick = (e, region) => {
+  //   show("right");
+  //   // console.log(region);
+  //   setTooltip2({
+  //     header: region[0].name,
+  //     visible: true,
+  //     content: region[0].content,
+  //   });
+  // };
 
   const onMouseLeave = () => {
     setshowdailog(false);
   };
-
-  // const [tooltip, setTooltip] = useState({
-  //   visible: false,
-  //   x: 85.8629,
-  //   y: 23.6937,
-  //   content: "Helloritik",
-  // });
 
   const [tooltip, setTooltip] = useState({
     visible: false,
@@ -159,29 +167,27 @@ function Eastern2(props) {
     y: 0,
     content: "Data not available",
     demand: "Demand: 0 MW",
-    generation: "Generation: 0 MW",
+    // generation: "Generation: 0 MW",
     drawal: "Drawal: 0 MW",
   });
 
-  const handleMouseEnter = (e, region) => {
-    // console.log(e);
-    // console.log(region[0].clatlong[0]);
-    const rect = e.target.getBoundingClientRect();
-    // console.log(rect);
+  const [tooltip2, setTooltip2] = useState({
+    header: "",
+    visible: false,
+    content: "Data not available",
+  });
 
+  const handleMouseEnter = (e, region) => {
+    const rect = e.target.getBoundingClientRect();
     setTooltip({
       visible: true,
-      // x: region[0].clatlong[0],
-      // y: region[0].clatlong[0] + window.scrollY,
       x: region[0].tooltiplatlong[0],
       y: region[0].tooltiplatlong[1],
-      // x: 109,
-      // y: 63,
       content: (
         <div>
           Constituent: {region[0].name}. <br /> {region[0].demand}
           <br /> {region[0].drawal}
-          <br /> {region[0].generation}
+          {/* <br /> {region[0].generation} */}
         </div>
       ),
     });
@@ -221,6 +227,7 @@ function Eastern2(props) {
                     fill={current[0].color}
                     style={geographyStyle}
                     onMouseEnter={(e) => handleMouseEnter(e, current)}
+                    // onClick={(e) => onMouseclick(e, current)}
                     onMouseLeave={handleMouseLeave}
                   />
 
@@ -256,7 +263,6 @@ function Eastern2(props) {
           }
         </Geographies>
       </ComposableMap>
-
       {tooltip.visible && (
         <div
           style={{
@@ -287,8 +293,7 @@ function Eastern2(props) {
         {clickdata[0] ? (
           <div>
             <p>State : {clickdata[0].name}</p>
-            {/* <p>District : {clickdata[0].District}</p> */}
-            {/* <p>Ac_name : {clickdata[0].Ac_name}</p> */}
+
             {temp_list.map((item) => (
               <p>
                 {item} : {clickdata[0][item] ? clickdata[0][item] : "NA"}
@@ -299,8 +304,35 @@ function Eastern2(props) {
           ""
         )}
       </Dialog>
+
+      <Dialog
+        header={tooltip2.header}
+        visible={visible}
+        style={{
+          width: "auto",
+          minWidth: "350px",
+          maxWidth: "20vw",
+          padding: "0.2rem",
+          textAlign: "justify",
+          borderRadius: "12px",
+        }}
+        contentStyle={{
+          backgroundColor: "#E5E5E5",
+          padding: "1.5rem",
+          textAlign: "justify",
+          fontSize: "1rem",
+          lineHeight: "1.6",
+          color: "#333",
+        }}
+        modal
+        onHide={() => setVisible(false)}
+        draggable={false}
+        resizable={false}
+      >
+        <p style={{ margin: 0 }}>{tooltip2.content}</p>
+      </Dialog>
     </React.Fragment>
   );
 }
 
-export default Eastern2;
+export default EasternMap;

@@ -57,7 +57,7 @@ export default function ForgotPassword({ redirectionURL = "/" }) {
     if (!data.email) {
       return;
     }
-
+    setStep("notVerified");
     try {
       let response = await axios({
         method: "post",
@@ -66,15 +66,12 @@ export default function ForgotPassword({ redirectionURL = "/" }) {
         data: data,
       });
       setEmail(data.email);
-      setStep("notVerified"); // Move to OTP verification
-      console.log(data.email);
-      console.log(response);
+      // setStep("notVerified"); // Move to OTP verification
+      // console.log(data.email);
+      // console.log(response);
     } catch (e) {
-      // console.log(e.response);
-      // console.log("Bad Request");
-
       const responseData = e.response?.data;
-      console.log(responseData);
+      // console.log(responseData);
 
       const toastDetails = {
         severity: responseData?.type,
@@ -130,7 +127,7 @@ export default function ForgotPassword({ redirectionURL = "/" }) {
       return;
     }
 
-    // console.log(otp, data.newPassword, data.confirmPassword);
+    // // console.log(otp, data.newPassword, data.confirmPassword);
     const newData = { ...data };
     newData["email"] = email;
     newData["otp"] = otp;
@@ -142,21 +139,13 @@ export default function ForgotPassword({ redirectionURL = "/" }) {
         headers: {},
         data: newData,
       });
-      // setEmail(data.email);
-      // console.log(data.email);
+
       setShowMessage(true);
-      // setOtp(otp);
-      // setPassword(data.newPassword);
-      // form.restart();
-      // handleVerifyOtpSuccess();
 
-      console.log(response);
+      // console.log(response);
     } catch (e) {
-      // console.log(e.response);
-      // console.log("Bad Request");
-
       const responseData = e.response?.data;
-      console.log(responseData);
+      // console.log(responseData);
 
       const toastDetails = {
         severity: responseData?.type,
@@ -290,17 +279,10 @@ export default function ForgotPassword({ redirectionURL = "/" }) {
                   </h4>
                 </div>
 
-                {/* <h4 className="text-center">
-                  Enter the 6 digit code we sent you via email.
-                </h4> */}
-
-                {/* <h4 className="text-center">OTP is valid for 5 minutes</h4> */}
                 <Form
                   onSubmit={onSubmitVerifyOTP}
                   initialValues={{
                     otp: "",
-                    // newPassword: "",
-                    // confirmPassword: "",
                   }}
                   validate={validateVerifyOTP}
                   render={({ handleSubmit }) => (

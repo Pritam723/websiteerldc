@@ -46,9 +46,9 @@
 //   };
 
 //   const onSubmitsendotp = async (data, form) => {
-//     // console.log("hell ritik here");
+//     // // console.log("hell ritik here");
 //     const loginFlag = await loginUser(data);
-//     console.log(data);
+//     // console.log(data);
 
 //     if (!loginFlag) return;
 //   };
@@ -56,7 +56,7 @@
 //   const validateverifyotp = (data) => {
 //     let errors = {};
 //     // errors.token = "OTP is required.";
-//     // console.log(data.Otp);
+//     // // console.log(data.Otp);
 //     if (!data.Otp) {
 //       errors.Otp = "OTP is required.";
 //     }
@@ -75,18 +75,18 @@
 //     if (data.confirmPassword != data.newPassword) {
 //       errors.mainerror = "Confirm Password is not same as New Password.";
 //     }
-//     // console.log(errors);
+//     // // console.log(errors);
 //     return errors;
 //   };
 
 //   const onSubmitverifyotp = async () => {
-//     console.log(token);
+//     // console.log(token);
 //   };
 
 //   const onSubmitchangepassword = async (data, form) => {
-//     // console.log("hell ritik here");
+//     // // console.log("hell ritik here");
 //     const loginFlag = await loginUser(data);
-//     console.log(data);
+//     // console.log(data);
 
 //     if (!loginFlag) return;
 //   };

@@ -21,7 +21,7 @@ export default function UserProfile({ redirectionURL = "/" }) {
   //   };
 
   const { user, logoutUser } = useContext(AuthContext);
-  console.log(user);
+  // console.log(user);
   const nameParts = user.name.split(" ");
   const firstNameInitial = nameParts[0].charAt(0).toUpperCase(); // First character of first name
   const lastNameInitial = nameParts[nameParts.length - 1]

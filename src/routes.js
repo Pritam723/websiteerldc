@@ -61,6 +61,7 @@ import YearAheadForecastingError from "pages/Departmental/SystemOperation/Foreca
 import ATCViolationDaily from "pages/Departmental/SystemOperation/System Reliability Indices/ATCViolationDaily.js";
 import ATCViolationMonthly from "pages/Departmental/SystemOperation/System Reliability Indices/ATCViolationMonthly.js";
 import ATCViolationWeekly from "pages/Departmental/SystemOperation/System Reliability Indices/ATCViolationWeekly.js";
+
 import FRC from "pages/Departmental/SystemOperation/FRC.js";
 import TransmissionElementAvailability from "pages/Departmental/SystemOperation/TransmissionElementAvailability.js";
 import FinalSchedule from "pages/Departmental/Scheduling/FinalSchedule.js";
@@ -103,9 +104,11 @@ import SupplementaryAndPLIBill from "pages/Departmental/MarketOperation/Fees & C
 import QuarterlyReconciliationStatement from "pages/Departmental/MarketOperation/Fees & Charges/QuarterlyReconciliationStatement.js";
 import CongestionReport from "pages/Departmental/MarketOperation/Reports/CongestionReport.js";
 import PSDF from "pages/Departmental/MarketOperation/PSDF.js";
-
+import Tender from "pages/Departmental/More/Tender/Tender.js";
 import HRInitiatives from "pages/Departmental/More/HR/HRInitiatives.js";
 import SummerInternship from "pages/Departmental/More/HR/SummerInternship.js";
+
+import DownloadMap from "pages/Departmental/More/DownloadMap.js";
 
 const routes = [
   // {
@@ -256,9 +259,30 @@ const routes = [
         dropdown: true,
         collapse: [
           {
-            name: "Inter-Regional",
-            hindiName: "अंतर क्षेत्रीय",
-            route: "/sections/page-sections/page-headers",
+            name: "Inter-Regional Daily ANGULAR DIFFERENCE",
+            hindiName: "अंतर-क्षेत्रीय दैनिक कोणीय अंतर",
+            href: "https://report.grid-india.in//index.php?p=Daily+Report%2FDaily+Angular+Difference",
+          },
+          {
+            name: "Inter-Regional Daily TTC/ATC/N-1",
+            hindiName: "अंतर-क्षेत्रीय दैनिक टीटीसी/एटीसी/एन-1",
+            href: "https://report.grid-india.in/index.php?p=Daily+Report%2FDaily+VDI_TTC_ATC",
+          },
+
+          {
+            name: "Inter-Regional Weekly ANGULAR DIFFERENCE",
+            hindiName: "अंतर-क्षेत्रीय साप्ताहिक कोणीय अंतर",
+            href: "https://report.grid-india.in/index.php?p=Weekly+Report%2FAngular+Difference",
+          },
+          {
+            name: "Inter-Regional Weekly TTC/ATC/N-1",
+            hindiName: "अंतर-क्षेत्रीय साप्ताहिक टीटीसी/एटीसी/एन-1",
+            href: "https://grid-india.in/reports/system-reliability-indices/weekly-vdittcatc/",
+          },
+          {
+            name: "Inter-Regional Monthly FDI/SYSTEM RELIABILITY",
+            hindiName: "अंतर-क्षेत्रीय मासिक एफडीआई/सिस्टम विश्वसनीयता",
+            href: "https://grid-india.in/reports/system-reliability-indices/monthly-vdittcatc/",
           },
           {
             name: "Intra Regional ATC Violation Daily",
@@ -1231,7 +1255,6 @@ const routes = [
             hindiName: "ग्रीष्म प्रशिक्षण",
             route: "/more/hr/summerinternship",
             component: <SummerInternship />,
-            
           },
           {
             name: "Careers",
@@ -1240,20 +1263,22 @@ const routes = [
           },
         ],
       },
-      {
-        name: "Live Map",
-        hindiName: "लाइव मैप",
-        route: "/sections/page-sections/page-headers",
-      },
+      // {
+      //   name: "Live Map",
+      //   hindiName: "लाइव मैप",
+      //   route: "/sections/page-sections/page-headers",
+      // },
       {
         name: "Download Map",
         hindiName: "डाउनलोड मैप",
-        route: "/sections/page-sections/page-headers",
+        route: "/more/downloadmap",
+        component: <DownloadMap />,
       },
       {
         name: "Tender",
         hindiName: "निविदा",
-        route: "/sections/page-sections/page-headers",
+        route: "/more/tender",
+        component: <Tender />,
       },
       {
         name: "Contracts Awarded",

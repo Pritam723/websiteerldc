@@ -57,15 +57,90 @@ import "./video.css";
 // import sample from './sample.mp4';
 import FlasherSlider from "examples/FlasherSlider/flasherSlider.js";
 
-import Chip from "@mui/material/Chip";
-import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
-import MKBadge from "components/MKBadge";
+// import Chip from "@mui/material/Chip";
+// import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
+// import MKBadge from "components/MKBadge";
 import AppBar from "examples/AppBar/AppBar";
-import Banner from "examples/Banner/Banner";
-
+// import Banner from "examples/Banner/Banner";
+import axios from "axios";
 function Presentation() {
+  const [views, setViews] = useState("NAN");
+
+  const [counterData, setCounterData] = useState({
+    LAST_UPDATED: "NOT ABLE TO REACH SERVER",
+    ER_DEMAND_MET: 0,
+    SCED_REV: -1,
+    ER_FREQ: 0,
+  });
+
+  const [demandData, setDemandData] = useState({
+    LAST_UPDATED: "NOT ABLE TO REACH SERVER",
+    WB: 0,
+    BH: 0,
+    JH: 0,
+    OD: 0,
+    SI: 0,
+    DVC: 0,
+  });
+
+  const [drawlData, setDrawlData] = useState({
+    LAST_UPDATED: "NOT ABLE TO REACH SERVER",
+    WB: 0,
+    BH: 0,
+    JH: 0,
+    OD: 0,
+    SI: 0,
+    DVC: 0,
+  });
+
+  const updateTotalViews = async () => {
+    try {
+      let response = await axios({
+        method: "get",
+        url: `${process.env.REACT_APP_READ_API}/updateTotalViews`,
+      });
+      console.log(response.data.data);
+      setViews(response.data.data);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const fetchRealTimeData = async () => {
+    console.log("Fetching realtime data");
+    try {
+      let response = await axios({
+        method: "get",
+        url: `${process.env.REACT_APP_READ_API}/getScadaData`,
+      });
+      console.log(response.data);
+      setCounterData(response.data.counterData);
+      setDemandData(response.data.demandData);
+      setDrawlData(response.data.drawlData);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  useEffect(() => {
+    // Initial fetch
+    fetchRealTimeData();
+
+    // Set up polling every 30 seconds
+    const interval = setInterval(fetchRealTimeData, 30000);
+
+    // Cleanup on unmount
+    return () => clearInterval(interval);
+  }, []);
+
   useEffect(() => {
     //Runs only on the first render
+
+    console.log("Here");
+    updateTotalViews();
+
+    fetchRealTimeData();
+
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         const square = entry.target;
@@ -116,11 +191,14 @@ function Presentation() {
       >
         <FlasherSlider />
 
-        <Counters />
-        <Information />
+        <Counters counterData={counterData} />
+        <Information demandData={demandData} />
         {/* <DesignBlocks /> */}
-        <Pages />
-        <Container sx={{ mt: 3 ,ml:2 }} className="grid-item vertical-courasol-hide">
+        <Pages demandData={demandData} drawlData={drawlData} />
+        <Container
+          sx={{ mt: 3, ml: 2 }}
+          className="grid-item vertical-courasol-hide"
+        >
           <Grid container spacing={3}>
             <Grid item xs={12} lg={8}>
               <Highlights />
@@ -131,9 +209,9 @@ function Presentation() {
           </Grid>
         </Container>
 
-        <Container sx={{ml:2 }} className="grid-item vertical-courasol-hide">
+        <Container sx={{ ml: 2 }} className="grid-item vertical-courasol-hide">
           <Grid container spacing={1}>
-            <Grid item xs={6} sm ={4} lg={2}>
+            <Grid item xs={6} sm={4} lg={2}>
               <FilledInfoCard
                 // variant="gradient"
                 color="info"
@@ -147,7 +225,7 @@ function Presentation() {
                 }}
               />
             </Grid>
-            <Grid item xs={6} sm ={4} lg={2}>
+            <Grid item xs={6} sm={4} lg={2}>
               <FilledInfoCard
                 color="info"
                 icon="earbuds_battery"
@@ -160,7 +238,7 @@ function Presentation() {
                 }}
               />
             </Grid>
-            <Grid item xs={6} sm ={4} lg={2}>
+            <Grid item xs={6} sm={4} lg={2}>
               <FilledInfoCard
                 color="info"
                 icon="menu_book"
@@ -173,7 +251,7 @@ function Presentation() {
                 }}
               />
             </Grid>
-            <Grid item xs={6} sm ={4} lg={2}>
+            <Grid item xs={6} sm={4} lg={2}>
               <FilledInfoCard
                 // variant="gradient"
                 color="info"
@@ -187,7 +265,7 @@ function Presentation() {
                 }}
               />
             </Grid>
-            <Grid item xs={6} sm ={4} lg={2}>
+            <Grid item xs={6} sm={4} lg={2}>
               <FilledInfoCard
                 color="info"
                 icon="assessment"
@@ -200,7 +278,7 @@ function Presentation() {
                 }}
               />
             </Grid>
-            <Grid item xs={6} sm ={4} lg={2}>
+            <Grid item xs={6} sm={4} lg={2}>
               <FilledInfoCard
                 color="info"
                 icon="currency_rupee"
@@ -219,7 +297,7 @@ function Presentation() {
         <CarouselGOI />
       </Card>
       <MKBox pt={6} px={1} mt={6}>
-        <DefaultFooter content={footerRoutes} />
+        <DefaultFooter content={footerRoutes} views={views} />
       </MKBox>
     </React.Fragment>
   );
