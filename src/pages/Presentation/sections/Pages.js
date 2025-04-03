@@ -53,9 +53,10 @@ import "./pages.css";
 import RotatingCard from "examples/Cards/RotatingCard";
 import RotatingCardFront from "examples/Cards/RotatingCard/RotatingCardFront";
 import RotatingCardBack from "examples/Cards/RotatingCard/RotatingCardBack";
-
+import DownloadMap from "pages/Departmental/More/DownloadMap.js";
 import bgFront from "assets/images/Flower-offering.jpg";
 import bgBack from "assets/images/nscb.jpg";
+import { Link } from "react-router-dom";
 
 // import EasternMap from "examples/Easternmap/EasternMap";
 
@@ -289,16 +290,12 @@ function Pages({ demandData, drawlData }) {
               </h6>
               <EasternMap demandData={demandData} drawlData={drawlData} />
               <CardActions>
-                <a
-                  href="https://www.facebook.com/GridIndia1"
-                  target="_blank"
-                  rel="noreferrer"
-                >
+                <Link to="More/DownloadMap">
+                  {/* path="More/DownloadMap" */}
                   <Button size="small">
                     See Eastern Regional Power Map (Login Required)
                   </Button>
-                </a>
-                {/* <Button size="small">Learn More</Button> */}
+                </Link>
               </CardActions>
             </Card>
           </Grid>

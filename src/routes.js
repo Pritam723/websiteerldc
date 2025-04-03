@@ -107,6 +107,8 @@ import Tender from "pages/Departmental/More/Tender/Tender.js";
 import HRInitiatives from "pages/Departmental/More/HR/HRInitiatives.js";
 import SummerInternship from "pages/Departmental/More/HR/SummerInternship.js";
 
+import DownloadMap from "pages/Departmental/More/DownloadMap.js";
+
 const routes = [
   // {
   //           name: "Home",
@@ -1251,7 +1253,6 @@ const routes = [
             hindiName: "ग्रीष्म प्रशिक्षण",
             route: "/more/hr/summerinternship",
             component: <SummerInternship />,
-            
           },
           {
             name: "Careers",
@@ -1260,15 +1261,16 @@ const routes = [
           },
         ],
       },
-      {
-        name: "Live Map",
-        hindiName: "लाइव मैप",
-        route: "/sections/page-sections/page-headers",
-      },
+      // {
+      //   name: "Live Map",
+      //   hindiName: "लाइव मैप",
+      //   route: "/sections/page-sections/page-headers",
+      // },
       {
         name: "Download Map",
         hindiName: "डाउनलोड मैप",
-        route: "/sections/page-sections/page-headers",
+        route: "/more/downloadmap",
+        component: <DownloadMap />,
       },
       {
         name: "Tender",

@@ -22,7 +22,7 @@ import Register from "pages/FunctionalPages/Auth/Register";
 import Gallery from "pages/Gallery/Gallery";
 import SingleAlbum from "pages/Gallery/SingleAlbum";
 import RTI from "pages/Departmental/More/HR/RTI.js";
-
+import DownloadMap from "pages/Departmental/More/DownloadMap.js";
 import UserProfile from "pages/FunctionalPages/Auth/UserProfile";
 import Test from "./Test";
 
@@ -62,7 +62,6 @@ export default function App() {
       <AuthProvider>
         <Routes>
           {getRoutes(routes)}
-
           <Route
             key="LandingPage"
             path="/"
@@ -73,16 +72,19 @@ export default function App() {
               </React.Fragment>
             }
           />
-
           <Route
             key="forgotpassword"
             path="user/forgotpassword"
             element={<ForgotPassword />}
           />
+          <Route
+            key="Downloadmap"
+            path="More/DownloadMap"
+            element={<DownloadMap />}
+          />
           <Route key="register" path="user/register" element={<Register />} />
           <Route key="photogallery" path="photogallery" element={<Gallery />} />
           <Route path="photogallery/album/:albumId" element={<SingleAlbum />} />
-
           <Route path="rti" element={<RTI />} />
           {/* <Route path="*" element={<Navigate to="/" />} /> */}
           <Route key="default" path="*" element={<Navigate to="/" />} />
