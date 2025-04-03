@@ -1206,19 +1206,19 @@ const routes = [
       },
     ],
   },
-  {
-    name: "Documents",
-    hindiName: "दस्तावेज",
-    // icon: <Icon>article</Icon>,
-    dropdown: true,
-    collapse: [
-      {
-        name: "Documents",
-        hindiName: "दस्तावेज",
-        route: "/sections/page-sections/page-headers",
-      },
-    ],
-  },
+  // {
+  //   name: "Documents",
+  //   hindiName: "दस्तावेज",
+  //   // icon: <Icon>article</Icon>,
+  //   dropdown: true,
+  //   collapse: [
+  //     {
+  //       name: "Documents",
+  //       hindiName: "दस्तावेज",
+  //       route: "/sections/page-sections/page-headers",
+  //     },
+  //   ],
+  // },
   {
     name: "More",
     hindiName: "अतिरिक्त",
