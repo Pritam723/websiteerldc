@@ -92,6 +92,7 @@ import ReactiveDisbursementLetter from "pages/Departmental/MarketOperation/React
 import RRASReconciliation from "pages/Departmental/MarketOperation/AncilliaryServices/RRASReconciliation.js";
 import AGCReconciliation from "pages/Departmental/MarketOperation/AncilliaryServices/AGCReconciliation.js";
 import BankDetails from "pages/Departmental/MarketOperation/BankDetails.js";
+import FTCDocuments from "pages/Departmental/MarketOperation/FTC/FTCDocuments.js";
 
 import SEMData from "pages/Departmental/MarketOperation/Metering/SEMData.js";
 import MeteringError from "pages/Departmental/MarketOperation/Metering/MeteringError.js";
@@ -106,6 +107,8 @@ import PSDF from "pages/Departmental/MarketOperation/PSDF.js";
 import Tender from "pages/Departmental/More/Tender/Tender.js";
 import HRInitiatives from "pages/Departmental/More/HR/HRInitiatives.js";
 import SummerInternship from "pages/Departmental/More/HR/SummerInternship.js";
+
+import DownloadMap from "pages/Departmental/More/DownloadMap.js";
 
 const routes = [
   // {
@@ -592,7 +595,8 @@ const routes = [
           {
             name: "First Time Charging Documents",
             hindiName: "पहली बार चार्जिंग दस्तावेज",
-            route: "/sections/page-sections/page-headers",
+            route: "/marketoperation/ftc/ftcdocuments",
+            component: <FTCDocuments />,
           },
         ],
       },
@@ -1202,19 +1206,19 @@ const routes = [
       },
     ],
   },
-  {
-    name: "Documents",
-    hindiName: "दस्तावेज",
-    // icon: <Icon>article</Icon>,
-    dropdown: true,
-    collapse: [
-      {
-        name: "Documents",
-        hindiName: "दस्तावेज",
-        route: "/sections/page-sections/page-headers",
-      },
-    ],
-  },
+  // {
+  //   name: "Documents",
+  //   hindiName: "दस्तावेज",
+  //   // icon: <Icon>article</Icon>,
+  //   dropdown: true,
+  //   collapse: [
+  //     {
+  //       name: "Documents",
+  //       hindiName: "दस्तावेज",
+  //       route: "/sections/page-sections/page-headers",
+  //     },
+  //   ],
+  // },
   {
     name: "More",
     hindiName: "अतिरिक्त",
@@ -1251,7 +1255,6 @@ const routes = [
             hindiName: "ग्रीष्म प्रशिक्षण",
             route: "/more/hr/summerinternship",
             component: <SummerInternship />,
-            
           },
           {
             name: "Careers",
@@ -1260,15 +1263,16 @@ const routes = [
           },
         ],
       },
-      {
-        name: "Live Map",
-        hindiName: "लाइव मैप",
-        route: "/sections/page-sections/page-headers",
-      },
+      // {
+      //   name: "Live Map",
+      //   hindiName: "लाइव मैप",
+      //   route: "/sections/page-sections/page-headers",
+      // },
       {
         name: "Download Map",
         hindiName: "डाउनलोड मैप",
-        route: "/sections/page-sections/page-headers",
+        route: "/more/downloadmap",
+        component: <DownloadMap />,
       },
       {
         name: "Tender",
