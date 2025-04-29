@@ -224,7 +224,7 @@ export default function GridDataInfographics({ demandData }) {
       text: "Eastern Regional Demand. " + demandData.LAST_UPDATED,
     },
     subtitle: {
-      text: '<a href="http://statcounter.com" target="_blank"> Click here to see Real-Time Grid Data. </a>',
+      // text: '<a href="http://statcounter.com" target="_blank"> Click here to see Real-Time Grid Data. </a>',
     },
 
     accessibility: {

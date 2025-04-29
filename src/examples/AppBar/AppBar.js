@@ -209,7 +209,7 @@ export default function MyAppBar() {
               {windowWidth > 1200 && (
                 <>
                   <a
-                    href="#"
+                    href={`${process.env.REACT_APP_READ_API}/files/ISO_9001.pdf`}
                     target="_blank"
                     rel="noopener noreferrer"
                     style={{ textDecoration: "none" }}
@@ -224,7 +224,7 @@ export default function MyAppBar() {
                     </Typography>
                   </a>
                   <a
-                    href="#"
+                    href={`${process.env.REACT_APP_READ_API}/files/ISO_27001.pdf`}
                     target="_blank"
                     rel="noopener noreferrer"
                     style={{ textDecoration: "none" }}
@@ -239,7 +239,7 @@ export default function MyAppBar() {
                     </Typography>
                   </a>
                   <a
-                    href="#"
+                    href={`${process.env.REACT_APP_READ_API}/files/ISO_14001.pdf`}
                     target="_blank"
                     rel="noopener noreferrer"
                     style={{ textDecoration: "none" }}
@@ -254,7 +254,7 @@ export default function MyAppBar() {
                     </Typography>
                   </a>
                   <a
-                    href="#"
+                    href={`${process.env.REACT_APP_READ_API}/files/ISO_45001.pdf`}
                     target="_blank"
                     rel="noopener noreferrer"
                     style={{ textDecoration: "none" }}
@@ -269,7 +269,7 @@ export default function MyAppBar() {
                     </Typography>
                   </a>
                   <a
-                    href="#"
+                    href={`${process.env.REACT_APP_READ_API}/files/IMS_Policy.pdf`}
                     target="_blank"
                     rel="noopener noreferrer"
                     style={{ textDecoration: "none" }}

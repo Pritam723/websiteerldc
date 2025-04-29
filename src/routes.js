@@ -85,6 +85,7 @@ import WeatherRelatedEvents from "pages/Departmental/Reports/WeatherRelatedEvent
 import ReconciliationCTU from "pages/Departmental/MarketOperation/TGNA/ReconciliationCTU.js";
 import ReconciliationApplicant from "pages/Departmental/MarketOperation/TGNA/ReconciliationApplicant.js";
 import Disbursements from "pages/Departmental/MarketOperation/TGNA/Disbursements.js";
+import Refunds from "pages/Departmental/MarketOperation/TGNA/Refunds.js";
 import DSMDisbursementLetter from "pages/Departmental/MarketOperation/DSM/DSMDisbursementLetter.js";
 import DSMReconcilation from "pages/Departmental/MarketOperation/DSM/DSMReconcilation.js";
 import ReactiveReconcilation from "pages/Departmental/MarketOperation/Reactive/ReactiveReconcilation.js";
@@ -109,6 +110,9 @@ import HRInitiatives from "pages/Departmental/More/HR/HRInitiatives.js";
 import SummerInternship from "pages/Departmental/More/HR/SummerInternship.js";
 
 import DownloadMap from "pages/Departmental/More/DownloadMap.js";
+import Highlights from "pages/Departmental/More/Upload Documents/Highlights";
+import LatestNews from "pages/Departmental/More/Upload Documents/LatestNews";
+import HRDocuments from "pages/Departmental/More/Upload Documents/HRDocuments";
 
 const routes = [
   // {
@@ -171,7 +175,7 @@ const routes = [
           {
             name: "E-Logbook Software",
             hindiName: "ई-लॉगबुक सॉफ्टवेयर",
-            href: "https://logbook.erldc.in/en/",
+            href: "http://crms.erldc.in/",
           },
           {
             name: "Shutdown Availed List",
@@ -187,8 +191,7 @@ const routes = [
           {
             name: "ERLDC Outage Procedure",
             hindiName: "ईआरएलडीसी आउटेज प्रक्रिया",
-            route: "/sections/page-sections/page-headers",
-            component: <PageHeaders />,
+            href:process.env.REACT_APP_READ_API + "/files/ERLDC_Outage_Procedure.pdf",
           },
           {
             name: "LGBR",
@@ -314,11 +317,11 @@ const routes = [
     hindiName: "निर्धारण",
     // icon: <Icon>article</Icon>,
     collapse: [
-      {
-        name: "ISGS Real Time Data",
-        hindiName: "आईएसजीएस वास्तविक काल डेटा",
-        route: "/sections/page-sections/page-headers",
-      },
+      // {
+      //   name: "ISGS Real Time Data",
+      //   hindiName: "आईएसजीएस वास्तविक काल डेटा",
+      //   route: "/sections/page-sections/page-headers",
+      // },
 
       {
         name: "Share Table",
@@ -580,6 +583,13 @@ const routes = [
             route: "/marketoperation/tgna/disbursements",
             component: <Disbursements />,
           },
+
+          {
+            name: "Refund",
+            hindiName: "वापसी",
+            route: "/marketoperation/tgna/refunds",
+            component: <Refunds />,
+          },
           {
             name: "NOAR",
             hindiName: "एनओएआर",
@@ -711,11 +721,11 @@ const routes = [
             hindiName: "एफ&सी उपयोगकर्ता सूची",
             href: "http://fc.grid-india.in/FnCWeb/#/landing/reg-users",
           },
-          {
-            name: "Monthly Bill Statement",
-            hindiName: "मासिक बिल विवरण",
-            route: "/sections/page-sections/page-headers",
-          },
+          // {
+          //   name: "Monthly Bill Statement",
+          //   hindiName: "मासिक बिल विवरण",
+          //   route: "/sections/page-sections/page-headers",
+          // },
           {
             name: "Supplementary & PLI Bill",
             hindiName: "अनुपूरक एवं पीएलआई बिल",
@@ -866,18 +876,18 @@ const routes = [
     hindiName: "रिपोर्ट्स",
     // icon: <Icon>article</Icon>,
     collapse: [
-      {
-        name: "ER Utility Performance",
-        hindiName: "ईआर उपयोगिता प्रदर्शन",
-        dropdown: true,
-        collapse: [
-          {
-            name: "Hydro Reservoir",
-            hindiName: "जलाशय",
-            route: "/sections/page-sections/page-headers",
-          },
-        ],
-      },
+      // {
+      //   name: "ER Utility Performance",
+      //   hindiName: "ईआर उपयोगिता प्रदर्शन",
+      //   dropdown: true,
+      //   collapse: [
+      //     {
+      //       name: "Hydro Reservoir",
+      //       hindiName: "जलाशय",
+      //       route: "/sections/page-sections/page-headers",
+      //     },
+      //   ],
+      // },
       {
         name: "Daily Report",
         hindiName: "दैनिक रिपोर्ट",
@@ -1005,43 +1015,43 @@ const routes = [
         component: <ScadavsSEM />,
       },
 
-      {
-        name: "Real-Time Data",
-        hindiName: "वास्तविक काल डेटा",
-        dropdown: true,
-        collapse: [
-          {
-            name: "Constituent Wise Schedule & Actual",
-            hindiName: "गठन वार निर्धारण और वास्तविक",
-            route: "/sections/page-sections/page-headers",
-          },
-          {
-            name: "Inter-Regional Wise Deviation",
-            hindiName: "अंतर-क्षेत्रीय वार विचलन",
-            route: "/sections/page-sections/page-headers",
-          },
-          {
-            name: "Constituent Wise Generation",
-            hindiName: "गठन वार उत्पादन",
-            route: "/sections/page-sections/page-headers",
-          },
-          {
-            name: "Station Wise Voltage",
-            hindiName: "स्टेशन वार वोल्टेज",
-            route: "/sections/page-sections/page-headers",
-          },
-          {
-            name: "Station Wise Generation",
-            hindiName: "स्टेशन वार उत्पादन",
-            route: "/sections/page-sections/page-headers",
-          },
-          {
-            name: "ER Generation",
-            hindiName: "ईआर उत्पादन",
-            route: "/sections/page-sections/page-headers",
-          },
-        ],
-      },
+      // {
+      //   name: "Real-Time Data",
+      //   hindiName: "वास्तविक काल डेटा",
+      //   dropdown: true,
+      //   collapse: [
+      //     {
+      //       name: "Constituent Wise Schedule & Actual",
+      //       hindiName: "गठन वार निर्धारण और वास्तविक",
+      //       route: "/sections/page-sections/page-headers",
+      //     },
+      //     {
+      //       name: "Inter-Regional Wise Deviation",
+      //       hindiName: "अंतर-क्षेत्रीय वार विचलन",
+      //       route: "/sections/page-sections/page-headers",
+      //     },
+      //     {
+      //       name: "Constituent Wise Generation",
+      //       hindiName: "गठन वार उत्पादन",
+      //       route: "/sections/page-sections/page-headers",
+      //     },
+      //     {
+      //       name: "Station Wise Voltage",
+      //       hindiName: "स्टेशन वार वोल्टेज",
+      //       route: "/sections/page-sections/page-headers",
+      //     },
+      //     {
+      //       name: "Station Wise Generation",
+      //       hindiName: "स्टेशन वार उत्पादन",
+      //       route: "/sections/page-sections/page-headers",
+      //     },
+      //     {
+      //       name: "ER Generation",
+      //       hindiName: "ईआर उत्पादन",
+      //       route: "/sections/page-sections/page-headers",
+      //     },
+      //   ],
+      // },
       {
         name: "SCADA TeST Meeting",
         hindiName: "स्काडा टेस्ट बैठक",
@@ -1131,7 +1141,7 @@ const routes = [
           {
             name: "E-Log Book",
             hindiName: "ई-कार्यपंजी",
-            href: "https://logbook.erldc.in/en",
+            href: "http://crms.erldc.in/",
           },
           {
             name: "Open Access",
@@ -1195,7 +1205,7 @@ const routes = [
           {
             name: "ER Weather Information",
             hindiName: "ईआर मौसम की जानकारी",
-            href: "http://14.139.247.5/power/ERLDC/MAIN.html",
+            href: "https://internal.imd.gov.in/power/ERLDC/MAIN.html",
           },
           {
             name: "IMD",
@@ -1238,28 +1248,29 @@ const routes = [
           {
             name: "Organizational Chart",
             hindiName: "संगठन चार्ट",
-            route: "/sections/page-sections/page-headers",
+            href:process.env.REACT_APP_READ_API + "/files/OgranizationalChart.pdf",
           },
           {
             name: "Our Employees",
             hindiName: "हमारे कर्मचारी",
-            route: "/sections/page-sections/page-headers",
+            href:process.env.REACT_APP_READ_API + "/files/EmpList.pdf",
           },
           {
             name: "Empaneled Hospitals",
             hindiName: "सूचीबद्ध अस्पताल",
-            route: "/sections/page-sections/page-headers",
+            href:process.env.REACT_APP_READ_API + "/files/ERLDC_Empanelled_Hospitals.pdf",
           },
-          {
-            name: "Summer Internship",
-            hindiName: "ग्रीष्म प्रशिक्षण",
-            route: "/more/hr/summerinternship",
-            component: <SummerInternship />,
-          },
+          // {
+          //   name: "Summer Internship",
+          //   hindiName: "ग्रीष्म प्रशिक्षण",
+          //   route: "/more/hr/summerinternship",
+          //   component: <SummerInternship />,
+          // },
           {
             name: "Careers",
             hindiName: "करियर",
-            route: "/sections/page-sections/page-headers",
+            route: "/more/hr/summerinternship",
+            component: <SummerInternship />,
           },
         ],
       },
@@ -1269,8 +1280,8 @@ const routes = [
       //   route: "/sections/page-sections/page-headers",
       // },
       {
-        name: "Download Map",
-        hindiName: "डाउनलोड मैप",
+        name: "Download Power Map",
+        hindiName: "डाउनलोड पावर मैप",
         route: "/more/downloadmap",
         component: <DownloadMap />,
       },
@@ -1315,6 +1326,29 @@ const routes = [
             component: <RajbhasaPatrika />,
             isPrivate: true,
             // cssOverlap: true,
+          },
+        ],
+      },      
+      {
+        name: "Upload Documents",
+        hindiName: "अपलोड करें",
+        dropdown: true,
+        collapse: [
+          {
+            name: "Latest News",
+            hindiName: "नवीनतम समाचार",
+            route: "/latestnews",
+            component: <LatestNews />,
+          }, {
+            name: "Highlights",
+            hindiName: "मुख्य अंश",
+            route: "/highlights",
+            component: <Highlights />,
+          },{
+            name: "Other Documents",
+            hindiName: "एचआर दस्तावेज़",
+            route: "/hrdocuments",
+            component: <HRDocuments />,
           },
         ],
       },

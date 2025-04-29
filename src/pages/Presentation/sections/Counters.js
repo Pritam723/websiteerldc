@@ -59,7 +59,7 @@ function Counters({ counterData }) {
     <MKBox component="section" py={2}>
       <Container>
         <Grid container item xs={12} lg={12} sx={{ mx: "auto" }}>
-          <Grid item xs={6} md={3} display="centre">
+          {/* <Grid item xs={6} md={3} display="centre">
             <div class="MuiBox-root css-1qqu4ux">
               <h2 class="MuiTypography-root MuiTypography-h2 css-zg0wqh-MuiTypography-root">
                 <span>{scadaData.LAST_UPDATED}</span>
@@ -68,6 +68,15 @@ function Counters({ counterData }) {
                 Last Updated On
               </h5>
             </div>
+          </Grid> */}
+
+          <Grid item xs={6} md={3} display="centre">
+            <DefaultCounterCard
+              count={scadaData.LAST_UPDATED}
+              suffix=""
+              title="ER Demand Met"
+              // description="Mix the sections, change the colors and unleash your creativity"
+            />
           </Grid>
 
           <Grid item xs={6} md={3} display="centre">

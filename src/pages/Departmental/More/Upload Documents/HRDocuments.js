@@ -3,7 +3,7 @@ import { Button } from "primereact/button";
 import React, { useState, useRef, useContext, useEffect } from "react";
 
 import "react-image-lightbox/style.css";
-import "./tender.css";
+import "./LatestNews.css";
 
 import BaseLayout from "layouts/sections/components/BaseLayout";
 import { Toolbar } from "primereact/toolbar";
@@ -27,29 +27,26 @@ import moment from "moment";
 import { Chip } from "primereact/chip";
 // import { Tag } from "primereact/tag";
 import { Badge } from "primereact/badge";
+import { Dropdown } from 'primereact/dropdown';
 
-export default function Tender() {
-  const targetTableClass = "Tenders";
+
+export default function HRDocuments() {
+  const targetTableClass = "HRDocuments";
   let emptyProduct = {
     id: null,
-    description: null,
-    nitRef: null,
-    bidStartDate: null,
-    bidEndDate: null,
-    bidOpeningDate: null,
-    tenderFilesActual: [],
-    downloadedTimes: 0,
+    typeOfDocument: null,
+    uploadedOn: null
   };
   const uploadRef = useRef(null);
   const dt = useRef(null);
 
   const { user, authTokens } = useContext(AuthContext);
 
-  const pageTitle = "Tender";
+  const pageTitle = "Other Documents";
   const breadcrumb = [
-    { label: "Home" },
     { label: "More" },
-    { label: "Tender" },
+    { label: "Upload Documents" },
+    { label: "Other Documents" },
   ];
   const navigate = useNavigate();
   const toast = useRef(null);
@@ -58,6 +55,19 @@ export default function Tender() {
   const [product, setProduct] = useState(emptyProduct);
   const [products, setProducts] = useState([]);
   const [globalFilter, setGlobalFilter] = useState(null);
+  const [selectedTypeOfDocument, setSelectedTypeOfDocument] = useState(null);
+
+//   const emptyDynamicMetaData = {
+//     readPermission: null,
+//     writePermission: null,
+//     multipleUploads: null,
+//     uploadPoints: {},
+//     dataToDisplay: {},
+//     sortInUse: {},
+//     filtersInUse: {},
+//     defaultFiltering: null,
+//   };
+
 
   const emptyDynamicMetaData = {
     readPermission: null,
@@ -70,9 +80,10 @@ export default function Tender() {
     defaultFiltering: null,
   };
 
+
   const [dynamicMetaData, setDynamicMetaData] = useState(emptyDynamicMetaData);
 
-  const getTenders = async () => {
+  const getHRDocuments = async () => {
     let headers = {
       "Content-Type": "application/json",
     };
@@ -83,7 +94,7 @@ export default function Tender() {
     try {
       let response = await axios({
         method: "post",
-        url: `${process.env.REACT_APP_READ_API}/getTenders`,
+        url: `${process.env.REACT_APP_READ_API}/fetchHRDocuments`,
         headers: headers,
         data: {
           targetTableClass: targetTableClass,
@@ -93,18 +104,17 @@ export default function Tender() {
 
       // const transformedData = response.data["data"]["data"];
 
+    //   const transformedData = response.data["data"]["data"]
+
+      console.log(response.data["data"]["data"])
+
       const transformedData = response.data["data"]["data"].map((item) => ({
         id: item.id,
-        description: item.description,
-        nitRef: item.nitRef,
-        bidStartDate: new Date(item.bidStartDate),
-        bidEndDate: item.bidEndDate,
-        bidOpeningDate: item.bidOpeningDate,
-        tenderFilesActual: item.tenderFilesActual,
-        downloadedTimes: item.downloadedTimes,
+        typeOfDocument: item.typeOfDocument,
+        uploadedOn: new Date(item.uploadedOn),
       }));
 
-      // // console.log(transformedData);
+      console.log(transformedData);
       setProducts(transformedData);
     } catch (e) {
       // // console.log(e.response.data);
@@ -120,48 +130,6 @@ export default function Tender() {
     }
   };
 
-  const downloadTender = async (tenderId) => {
-    try {
-      let headers = {
-        "Content-Type": "application/json",
-      };
-
-      if (authTokens?.access_token) {
-        headers["Authorization"] = `Bearer ${authTokens.access_token}`;
-      }
-      let response = await axios({
-        method: "post",
-        url: `${process.env.REACT_APP_READ_API}/getTender`,
-
-        headers: headers,
-        data: {
-          tenderId: tenderId,
-          targetTableClass: targetTableClass,
-        },
-        responseType: "blob",
-      });
-
-      // // console.log(response);
-      // return;
-      // Create a Blob URL for the downloaded file
-      const url = window.URL.createObjectURL(new Blob([response.data]));
-      const link = document.createElement("a");
-      link.href = url;
-      link.setAttribute("download", "TenderFiles.zip"); // Set the file name
-      document.body.appendChild(link);
-      link.click(); // Simulate click to download
-      link.remove(); // Cleanup
-    } catch (e) {
-      const responseData = e.response?.data;
-
-      const toastDetails = {
-        severity: responseData?.type,
-        summary: responseData?.summary,
-        deatil: responseData?.message,
-      };
-      showToastMessage(toast, toastDetails);
-    }
-  };
 
   const fetchPageMetaData = async () => {
     try {
@@ -191,14 +159,13 @@ export default function Tender() {
   };
 
   useEffect(() => {
-    getTenders();
+    getHRDocuments();
     fetchPageMetaData();
   }, []);
 
   const [submitted, setSubmitted] = useState(false);
-  const [deleteProductDialog, setDeleteProductDialog] = useState(false);
 
-  const saveTender = async () => {
+  const saveHRDocument = async () => {
     setSubmitted(true);
 
     /////////////////////  Reading the Files ///////////////////////////////////
@@ -295,7 +262,7 @@ export default function Tender() {
     try {
       let response = await axios({
         method: "post",
-        url: `${process.env.REACT_APP_WRITE_API_PRIVATE}/addTender`,
+        url: `${process.env.REACT_APP_WRITE_API_PRIVATE}/addHRDocument`,
         headers: headers,
         data: {
           product: _product,
@@ -328,48 +295,7 @@ export default function Tender() {
     }
   };
 
-  const confirmDeleteProduct = (product) => {
-    setProduct(product);
-    setDeleteProductDialog(true);
-  };
 
-  const deleteProduct = async () => {
-    // console.log(product);
-    let headers = {
-      "Content-Type": "application/json",
-    };
-
-    if (authTokens?.access_token) {
-      headers["Authorization"] = `Bearer ${authTokens.access_token}`;
-    }
-    try {
-      let response = await axios({
-        method: "post",
-        url: `${process.env.REACT_APP_READ_API}/deleteTender`,
-        headers: headers,
-        data: {
-          targetTableClass: targetTableClass,
-          tenderId: product.id,
-        },
-      });
-      window.location.reload();
-    } catch (e) {
-      // // console.log(e.response.data);
-      const responseData = e.response?.data;
-      // console.log(responseData);
-      const toastDetails = {
-        severity: responseData?.type,
-        summary: responseData?.summary,
-        deatil: responseData?.message,
-      };
-
-      showToastMessage(toast, toastDetails);
-    }
-  };
-
-  const hideDeleteProductDialog = () => {
-    setDeleteProductDialog(false);
-  };
 
   const onInputChange = (e, name) => {
     // // console.log(e.target);
@@ -401,7 +327,7 @@ export default function Tender() {
         <Button
           severity="success"
           icon="pi pi-plus"
-          label="Add Tender"
+          label="Add Document"
           onClick={() => {
             setProduct(emptyProduct);
             setSubmitted(false);
@@ -412,28 +338,8 @@ export default function Tender() {
     );
   };
 
-  const editProduct = (product) => {
-    // // console.log(product);
-    setProduct({ ...product });
-    setProductDialog(true);
-  };
 
-  const deleteProductDialogFooter = (
-    <React.Fragment>
-      <Button
-        label="No"
-        icon="pi pi-times"
-        outlined
-        onClick={hideDeleteProductDialog}
-      />
-      <Button
-        label="Yes"
-        icon="pi pi-check"
-        severity="danger"
-        onClick={deleteProduct}
-      />
-    </React.Fragment>
-  );
+
 
   const productDialogFooter = (
     <React.Fragment>
@@ -442,59 +348,16 @@ export default function Tender() {
         label="Save"
         icon="pi pi-check"
         onClick={() => {
-          saveTender();
+          saveHRDocument();
         }}
       />
     </React.Fragment>
   );
 
-  const actionBodyTemplate = (rowData) => {
-    return (
-      <React.Fragment>
-        <Button
-          icon="pi pi-pencil"
-          rounded
-          outlined
-          className="mr-2"
-          onClick={() => editProduct(rowData)}
-        />
-        <Button
-          icon="pi pi-trash"
-          rounded
-          outlined
-          severity="danger"
-          onClick={() => confirmDeleteProduct(rowData)}
-        />
-      </React.Fragment>
-    );
-  };
-
-  const downloadBodyTemplate = (rowData) => {
-    return (
-      <React.Fragment>
-        {rowData.tenderFilesActual.map((item) => (
-          <React.Fragment>
-            <Chip label={item} />
-            <br />
-          </React.Fragment>
-        ))}
-
-        {/* <br /> */}
-
-        <Button
-          label="Download Files (.zip)"
-          link
-          onClick={() => downloadTender(rowData.id)}
-        />
-        {dynamicMetaData.writePermission && (
-          <Badge value={"Seen by: " + rowData.downloadedTimes}></Badge>
-        )}
-      </React.Fragment>
-    );
-  };
+ 
 
   const dateBodyTemplate = (rowData) => {
-    if (!rowData.bidStartDate) {
+    if (!rowData.uploadedOn) {
       return "Data not available.";
     }
     return moment(rowData.dateBodyTemplate).format("DD/MM/YYYY");
@@ -543,55 +406,25 @@ export default function Tender() {
             header={header}
           >
             <Column
-              field="description"
-              header="Description of Tender"
+              field="typeOfDocument"
+              header="Type of Document"
               // body={fileNameBodyTemplate}
               // sortable={sortInUse["fileName"]}
               style={{ minWidth: "20rem" }}
               // hidden={!dataToDisplay["fileName"]}
             ></Column>
+      
             <Column
-              field="nitRef"
-              header="NIT Reference"
-              // sortable={sortInUse["uploadedBy"]}
-              style={{ minWidth: "12rem" }}
-              // hidden={!dataToDisplay["uploadedBy"]}
-            ></Column>
-            <Column
-              field="bidStartDate"
-              header="Bid submission Start Date"
+              field="uploadedOn"
+              header="Upload Date"
               body={dateBodyTemplate}
               // sortable={sortInUse["uploadedBy"]}
               style={{ minWidth: "12rem" }}
               // hidden={!dataToDisplay["uploadedBy"]}
             ></Column>
-            <Column
-              field="bidEndDate"
-              header="Bid submission End Date"
-              // sortable={sortInUse["uploadedBy"]}
-              style={{ minWidth: "12rem" }}
-              // hidden={!dataToDisplay["uploadedBy"]}
-            ></Column>
-            <Column
-              field="bidOpeningDate"
-              header="Bid opening Date"
-              // sortable={sortInUse["uploadedBy"]}
-              style={{ minWidth: "12rem" }}
-              // hidden={!dataToDisplay["uploadedBy"]}
-            ></Column>
-            <Column
-              header="Download"
-              body={downloadBodyTemplate}
-              exportable={false}
-              style={{ minWidth: "20rem" }}
-            ></Column>
-            <Column
-              header="Action"
-              body={actionBodyTemplate}
-              exportable={false}
-              style={{ minWidth: "12rem" }}
-              hidden={!dynamicMetaData.writePermission}
-            ></Column>
+
+ 
+          
           </DataTable>
         </div>
 
@@ -606,121 +439,55 @@ export default function Tender() {
           onHide={hideDialog}
         >
           <div className="field">
-            <label htmlFor="description" className="font-bold">
-              Description of Tender
+            <label htmlFor="typeOfDocument" className="font-bold">
+              Type of Document
             </label>
+            <Dropdown 
+                value={selectedTypeOfDocument} 
+                onChange={(e) => {
+                    console.log(e.value);
+                    setSelectedTypeOfDocument(e.value)
+                    onInputChange(e, "typeOfDocument")
+                }} 
+                options={["OgranizationalChart", "ISO_27001","ISO_45001","ISO_14001","ISO_9001","IMS_Policy","EmpList","EmployeeDirectory","ERLDC_Empanelled_Hospitals","WB_Power_Map","Sikkim_Power_Map","Jharkhand_Power_Map",
+                  "Odisha_Power_Map","Bihar_Power_Map","DVC_Power_Map","ER_Power_Map","ERLDC_Outage_Procedure","PublicInformationOfficers","InformationAvailableInElectronicForm",""]} 
+                // optionLabel="name"
+                required
 
-            <InputTextarea
-              value={product.description}
-              onChange={(e) => {
-                // console.log(e);
-                onInputChange(e, "description");
-              }}
-              required
-              className={classNames({
-                "p-invalid": submitted && !product.description,
-              })}
-              placeholder="Description of Tender"
+                className={classNames({
+                  "p-invalid": submitted && !product.typeOfDocument,
+                })}
+                placeholder="Type of Document"
             />
-            {submitted && !product.description && (
+
+            {submitted && !product.typeOfDocument && (
               <small className="p-error">
-                Description of Tender is required.
+                Type of Document is required.
               </small>
             )}
           </div>
 
           <div className="field">
-            <label htmlFor="nitRef" className="font-bold">
-              NIT Reference Number
-            </label>
-
-            <InputText
-              value={product.nitRef}
-              onChange={(e) => {
-                // console.log(e);
-                onInputChange(e, "nitRef");
-              }}
-              required
-              className={classNames({
-                "p-invalid": submitted && !product.nitRef,
-              })}
-              placeholder="NIT Reference Number"
-            />
-
-            {submitted && !product.nitRef && (
-              <small className="p-error">
-                NIT Reference Number is required.
-              </small>
-            )}
-          </div>
-
-          <div className="field">
-            <label htmlFor="bidStartDate" className="font-bold">
-              Bid Start Date (Bids are sorted based on this field)
+            <label htmlFor="uploadedOn" className="font-bold">
+              Uploaded On
             </label>
             <Calendar
-              id="bidStartDate"
-              value={product.bidStartDate}
+              id="uploadedOn"
+              value={product.uploadedOn}
               onChange={(e) => {
                 // e.preventDefault();
-                onInputChange(e, "bidStartDate");
+                onInputChange(e, "uploadedOn");
               }}
               dateFormat="dd/mm/yy"
               required
               // autoFocus
               className={classNames({
-                "p-invalid": submitted && !product.bidStartDate,
+                "p-invalid": submitted && !product.uploadedOn,
               })}
-              placeholder="Select Bid Start Date"
+              placeholder="Select Date"
             />
-            {submitted && !product.bidStartDate && (
-              <small className="p-error">Bid Start Date is required.</small>
-            )}
-          </div>
-
-          <div className="field">
-            <label htmlFor="bidEndDate" className="font-bold">
-              Bid End Date
-            </label>
-
-            <InputText
-              value={product.bidEndDate}
-              onChange={(e) => {
-                // console.log(e);
-                onInputChange(e, "bidEndDate");
-              }}
-              required
-              className={classNames({
-                "p-invalid": submitted && !product.bidEndDate,
-              })}
-              placeholder="Bid End Date"
-            />
-
-            {submitted && !product.bidEndDate && (
-              <small className="p-error">Bid End Date is required.</small>
-            )}
-          </div>
-
-          <div className="field">
-            <label htmlFor="bidOpeningDate" className="font-bold">
-              Bid Opening Date
-            </label>
-
-            <InputText
-              value={product.bidOpeningDate}
-              onChange={(e) => {
-                // console.log(e);
-                onInputChange(e, "bidOpeningDate");
-              }}
-              required
-              className={classNames({
-                "p-invalid": submitted && !product.bidOpeningDate,
-              })}
-              placeholder="Bid Opening Date"
-            />
-
-            {submitted && !product.bidOpeningDate && (
-              <small className="p-error">Bid Opening Date is required.</small>
+            {submitted && !product.uploadedOn && (
+              <small className="p-error">Uploaded On is required.</small>
             )}
           </div>
 
@@ -734,8 +501,8 @@ export default function Tender() {
               ref={uploadRef}
               // mode="basic"
               // url={"/api/upload"}
-              multiple={true}
-              accept="application/pdf" // Allow only PDF files
+              multiple={false}
+              accept="*" // Allow only PDF files
               maxFileSize={25 * 1000000} // It is 25Mb
               emptyTemplate={
                 <p className="m-0">Drag and drop files to here to upload.</p>
@@ -756,28 +523,6 @@ export default function Tender() {
           </div>
         </Dialog>
 
-        <Dialog
-          visible={deleteProductDialog}
-          style={{ width: "32rem" }}
-          breakpoints={{ "960px": "75vw", "641px": "90vw" }}
-          header="Confirm"
-          modal
-          footer={deleteProductDialogFooter}
-          onHide={hideDeleteProductDialog}
-        >
-          <div className="confirmation-content">
-            <i
-              className="pi pi-exclamation-triangle mr-3"
-              style={{ fontSize: "2rem" }}
-            />
-            {product && (
-              <span>
-                Are you sure you want to delete the Tender:{" "}
-                <b>{product.nitRef}</b>?
-              </span>
-            )}
-          </div>
-        </Dialog>
       </div>
     </BaseLayout>
   );

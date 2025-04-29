@@ -53,9 +53,7 @@ export default function SalientFeatures() {
         Eastern Region Connectivity
         </h5>
         <p style={{ margin: 0 }}>
-        Eastern Region is the only region having connectivity with all other
-regions of the Country i.e., North, West, South and North-East, besides
-international connection with Nepal, Bhutan, and Bangladesh.
+        Eastern Region is the only region having connectivity with all other regions of the Country i.e., North, West, South and North-East, besides international connection with Nepal, Bhutan, and Bangladesh.
         </p>
       </div>
     </div>
@@ -73,8 +71,7 @@ international connection with Nepal, Bhutan, and Bangladesh.
         ER Grid Power Utilities
         </h5>
         <p style={{ margin: 0 }}>
-        ER Grid comprises of Power Utilities belonging to Bihar, Jharkhand, DVC,
-        Odisha, Sikkim, and West Bengal.
+        ER Grid comprises of Power Utilities belonging to Bihar, Jharkhand, DVC, Odisha, Sikkim, and West Bengal
         </p>
       </div>
     </div>
@@ -89,11 +86,10 @@ international connection with Nepal, Bhutan, and Bangladesh.
       />
       <div>
         <h5 style={{ color: "#007bff", fontWeight: "bold", margin: 0 }}>
-        Installed Capacity in ER (As on 31.03.2023)
+        Installed Capacity in ER (As on 03.04.2025)
         </h5>
         <p style={{ margin: 0 }}>
-        Installed Capacity: 41,052 MW (10,460 MW is allocated to the outside of
-            ER)
+        Installed Capacity: 43,393 MW 
         </p>
       </div>
     </div>
@@ -102,7 +98,7 @@ international connection with Nepal, Bhutan, and Bangladesh.
 
 
 
-  <Grid item xs={6} lg={6}>
+  {/* <Grid item xs={6} lg={6}>
     <div style={{ display: "flex", alignItems: "center" }}>
     <img
                 style={{ width: 64, height: 64, marginRight: 10 }}
@@ -117,9 +113,9 @@ international connection with Nepal, Bhutan, and Bangladesh.
         </p>
       </div>
     </div>
-  </Grid>
+  </Grid> */}
   
-  <Grid item xs={6} lg={6}>
+  {/* <Grid item xs={6} lg={6}>
     <div style={{ display: "flex", alignItems: "center" }}>
     <img
                 style={{ width: 64, height: 64, marginRight: 10 }}
@@ -134,7 +130,7 @@ international connection with Nepal, Bhutan, and Bangladesh.
         </p>
       </div>
     </div>
-  </Grid>
+  </Grid> */}
   
   <Grid item xs={6} lg={6}>
     <div style={{ display: "flex", alignItems: "center" }}>
@@ -147,7 +143,7 @@ international connection with Nepal, Bhutan, and Bangladesh.
         Number of ISTS Licensees
         </h5>
         <p style={{ margin: 0 }}>
-        Number of ISTS Licensees: 12
+        Number of ISTS Licensees: 13
         </p>
       </div>
     </div>
@@ -164,9 +160,7 @@ international connection with Nepal, Bhutan, and Bangladesh.
         Pump Storage Project
         </h5>
         <p style={{ margin: 0 }}>
-        One of the successful pumped storage projects in India is the Purulia Pump
-Storage Project (PPSP) of 900MW (in Generation mode). It is a completely
-“Off the River” or “closed loop” Pump storage power plant (Under WBSEDCL).
+        One of the successful pumped storage projects in India is the Purulia Pump Storage Project (PPSP) of 900MW (in Generation mode). It is a completely “Off the River” or “closed loop” Pump storage power plant (Under WBSEDCL).
         </p>
       </div>
     </div>
@@ -174,7 +168,7 @@ Storage Project (PPSP) of 900MW (in Generation mode). It is a completely
 
 
 
-  <Grid item xs={6} lg={6}>
+  {/* <Grid item xs={6} lg={6}>
     <div style={{ display: "flex", alignItems: "center" }}>
     <img
                 style={{ width: 64, height: 64, marginRight: 10 }}
@@ -189,7 +183,7 @@ Storage Project (PPSP) of 900MW (in Generation mode). It is a completely
         </p>
       </div>
     </div>
-  </Grid>
+  </Grid> */}
 
 
 

@@ -16,13 +16,13 @@ import { Link } from "react-router-dom";
 import React from "react";
 
 const states = [
-  { name: "Eastern Region", route: "/eastern-region-route", color: "#D4AF37" }, // Rich gold for significance
-  { name: "Bihar", route: "/bihar-route", color: "#FF6F61" }, // Terracotta & Madhubani art
-  { name: "Jharkhand", route: "/jharkhand-route", color: "#006400" }, // Dark forest green for minerals and forests
-  { name: "DVC", route: "/dvc-route", color: "#1E90FF" }, // Bright blue for hydro & thermal power
-  { name: "Odisha", route: "/odisha-route", color: "#FF8C00" }, // Orange for Konark Sun Temple & tribal culture
-  { name: "West Bengal", route: "/westbengal-route", color: "#8A2BE2" }, // Deep purple for cultural & intellectual richness
-  { name: "Sikkim", route: "/sikkim-route", color: "#4682B4" }, // Steel blue for serene mountains and biodiversity
+  { name: "Eastern Region", route:process.env.REACT_APP_READ_API + "/files/ER_Power_Map.pdf", color: "#D4AF37" }, // Rich gold for significance
+  { name: "Bihar", route:process.env.REACT_APP_READ_API + "/files/Bihar_Power_Map.pdf", color: "#FF6F61" }, // Terracotta & Madhubani art
+  { name: "Jharkhand", route:process.env.REACT_APP_READ_API + "/files/Jharkhand_Power_Map.pdf", color: "#006400" }, // Dark forest green for minerals and forests
+  { name: "DVC", route:process.env.REACT_APP_READ_API + "/files/DVC_Power_Map.pdf", color: "#1E90FF" }, // Bright blue for hydro & thermal power
+  { name: "Odisha", route:process.env.REACT_APP_READ_API + "/files/Odisha_Power_Map.pdf", color: "#FF8C00" }, // Orange for Konark Sun Temple & tribal culture
+  { name: "West Bengal", route:process.env.REACT_APP_READ_API + "/files/WB_Power_Map.pdf", color: "#8A2BE2" }, // Deep purple for cultural & intellectual richness
+  { name: "Sikkim", route:process.env.REACT_APP_READ_API + "/files/Sikkim_Power_Map.pdf", color: "#4682B4" }, // Steel blue for serene mountains and biodiversity
 ];
 
 export default function HRInitiatives() {
@@ -44,7 +44,7 @@ export default function HRInitiatives() {
                   backgroundColor: state.color,
                 }}
               >
-                <CardActionArea component={Link} to={state.route}>
+                <CardActionArea component="a" href={state.route} target="_blank" rel="noopener noreferrer">
                   <CardContent sx={{ textAlign: "center", padding: 3 }}>
                     <Typography
                       variant="h5"

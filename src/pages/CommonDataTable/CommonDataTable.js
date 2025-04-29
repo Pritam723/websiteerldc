@@ -750,7 +750,7 @@ export default function CommonDataTable({
               tableStyle={{ minWidth: "50rem" }}
               // rowsPerPageOptions={[5, 10, 25]}
               paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
-              currentPageReportTemplate="Showing {first} to {last} of {totalRecords} products"
+              currentPageReportTemplate="Showing {first} to {last} of {totalRecords} Items"
               globalFilter={globalFilter}
               header={header}
             >
@@ -779,6 +779,22 @@ export default function CommonDataTable({
                 hidden={!dataToDisplay["fileDate"]}
               ></Column>
               <Column
+                field="year"
+                header="Year"
+                body={yearBodyTemplate}
+                sortable={sortInUse["year"]}
+                style={{ minWidth: "12rem" }}
+                hidden={!dataToDisplay["year"]}
+              ></Column>
+                <Column
+                  field="fy"
+                  header="Financial Year"
+                  // body={statusBodyTemplate}
+                  sortable={sortInUse["fy"]}
+                  style={{ minWidth: "12rem" }}
+                  hidden={!dataToDisplay["fy"]}
+                ></Column>
+              <Column
                 field="weekStartsEnds"
                 header="Week (Starts-Ends) (dd/mm/yyyy)"
                 body={weekBodyTemplate}
@@ -803,22 +819,6 @@ export default function CommonDataTable({
                 hidden={!dataToDisplay["quarter"]}
               ></Column>
               <Column
-                field="year"
-                header="Year"
-                body={yearBodyTemplate}
-                sortable={sortInUse["year"]}
-                style={{ minWidth: "12rem" }}
-                hidden={!dataToDisplay["year"]}
-              ></Column>
-              <Column
-                field="fy"
-                header="Financial Year"
-                // body={statusBodyTemplate}
-                sortable={sortInUse["fy"]}
-                style={{ minWidth: "12rem" }}
-                hidden={!dataToDisplay["fy"]}
-              ></Column>
-              <Column
                 field="fileDateFromTo"
                 header="File Date (From-To) (dd/mm/yyyy)"
                 body={fileDateFromToBodyTemplate}
@@ -835,13 +835,13 @@ export default function CommonDataTable({
                 hidden={!dataToDisplay["uploadedOn"]}
               ></Column>
 
-              <Column
+              {/* <Column
                 field="uploadedBy"
                 header="Uploaded By"
                 sortable={sortInUse["uploadedBy"]}
                 style={{ minWidth: "12rem" }}
                 hidden={!dataToDisplay["uploadedBy"]}
-              ></Column>
+              ></Column> */}
 
               {/* <Column
               field="actualUploadDate"

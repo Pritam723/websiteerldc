@@ -26,13 +26,22 @@ import MKTypography from "components/MKTypography";
 function DefaultCounterCard({ color, count, title, description, ...rest }) {
   return (
     <MKBox p={0.5} textAlign="center" lineHeight={1}>
-      <MKTypography variant="h2" color={color} textGradient>
+      {/* <MKTypography variant="h2" color={color} textGradient>
         {count !== undefined && count !== null ? (
           <CountUp end={count} duration={1} {...rest} />
         ) : (
           <CountUp {...rest} />
         )}
-      </MKTypography>
+      </MKTypography> */}
+
+      <MKTypography variant="h2" color={color} textGradient>
+        {typeof count === "number" ? (
+          <CountUp end={count} duration={1} {...rest} />
+        ) : (
+          count // just show the plain string
+        )}
+    </MKTypography>
+
 
       {title && (
         <MKTypography variant="h5" mt={0} mb={0}>

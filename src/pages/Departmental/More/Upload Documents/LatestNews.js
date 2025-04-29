@@ -3,7 +3,7 @@ import { Button } from "primereact/button";
 import React, { useState, useRef, useContext, useEffect } from "react";
 
 import "react-image-lightbox/style.css";
-import "./tender.css";
+// import "./tender.css";
 
 import BaseLayout from "layouts/sections/components/BaseLayout";
 import { Toolbar } from "primereact/toolbar";
