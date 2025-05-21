@@ -226,7 +226,7 @@ function EasternMap({ demandData, drawlData }) {
                     geography={geo}
                     fill={current[0].color}
                     style={geographyStyle}
-                    onMouseEnter={(e) => handleMouseEnter(e, current)}
+                    // onMouseEnter={(e) => handleMouseEnter(e, current)}
                     // onClick={(e) => onMouseclick(e, current)}
                     onMouseLeave={handleMouseLeave}
                   />

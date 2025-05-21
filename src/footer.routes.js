@@ -80,7 +80,7 @@ export default {
       name: "Contact Us",
       items: [
         { name: "(+91) 33 30116900-09 (EPABX)" },
-        { name: "2423-5875 / 24235265 / 30116990-96 (CONTROL ROOM)" },
+        // { name: "2423-5875 / 24235265 / 30116990-96 (CONTROL ROOM)" },
         { name: "erldcit@grid-india.in", href: "mailto:erldcit@grid-india.in" },
       ],
     },

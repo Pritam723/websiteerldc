@@ -72,9 +72,10 @@ function Counters({ counterData }) {
 
           <Grid item xs={6} md={3} display="centre">
             <DefaultCounterCard
-              count={scadaData.LAST_UPDATED}
+              // count={scadaData.LAST_UPDATED}
+              count = "30th April 2025"
               suffix=""
-              title="ER Demand Met"
+              title="Data last updated on"
               // description="Mix the sections, change the colors and unleash your creativity"
             />
           </Grid>

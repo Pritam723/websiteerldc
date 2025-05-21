@@ -18,7 +18,6 @@ function Information({ demandData }) {
 
   const truncateText = (text, maxLength) =>
     text.length > maxLength ? text.substring(0, maxLength) + "..." : text;
-
   return (
     <MKBox
       component="section"
@@ -33,39 +32,50 @@ function Information({ demandData }) {
         item
         xs={11}
         spacing={6}
-        alignItems="stretch" // Ensures the grid items stretch to the same height
+        alignItems="center"
         sx={{ mx: 0 }}
       >
         {/* <Grid item xs={12} lg={5} sx={{ mx: "auto", ml: { xs: -2, lg: 0 } }}>
           <GridDataInfographics demandData={demandData} />
         </Grid> */}
 
-      <Grid item xs={12} lg={12} sx={{ ml: { xs: -2, sm: -1.5, md: -2.5, lg: 0 } }}>
+        <Grid item xs={12} lg={12} sx={{ ml: "auto" }}>
           <Grid container spacing={3}>
-            {/* MISSION Card */}
-            <Grid item xs={12} md={4} sx={{ display: "flex" }}>
-              <FilledInfoCard
-                color="info"
+            <Grid item xs={12} md={4} sx={{ ml: { xs: -0.5, lg: 0 } }}>
+              <DefaultInfoCard
                 icon="crisis_alert"
                 title="MISSION"
-                description="Ensure Integrated Operation of the Indian Power System to facilitate transfer of electric power within & across the regions and Transnational exchange of power with Reliability, Economy & Sustainability."
-                sx={{ flex: 1, display: "flex", flexDirection: "column" }} // Ensures equal height and vertical layout
+                // description="Ensure Integrated Operation of the Indian Power System to facilitate transfer of electric power within & across the regions and transnational exchange of power with Reliability, Economy & Sustainability."
+                description={
+                  <div>
+                    Ensure Integrated Operation of the Indian Power System to
+                    facilitate transfer of electric power within & across the
+                    regions and Transnational exchange of power with
+                    Reliability, Economy & Sustainability.
+                  </div>
+                }
+                // description="Regardless of the screen size, the website content will naturally fit the given resolution."
               />
             </Grid>
-
-            {/* VISION Card */}
-            <Grid item xs={12} md={4} sx={{ display: "flex" }}>
-              <FilledInfoCard
-                color="info"
+            <Grid
+              item
+              xs={12}
+              md={4}
+              sx={{ ml: { xs: -0.5, lg: 0 }, mb: { xs: 2 } }}
+            >
+              <DefaultInfoCard
                 icon="visibility"
                 title="VISION"
                 description="To be a global institution of excellence for reliable & resilient power systems, fostering efficient electricity markets, promoting economy and sustainability."
-                sx={{ flex: 1, display: "flex", flexDirection: "column" }} // Ensures equal height and vertical layout
+                // description="Regardless of the screen size, the website content will naturally fit the given resolution."
               />
             </Grid>
-
-            {/* WHO ARE WE Card */}
-            <Grid item xs={12} md={4} sx={{ display: "flex" }}>
+            <Grid
+              style={{ paddingLeft: 0, paddingTop: 0 }}
+              item
+              xs={12}
+              md={4}
+            >
               {/* <DefaultInfoCard
                   icon="people_alt"
                   title="WHO ARE WE"
@@ -83,11 +93,11 @@ function Information({ demandData }) {
                   route: "aboutus/readaboutus",
                   label: "Read more about us",
                 }}
-                sx={{ flex: 1, display: "flex", flexDirection: "column" }} // Ensures equal height and vertical layout
               />
               {/* <div>hii</div> */}
             </Grid>
           </Grid>
+          
         </Grid>
       </Grid>
       {/* </Container> */}

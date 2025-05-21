@@ -211,7 +211,7 @@ function Presentation() {
 
         <Container sx={{ ml: 2 }} className="grid-item vertical-courasol-hide">
           <Grid container spacing={1}>
-            <Grid item xs={6} sm={4} lg={2}>
+            <Grid item xs={6} sm={4} lg={2.4}>
               <FilledInfoCard
                 // variant="gradient"
                 color="info"
@@ -225,7 +225,7 @@ function Presentation() {
                 }}
               />
             </Grid>
-            <Grid item xs={6} sm={4} lg={2}>
+            {/* <Grid item xs={6} sm={4} lg={2}>
               <FilledInfoCard
                 color="info"
                 icon="earbuds_battery"
@@ -237,8 +237,8 @@ function Presentation() {
                   label: "Visit FTC Application",
                 }}
               />
-            </Grid>
-            <Grid item xs={6} sm={4} lg={2}>
+            </Grid> */}
+            <Grid item xs={6} sm={4} lg={2.4}>
               <FilledInfoCard
                 color="info"
                 icon="menu_book"
@@ -251,7 +251,7 @@ function Presentation() {
                 }}
               />
             </Grid>
-            <Grid item xs={6} sm={4} lg={2}>
+            <Grid item xs={6} sm={4} lg={2.4}>
               <FilledInfoCard
                 // variant="gradient"
                 color="info"
@@ -265,7 +265,7 @@ function Presentation() {
                 }}
               />
             </Grid>
-            <Grid item xs={6} sm={4} lg={2}>
+            <Grid item xs={6} sm={4} lg={2.4}>
               <FilledInfoCard
                 color="info"
                 icon="assessment"
@@ -278,7 +278,7 @@ function Presentation() {
                 }}
               />
             </Grid>
-            <Grid item xs={6} sm={4} lg={2}>
+            <Grid item xs={6} sm={4} lg={2.4}>
               <FilledInfoCard
                 color="info"
                 icon="currency_rupee"

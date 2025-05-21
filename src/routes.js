@@ -144,11 +144,11 @@ const routes = [
         component: <SalientFeatures />,
       },
 
-      {
-        name: "GRID-INDIA Annual Reports",
-        hindiName: "ग्रिड-इंडिया वार्षिक रिपोर्ट्स",
-        href: "http://grid-india.in/about-us/annual-reports/",
-      },
+      // {
+      //   name: "GRID-INDIA Annual Reports",
+      //   hindiName: "ग्रिड-इंडिया वार्षिक रिपोर्ट्स",
+      //   href: "http://grid-india.in/about-us/annual-reports/",
+      // },
     ],
   },
   {
@@ -323,11 +323,11 @@ const routes = [
       //   route: "/sections/page-sections/page-headers",
       // },
 
-      {
-        name: "Share Table",
-        hindiName: "साझा टैबल",
-        route: "/sections/page-sections/page-headers",
-      },
+      // {
+      //   name: "Share Table",
+      //   hindiName: "साझा टैबल",
+      //   route: "/sections/page-sections/page-headers",
+      // },
 
       {
         name: "Final Schedule",
@@ -607,6 +607,11 @@ const routes = [
             hindiName: "पहली बार चार्जिंग दस्तावेज",
             route: "/marketoperation/ftc/ftcdocuments",
             component: <FTCDocuments />,
+          },
+          {
+            name: "FTC Application",
+            hindiName: "एफटीसी एप्लीकेशन",
+            href: "https://ftc.erldc.in/FTC_ERLDC/",
           },
         ],
       },
@@ -1086,11 +1091,11 @@ const routes = [
             hindiName: "पीएसडीएफ",
             href: "http://psdfindia.in/",
           },
-          {
-            name: "Vidyut PRAVAH",
-            hindiName: "विद्युत प्रवाह",
-            href: "http://vidyutpravah.in/",
-          },
+          // {
+          //   name: "Vidyut PRAVAH",
+          //   hindiName: "विद्युत प्रवाह",
+          //   href: "http://vidyutpravah.in/",
+          // },
           {
             name: "MoP",
             hindiName: "एमओपी",
@@ -1197,23 +1202,23 @@ const routes = [
         hindiName: "आरईसी क्रियाविधि",
         href: "http://www.recregistryindia.nic.in/index.php/publics/Reference_Documents",
       },
-      {
-        name: "Weather",
-        hindiName: "मौसम",
-        dropdown: true,
-        collapse: [
-          {
-            name: "ER Weather Information",
-            hindiName: "ईआर मौसम की जानकारी",
-            href: "https://internal.imd.gov.in/power/ERLDC/MAIN.html",
-          },
-          {
-            name: "IMD",
-            hindiName: "आईएमडी",
-            href: "http://mausam.imd.gov.in/",
-          },
-        ],
-      },
+      // {
+      //   name: "Weather",
+      //   hindiName: "मौसम",
+      //   dropdown: true,
+      //   collapse: [
+      //     {
+      //       name: "ER Weather Information",
+      //       hindiName: "ईआर मौसम की जानकारी",
+      //       href: "https://internal.imd.gov.in/power/ERLDC/MAIN.html",
+      //     },
+      //     {
+      //       name: "IMD",
+      //       hindiName: "आईएमडी",
+      //       href: "http://mausam.imd.gov.in/",
+      //     },
+      //   ],
+      // },
     ],
   },
   // {
@@ -1339,12 +1344,14 @@ const routes = [
             hindiName: "नवीनतम समाचार",
             route: "/latestnews",
             component: <LatestNews />,
-          }, {
-            name: "Highlights",
-            hindiName: "मुख्य अंश",
-            route: "/highlights",
-            component: <Highlights />,
-          },{
+          }, 
+          // {
+          //   name: "Highlights",
+          //   hindiName: "मुख्य अंश",
+          //   route: "/highlights",
+          //   component: <Highlights />,
+          // },
+          {
             name: "Other Documents",
             hindiName: "एचआर दस्तावेज़",
             route: "/hrdocuments",

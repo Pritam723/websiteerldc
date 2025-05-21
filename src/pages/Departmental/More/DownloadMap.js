@@ -3,17 +3,20 @@ import "primereact/resources/themes/mdc-light-indigo/theme.css";
 import "primereact/resources/primereact.css";
 import "primeflex/primeflex.css";
 import BaseLayout from "layouts/sections/components/BaseLayout";
+import PleaseSignIn from "pages/TemplatePage/PleaseSignIn.js";
+import { AuthContext } from "context/AuthContext";
+import React, { useContext } from "react";
+
+
 import {
   Grid,
-  Box,
   Typography,
   Card,
   CardActionArea,
   CardContent,
   Container,
 } from "@mui/material";
-import { Link } from "react-router-dom";
-import React from "react";
+
 
 const states = [
   { name: "Eastern Region", route:process.env.REACT_APP_READ_API + "/files/ER_Power_Map.pdf", color: "#D4AF37" }, // Rich gold for significance
@@ -25,10 +28,20 @@ const states = [
   { name: "Sikkim", route:process.env.REACT_APP_READ_API + "/files/Sikkim_Power_Map.pdf", color: "#4682B4" }, // Steel blue for serene mountains and biodiversity
 ];
 
-export default function HRInitiatives() {
+export default function DownloadMap() {
   const pageTitle = "Power Maps";
   const breadcrumb = [{ label: "More" }, { label: "Download Power Maps" }];
 
+  const redirectionURL = "/more/downloadpowermaps";
+
+  const { authTokens } = useContext(AuthContext);
+
+
+  if (!authTokens) {
+    return <PleaseSignIn readPermission={false} breadcrumb={breadcrumb} redirectionURL={redirectionURL} />;
+  }
+
+  console.log(authTokens)
   return (
     <BaseLayout title={pageTitle} breadcrumb={breadcrumb}>
       <Container style={{ marginTop: 20, marginBottom: 20 }}>
