@@ -32,14 +32,14 @@ function BuiltByDevelopers() {
   const [newsnumber, setNewsnumber] = useState(0);
 
   const latestNews = [
-    "Flash report for Grid Event at 220/132 kV Darbhanga (Bihar) Substation",
-    "Preliminary Load Crash Report",
-    "Transition from existing Web Based Energy Scheduling (WBES) software to the New WBES software scheduled with effect from 05th August’2024.",
-    "Flash report for Grid Event at 220/132 kV Bokaro Substation",
-    "Hydro power stations would be scheduled maximum during non-solar peak hours",
-    "Flash report for Grid Event at 220/132 kV Bokaro Substation",
-    "Preliminary Load Crash Report",
-    "Hydro power stations would be scheduled maximum during non-solar peak hours",
+    // "Flash report for Grid Event at 220/132 kV Darbhanga (Bihar) Substation",
+    // "Preliminary Load Crash Report",
+    // "Transition from existing Web Based Energy Scheduling (WBES) software to the New WBES software scheduled with effect from 05th August’2024.",
+    // "Flash report for Grid Event at 220/132 kV Bokaro Substation",
+    // "Hydro power stations would be scheduled maximum during non-solar peak hours",
+    // "Flash report for Grid Event at 220/132 kV Bokaro Substation",
+    // "Preliminary Load Crash Report",
+    // "Hydro power stations would be scheduled maximum during non-solar peak hours",
   ];
 
   const latestNewsLength = latestNews.length;
@@ -89,19 +89,7 @@ function BuiltByDevelopers() {
           </MKTypography>
         </Grid>
 
-        {/* News Content */}
-        {/* <Grid item xs={12} sx={{ mb: 1, height: "100px" }}>
-          <MKTypography variant="body1" color="white" opacity={0.8}>
-            <a
-              href="https://google.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{ color: "white" }}
-            >
-              {latestNews[newsnumber]}
-            </a>
-          </MKTypography>
-        </Grid> */}
+ 
         <Grid item xs={12} sx={{ mb: 1, height: "100px", overflow: "hidden" }}>
           <motion.div
             key={newsnumber}

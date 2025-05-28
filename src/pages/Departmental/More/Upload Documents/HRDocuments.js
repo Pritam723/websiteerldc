@@ -4,7 +4,7 @@ import React, { useState, useRef, useContext, useEffect } from "react";
 
 import "react-image-lightbox/style.css";
 import "./LatestNews.css";
-
+import PleaseSignIn from "pages/TemplatePage/PleaseSignIn.js";
 import BaseLayout from "layouts/sections/components/BaseLayout";
 import { Toolbar } from "primereact/toolbar";
 import { Calendar } from "primereact/calendar";
@@ -57,16 +57,6 @@ export default function HRDocuments() {
   const [globalFilter, setGlobalFilter] = useState(null);
   const [selectedTypeOfDocument, setSelectedTypeOfDocument] = useState(null);
 
-//   const emptyDynamicMetaData = {
-//     readPermission: null,
-//     writePermission: null,
-//     multipleUploads: null,
-//     uploadPoints: {},
-//     dataToDisplay: {},
-//     sortInUse: {},
-//     filtersInUse: {},
-//     defaultFiltering: null,
-//   };
 
 
   const emptyDynamicMetaData = {
@@ -375,6 +365,17 @@ export default function HRDocuments() {
       </IconField>
     </div>
   );
+
+  const redirectionURL = "/more/downloadpowermaps";
+
+  // const { authTokens } = useContext(AuthContext);
+
+
+  if (!authTokens) {
+    return <PleaseSignIn readPermission={false} breadcrumb={breadcrumb} redirectionURL={redirectionURL} />;
+  }
+
+  console.log(authTokens)
 
   return (
     <BaseLayout title={pageTitle} breadcrumb={breadcrumb}>

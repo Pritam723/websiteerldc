@@ -114,6 +114,12 @@ import Highlights from "pages/Departmental/More/Upload Documents/Highlights";
 import LatestNews from "pages/Departmental/More/Upload Documents/LatestNews";
 import HRDocuments from "pages/Departmental/More/Upload Documents/HRDocuments";
 
+// const [authTokens, setAuthTokens] = useState(() =>
+//     localStorage.getItem("authTokens")
+//       ? JSON.parse(localStorage.getItem("authTokens"))
+//       : null
+//   );
+
 const routes = [
   // {
   //           name: "Home",
@@ -170,7 +176,7 @@ const routes = [
           {
             name: "Outage Software LC Module",
             hindiName: "आउटेज सॉफ्टवेयर एलसी मॉड्यूल",
-            href: "https://mdp.erldc.in/outage/Account/Login?ReturnUrl=%2foutage%2f",
+            href: "https://mdp.erldc.in/en/outage/",
           },
           {
             name: "E-Logbook Software",
@@ -1333,8 +1339,43 @@ const routes = [
             // cssOverlap: true,
           },
         ],
-      },      
-      {
+      },    
+      
+      
+
+  // Protected routes (only shown after sign-in)
+  // ...(authTokens
+  //   ? [
+  //       {
+  //         name: "Upload Documents",
+  //         hindiName: "अपलोड करें",
+  //         dropdown: true,
+  //         collapse: [
+  //           {
+  //             name: "Latest News",
+  //             hindiName: "नवीनतम समाचार",
+  //             route: "/latestnews",
+  //             component: <LatestNews />,
+  //           },
+  //           {
+  //             name: "Other Documents",
+  //             hindiName: "अन्य दस्तावेज़",
+  //             route: "/otherdocuments",
+  //             component: <HRDocuments />,
+  //           },
+  //         ],
+  //       },
+  //     ]
+  //   : []),
+
+
+
+
+
+
+
+
+      { 
         name: "Upload Documents",
         hindiName: "अपलोड करें",
         dropdown: true,
@@ -1345,20 +1386,17 @@ const routes = [
             route: "/latestnews",
             component: <LatestNews />,
           }, 
-          // {
-          //   name: "Highlights",
-          //   hindiName: "मुख्य अंश",
-          //   route: "/highlights",
-          //   component: <Highlights />,
-          // },
           {
             name: "Other Documents",
-            hindiName: "एचआर दस्तावेज़",
-            route: "/hrdocuments",
+            hindiName: "अन्य दस्तावेज़",
+            route: "/otherdocuments",
             component: <HRDocuments />,
           },
+
         ],
       },
+
+
     ],
   },
 
