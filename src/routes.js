@@ -170,7 +170,7 @@ const routes = [
           {
             name: "Outage Software LC Module",
             hindiName: "आउटेज सॉफ्टवेयर एलसी मॉड्यूल",
-            href: "https://mdp.erldc.in/en/outage/",
+            href: "https://mdp.erldc.in/outage/Account/Login?ReturnUrl=%2foutage%2f",
           },
           {
             name: "E-Logbook Software",
@@ -1126,7 +1126,7 @@ const routes = [
           {
             name: "WBES",
             hindiName: "डब्ल्यूबीईएस",
-            href: "https://wbes.erldc.in/",
+            href: "https://newwbes.grid-india.in/",
           },
           {
             name: "WBES Old",
@@ -1144,7 +1144,7 @@ const routes = [
             href: "https://mdp.erldc.in/ERLDC_MDP",
           },
           {
-            name: "E-Log Book",
+            name: "CRMS",
             hindiName: "ई-कार्यपंजी",
             href: "http://crms.erldc.in/",
           },
@@ -1192,11 +1192,11 @@ const routes = [
           },
         ],
       },
-      {
-        name: "Renewable",
-        hindiName: "नवीकरणीय",
-        route: "/sections/page-sections/page-headers",
-      },
+      // {
+      //   name: "Renewable",
+      //   hindiName: "नवीकरणीय",
+      //   route: "/sections/page-sections/page-headers",
+      // },
       {
         name: "REC Mechanism",
         hindiName: "आरईसी क्रियाविधि",

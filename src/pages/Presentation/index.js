@@ -191,7 +191,7 @@ function Presentation() {
       >
         <FlasherSlider />
 
-        <Counters counterData={counterData} />
+        {/* <Counters counterData={counterData} /> */}
         <Information demandData={demandData} />
         {/* <DesignBlocks /> */}
         <Pages demandData={demandData} drawlData={drawlData} />
@@ -211,7 +211,7 @@ function Presentation() {
 
         <Container sx={{ ml: 2 }} className="grid-item vertical-courasol-hide">
           <Grid container spacing={1}>
-            <Grid item xs={6} sm={4} lg={2.4}>
+            <Grid item xs={6} sm={6} lg={3}>
               <FilledInfoCard
                 // variant="gradient"
                 color="info"
@@ -238,7 +238,7 @@ function Presentation() {
                 }}
               />
             </Grid> */}
-            <Grid item xs={6} sm={4} lg={2.4}>
+            {/* <Grid item xs={6} sm={4} lg={2.4}>
               <FilledInfoCard
                 color="info"
                 icon="menu_book"
@@ -250,8 +250,8 @@ function Presentation() {
                   label: "Moring Presentation",
                 }}
               />
-            </Grid>
-            <Grid item xs={6} sm={4} lg={2.4}>
+            </Grid> */}
+            <Grid item xs={6} sm={6} lg={3}>
               <FilledInfoCard
                 // variant="gradient"
                 color="info"
@@ -265,7 +265,7 @@ function Presentation() {
                 }}
               />
             </Grid>
-            <Grid item xs={6} sm={4} lg={2.4}>
+            <Grid item xs={6} sm={6} lg={3}>
               <FilledInfoCard
                 color="info"
                 icon="assessment"
@@ -278,7 +278,7 @@ function Presentation() {
                 }}
               />
             </Grid>
-            <Grid item xs={6} sm={4} lg={2.4}>
+            <Grid item xs={6} sm={6} lg={3}>
               <FilledInfoCard
                 color="info"
                 icon="currency_rupee"
